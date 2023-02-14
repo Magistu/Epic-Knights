@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mm ",
+    "mmh"
+  ],
+  "key": {
+    "m": {
+      "tag": "minecraft:planks"
+    },
+    "h": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:wood_target",
+    "count": 1
+  }
+}

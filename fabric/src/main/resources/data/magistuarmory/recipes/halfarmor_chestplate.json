@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "i i",
+    "iii",
+    "pip"
+  ],
+  "key": {
+    "i": {
+      "tag": "c:steel_ingots"
+    },
+    "p": {
+      "tag": "c:steel_plates"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:halfarmor_chestplate",
+    "count": 1
+  }
+}

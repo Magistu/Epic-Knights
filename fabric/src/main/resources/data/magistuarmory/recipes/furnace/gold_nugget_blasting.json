@@ -1,0 +1,68 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "magistuarmory:gold_stylet"
+    },
+    {
+      "item": "magistuarmory:gold_shortsword"
+    },
+    {
+      "item": "magistuarmory:gold_katzbalger"
+    },
+    {
+      "item": "magistuarmory:gold_pike"
+    },
+    {
+      "item": "magistuarmory:gold_ranseur"
+    },
+    {
+      "item": "magistuarmory:gold_ahlspiess"
+    },
+    {
+      "item": "magistuarmory:gold_chivalrylance"
+    },
+    {
+      "item": "magistuarmory:gold_bastardsword"
+    },
+    {
+      "item": "magistuarmory:gold_estoc"
+    },
+    {
+      "item": "magistuarmory:gold_claymore"
+    },
+    {
+      "item": "magistuarmory:gold_zweihander"
+    },
+    {
+      "item": "magistuarmory:gold_flamebladedsword"
+    },
+    {
+      "item": "magistuarmory:gold_lochaberaxe"
+    },
+    {
+      "item": "magistuarmory:gold_concavehalberd"
+    },
+    {
+      "item": "magistuarmory:gold_heavymace"
+    },
+    {
+      "item": "magistuarmory:gold_heavywarhammer"
+    },
+    {
+      "item": "magistuarmory:gold_lucernhammer"
+    },
+    {
+      "item": "magistuarmory:gold_morgenstern"
+    },
+    {
+      "item": "magistuarmory:gold_chainmorgenstern"
+    },
+    {
+      "item": "magistuarmory:gold_guisarme"
+    }
+  ],
+  "result": "minecraft:gold_nugget",
+  "experience": 0.1,
+  "cookingtime": 100
+}

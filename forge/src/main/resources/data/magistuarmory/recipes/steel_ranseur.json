@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " t",
+    "p "
+  ],
+  "key": {
+    "t": {
+      "item": "magistuarmory:steel_shortsword"
+    },
+    "p": {
+      "item": "magistuarmory:pole"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:steel_ranseur",
+    "count": 1
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mm ",
+    "mmh"
+  ],
+  "key": {
+    "m": {
+      "tag": "c:diamonds"
+    },
+    "h": {
+      "tag": "c:steel_ingots"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:diamond_target",
+    "count": 1
+  }
+}

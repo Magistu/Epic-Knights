@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  m",
+    " m ",
+    "h  "
+  ],
+  "key": {
+    "m": {
+      "tag": "c:diamonds"
+    },
+    "h": {
+      "item": "magistuarmory:hilt"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:diamond_shortsword",
+    "count": 1
+  }
+}

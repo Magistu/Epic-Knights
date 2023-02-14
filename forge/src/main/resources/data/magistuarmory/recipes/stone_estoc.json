@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " m",
+    "t "
+  ],
+  "key": {
+    "t": {
+      "item": "magistuarmory:stone_shortsword"
+    },
+    "m": {
+      "tag": "forge:cobblestone"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:stone_estoc",
+    "count": 1
+  }
+}

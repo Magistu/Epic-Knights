@@ -1,0 +1,11 @@
+{
+  "parent": "magistuarmory:item/buckler",
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "magistuarmory:item/iron_buckler_blocking"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "magistuarmory:iron_stylet"
+    },
+    {
+      "item": "magistuarmory:iron_shortsword"
+    },
+    {
+      "item": "magistuarmory:iron_katzbalger"
+    },
+    {
+      "item": "magistuarmory:iron_pike"
+    },
+    {
+      "item": "magistuarmory:iron_ranseur"
+    },
+    {
+      "item": "magistuarmory:iron_ahlspiess"
+    },
+    {
+      "item": "magistuarmory:iron_chivalrylance"
+    },
+    {
+      "item": "magistuarmory:iron_bastardsword"
+    },
+    {
+      "item": "magistuarmory:iron_estoc"
+    },
+    {
+      "item": "magistuarmory:iron_claymore"
+    },
+    {
+      "item": "magistuarmory:iron_zweihander"
+    },
+    {
+      "item": "magistuarmory:iron_flamebladedsword"
+    },
+    {
+      "item": "magistuarmory:iron_lochaberaxe"
+    },
+    {
+      "item": "magistuarmory:iron_concavehalberd"
+    },
+    {
+      "item": "magistuarmory:iron_heavymace"
+    },
+    {
+      "item": "magistuarmory:iron_heavywarhammer"
+    },
+    {
+      "item": "magistuarmory:iron_lucernhammer"
+    },
+    {
+      "item": "magistuarmory:iron_morgenstern"
+    },
+    {
+      "item": "magistuarmory:iron_chainmorgenstern"
+    },
+    {
+      "item": "magistuarmory:iron_guisarme"
+    },
+    {
+      "item": "magistuarmory:pitchfork"
+    },
+    {
+      "item": "magistuarmory:noble_sword"
+    },
+    {
+      "item": "magistuarmory:messer_sword"
+    }
+  ],
+  "result": "minecraft:iron_nugget",
+  "experience": 0.1,
+  "cookingtime": 100
+}

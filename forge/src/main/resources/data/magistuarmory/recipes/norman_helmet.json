@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iii",
+    "i i",
+    "ccc"
+  ],
+  "key": {
+    "c": {
+      "item": "magistuarmory:steel_chainmail"
+    },
+    "i": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:norman_helmet",
+    "count": 1
+  }
+}

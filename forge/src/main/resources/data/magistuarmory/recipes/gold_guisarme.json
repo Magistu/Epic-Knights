@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mt",
+    "p "
+  ],
+  "key": {
+    "m": {
+      "tag": "forge:ingots/gold"
+    },
+    "t": {
+      "item": "magistuarmory:gold_shortsword"
+    },
+    "p": {
+      "item": "magistuarmory:pole"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:gold_guisarme",
+    "count": 1
+  }
+}

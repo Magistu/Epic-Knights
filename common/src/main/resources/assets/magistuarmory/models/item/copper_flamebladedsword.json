@@ -1,0 +1,14 @@
+{
+  "parent": "magistuarmory:item/iron_flamebladedsword",
+  "textures": {
+    "layer0": "magistuarmory:item/copper_flamebladedsword"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "magistuarmory:item/copper_flamebladedsword_blocking"
+    }
+  ]
+}

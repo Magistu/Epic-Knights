@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "pbp",
+    "#p#"
+  ],
+  "key": {
+    "b": {
+      "item": "magistuarmory:barbute"
+    },
+    "p": {
+      "tag": "forge:plates/steel"
+    },
+    "#": {
+      "item": "minecraft:blaze_powder"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:maximilian_helmet",
+    "count": 1
+  }
+}

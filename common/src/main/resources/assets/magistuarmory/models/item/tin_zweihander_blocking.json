@@ -1,0 +1,6 @@
+{
+  "parent": "magistuarmory:item/iron_zweihander_blocking",
+  "textures": {
+    "layer0": "magistuarmory:item/tin_zweihander"
+  }
+}

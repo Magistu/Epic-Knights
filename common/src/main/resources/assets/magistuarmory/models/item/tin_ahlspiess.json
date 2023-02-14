@@ -1,0 +1,14 @@
+{
+  "parent": "magistuarmory:item/iron_ahlspiess",
+  "textures": {
+    "layer0": "magistuarmory:item/tin_ahlspiess"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "magistuarmory:item/tin_ahlspiess_blocking"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mt"
+  ],
+  "key": {
+    "t": {
+      "item": "magistuarmory:copper_shortsword"
+    },
+    "m": {
+      "tag": "forge:ingots/copper"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:copper_claymore",
+    "count": 1
+  }
+}

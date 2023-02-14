@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "fhf",
+    "fcf",
+    "fsf"
+  ],
+  "key": {
+    "h": {
+      "item": "minecraft:rabbit_hide"
+    },
+    "c": {
+      "item": "magistuarmory:halfarmor_chestplate"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "f": {
+      "item": "minecraft:feather"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:wingedhussar_chestplate",
+    "count": 1
+  }
+}

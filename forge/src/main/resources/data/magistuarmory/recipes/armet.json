@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "www",
+    "pbp",
+    " p "
+  ],
+  "key": {
+    "b": {
+      "item": "magistuarmory:barbute"
+    },
+    "p": {
+      "tag": "forge:plates/steel"
+    },
+    "w": {
+      "item": "minecraft:red_wool"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:armet",
+    "count": 1
+  }
+}

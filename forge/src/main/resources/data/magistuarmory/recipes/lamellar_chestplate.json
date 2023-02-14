@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "r r",
+    "rrr",
+    "rrr"
+  ],
+  "key": {
+    "r": {
+      "item": "magistuarmory:lamellar_rows"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:lamellar_chestplate",
+    "count": 1
+  }
+}

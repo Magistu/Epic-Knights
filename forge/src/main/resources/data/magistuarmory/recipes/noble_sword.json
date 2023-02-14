@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "nt",
+    "nn"
+  ],
+  "key": {
+    "t": {
+      "item": "magistuarmory:iron_bastardsword"
+    },
+    "n": {
+      "tag": "forge:nuggets/gold"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:noble_sword",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "w w",
+    "s s",
+    "l l"
+  ],
+  "key": {
+    "w": {
+      "item": "magistuarmory:woolen_fabric"
+    },
+    "s": {
+      "item": "magistuarmory:leather_strip"
+    },
+    "l": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:gambeson_boots",
+    "count": 1
+  }
+}

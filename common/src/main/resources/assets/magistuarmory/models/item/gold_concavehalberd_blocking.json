@@ -1,0 +1,6 @@
+{
+  "parent": "magistuarmory:item/iron_concavehalberd_blocking",
+  "textures": {
+    "layer0": "magistuarmory:item/gold_concavehalberd"
+  }
+}

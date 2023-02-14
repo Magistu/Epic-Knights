@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "www",
+    "wmw",
+    " w "
+  ],
+  "key": {
+    "m": {
+      "tag": "forge:ingots/steel"
+    },
+    "w": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:wood_kiteshield",
+    "count": 1
+  },
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "minecraft:planks"
+      }
+    }
+  ]
+}

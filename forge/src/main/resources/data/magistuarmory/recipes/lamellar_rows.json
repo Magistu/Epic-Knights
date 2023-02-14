@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ppp",
+    "sss",
+    "ppp"
+  ],
+  "key": {
+    "p": {
+      "item": "magistuarmory:small_steel_plate"
+    },
+    "s": {
+      "item": "magistuarmory:leather_strip"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:lamellar_rows",
+    "count": 1
+  }
+}

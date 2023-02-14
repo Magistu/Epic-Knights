@@ -1,0 +1,45 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "magistuarmory:item/iron_concavehalberd"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [-55, -90, 0],
+			"translation": [0, 14.5, -1.5],
+			"scale": [2.8125, 2.8125, 1]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [-55, 90, 0],
+			"translation": [0, 14.5, -1.5],
+			"scale": [2.8125, 2.8125, 1]
+		},
+		"firstperson_righthand": {
+			"rotation": [-21, -90, 30],
+			"translation": [1.13, 7.5, -1.62],
+			"scale": [2.25, 2.25, 1]
+		},
+		"firstperson_lefthand": {
+			"rotation": [-21, 90, -30],
+			"translation": [1.13, 7.5, -1.62],
+			"scale": [2.25, 2.25, 1]
+		},
+		"ground": {
+			"translation": [0, 4.25, 0],
+			"scale": [0.9375, 0.9375, 0.46875]
+		},
+		"gui": {
+			"translation": [1.75, 1.75, 0],
+			"scale": [1.22, 1.22, 1]
+		}
+	},
+	"overrides": [
+		{
+			"predicate": {
+		    	"blocking": 1
+			},
+			"model": "magistuarmory:item/iron_concavehalberd_blocking"
+		}
+	]
+}

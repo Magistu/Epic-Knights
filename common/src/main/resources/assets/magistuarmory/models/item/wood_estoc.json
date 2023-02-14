@@ -1,0 +1,14 @@
+{
+  "parent": "magistuarmory:item/iron_estoc",
+  "textures": {
+    "layer0": "magistuarmory:item/wood_estoc"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "magistuarmory:item/wood_estoc_blocking"
+    }
+  ]
+}

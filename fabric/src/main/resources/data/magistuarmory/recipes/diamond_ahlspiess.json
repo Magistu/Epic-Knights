@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  m",
+    "mm ",
+    "pm "
+  ],
+  "key": {
+    "m": {
+      "tag": "c:diamonds"
+    },
+    "p": {
+      "item": "magistuarmory:pole"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:diamond_ahlspiess",
+    "count": 1
+  }
+}

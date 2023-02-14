@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "magistuarmory",
+  "version": "${version}",
+  "name": "Epic Knights Mod",
+  "description": "Adds medieval stuff to the game",
+  "authors": [
+    "Magistu"
+  ],
+  "contributors": [
+    "StaxiHD", "Mino", "Jackiecrazy", "CrazyBarkley"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/epic-knights-armor-and-weapons",
+    "sources": "https://github.com/Magistu/Knightly-Armory",
+    "discord": "https://discord.gg/R8U8Hpgr75"
+  },
+  "license": "All Rights Reversed",
+  "icon": "assets/magistuarmory/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.magistuarmory.fabric.KnightlyArmoryFabric"
+    ],
+    "mm:early_risers": [
+      "com.magistuarmory.fabric.init.HeraldryPatternsEarlyRiser"
+    ]
+  },
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.18.0",
+    "architectury": ">=4.9.83",
+    "cloth-config": ">=6.4.90"
+  },
+  "mixins": [
+  ]
+}

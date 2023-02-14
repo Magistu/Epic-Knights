@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "magistuarmory:diamond_heavymace"
+  },
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "result": {
+    "item": "magistuarmory:netherite_heavymace",
+    "count": 1
+  }
+}

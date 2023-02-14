@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mmm",
+    "msm",
+    "mmm"
+  ],
+  "key": {
+    "m": {
+      "tag": "minecraft:planks"
+    },
+    "s": {
+      "item": "magistuarmory:wood_roundshield"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:wood_rondache",
+    "count": 1
+  }
+}

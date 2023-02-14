@@ -1,0 +1,43 @@
+modLoader = "javafml"
+loaderVersion = "[40,)"
+issueTrackerURL = "https://github.com/Magistu/Knightly-Armory/issues"
+displayURL="https://github.com/Magistu/Knightly-Armory"
+license = "All Right Reserved"
+[[mods]]
+modId = "magistuarmory"
+version = "${version}"
+displayName = "Epic Knights Mod"
+authors = "Magistu"
+credits = ["StaxiHD", "Mino", "Jackiecrazy", "CrazyBarkley"]
+description = '''
+Adds medieval stuff to the game
+'''
+#logoFile = "assets/magistuarmory/icon.png"
+
+[[dependencies.magistuarmory]]
+modId = "forge"
+mandatory = true
+versionRange = "[40,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.magistuarmory]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.18.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.magistuarmory]]
+modId = "architectury"
+mandatory = true
+versionRange = "[4.9.83,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.magistuarmory]]
+modId = "cloth_config"
+mandatory = true
+versionRange = "[6.4.90,)"
+ordering = "AFTER"
+side = "BOTH"

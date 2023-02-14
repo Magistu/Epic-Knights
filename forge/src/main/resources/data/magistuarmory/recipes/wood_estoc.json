@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " m",
+    "t "
+  ],
+  "key": {
+    "t": {
+      "item": "magistuarmory:wood_shortsword"
+    },
+    "m": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:wood_estoc",
+    "count": 1
+  }
+}

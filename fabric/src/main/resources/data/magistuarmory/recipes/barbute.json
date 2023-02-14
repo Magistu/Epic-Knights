@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iii",
+    "p p"
+  ],
+  "key": {
+    "i": {
+      "tag": "c:steel_ingots"
+    },
+    "p": {
+      "tag": "c:steel_plates"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:barbute",
+    "count": 1
+  }
+}

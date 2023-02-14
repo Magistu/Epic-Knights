@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mm ",
+    "mmh"
+  ],
+  "key": {
+    "m": {
+      "tag": "c:copper_ingots"
+    },
+    "h": {
+      "tag": "c:steel_ingots"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:copper_target",
+    "count": 1
+  }
+}

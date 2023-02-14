@@ -1,0 +1,14 @@
+{
+  "parent": "magistuarmory:item/iron_claymore",
+  "textures": {
+    "layer0": "magistuarmory:item/netherite_claymore"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "magistuarmory:item/netherite_claymore_blocking"
+    }
+  ]
+}

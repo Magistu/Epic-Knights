@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "psp",
+    "ppp"
+  ],
+  "key": {
+    "p": {
+      "item": "magistuarmory:small_steel_plate"
+    },
+    "s": {
+      "item": "magistuarmory:shishak"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:face_helmet",
+    "count": 1
+  }
+}

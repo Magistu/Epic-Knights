@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "p p",
+    "php",
+    "npn"
+  ],
+  "key": {
+    "h": {
+      "item": "magistuarmory:halfarmor_chestplate"
+    },
+    "n": {
+      "tag": "c:steel_nuggets"
+    },
+    "p": {
+      "tag": "c:steel_plates"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:gothic_chestplate",
+    "count": 1
+  }
+}

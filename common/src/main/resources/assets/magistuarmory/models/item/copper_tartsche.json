@@ -1,0 +1,11 @@
+{
+  "parent": "magistuarmory:item/tartsche",
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "magistuarmory:item/copper_tartsche_blocking"
+    }
+  ]
+}

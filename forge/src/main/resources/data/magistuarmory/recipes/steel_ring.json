@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " n ",
+    "n n",
+    " n "
+  ],
+  "key": {
+    "n": {
+      "tag": "forge:nuggets/steel"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:steel_ring",
+    "count": 8
+  }
+}

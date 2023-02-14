@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "magistuarmory:item/brigandine_chestplate",
+    "layer1": "magistuarmory:item/brigandine_chestplate_overlay"
+  }
+}

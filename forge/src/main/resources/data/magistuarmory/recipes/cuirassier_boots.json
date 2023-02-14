@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "s s",
+    "s s",
+    "l l"
+  ],
+  "key": {
+    "s": {
+      "item": "magistuarmory:leather_strip"
+    },
+    "l": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:cuirassier_boots",
+    "count": 1
+  }
+}

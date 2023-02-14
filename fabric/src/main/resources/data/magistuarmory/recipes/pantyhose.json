@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "w w",
+    "www",
+    "www"
+  ],
+  "key": {
+    "w": {
+      "item": "magistuarmory:woolen_fabric"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:gambeson_chestplate",
+    "count": 1
+  }
+}

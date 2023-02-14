@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "magistuarmory:diamond_katzbalger"
+  },
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "result": {
+    "item": "magistuarmory:netherite_katzbalger",
+    "count": 1
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "r",
+    "r",
+    "r"
+  ],
+  "key": {
+    "r": {
+      "item": "magistuarmory:steel_ring"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:steel_chain",
+    "count": 1
+  }
+}

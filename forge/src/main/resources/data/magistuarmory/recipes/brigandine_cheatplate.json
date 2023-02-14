@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "l l",
+    "lpl",
+    "lpl"
+  ],
+  "key": {
+    "l": {
+      "item": "minecraft:leather"
+    },
+    "p": {
+      "tag": "forge:plates/steel"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:brigandine_chestplate",
+    "count": 1
+  }
+}

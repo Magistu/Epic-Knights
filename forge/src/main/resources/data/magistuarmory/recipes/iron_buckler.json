@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mmh",
+    "mm "
+  ],
+  "key": {
+    "m": {
+      "tag": "forge:ingots/iron"
+    },
+    "h": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:iron_buckler",
+    "count": 1
+  }
+}

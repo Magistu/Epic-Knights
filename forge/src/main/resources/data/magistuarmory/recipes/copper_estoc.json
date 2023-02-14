@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " m",
+    "t "
+  ],
+  "key": {
+    "t": {
+      "item": "magistuarmory:copper_shortsword"
+    },
+    "m": {
+      "tag": "forge:ingots/copper"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:copper_estoc",
+    "count": 1
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "magistuarmory:diamond_tartsche"
+  },
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "result": {
+    "item": "magistuarmory:netherite_tartsche",
+    "count": 1
+  }
+}

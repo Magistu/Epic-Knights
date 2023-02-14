@@ -1,0 +1,7 @@
+{
+  "parent": "magistuarmory:item/iron_chivalrylance_raised",
+  "textures": {
+    "0": "magistuarmory:item/steel_chivalrylance",
+	"particle": "magistuarmory:item/steel_chivalrylance"
+  }
+}

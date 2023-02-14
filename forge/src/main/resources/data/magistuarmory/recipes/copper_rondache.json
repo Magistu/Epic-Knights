@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mmm",
+    "msm",
+    "mmm"
+  ],
+  "key": {
+    "m": {
+      "tag": "forge:ingots/copper"
+    },
+    "s": {
+      "item": "magistuarmory:wood_roundshield"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:copper_rondache",
+    "count": 1
+  }
+}

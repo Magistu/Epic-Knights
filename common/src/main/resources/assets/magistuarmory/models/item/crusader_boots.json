@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "magistuarmory:item/crusader_boots",
+    "layer1": "magistuarmory:item/crusader_boots_overlay"
+  }
+}

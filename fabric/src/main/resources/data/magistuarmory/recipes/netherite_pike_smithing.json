@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "magistuarmory:diamond_pike"
+  },
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "result": {
+    "item": "magistuarmory:netherite_pike",
+    "count": 1
+  }
+}

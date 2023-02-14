@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "p p",
+    "p p",
+    "n n"
+  ],
+  "key": {
+    "n": {
+      "tag": "forge:nuggets/steel"
+    },
+    "p": {
+      "tag": "forge:plates/steel"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:gothic_boots",
+    "count": 1
+  }
+}

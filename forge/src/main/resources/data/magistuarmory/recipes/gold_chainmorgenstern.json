@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " mm",
+    "scm",
+    "h  "
+  ],
+  "key": {
+    "c": {
+      "item": "magistuarmory:steel_chain"
+    },
+    "s": {
+      "tag": "forge:rods/wooden"
+    },
+    "m": {
+      "tag": "forge:ingots/gold"
+    },
+    "h": {
+      "item": "magistuarmory:hilt"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:gold_chainmorgenstern",
+    "count": 1
+  }
+}

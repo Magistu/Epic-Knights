@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  m",
+    "   ",
+    "h  "
+  ],
+  "key": {
+    "m": {
+      "tag": "c:steel_ingots"
+    },
+    "h": {
+      "item": "magistuarmory:hilt"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:steel_stylet",
+    "count": 1
+  }
+}

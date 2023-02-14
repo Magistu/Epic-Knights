@@ -1,0 +1,14 @@
+{
+  "parent": "magistuarmory:item/iron_bastardsword",
+  "textures": {
+    "layer0": "magistuarmory:item/wood_bastardsword"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "magistuarmory:item/wood_bastardsword_blocking"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "parent": "magistuarmory:item/iron_lochaberaxe",
+  "textures": {
+    "layer0": "magistuarmory:item/tin_lochaberaxe"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "magistuarmory:item/tin_lochaberaxe_blocking"
+    }
+  ]
+}

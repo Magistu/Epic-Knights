@@ -1,0 +1,6 @@
+{
+  "parent": "magistuarmory:item/iron_ranseur_blocking",
+  "textures": {
+    "layer0": "magistuarmory:item/wood_ranseur"
+  }
+}

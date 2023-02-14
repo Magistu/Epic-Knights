@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#z#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:blaze_powder"
+    },
+    "z": {
+      "item": "magistuarmory:diamond_zweihander"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:diamond_flamebladedsword",
+    "count": 1
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "parent": "magistuarmory:item/pavese",
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "magistuarmory:item/copper_pavese_blocking"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "pkp",
+    "p p"
+  ],
+  "key": {
+    "k": {
+      "item": "magistuarmory:knight_boots"
+    },
+    "p": {
+      "tag": "c:steel_plates"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:jousting_boots",
+    "count": 1
+  }
+}

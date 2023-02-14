@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mt",
+    "p "
+  ],
+  "key": {
+    "m": {
+      "tag": "c:cobblestones"
+    },
+    "t": {
+      "item": "magistuarmory:stone_shortsword"
+    },
+    "p": {
+      "item": "magistuarmory:pole"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:stone_guisarme",
+    "count": 1
+  }
+}

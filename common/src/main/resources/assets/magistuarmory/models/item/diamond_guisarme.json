@@ -1,0 +1,14 @@
+{
+  "parent": "magistuarmory:item/iron_guisarme",
+  "textures": {
+    "layer0": "magistuarmory:item/diamond_guisarme"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "magistuarmory:item/diamond_guisarme_blocking"
+    }
+  ]
+}

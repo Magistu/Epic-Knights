@@ -1,0 +1,15 @@
+{
+  "parent": "magistuarmory:item/iron_chivalrylance",
+  "textures": {
+    "0": "magistuarmory:item/silver_chivalrylance",
+	"particle": "magistuarmory:item/silver_chivalrylance"
+  },
+	"overrides": [
+		{
+			"predicate": {
+				"magistuarmory:raised": 1
+			},
+			"model": "magistuarmory:item/silver_chivalrylance_raised"
+		}
+	]
+}

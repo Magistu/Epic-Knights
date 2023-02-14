@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " m ",
+    "msm",
+    " m "
+  ],
+  "key": {
+    "m": {
+      "item": "minecraft:gold_ingot"
+    },
+    "s": {
+      "item": "magistuarmory:wood_kiteshield"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:gold_kiteshield",
+    "count": 1
+  },
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:ingots/iron"
+      }
+    }
+  ]
+}

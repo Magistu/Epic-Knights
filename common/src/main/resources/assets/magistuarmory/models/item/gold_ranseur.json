@@ -1,0 +1,14 @@
+{
+  "parent": "magistuarmory:item/iron_ranseur",
+  "textures": {
+    "layer0": "magistuarmory:item/gold_ranseur"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "magistuarmory:item/gold_ranseur_blocking"
+    }
+  ]
+}

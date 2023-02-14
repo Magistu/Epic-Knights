@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mn",
+    "t "
+  ],
+  "key": {
+    "n": {
+      "tag": "forge:nuggets/iron"
+    },
+    "t": {
+      "item": "magistuarmory:iron_shortsword"
+    },
+    "m": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:messer_sword",
+    "count": 1
+  }
+}

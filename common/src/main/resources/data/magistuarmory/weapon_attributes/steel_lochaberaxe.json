@@ -1,0 +1,6 @@
+{
+    "parent": "bettercombat:halberd",
+    "attributes": {
+        "attack_range": 3.2
+    }
+}

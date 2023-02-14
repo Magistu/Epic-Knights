@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " m",
+    "t "
+  ],
+  "key": {
+    "t": {
+      "item": "magistuarmory:tin_shortsword"
+    },
+    "m": {
+      "tag": "forge:ingots/tin"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:tin_estoc",
+    "count": 1
+  }
+}

@@ -1,0 +1,18 @@
+{
+    "parent": "magistuarmory:item/heavy_crossbow",
+    "textures": {
+        "layer0": "magistuarmory:item/heavy_crossbow_pulling_2"
+    },
+    "display": {
+        "firstperson_righthand": {
+            "rotation": [-150, 0, -45],
+            "translation": [-5, -3, 0],
+            "scale": [1.6, 1.6, 1]
+        },
+        "firstperson_lefthand": {
+            "rotation": [-150, 0, 45],
+            "translation": [-5, -3, 0],
+            "scale": [1.6, 1.6, 1]
+        }
+    }
+}

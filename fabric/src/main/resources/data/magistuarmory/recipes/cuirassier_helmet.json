@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "pip",
+    "p p"
+  ],
+  "key": {
+    "i": {
+      "tag": "c:steel_ingots"
+    },
+    "p": {
+      "tag": "c:steel_plates"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:cuirassier_helmet",
+    "count": 1
+  }
+}

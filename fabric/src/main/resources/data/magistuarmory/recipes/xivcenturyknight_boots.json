@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "p p",
+    "l l"
+  ],
+  "key": {
+    "p": {
+      "tag": "c:steel_plates"
+    },
+    "l": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:xivcenturyknight_boots",
+    "count": 1
+  }
+}

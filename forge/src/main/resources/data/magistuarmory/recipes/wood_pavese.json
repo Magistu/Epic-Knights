@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "wmw",
+    "www",
+    "www"
+  ],
+  "key": {
+    "m": {
+      "tag": "forge:ingots/steel"
+    },
+    "w": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:wood_pavese",
+    "count": 1
+  }
+}

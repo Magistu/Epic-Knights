@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  m",
+    " m ",
+    "h  "
+  ],
+  "key": {
+    "m": {
+      "tag": "forge:ingots/bronze"
+    },
+    "h": {
+      "item": "magistuarmory:hilt"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:bronze_shortsword",
+    "count": 1
+  }
+}

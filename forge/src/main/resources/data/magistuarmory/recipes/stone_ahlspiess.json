@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  m",
+    "mm ",
+    "pm "
+  ],
+  "key": {
+    "m": {
+      "tag": "forge:cobblestone"
+    },
+    "p": {
+      "item": "magistuarmory:pole"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:stone_ahlspiess",
+    "count": 1
+  }
+}

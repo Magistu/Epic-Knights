@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "c c",
+    "l l",
+    "l l"
+  ],
+  "key": {
+    "c": {
+      "item": "magistuarmory:steel_chainmail"
+    },
+    "l": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:crusader_boots",
+    "count": 1
+  }
+}

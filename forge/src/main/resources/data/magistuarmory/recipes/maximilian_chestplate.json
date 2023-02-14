@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "p#p",
+    "php",
+    "#p#"
+  ],
+  "key": {
+    "h": {
+      "item": "magistuarmory:halfarmor_chestplate"
+    },
+    "p": {
+      "tag": "forge:plates/steel"
+    },
+    "#": {
+      "item": "minecraft:blaze_powder"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:maximilian_chestplate",
+    "count": 1
+  }
+}

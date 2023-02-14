@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "m",
+    "t"
+  ],
+  "key": {
+    "t": {
+      "item": "magistuarmory:diamond_shortsword"
+    },
+    "m": {
+      "tag": "forge:gems/diamond"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:diamond_bastardsword",
+    "count": 1
+  }
+}

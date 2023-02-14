@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " m ",
+    "msm",
+    " m "
+  ],
+  "key": {
+    "m": {
+      "tag": "forge:ingots/steel"
+    },
+    "s": {
+      "item": "magistuarmory:wood_pavese"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:steel_pavese",
+    "count": 1
+  }
+}

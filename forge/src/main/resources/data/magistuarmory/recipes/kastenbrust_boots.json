@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "p p",
+    "p p",
+    "s s"
+  ],
+  "key": {
+    "s": {
+      "item": "magistuarmory:small_steel_plate"
+    },
+    "p": {
+      "tag": "forge:plates/steel"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:kastenbrust_boots",
+    "count": 1
+  }
+}

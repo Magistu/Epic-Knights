@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "rrs",
+    "h s",
+    "rrs"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:string"
+    },
+    "r": {
+      "tag": "forge:rods/wooden"
+    },
+    "h": {
+      "item": "magistuarmory:hilt"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:longbow",
+    "count": 1
+  }
+}

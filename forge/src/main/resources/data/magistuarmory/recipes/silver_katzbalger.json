@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "m",
+    "m",
+    "h"
+  ],
+  "key": {
+    "m": {
+      "tag": "forge:ingots/silver"
+    },
+    "h": {
+      "item": "magistuarmory:hilt"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:silver_katzbalger",
+    "count": 1
+  }
+}

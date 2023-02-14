@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " m ",
+    "msm",
+    " m "
+  ],
+  "key": {
+    "m": {
+      "item": "minecraft:gold_ingot"
+    },
+    "s": {
+      "item": "magistuarmory:wood_ellipticalshield"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:gold_ellipticalshield",
+    "count": 1
+  }
+}

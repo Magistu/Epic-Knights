@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iii",
+    "ini",
+    "ccc"
+  ],
+  "key": {
+    "n": {
+      "tag": "forge:nuggets/steel"
+    },
+    "c": {
+      "item": "magistuarmory:steel_chainmail"
+    },
+    "i": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:shishak",
+    "count": 1
+  }
+}

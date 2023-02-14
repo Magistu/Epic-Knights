@@ -1,0 +1,45 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "magistuarmory:item/iron_claymore"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"blocking": 1
+			},
+			"model": "magistuarmory:item/iron_claymore_blocking"
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [-50, -90, 0],
+			"translation": [0, 12.75, 0.2],
+			"scale": [1.875, 1.875, 1]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [-50, 90, 0],
+			"translation": [0, 12.75, 0.2],
+			"scale": [1.875, 1.875, 1]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, -90, 30],
+			"translation": [1.38, 10.5, 0.88],
+			"scale": [1.5, 1.5, 1]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 90, -30],
+			"translation": [1.38, 10.5, 0.88],
+			"scale": [1.5, 1.5, 1]
+		},
+		"ground": {
+			"translation": [0, 4.25, 0],
+			"scale": [0.9375, 0.9375, 0.46875]
+		},
+		"gui": {
+			"translation": [1.63, 1.63, 0],
+			"scale": [1.2, 1.2, 1]
+		}
+	}
+}

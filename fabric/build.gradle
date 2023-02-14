@@ -1,0 +1,138 @@
+plugins {
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id "me.shedaniel.unified-publishing"
+}
+
+architectury {
+    platformSetupLoomIde()
+    fabric()
+}
+
+loom {
+    accessWidenerPath = project(":common").loom.accessWidenerPath
+}
+
+configurations {
+    common
+    shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentFabric.extendsFrom common
+}
+
+repositories {
+    maven { url 'https://maven.shedaniel.me' }
+    maven { url 'https://maven.minecraftforge.net/' }
+    maven { url 'https://jitpack.io' }
+}
+
+
+dependencies {
+    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+    modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}+${rootProject.minecraft_version}"
+    modApi "dev.architectury:architectury-fabric:${rootProject.architectury_version}"
+
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${rootProject.cloth_config_version}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+
+    common(project(path: ":common", configuration: "namedElements")) { transitive false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+    
+    modImplementation("com.github.Chocohead:Fabric-ASM:v${rootProject.fabric_asm_version}") {
+        exclude (group: "net.fabricmc.fabric-api")
+    }
+    include("com.github.Chocohead:Fabric-ASM:v${rootProject.fabric_asm_version}")
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
+    }
+}
+
+shadowJar {
+    exclude "architectury.common.json"
+
+    configurations = [project.configurations.shadowCommon]
+    classifier "dev-shadow"
+}
+
+remapJar {
+    injectAccessWidener = true
+    input.set shadowJar.archiveFile
+    dependsOn shadowJar
+    classifier null
+}
+
+jar {
+    classifier "dev"
+}
+
+sourcesJar {
+    def commonSources = project(":common").sourcesJar
+    dependsOn commonSources
+    from commonSources.archiveFile.map { zipTree(it) }
+}
+
+components.java {
+    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+        skip()
+    }
+}
+
+//if(project.hasProperty('release_type')) {
+//    tasks.register("publishMod") {
+//        dependsOn(build)
+//        finalizedBy(tasks.curseforge)
+//        finalizedBy(tasks.modrinth)
+//    }
+//
+//    curseforge {
+//        apiKey = System.getenv("CURSEFORGE_API_KEY")
+//        project {
+//            id = '639842'
+//            changelog = changelog_last_section()
+//            changelogType = 'markdown'
+//            releaseType = release_type
+//            addGameVersion "1.19.3"
+//            addGameVersion "Fabric"
+//
+//            relations {
+//                requiredDependency 'fabric-api'
+//                requiredDependency 'cloth-config'
+//                requiredDependency 'playeranimator'
+//            }
+//
+//            mainArtifact(remapJar)
+//            afterEvaluate {
+//                uploadTask.dependsOn(remapJar)
+//            }
+//            options {
+//                forgeGradleIntegration = false
+//            }
+//        }
+//    }
+//
+//    modrinth {
+//        token = System.getenv("MODRINTH_API_KEY")
+//        projectId = "better-combat" // This can be the project ID or the slug. Either will work!
+//        versionName = "${project.version}"
+//        versionNumber = "${project.version}-fabric"
+//        // You don't need to set this manually. Will fail if Modrinth has this version already
+//        versionType = release_type // This is the default -- can also be `beta` or `alpha`
+//        uploadFile = remapJar // With Loom, this MUST be set to `remapJar` instead of `jar`!
+//        gameVersions = ["1.19.3"] // Must be an array, even with only one version
+//        loaders = ["fabric"] // Must also be an array - no need to specify this if you're using Loom or ForgeGradle
+//        dependencies { // A special DSL for creating dependencies
+//            // scope.type
+//            // The scope can be `required`, `optional`, `incompatible`, or `embedded`
+//            // The type can either be `project` or `version`
+//            required.project "fabric-api"
+//            required.project "cloth-config"
+//            required.project "playeranimator"
+//        }
+//    }
+//}

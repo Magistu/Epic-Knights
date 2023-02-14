@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  m",
+    "mp ",
+    "hm "
+  ],
+  "key": {
+    "m": {
+      "tag": "forge:ingots/bronze"
+    },
+    "p": {
+      "item": "magistuarmory:pole"
+    },
+    "h": {
+      "item": "magistuarmory:hilt"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:bronze_chivalrylance",
+    "count": 1
+  }
+}

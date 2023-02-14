@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mmm",
+    "shs",
+    " p "
+  ],
+  "key": {
+    "h": {
+      "item": "minecraft:tripwire_hook"
+    },
+    "s": {
+      "item": "minecraft:string"
+    },
+    "m": {
+      "tag": "forge:ingots/steel"
+    },
+    "p": {
+      "item": "magistuarmory:pole"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:heavy_crossbow",
+    "count": 1
+  }
+}

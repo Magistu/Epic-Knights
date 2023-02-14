@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " m ",
+    "msm",
+    " m "
+  ],
+  "key": {
+    "m": {
+      "tag": "forge:ingots/bronze"
+    },
+    "s": {
+      "item": "magistuarmory:wood_roundshield"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:bronze_roundshield",
+    "count": 1
+  }
+}

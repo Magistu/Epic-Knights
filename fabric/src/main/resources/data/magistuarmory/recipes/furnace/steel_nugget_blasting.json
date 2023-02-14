@@ -1,0 +1,146 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "magistuarmory:steel_stylet"
+    },
+    {
+      "item": "magistuarmory:steel_shortsword"
+    },
+    {
+      "item": "magistuarmory:steel_katzbalger"
+    },
+    {
+      "item": "magistuarmory:steel_pike"
+    },
+    {
+      "item": "magistuarmory:steel_ranseur"
+    },
+    {
+      "item": "magistuarmory:steel_ahlspiess"
+    },
+    {
+      "item": "magistuarmory:steel_chivalrylance"
+    },
+    {
+      "item": "magistuarmory:steel_bastardsword"
+    },
+    {
+      "item": "magistuarmory:steel_estoc"
+    },
+    {
+      "item": "magistuarmory:steel_claymore"
+    },
+    {
+      "item": "magistuarmory:steel_zweihander"
+    },
+    {
+      "item": "magistuarmory:steel_flamebladedsword"
+    },
+    {
+      "item": "magistuarmory:steel_lochaberaxe"
+    },
+    {
+      "item": "magistuarmory:steel_concavehalberd"
+    },
+    {
+      "item": "magistuarmory:steel_heavymace"
+    },
+    {
+      "item": "magistuarmory:steel_heavywarhammer"
+    },
+    {
+      "item": "magistuarmory:steel_lucernhammer"
+    },
+    {
+      "item": "magistuarmory:steel_morgenstern"
+    },
+    {
+      "item": "magistuarmory:barbute"
+    },
+    {
+      "item": "magistuarmory:halfarmor_chestplate"
+    },
+    {
+      "item": "magistuarmory:armet"
+    },
+    {
+      "item": "magistuarmory:knight_chestplate"
+    },
+    {
+      "item": "magistuarmory:knight_leggings"
+    },
+    {
+      "item": "magistuarmory:knight_boots"
+    },
+    {
+      "item": "magistuarmory:sallet"
+    },
+    {
+      "item": "magistuarmory:gothic_chestplate"
+    },
+    {
+      "item": "magistuarmory:gothic_leggings"
+    },
+    {
+      "item": "magistuarmory:gothic_boots"
+    },
+    {
+      "item": "magistuarmory:stechhelm"
+    },
+    {
+      "item": "magistuarmory:jousting_chestplate"
+    },
+    {
+      "item": "magistuarmory:jousting_leggings"
+    },
+    {
+      "item": "magistuarmory:jousting_boots"
+    },
+    {
+      "item": "magistuarmory:maximilian_helmet"
+    },
+    {
+      "item": "magistuarmory:maximilian_chestplate"
+    },
+    {
+      "item": "magistuarmory:maximilian_leggings"
+    },
+    {
+      "item": "magistuarmory:maximilian_boots"
+    },
+    {
+      "item": "magistuarmory:chainmail_helmet"
+    },
+    {
+      "item": "magistuarmory:chainmail_chestplate"
+    },
+    {
+      "item": "magistuarmory:chainmail_leggings"
+    },
+    {
+      "item": "magistuarmory:kettlehat"
+    },
+    {
+      "item": "magistuarmory:platemail_chestplate"
+    },
+    {
+      "item": "magistuarmory:platemail_leggings"
+    },
+    {
+      "item": "magistuarmory:platemail_boots"
+    },
+    {
+      "item": "magistuarmory:steel_chainmorgenstern"
+    },
+    {
+      "item": "magistuarmory:steel_guisarme"
+    },
+    {
+      "item": "magistuarmory:blacksmith_hammer"
+    }
+  ],
+  "result": "magistuarmory:steel_nugget",
+  "experience": 0.1,
+  "cookingtime": 100
+}

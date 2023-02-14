@@ -1,0 +1,14 @@
+{
+  "parent": "magistuarmory:item/iron_zweihander",
+  "textures": {
+    "layer0": "magistuarmory:item/gold_zweihander"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "magistuarmory:item/gold_zweihander_blocking"
+    }
+  ]
+}

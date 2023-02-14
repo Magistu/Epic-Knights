@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mmm",
+    "msm",
+    "mmm"
+  ],
+  "key": {
+    "m": {
+      "tag": "forge:ingots/iron"
+    },
+    "s": {
+      "item": "magistuarmory:wood_roundshield"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:iron_rondache",
+    "count": 1
+  }
+}

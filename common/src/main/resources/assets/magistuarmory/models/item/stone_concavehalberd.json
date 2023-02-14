@@ -1,0 +1,14 @@
+{
+  "parent": "magistuarmory:item/iron_concavehalberd",
+  "textures": {
+    "layer0": "magistuarmory:item/stone_concavehalberd"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "magistuarmory:item/stone_concavehalberd_blocking"
+    }
+  ]
+}

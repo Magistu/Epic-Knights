@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ppp",
+    "psp",
+    "psp"
+  ],
+  "key": {
+    "s": {
+      "item": "magistuarmory:small_steel_plate"
+    },
+    "p": {
+      "tag": "forge:plates/steel"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:kastenbrust_leggings",
+    "count": 1
+  }
+}

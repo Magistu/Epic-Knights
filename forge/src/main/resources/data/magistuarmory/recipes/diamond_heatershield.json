@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " m ",
+    "msm",
+    " m "
+  ],
+  "key": {
+    "m": {
+      "tag": "forge:gems/diamond"
+    },
+    "s": {
+      "item": "magistuarmory:wood_heatershield"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:diamond_heatershield",
+    "count": 1
+  }
+}

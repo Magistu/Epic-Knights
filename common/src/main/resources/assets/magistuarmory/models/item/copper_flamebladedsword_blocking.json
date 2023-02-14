@@ -1,0 +1,6 @@
+{
+  "parent": "magistuarmory:item/iron_flamebladedsword_blocking",
+  "textures": {
+    "layer0": "magistuarmory:item/copper_flamebladedsword"
+  }
+}

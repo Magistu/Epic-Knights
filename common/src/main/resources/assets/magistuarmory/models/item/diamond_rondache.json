@@ -1,0 +1,11 @@
+{
+  "parent": "magistuarmory:item/rondache",
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "magistuarmory:item/diamond_rondache_blocking"
+    }
+  ]
+}

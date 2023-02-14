@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "lwl",
+    "w w",
+    "w w"
+  ],
+  "key": {
+    "w": {
+      "item": "magistuarmory:woolen_fabric"
+    },
+    "l": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:cuirassier_leggings",
+    "count": 1
+  }
+}

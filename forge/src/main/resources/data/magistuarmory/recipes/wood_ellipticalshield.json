@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "wwm",
+    "www",
+    " ww"
+  ],
+  "key": {
+    "m": {
+      "tag": "forge:ingots/steel"
+    },
+    "w": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:wood_ellipticalshield",
+    "count": 1
+  }
+}

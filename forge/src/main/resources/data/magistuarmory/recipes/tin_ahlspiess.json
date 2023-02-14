@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  m",
+    "mm ",
+    "pm "
+  ],
+  "key": {
+    "m": {
+      "tag": "forge:ingots/tin"
+    },
+    "p": {
+      "item": "magistuarmory:pole"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:tin_ahlspiess",
+    "count": 1
+  }
+}

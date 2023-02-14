@@ -1,0 +1,11 @@
+{
+  "parent": "magistuarmory:item/roundshield",
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "magistuarmory:item/stone_roundshield_blocking"
+    }
+  ]
+}

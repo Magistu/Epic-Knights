@@ -1,0 +1,6 @@
+{
+  "parent": "magistuarmory:item/iron_lucernhammer",
+  "textures": {
+    "layer0": "magistuarmory:item/copper_lucernhammer"
+  }
+}

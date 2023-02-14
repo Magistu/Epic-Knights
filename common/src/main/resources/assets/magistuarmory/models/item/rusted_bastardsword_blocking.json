@@ -1,0 +1,6 @@
+{
+  "parent": "magistuarmory:item/iron_bastardsword_blocking",
+  "textures": {
+    "layer0": "magistuarmory:item/rusted_bastardsword"
+  }
+}

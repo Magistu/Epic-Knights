@@ -1,0 +1,11 @@
+{
+  "parent": "magistuarmory:item/ellipticalshield",
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "magistuarmory:item/gold_ellipticalshield_blocking"
+    }
+  ]
+}

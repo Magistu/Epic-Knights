@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  m",
+    "   ",
+    "h  "
+  ],
+  "key": {
+    "m": {
+      "tag": "forge:ingots/tin"
+    },
+    "h": {
+      "item": "magistuarmory:hilt"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:tin_stylet",
+    "count": 1
+  }
+}

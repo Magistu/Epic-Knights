@@ -1,0 +1,6 @@
+{
+    "parent": "bettercombat:spear",
+    "attributes": {
+        "attack_range": 3.0
+    }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "magistuarmory:item/iron_morgenstern",
+  "textures": {
+    "0": "magistuarmory:item/diamond_morgenstern",
+	"particle": "magistuarmory:item/diamond_morgenstern"
+  }
+}

@@ -1,0 +1,6 @@
+{
+    "parent": "bettercombat:double_axe",
+    "attributes": {
+        "attack_range": 2.9
+    }
+}

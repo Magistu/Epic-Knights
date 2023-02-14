@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mmm",
+    "msm",
+    "mmm"
+  ],
+  "key": {
+    "m": {
+      "tag": "forge:gems/diamond"
+    },
+    "s": {
+      "item": "magistuarmory:wood_roundshield"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:diamond_rondache",
+    "count": 1
+  }
+}

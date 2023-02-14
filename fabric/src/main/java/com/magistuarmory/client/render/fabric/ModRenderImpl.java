@@ -28,6 +28,8 @@ public class ModRenderImpl
 			shields.get().forEach(supplier -> 
 					BuiltinItemRendererRegistry.INSTANCE.register(supplier.get(), (BuiltinItemRendererRegistry.DynamicItemRenderer) supplier.get().getRenderer()));
 		}
+
+		BuiltinItemRendererRegistry.INSTANCE.register(ModItems.CORRUPTED_ROUND_SHIELD.get(), (BuiltinItemRendererRegistry.DynamicItemRenderer) ModItems.CORRUPTED_ROUND_SHIELD.get().getRenderer());
 	}
 
 	public static BlockEntityWithoutLevelRenderer getHeraldryItemStackRenderer(String id, String name, Models.ShieldEnum modelkey)

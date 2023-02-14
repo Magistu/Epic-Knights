@@ -72,7 +72,8 @@ public class ModRender
 		ModItems.KITE_SHIELDS.stitch(atlas, adder);
 		ModItems.BUCKLERS.stitchWithoutPatterns(atlas, adder);
 		ModItems.TARGETS.stitchWithoutPatterns(atlas, adder);
-		adder.accept(new ResourceLocation(KnightlyArmory.ID, "entity/corruptedroundshield_nopattern"));
+		if (atlas.location() == TextureAtlas.LOCATION_BLOCKS)
+			adder.accept(new ResourceLocation(KnightlyArmory.ID, "entity/corruptedroundshield_nopattern"));
 	}
 
 	@ExpectPlatform

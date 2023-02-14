@@ -76,11 +76,10 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 		if (!this.isLong())
 			return true;
 		
-		player.swing(InteractionHand.MAIN_HAND);
-		player.resetAttackStrengthTicker();
-		
-		if (entity.invulnerableTime == 0 && entity != player && entity != player.getVehicle())
+		if (entity != player && entity != player.getVehicle())
 			PacketLongReachAttack.sendToServer(entity.getId());
+		
+		player.resetAttackStrengthTicker();
 
 		return false;
 	}
@@ -159,16 +158,15 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 		if (victim.level.isClientSide() || ModDamageSource.isAdditional(source) || !(source.getEntity() instanceof LivingEntity attacker))
 			return;
 		
-		if (this.isSilver())
-			this.dealSilverDamage(attacker, victim, damage);
-		
 		if (type.isFlamebladed)
 			LacerationEffect.apply(victim, damage);
 		
 		if (type.isHalberd && victim.isPassenger() && new Random().nextInt(20) >= 14)
 			victim.stopRiding();
-		
-		if (this.type.armorPiercing != 0 && victim.getArmorValue() > 0)
+
+		if (this.isSilver())
+			this.dealSilverDamage(attacker, victim, damage);
+		else if (this.type.armorPiercing != 0 && victim.getArmorValue() > 0)
 			this.dealArmorPiercingDamage(attacker, victim, damage);
 	}
 
@@ -255,7 +253,7 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 	
 	public boolean isLong()
 	{
-		return getBonusReachDistance() > 0.0;
+		return this.getBonusReachDistance() > 0.0;
 	}
 
 	public float getSilverDamage(ItemStack stack, float damage)
@@ -275,7 +273,7 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 
 	public boolean isSilver()
 	{
-		return isSilver;
+		return this.isSilver;
 	}
 
 	public boolean canBlock()
@@ -298,24 +296,24 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 	{
 		if (canBlock() && blockingPriority)
 		{
-			ItemStack itemstack = player.getItemInHand(hand);
+			ItemStack stack = player.getItemInHand(hand);
 			player.startUsingItem(hand);
 
-			return InteractionResultHolder.consume(itemstack);
+			return InteractionResultHolder.consume(stack);
 		}
 
 		return super.use(level, player, hand);
 	}
 
-	public int getUseDuration(ItemStack p_77626_1_)
+	public int getUseDuration(ItemStack stack)
 	{
-		return canBlock() ? (int) (500 / getWeight()) : 0;
+		return this.canBlock() ? (int) (500 / this.getWeight()) : 0;
 	}
 
 	@Override
-	public UseAnim getUseAnimation(ItemStack p_77661_1_)
+	public UseAnim getUseAnimation(ItemStack stack)
 	{
-		return (canBlock() && blockingPriority) ? UseAnim.BLOCK : super.getUseAnimation(p_77661_1_);
+		return (canBlock() && blockingPriority) ? UseAnim.BLOCK : super.getUseAnimation(stack);
 	}
 
 	public void onBlocked(ItemStack stack, float damage, LivingEntity victim, DamageSource source)
@@ -332,19 +330,16 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 		}
 		else if (!haveBlocked(new Random(), source))
 		{
-			// float damage2 = CombatRules.getDamageAfterAbsorb(damage, (float)victim.getArmorValue(), (float)victim.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
 			victim.hurt(ModDamageSource.additional(), damage);
 		}
 		else if (damage > this.getMaxBlockDamage())
 		{
 			f *= 1.5f;
 			float damage1 = damage - getMaxBlockDamage();
-			// float damage2 = CombatRules.getDamageAfterAbsorb(damage1, (float)victim.getArmorValue(), (float)victim.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
-			victim.hurt(ModDamageSource.additional(attacker), damage1);
+			victim.hurt(ModDamageSource.additional(), damage1);
 		}
 
 		stack.hurtAndBreak((int) (f * damage), victim, entity -> entity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
-
 	}
 
 	public void dealSilverDamage(LivingEntity attacker, LivingEntity victim, float damage)
@@ -359,9 +354,8 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 	{
 		float afterabsorb = CombatRules.getDamageAfterAbsorb(damage, (float) victim.getArmorValue(), (float) victim.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
 		afterabsorb = Math.max(afterabsorb - victim.getAbsorptionAmount(), 0.0f);
-		float pierced = ((float) type.armorPiercing) / 100.0f * (damage - afterabsorb);
-		if (pierced <= 0) return;
-		victim.hurt(ModDamageSource.armorPiercing(attacker), pierced);
+		float pierced = Math.max(((float) type.armorPiercing) / 100.0f * (damage - afterabsorb), 0.0f);
+		victim.hurt(ModDamageSource.armorPiercing(attacker), afterabsorb + pierced);
 	}
 
 	@Override

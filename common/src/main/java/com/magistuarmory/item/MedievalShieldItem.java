@@ -62,15 +62,15 @@ public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
     }
 	
 	@Override
-	public void appendHoverText(@NotNull ItemStack p_43094_, @Nullable Level p_43095_, List<Component> p_43096_, TooltipFlag p_43097_)
+	public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag)
     {
-    	p_43096_.add(new TextComponent(getMaxBlockDamage() + " max damage block").withStyle(ChatFormatting.BLUE));
-    	p_43096_.add(new TextComponent(getWeight() + "kg weight").withStyle(ChatFormatting.BLUE));
+    	list.add(new TextComponent(getMaxBlockDamage() + " max damage block").withStyle(ChatFormatting.BLUE));
+    	list.add(new TextComponent(getWeight() + "kg weight").withStyle(ChatFormatting.BLUE));
 		if (this.getWeight() >= 10)
 		{
-			p_43096_.add(new TextComponent("Slow movement speed").withStyle(ChatFormatting.RED));
+			list.add(new TextComponent("Slow movement speed").withStyle(ChatFormatting.RED));
 		}
-	    BannerItem.appendHoverTextFromBannerBlockEntityTag(p_43094_, p_43096_);
+	    BannerItem.appendHoverTextFromBannerBlockEntityTag(stack, list);
     }
 	
 	@Override
@@ -85,40 +85,40 @@ public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
 	
 	protected float getWeight() 
 	{
-		return weight;
+		return this.weight;
 	}
 
 	@Override
-	public String getDescriptionId(ItemStack p_43109_)
+	public String getDescriptionId(ItemStack stack)
     {
-		return getDescriptionId();
+		return super.getDescriptionId();
     }
 	
 	@Override
-	public int getUseDuration(ItemStack p_43107_)
+	public int getUseDuration(ItemStack stack)
     {
-        return (int) (12000 * weight);
+        return (int) (12000 * this.weight);
     }
 	
 	@Override
-	public boolean isValidRepairItem(ItemStack p_40392_, ItemStack p_40393_) 
+	public boolean isValidRepairItem(ItemStack stack, ItemStack stack2) 
 	{
-		return this.repairItem.get().test(p_40393_);
+		return this.repairItem.get().test(stack2);
 	}
 	
 	public boolean isPaintable()
 	{
-		return paintable;
+		return this.paintable;
 	}
 	
 	public HeraldryItemStackRenderer getRenderer() 
 	{
-		return renderer;
+		return this.renderer;
 	}
 	
 	public float getMaxBlockDamage() 
 	{
-		return maxBlockDamage;
+		return this.maxBlockDamage;
 	}
 
 	public void onBlocked(ItemStack stack, float damage, LivingEntity victim, DamageSource source) 

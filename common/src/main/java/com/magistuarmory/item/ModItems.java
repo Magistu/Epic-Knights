@@ -306,19 +306,19 @@ public class ModItems
 			this.bronzeTexture = "entity/" + ModItemTier.BRONZE.getMaterialName() + "_" + shieldName;
 		}
 
-		public void stitchWithoutPatterns(TextureAtlas atlas, Consumer<ResourceLocation> spriteAdder)
+		public void stitchWithoutPatterns(TextureAtlas atlas, Consumer<ResourceLocation> adder)
 		{
 			if (atlas.location() == TextureAtlas.LOCATION_BLOCKS)
 			{
 				String[] textures = new String[] { this.woodTexture, this.stoneTexture, this.ironTexture, this.goldTexture, this.diamondTexture, this.netheriteTexture, this.copperTexture, this.steelTexture, this.silverTexture, this.netheriteTexture, this.tinTexture, this.bronzeTexture };
 				for (String texture : textures)
 				{
-					spriteAdder.accept(new ResourceLocation(KnightlyArmory.ID, texture + "_nopattern"));
+					adder.accept(new ResourceLocation(KnightlyArmory.ID, texture + "_nopattern"));
 				}
 			}
 		}
 
-		public void stitch(TextureAtlas atlas, Consumer<ResourceLocation> spriteAdder)
+		public void stitch(TextureAtlas atlas, Consumer<ResourceLocation> adder)
 		{
 			if (atlas.location() == TextureAtlas.LOCATION_BLOCKS)
 			{
@@ -326,9 +326,9 @@ public class ModItems
 				for (String texture : textures)
 				{
 					ResourceLocation location1 = new ResourceLocation(KnightlyArmory.ID, texture + "_pattern");
-					spriteAdder.accept(location1);
+					adder.accept(location1);
 					ResourceLocation location2 = new ResourceLocation(KnightlyArmory.ID, texture + "_nopattern");
-					spriteAdder.accept(location2);
+					adder.accept(location2);
 				}
 			}
 
@@ -337,7 +337,7 @@ public class ModItems
 				for (BannerPattern bannerPattern : BannerPattern.values())
 				{
 					ResourceLocation location = new ResourceLocation(KnightlyArmory.ID, "entity/" + shieldName + "/" + bannerPattern.getFilename());
-					spriteAdder.accept(location);
+					adder.accept(location);
 				}
 			}
 		}

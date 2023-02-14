@@ -45,7 +45,7 @@ public class PacketLongReachAttack extends PacketBase
 		if (stack.isEmpty())
 			return;
 		player.attack(victim);
-		player.swing(InteractionHand.MAIN_HAND);
+		player.swing(InteractionHand.MAIN_HAND, true);
 		player.resetAttackStrengthTicker();
 	}
 

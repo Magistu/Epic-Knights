@@ -123,15 +123,17 @@ public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
 
 	public void onBlocked(ItemStack stack, float damage, LivingEntity victim, DamageSource source) 
 	{
+		if (ModDamageSource.isAdditional(source))
+			return;
+		
 		Entity attacker = source.getEntity();
 		float f = CombatHelper.getArmorPiercingFactor(attacker);
 
 		if (damage > this.getMaxBlockDamage())
 		{
 			f *= 1.5f;
-			float damage1 = damage - getMaxBlockDamage();
-			// float damage2 = CombatRules.getDamageAfterAbsorb(damage1, (float)blockingentity.getArmorValue(), (float)blockingentity.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
-			victim.hurt(ModDamageSource.additional(attacker), damage1);
+			float damage2 = damage - getMaxBlockDamage();
+			victim.hurt(ModDamageSource.additional(), damage2);
 		}
 		
 		stack.hurtAndBreak((int) (f * damage), victim, entity -> entity.broadcastBreakEvent(EquipmentSlot.MAINHAND));

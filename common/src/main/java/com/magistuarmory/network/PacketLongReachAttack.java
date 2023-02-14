@@ -44,9 +44,9 @@ public class PacketLongReachAttack extends PacketBase
 		ItemStack stack = player.getItemBySlot(EquipmentSlot.MAINHAND);
 		if (stack.isEmpty())
 			return;
+		player.attack(victim);
 		player.swing(InteractionHand.MAIN_HAND);
 		player.resetAttackStrengthTicker();
-		player.attack(victim);
 	}
 
 	public static void sendToServer(int entityid)

@@ -328,12 +328,12 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 
 		if (source.isExplosion())
 		{
-			victim.hurt(source, damage);
+			victim.hurt(ModDamageSource.additional(), damage);
 		}
 		else if (!haveBlocked(new Random(), source))
 		{
 			// float damage2 = CombatRules.getDamageAfterAbsorb(damage, (float)victim.getArmorValue(), (float)victim.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
-			victim.hurt(ModDamageSource.additional(attacker), damage);
+			victim.hurt(ModDamageSource.additional(), damage);
 		}
 		else if (damage > this.getMaxBlockDamage())
 		{

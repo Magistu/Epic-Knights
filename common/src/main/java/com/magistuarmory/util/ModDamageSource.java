@@ -10,6 +10,11 @@ public class ModDamageSource
 	{
 		return new EntityDamageSource("entity", attacker);
 	}
+
+	public static DamageSource additional()
+	{
+		return additional(null);
+	}
 	
 	public static DamageSource additional(Entity attacker)
 	{

@@ -403,7 +403,7 @@
 	"silvertools.hurt": "obrażenia przeciwko nieumarłym",
 	"flamebladed.hurt": "Zadaje nie gojące się rany",
 	"halberd.hurt": "Ma szansę zepchnąć przeciwnika z konia",
-	"reachdistance": "zasięg",
+	"bonusattackreach": "zasięg",
 	"slowmovementspeed": "Powolny prędkość ruchu",
 	"effect.laceration": "Zranienie",
 	"lance.rideronly": "Używane tylko podczas jazdy",

@@ -397,7 +397,7 @@
 	"lance.leftclick": "Vor dem Schlagen mit der linken Maustaste klicken, um vom Ziel abzusteigen",
 	"lance.bonusdamage": "+Bonusschaden basierend auf Masse und Geschwindigkeit",
 	"halberd.hurt": "Hat eine Chance den Gegner vom Pferd zu schubsen",
-    "reachdistance": " Reichweite",
+    "bonusattackreach": " Reichweite",
     "slowmovementspeed": "Verlangsamte Bewegungsgeschwindigkeit",
     "armorpiercing": "Rüstungsdurchdringung", 
     "twohandedi": "Zweihändig I", 

@@ -409,7 +409,7 @@
   "lance.leftclick": "右键放下骑枪后左键攻击可击落对手",
   "lance.bonusdamage": "根据重量和速度增加额外伤害",
   "halberd.hurt": "一定几率将敌人推下马",
-  "reachdistance": " 延伸范围",
+  "bonusattackreach": " 延伸范围",
   "armorpiercing": "护甲穿透", 
   "twohandedi": "双手武器 I", 
   "twohandedii": "双手武器 II", 

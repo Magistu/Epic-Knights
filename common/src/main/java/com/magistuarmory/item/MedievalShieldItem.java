@@ -44,9 +44,9 @@ public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
 	private final float maxBlockDamage;
 	private final float weight;
 
-	public MedievalShieldItem(String id, String name, Properties build, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Models.ShieldEnum modelkey)
+	public MedievalShieldItem(String id, String name, Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Models.ShieldEnum modelkey)
     {
-		super(build.durability(type.getDurability(material)));
+		super(properties.durability(type.getDurability(material)));
 		this.type = type;
 		this.paintable = paintable;
 		this.maxBlockDamage = type.maxBlockDamage + material.getAttackDamageBonus();

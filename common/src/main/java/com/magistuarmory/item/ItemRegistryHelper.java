@@ -46,19 +46,19 @@ public class ItemRegistryHelper
 	}
 
 	@ExpectPlatform
-	public static RegistrySupplier<MedievalWeaponItem> registerMedievalWeaponItem(String id, Item.Properties build, ModItemTier material, WeaponType type)
+	public static RegistrySupplier<MedievalWeaponItem> registerMedievalWeaponItem(String id, Item.Properties properties, ModItemTier material, WeaponType type)
 	{
 		throw new AssertionError();
 	}
 
 	@ExpectPlatform
-	public static RegistrySupplier<MedievalWeaponItem> registerLanceItem(String id, Item.Properties build, ModItemTier material, WeaponType type)
+	public static RegistrySupplier<MedievalWeaponItem> registerLanceItem(String id, Item.Properties properties, ModItemTier material, WeaponType type)
 	{
 		throw new AssertionError();
 	}
 
 	@ExpectPlatform
-	public static RegistrySupplier<MedievalShieldItem> registerMedievalShieldItem(String id, String name, Item.Properties build, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Models.ShieldEnum modelkey)
+	public static RegistrySupplier<MedievalShieldItem> registerMedievalShieldItem(String id, String name, Item.Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Models.ShieldEnum modelkey)
 	{
 		throw new AssertionError();
 	}

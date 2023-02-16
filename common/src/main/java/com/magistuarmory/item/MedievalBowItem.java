@@ -31,72 +31,57 @@ public class MedievalBowItem extends BowItem implements IHasModelProperty
     }
 
     @Override
-    public void releaseUsing(ItemStack p_40667_, Level p_40668_, LivingEntity p_40669_, int p_40670_)
+    public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int t)
     {
-        if (p_40669_ instanceof Player)
+        if (entity instanceof Player player)
         {
-            Player player = (Player)p_40669_;
-            boolean flag = player.getAbilities().instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, p_40667_) > 0;
-            ItemStack itemstack = player.getProjectile(p_40667_);
+            boolean flag = player.getAbilities().instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, stack) > 0;
+            ItemStack stack2 = player.getProjectile(stack);
 
-            int i = this.getUseDuration(p_40667_) - p_40670_;
-            if (!itemstack.isEmpty() || flag)
+            int i = this.getUseDuration(stack) - t;
+            if (!stack2.isEmpty() || flag)
             {
-                if (itemstack.isEmpty())
-                {
-                    itemstack = new ItemStack(Items.ARROW);
-                }
+                if (stack2.isEmpty())
+                    stack2 = new ItemStack(Items.ARROW);
 
-                float f = getPower(i);
+                float f = this.getPower(i);
                 if (!((double)f < 0.1D))
                 {
-                    boolean flag1 = player.getAbilities().instabuild || (itemstack.getItem() instanceof ArrowItem && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, p_40667_) > 0);
-                    if (!p_40668_.isClientSide)
+                    boolean flag1 = player.getAbilities().instabuild || (stack2.getItem() instanceof ArrowItem && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, stack) > 0);
+                    if (!level.isClientSide)
                     {
-                        ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
-                        AbstractArrow abstractarrow = arrowitem.createArrow(p_40668_, itemstack, player);
+                        ArrowItem arrowitem = (ArrowItem)(stack2.getItem() instanceof ArrowItem ? stack2.getItem() : Items.ARROW);
+                        AbstractArrow abstractarrow = arrowitem.createArrow(level, stack2, player);
                         abstractarrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, f * this.arrowSpeed, 1.0F);
                         if (f == 1.0F)
-                        {
                             abstractarrow.setCritArrow(true);
-                        }
 
-                        int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, p_40667_);
+                        int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stack);
                         if (j > 0)
-                        {
                             abstractarrow.setBaseDamage(abstractarrow.getBaseDamage() + (double)j * 0.5D + 0.5D);
-                        }
 
-                        int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, p_40667_);
+                        int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, stack);
                         if (k > 0)
-                        {
                             abstractarrow.setKnockback(k);
-                        }
 
-                        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, p_40667_) > 0)
-                        {
+                        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, stack) > 0)
                             abstractarrow.setSecondsOnFire(100);
-                        }
 
-                        p_40667_.hurtAndBreak(1, player, (p_40665_) -> {
+                        stack.hurtAndBreak(1, player, (p_40665_) -> {
                             p_40665_.broadcastBreakEvent(player.getUsedItemHand());
                         });
-                        if (flag1 || player.getAbilities().instabuild && (itemstack.is(Items.SPECTRAL_ARROW) || itemstack.is(Items.TIPPED_ARROW)))
-                        {
+                        if (flag1 || player.getAbilities().instabuild && (stack2.is(Items.SPECTRAL_ARROW) || stack2.is(Items.TIPPED_ARROW)))
                             abstractarrow.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
-                        }
 
-                        p_40668_.addFreshEntity(abstractarrow);
+                        level.addFreshEntity(abstractarrow);
                     }
 
-                    p_40668_.playSound((Player)null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (p_40668_.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                    level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (level.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
                     if (!flag1 && !player.getAbilities().instabuild)
                     {
-                        itemstack.shrink(1);
-                        if (itemstack.isEmpty())
-                        {
-                            player.getInventory().removeItem(itemstack);
-                        }
+                        stack2.shrink(1);
+                        if (stack2.isEmpty())
+                            player.getInventory().removeItem(stack2);
                     }
 
                     player.awardStat(Stats.ITEM_USED.get(this));
@@ -105,9 +90,9 @@ public class MedievalBowItem extends BowItem implements IHasModelProperty
         }
     }
 
-    public float getPower(int p_185059_0_)
+    public float getPower(int t)
     {
-        float f = (float)p_185059_0_ / this.pullTime;
+        float f = (float) t / this.pullTime;
         f = (f * f + f * 2.0F) / 3.0F;
         if (f > 1.0F)
             f = 1.0F;

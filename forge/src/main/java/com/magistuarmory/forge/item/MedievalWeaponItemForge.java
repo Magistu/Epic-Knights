@@ -15,9 +15,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class MedievalWeaponItemForge extends MedievalWeaponItem
 {
-    public MedievalWeaponItemForge(Properties build, ModItemTier material, WeaponType type)
+    public MedievalWeaponItemForge(Properties properties, ModItemTier material, WeaponType type)
     {
-        super(build, material, type);
+        super(properties, material, type);
     }
 
     @Override

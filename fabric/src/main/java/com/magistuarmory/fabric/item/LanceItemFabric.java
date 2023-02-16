@@ -13,9 +13,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class LanceItemFabric extends LanceItem
 {
-	public LanceItemFabric(Properties build, ModItemTier material, WeaponType type)
+	public LanceItemFabric(Properties properties, ModItemTier material, WeaponType type)
 	{
-		super(build, material, type);
+		super(properties, material, type);
 	}
 
 	@Override

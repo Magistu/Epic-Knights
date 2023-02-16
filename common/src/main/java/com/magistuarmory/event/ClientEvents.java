@@ -56,7 +56,7 @@ public class ClientEvents
 			ItemStack stack = player.getMainHandItem();
 			if (stack.getItem() instanceof MedievalWeaponItem weapon) 
 			{
-				HitResult hit = ClientHelper.getMouseOver(mc, CombatHelper.getReachDistance(player, weapon));
+				HitResult hit = ClientHelper.getMouseOver(mc, CombatHelper.getAttackReach(player, weapon));
 				if (hit instanceof EntityHitResult entityhit && !weapon.onAttackClickEntity(stack, player, entityhit.getEntity())) 
 				{
 					return EventResult.interruptFalse();

@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class MedievalWeaponItemFabric extends MedievalWeaponItem
 {
-    public MedievalWeaponItemFabric(Properties build, ModItemTier material, WeaponType type)
+    public MedievalWeaponItemFabric(Properties properties, ModItemTier material, WeaponType type)
     {
-        super(build, material, type);
+        super(properties, material, type);
     }
 
     @Override

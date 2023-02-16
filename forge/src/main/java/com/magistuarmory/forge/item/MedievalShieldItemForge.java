@@ -17,9 +17,9 @@ import java.util.function.Consumer;
 
 public class MedievalShieldItemForge extends MedievalShieldItem
 {
-	public MedievalShieldItemForge(String id, String name, Properties build, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Models.ShieldEnum modelkey)
+	public MedievalShieldItemForge(String id, String name, Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Models.ShieldEnum modelkey)
     {
-		super(id, name, build, material, paintable, is3d, type, modelkey);
+		super(id, name, properties, material, paintable, is3d, type, modelkey);
     }
 
 	@Override

@@ -52,9 +52,9 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 	private float silverAttackDamage = 0.0f;
 	private boolean blockingPriority = false;
 
-	public MedievalWeaponItem(Properties build, ModItemTier material, WeaponType type)
+	public MedievalWeaponItem(Properties properties, ModItemTier material, WeaponType type)
 	{
-		super(material, (int) CombatHelper.getBaseAttackDamage(material, type), CombatHelper.getBaseAttackSpeed(material, type), build);
+		super(material, (int) CombatHelper.getBaseAttackDamage(material, type), CombatHelper.getBaseAttackSpeed(material, type), properties);
 		this.type = type;
 		this.attackDamage = CombatHelper.getBaseAttackDamage(material, type);
 		this.attackSpeed = CombatHelper.getBaseAttackSpeed(material, type);
@@ -153,21 +153,23 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 		super.inventoryTick(stack, level, entity, i, selected);
 	}
 
-	public void onHurtEntity(DamageSource source, LivingEntity victim, float damage)
+	public boolean onHurtEntity(DamageSource source, LivingEntity victim, float damage)
 	{
 		if (victim.level.isClientSide() || ModDamageSource.isAdditional(source) || !(source.getEntity() instanceof LivingEntity attacker))
-			return;
+			return true;
 		
 		if (type.isFlamebladed)
 			LacerationEffect.apply(victim, damage);
 		
 		if (type.isHalberd && victim.isPassenger() && new Random().nextInt(20) >= 14)
 			victim.stopRiding();
-
+		
+		boolean flag = false;
 		if (this.isSilver())
-			this.dealSilverDamage(attacker, victim, damage);
-		else if (this.type.armorPiercing != 0 && victim.getArmorValue() > 0)
-			this.dealArmorPiercingDamage(attacker, victim, damage);
+			flag = this.dealSilverDamage(attacker, victim, damage);
+		if (!flag && this.type.armorPiercing != 0 && victim.getArmorValue() > 0)
+			flag = this.dealArmorPiercingDamage(attacker, victim, damage);
+		return flag;
 	}
 
 	@Override
@@ -182,7 +184,7 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 		if (type.armorPiercing != 0)
 			tooltip.add(new TextComponent(type.armorPiercing + "% ").append(new TranslatableComponent("armorpiercing")).withStyle(ChatFormatting.BLUE));
 		if (this.isLong())
-			tooltip.add(new TextComponent("+" + type.bonusReachDistance + " ").append(new TranslatableComponent("reachdistance")).withStyle(ChatFormatting.BLUE));
+			tooltip.add(new TextComponent("+" + type.bonusAttackReach + " ").append(new TranslatableComponent("bonusattackreach")).withStyle(ChatFormatting.BLUE));
 		if (type.twoHanded == 1)
 			tooltip.add(new TranslatableComponent("twohandedi").withStyle(ChatFormatting.BLUE));
 		else if (type.twoHanded > 1)
@@ -241,19 +243,19 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 		return this.attackDamage;
 	}
 
-	public float getReachDistance(float baseReach)
+	public float getAttackReach(float baseReach)
 	{
-		return baseReach + getBonusReachDistance();
+		return baseReach + getBonusAttackReach();
 	}
 
-	public float getBonusReachDistance()
+	public float getBonusAttackReach()
 	{
-		return KnightlyArmory.BC_or_EF_installed ? 0.0f : type.bonusReachDistance;
+		return KnightlyArmory.BC_or_EF_installed ? 0.0f : type.bonusAttackReach;
 	}
 	
 	public boolean isLong()
 	{
-		return this.getBonusReachDistance() > 0.0;
+		return this.getBonusAttackReach() > 0.0;
 	}
 
 	public float getSilverDamage(ItemStack stack, float damage)
@@ -342,20 +344,23 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 		stack.hurtAndBreak((int) (f * damage), victim, entity -> entity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
 	}
 
-	public void dealSilverDamage(LivingEntity attacker, LivingEntity victim, float damage)
+	public boolean dealSilverDamage(LivingEntity attacker, LivingEntity victim, float damage)
 	{
 		if (victim.getMobType().equals(MobType.UNDEAD))
 		{
 			victim.hurt(ModDamageSource.silverAttack(attacker), damage + this.getSilverDamage(attacker.getMainHandItem(), damage));
+			return true;
 		}
+		return false;
 	}
 
-	public void dealArmorPiercingDamage(LivingEntity attacker, LivingEntity victim, float damage)
+	public boolean dealArmorPiercingDamage(LivingEntity attacker, LivingEntity victim, float damage)
 	{
 		float afterabsorb = CombatRules.getDamageAfterAbsorb(damage, (float) victim.getArmorValue(), (float) victim.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
 		afterabsorb = Math.max(afterabsorb - victim.getAbsorptionAmount(), 0.0f);
 		float pierced = Math.max(((float) type.armorPiercing) / 100.0f * (damage - afterabsorb), 0.0f);
 		victim.hurt(ModDamageSource.armorPiercing(attacker), afterabsorb + pierced);
+		return true;
 	}
 
 	@Override

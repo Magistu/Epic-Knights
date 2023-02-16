@@ -3,23 +3,18 @@ package com.magistuarmory.util;
 import com.magistuarmory.item.MedievalWeaponItem;
 import com.magistuarmory.item.ModItemTier;
 import com.magistuarmory.item.WeaponType;
-import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
 
 public class CombatHelper
 {
-	public static float getReachDistance(Player player, MedievalWeaponItem weapon) 
+	public static float getAttackReach(Player player, MedievalWeaponItem weapon) 
 	{
-		return weapon.getReachDistance(getBaseReachDistance(player));
+		return weapon.getAttackReach(getBaseAttackReach(player));
 	}
 	
-	public static float getBaseReachDistance(Player player)
+	public static float getBaseAttackReach(Player player)
 	{
 		return player.isCreative() ? 5.0f : 4.5f;
 	}

@@ -20,7 +20,7 @@ public final class ServerConfig implements ConfigData
     public boolean enableSurcoatRecipeForAllArmor = true;
     
     @Comment("If Epic Fight or Better Combat is installed, it will be used as true. If true, all the weapons have the same reach distance. It's recommended to set to true to avoid conflicts with some combat mods. Default value is false.")
-    public boolean disableReachDistance = false;
+    public boolean disableAttackReach = false;
     
     @Comment("If true, all the weapons don't penetrate armor. It's recommended to set to true to avoid conflicts with some combat mods. Default value is false.")
     public boolean disableArmorPiercing = false;

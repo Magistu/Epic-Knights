@@ -3,6 +3,7 @@ package com.magistuarmory.fabric;
 import com.magistuarmory.KnightlyArmory;
 import com.magistuarmory.fabric.event.ClientEventsFabric;
 import dev.architectury.platform.Platform;
+import me.shedaniel.clothconfig2.gui.ClothConfigScreen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
 

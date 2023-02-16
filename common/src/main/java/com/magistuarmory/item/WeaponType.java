@@ -39,20 +39,20 @@ public class WeaponType
     public final float sizeFactor;
     public final float weight;
     public int armorPiercing = 0;
-    public float bonusReachDistance = 0.0f;
+    public float bonusAttackReach = 0.0f;
     public int twoHanded = 0;
     public float maxBlockDamage = 0.0f;
     public boolean canBlock = false;
     public boolean isFlamebladed = false;
     public boolean isHalberd = false;
 
-    public WeaponType(float baseAttackDamage, float baseAttackSpeed, float sizeFactor, int armorPiercing, float reachDistance, float weight)
+    public WeaponType(float baseAttackDamage, float baseAttackSpeed, float sizeFactor, int armorPiercing, float attackReach, float weight)
     {
         this(baseAttackDamage, baseAttackSpeed, sizeFactor, weight);
         if (!KnightlyArmory.CONFIG.disableArmorPiercing)
             this.armorPiercing = armorPiercing;
-        if (!KnightlyArmory.CONFIG.disableReachDistance)
-            this.bonusReachDistance = reachDistance;
+        if (!KnightlyArmory.CONFIG.disableAttackReach)
+            this.bonusAttackReach = attackReach;
     }
     
     public WeaponType(float baseAttackDamage, float baseAttackSpeed, float sizeFactor, float weight)

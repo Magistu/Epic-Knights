@@ -49,18 +49,18 @@ public class ItemRegistryHelperImpl
 		{ @Override public HumanoidModel<?> getArmorModel(EquipmentSlot slot0, HumanoidModel<?> _default) { return slot0 == slot ? Models.ARMOR_MAP.get(modelkey) : super.getArmorModel(slot0, _default); } });
 	}
 
-	public static RegistrySupplier<MedievalWeaponItem> registerMedievalWeaponItem(String id, Item.Properties build, ModItemTier material, WeaponType type)
+	public static RegistrySupplier<MedievalWeaponItem> registerMedievalWeaponItem(String id, Item.Properties properties, ModItemTier material, WeaponType type)
 	{
-		return ModItems.ITEMS.register(id, () -> new MedievalWeaponItemForge(build, material, type));
+		return ModItems.ITEMS.register(id, () -> new MedievalWeaponItemForge(properties, material, type));
 	}
 
-	public static RegistrySupplier<MedievalWeaponItem> registerLanceItem(String id, Item.Properties build, ModItemTier material, WeaponType type)
+	public static RegistrySupplier<MedievalWeaponItem> registerLanceItem(String id, Item.Properties properties, ModItemTier material, WeaponType type)
 	{
-		return ModItems.ITEMS.register(id, () -> new LanceItemForge(build, material, type));
+		return ModItems.ITEMS.register(id, () -> new LanceItemForge(properties, material, type));
 	}
 
-	public static RegistrySupplier<MedievalShieldItem> registerMedievalShieldItem(String id, String name, Item.Properties build, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Models.ShieldEnum modelkey)
+	public static RegistrySupplier<MedievalShieldItem> registerMedievalShieldItem(String id, String name, Item.Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Models.ShieldEnum modelkey)
 	{
-		return ModItems.ITEMS.register(id, () -> new MedievalShieldItemForge(id, name, build, material, paintable, is3d, type, modelkey));
+		return ModItems.ITEMS.register(id, () -> new MedievalShieldItemForge(id, name, properties, material, paintable, is3d, type, modelkey));
 	}
 }

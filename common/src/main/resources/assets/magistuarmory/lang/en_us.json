@@ -404,7 +404,7 @@
   "silvertools.hurt": "damage against undead",
   "flamebladed.hurt": "Inflicts non-healing wounds",
   "halberd.hurt": "Has a chance to push the enemy off the horse",
-  "reachdistance": " reach distance",
+  "bonusattackreach": " reach distance",
   "slowmovementspeed": "Slow movement speed",
   "effect.laceration": "Laceration",
   "lance.rideronly": "Used only when riding",

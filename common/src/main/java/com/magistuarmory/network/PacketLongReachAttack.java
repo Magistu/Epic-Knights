@@ -30,7 +30,7 @@ public class PacketLongReachAttack extends PacketBase
 	FriendlyByteBuf encode() 
 	{
 		FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
-		buf.writeInt(entityId);
+		buf.writeInt(this.entityId);
 		return buf;
 	}
 
@@ -42,7 +42,7 @@ public class PacketLongReachAttack extends PacketBase
 	static void apply(Entity victim, ServerPlayer player) 
 	{
 		ItemStack stack = player.getItemBySlot(EquipmentSlot.MAINHAND);
-		if (stack.isEmpty())
+		if (!(stack.getItem() instanceof MedievalWeaponItem weapon) || !weapon.isLong())
 			return;
 		player.attack(victim);
 		player.swing(InteractionHand.MAIN_HAND, true);

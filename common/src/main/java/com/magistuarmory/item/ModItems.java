@@ -336,7 +336,10 @@ public class ModItems
 			{
 				for (BannerPattern bannerPattern : BannerPattern.values())
 				{
-					ResourceLocation location = new ResourceLocation(KnightlyArmory.ID, "entity/" + shieldName + "/" + bannerPattern.getFilename());
+					String filename = bannerPattern.getFilename();
+					if (filename.contains(":"))
+						filename = filename.split(":")[1];
+					ResourceLocation location = new ResourceLocation(KnightlyArmory.ID, "entity/" + shieldName + "/" + filename);
 					adder.accept(location);
 				}
 			}
@@ -344,7 +347,7 @@ public class ModItems
 	}
 
 	public static final ShieldsSupply[] shieldsSupply = new ShieldsSupply[] {HEATER_SHIELDS, TARGETS, BUCKLERS, RONDACHES, TARTSCHES, ELLIPTICAL_SHIELDS, ROUND_SHIELDS, PAVESES, KITE_SHIELDS};
-	public static final WeaponsSupply[] weaponsSupply = new WeaponsSupply[] {RANSEURS, AHLSPIESSES, GIANT_LANCES, BASTARD_SWORDS, ESTOCS, CLAYMORS, ZWEIHANDERS, FLAME_BLADED_SWORDS, LOCHABER_AXES, CONCAVE_EDGED_HALBERDS, GUISARMES};
+	public static final WeaponsSupply[] weaponsSupply = new WeaponsSupply[] {STILETTOS, SHORT_SWORDS, KATZBALGERS, PIKES, RANSEURS, AHLSPIESSES, GIANT_LANCES, BASTARD_SWORDS, ESTOCS, CLAYMORS, ZWEIHANDERS, FLAME_BLADED_SWORDS, LOCHABER_AXES, CONCAVE_EDGED_HALBERDS, HEAVY_MACES, HEAVY_WAR_HAMMERS, LUCERNE_HAMMERS, MORNINGSTARS, FLAILS, GUISARMES};
 	public static ArrayList<RegistrySupplier<? extends Item>> dyeableItems;
 	static
 	{

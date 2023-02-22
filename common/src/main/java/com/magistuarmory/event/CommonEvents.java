@@ -3,6 +3,7 @@ package com.magistuarmory.event;
 import com.magistuarmory.KnightlyArmory;
 import com.magistuarmory.init.ModMerchOffers;
 
+import com.magistuarmory.network.PacketBetterCombatOrEpicFightInstalled;
 import com.magistuarmory.util.EquipmentHelper;
 import com.magistuarmory.init.ModLoot;
 import com.magistuarmory.item.MedievalShieldItem;
@@ -11,8 +12,10 @@ import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.EntityEvent;
 import dev.architectury.event.events.common.LifecycleEvent;
 import dev.architectury.event.events.common.LootEvent;
+import dev.architectury.event.events.common.PlayerEvent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,6 +32,7 @@ public class CommonEvents
         LifecycleEvent.SERVER_STARTING.register(CommonEvents::onServerStarting);
         EntityEvent.ADD.register(CommonEvents::onEntityJoinLevel);
         EntityEvent.LIVING_HURT.register(CommonEvents::onLivingHurt);
+        PlayerEvent.PLAYER_JOIN.register(CommonEvents::onPlayerJoin);
     }
 
     public static void onModifyLootTable(LootTables tables, ResourceLocation id, LootEvent.LootTableModificationContext context, boolean builtin)
@@ -72,5 +76,10 @@ public class CommonEvents
         }
         
         return EventResult.pass();
+    }
+
+    public static void onPlayerJoin(ServerPlayer player)
+    {
+        PacketBetterCombatOrEpicFightInstalled.sendToPlayer(player);
     }
 }

@@ -11,37 +11,37 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 
 
-public class PacketLanceCollision extends PacketBase
+public class PacketLanceCollision
 {
 	public static final ResourceLocation ID = new ResourceLocation(KnightlyArmory.ID, "packet_lance_collision");
 
-	private final int entityId;
-	private final float speed;
-	private final boolean dismount;
-
-	PacketLanceCollision(int entityid, float speed, boolean dismount)
+	public static void sendToServer(int entityid, float damage, boolean dismount)
 	{
-		this.entityId = entityid;
-		this.speed = speed;
-		this.dismount = dismount;
+		NetworkManager.sendToServer(ID, PacketLanceCollision.encode(entityid, damage, dismount));
 	}
 
-	@Override
-	FriendlyByteBuf encode()
+	static FriendlyByteBuf encode(int entityid, float speed, boolean dismount)
 	{
 		FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
-		buf.writeInt(this.entityId);
-		buf.writeFloat(this.speed);
-		buf.writeBoolean(this.dismount);
+		buf.writeInt(entityid);
+		buf.writeFloat(speed);
+		buf.writeBoolean(dismount);
 		return buf;
 	}
 
 	public static void apply(FriendlyByteBuf buf, NetworkManager.PacketContext context)
 	{
-		apply(context.getPlayer().level.getEntity(buf.readInt()), buf.readFloat(), buf.readBoolean(), (ServerPlayer) context.getPlayer());
+		if (!(context.getPlayer() instanceof ServerPlayer player))
+			return;
+		Entity victim = player.level.getEntity(buf.readInt());
+		if (victim == null)
+			return;
+		float speed = buf.readFloat();
+		boolean dismount = buf.readBoolean();
+		context.queue(() -> execute(victim, speed, dismount, player));
 	}
 
-	static void apply(Entity victim, float speed, boolean dismount, ServerPlayer player)
+	static void execute(Entity victim, float speed, boolean dismount, ServerPlayer player)
 	{
 		ItemStack stack = player.getMainHandItem();
 
@@ -52,10 +52,5 @@ public class PacketLanceCollision extends PacketBase
 			player.attack(victim);
 			player.resetAttackStrengthTicker();
 		}
-	}
-	
-	public static void sendToServer(int entityid, float damage, boolean dismount)
-	{
-		NetworkManager.sendToServer(ID, new PacketLanceCollision(entityid, damage, dismount).encode());
 	}
 }

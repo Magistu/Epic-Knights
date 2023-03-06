@@ -1,6 +1,5 @@
 package com.magistuarmory.forge.item.armor;
 
-import com.magistuarmory.item.armor.ISurcoat;
 import com.magistuarmory.item.armor.KnightItem;
 import dev.architectury.platform.Platform;
 import dev.architectury.utils.Env;

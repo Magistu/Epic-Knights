@@ -1,7 +1,16 @@
 {
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "magistuarmory:item/ceremonialarmet",
-    "layer1": "magistuarmory:item/ceremonialarmet_overlay"
-  }
+	"credit": "Made with Blockbench",
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "magistuarmory:item/ceremonialarmet",
+		"layer1": "magistuarmory:item/ceremonialarmet_overlay"
+	},
+	"display": {
+		"gui": {
+			"translation": [0, 1, 0]
+		},
+		"fixed": {
+			"translation": [0, 1, 0]
+		}
+	}
 }

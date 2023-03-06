@@ -153,7 +153,7 @@ public class HeraldryRecipe extends CustomRecipe
 
     static boolean wornWithSurcoat(Item item)
     {
-        return item instanceof ArmorItem && (KnightlyArmory.CONFIG.enableSurcoatRecipeForAllArmor || item instanceof ISurcoat) && ((ArmorItem) item).getSlot().equals(EquipmentSlot.CHEST);
+        return item instanceof ArmorItem && (KnightlyArmory.GENERAL_CONFIG.enableSurcoatRecipeForAllArmor || item instanceof ISurcoat) && ((ArmorItem) item).getSlot().equals(EquipmentSlot.CHEST);
     }
 
     static boolean isApplicableForBanner(Item item)

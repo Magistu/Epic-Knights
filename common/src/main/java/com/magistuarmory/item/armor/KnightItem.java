@@ -11,7 +11,7 @@ import net.minecraft.world.item.*;
 
 public class KnightItem extends MedievalArmorItem implements ISurcoat, DyeableLeatherItem
 {
-	public KnightItem(ArmorMaterial material, EquipmentSlot slot, Item.Properties properties) {
+	public KnightItem(ArmorMaterial material, EquipmentSlot slot, Properties properties) {
 		super(material, slot, properties);
 	}
 

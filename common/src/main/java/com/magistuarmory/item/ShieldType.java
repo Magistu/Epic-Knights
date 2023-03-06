@@ -2,32 +2,22 @@ package com.magistuarmory.item;
 
 import net.minecraft.world.item.Tier;
 
-public class ShieldType
+public final class ShieldType
 {
-    public static final ShieldType HEATERSHIELD = new ShieldType(350, 0.8f, 4, 10);
-    public static final ShieldType TARGET = new ShieldType(350, 0.8f, 1, 6).setRepairable();
-    public static final ShieldType BUCKLER = new ShieldType(350, 0.8f, 1, 6).setRepairable();
-    public static final ShieldType RONDACHE = new ShieldType(420, 1.2f, 6, 13).setRepairable();
-    public static final ShieldType TARTSCHE = new ShieldType(350, 0.8f, 4, 10);
-    public static final ShieldType ELLIPTICALSHIELD = new ShieldType(370, 0.8f, 5, 10);
-    public static final ShieldType ROUNDSHIELD = new ShieldType(350, 0.8f, 3, 7);
-    public static final ShieldType PAVESE = new ShieldType(450, 0.7f, 10, 17);
-    public static final ShieldType KITESHIELD = new ShieldType(370, 0.8f, 5, 10);
+    private final int baseDurability;
+    private final float materialFactor;
+    private final float weight;
+    private final float maxBlockDamage;
+    private boolean repairable = false;
+    public final boolean enabled;
 
-    public static final ShieldType CORRUPTED_ROUND_SHIELD = new ShieldType(100, 0.8f, 2, 4);
-    
-    public final int baseDurability;
-    public final float materialFactor;
-    public final float weigth;
-    public final float maxBlockDamage;
-    public boolean repairable = false;
-
-    public ShieldType(int baseDurability, float materialFactor, float weigth, float maxBlockDamage)
+    public ShieldType(int baseDurability, float materialFactor, float weight, float maxBlockDamage, boolean enabled)
     {
         this.baseDurability = baseDurability;
         this.materialFactor = materialFactor;
-        this.weigth = weigth;
+        this.weight = weight;
         this.maxBlockDamage = maxBlockDamage;
+        this.enabled = enabled;
     }
     
     public ShieldType setRepairable()
@@ -39,5 +29,35 @@ public class ShieldType
     public int getDurability(Tier material)
     {
         return (int) (this.baseDurability + this.materialFactor * material.getUses());
+    }
+
+    public int getBaseDurability()
+    {
+        return this.baseDurability;
+    }
+
+    public float getMaterialFactor()
+    {
+        return this.materialFactor;
+    }
+
+    public float getWeight()
+    {
+        return this.weight;
+    }
+
+    public float getMaxBlockDamage()
+    {
+        return this.maxBlockDamage;
+    }
+
+    public boolean isRepairable()
+    {
+        return this.repairable;
+    }
+
+    public boolean isDisabled()
+    {
+        return !this.enabled;
     }
 }

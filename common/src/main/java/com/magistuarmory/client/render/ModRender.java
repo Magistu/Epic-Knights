@@ -2,6 +2,8 @@ package com.magistuarmory.client.render;
 
 import com.magistuarmory.KnightlyArmory;
 import com.magistuarmory.client.render.model.*;
+import com.magistuarmory.item.MedievalShieldItem;
+import com.magistuarmory.item.MedievalWeaponItem;
 import com.magistuarmory.item.ModItems;
 import com.magistuarmory.item.IHasModelProperty;
 
@@ -28,26 +30,23 @@ public class ModRender
 	
 	public static void setup()
 	{
-		for (RegistrySupplier<? extends Item> supplier : ModItems.dyeableItems)
+		for (RegistrySupplier<? extends Item> supplier : ModItems.DYEABLE_ITEMS)
 		{
 			ColorHandlerRegistry.registerItemColors((stack, i) -> i > 0 ? -1 : ((DyeableLeatherItem) stack.getItem()).getColor(stack), supplier.get());
 		}
 		
-		for (ModItems.ShieldsSupply shields : ModItems.shieldsSupply) 
+		for (RegistrySupplier<MedievalShieldItem> supplier : ModItems.SHIELD_ITEMS) 
 		{
-			shields.get().forEach(supplier -> ((IHasModelProperty) supplier.get()).registerModelProperty());
+			((IHasModelProperty) supplier.get()).registerModelProperty();
 		}
 
-		for (ModItems.WeaponsSupply weapons : ModItems.weaponsSupply)
+		for (RegistrySupplier<MedievalWeaponItem> supplier : ModItems.WEAPON_ITEMS)
 		{
-			weapons.get().forEach(supplier -> ((IHasModelProperty) supplier.get()).registerModelProperty());
+			((IHasModelProperty) supplier.get()).registerModelProperty();
 		}
 
 		((IHasModelProperty) ModItems.LONGBOW.get()).registerModelProperty();
 		((IHasModelProperty) ModItems.HEAVY_CROSSBOW.get()).registerModelProperty();
-		((IHasModelProperty) ModItems.NOBLE_SWORD.get()).registerModelProperty();
-		((IHasModelProperty) ModItems.MESSER_SWORD.get()).registerModelProperty();
-		((IHasModelProperty) ModItems.CORRUPTED_ROUND_SHIELD.get()).registerModelProperty();
 
 		EntityModelLayerRegistry.register(SURCOAT, SurcoatModel::createLayer);
 		EntityModelLayerRegistry.register(CAPARISON, CaparisonModel::createLayer);

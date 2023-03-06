@@ -3,8 +3,6 @@ package com.magistuarmory.network;
 import dev.architectury.networking.NetworkManager;
 import dev.architectury.platform.Platform;
 import dev.architectury.utils.Env;
-import net.fabricmc.api.EnvType;
-import net.minecraft.server.level.ServerPlayer;
 
 public class ModPackets
 {

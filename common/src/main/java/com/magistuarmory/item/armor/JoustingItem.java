@@ -24,7 +24,7 @@ import java.util.List;
 
 public class JoustingItem extends MedievalArmorItem implements ISurcoat
 {
-	public JoustingItem(ArmorMaterial material, EquipmentSlot slot, Item.Properties properties)
+	public JoustingItem(ArmorMaterial material, EquipmentSlot slot, Properties properties)
 	{
 		super(material, slot, properties);
 	}

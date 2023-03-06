@@ -1,7 +1,6 @@
 package com.magistuarmory.forge.item;
 
 import com.magistuarmory.client.render.model.Models;
-import com.magistuarmory.item.IHasModelProperty;
 import com.magistuarmory.item.MedievalShieldItem;
 import com.magistuarmory.item.ModItemTier;
 import com.magistuarmory.item.ShieldType;

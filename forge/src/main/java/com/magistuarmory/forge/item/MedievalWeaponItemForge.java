@@ -1,7 +1,6 @@
 package com.magistuarmory.forge.item;
 
 import com.google.common.collect.Multimap;
-import com.magistuarmory.item.IHasModelProperty;
 import com.magistuarmory.item.MedievalWeaponItem;
 import com.magistuarmory.item.ModItemTier;
 import com.magistuarmory.item.WeaponType;
@@ -23,7 +22,7 @@ public class MedievalWeaponItemForge extends MedievalWeaponItem
     @Override
     public boolean canPerformAction(ItemStack stack, ToolAction action)
     {
-        return (type.canBlock && ToolActions.DEFAULT_SHIELD_ACTIONS.contains(action)) || ToolActions.DEFAULT_SWORD_ACTIONS.contains(action);
+        return (type.canBlock() && ToolActions.DEFAULT_SHIELD_ACTIONS.contains(action)) || ToolActions.DEFAULT_SWORD_ACTIONS.contains(action);
     }
 
     @Override

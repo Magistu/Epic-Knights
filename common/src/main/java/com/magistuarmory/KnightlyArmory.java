@@ -1,11 +1,10 @@
 package com.magistuarmory;
 
-import com.magistuarmory.config.ServerConfig;
-import com.magistuarmory.config.ServerConfigWrapper;
+import com.magistuarmory.config.GeneralConfig;
+import com.magistuarmory.config.ModConfig;
 import com.magistuarmory.effects.ModEffects;
 import com.magistuarmory.event.ClientEvents;
 import com.magistuarmory.event.CommonEvents;
-import com.magistuarmory.init.HeraldryPattern;
 import com.magistuarmory.item.ModItems;
 import com.magistuarmory.item.crafting.ModRecipes;
 import com.magistuarmory.network.ModPackets;
@@ -22,12 +21,14 @@ public class KnightlyArmory
     public static boolean BC_or_EF_installed;
 	public static final String ID = "magistuarmory";
     public static final Logger LOGGER = LogManager.getLogger();
-    public static ServerConfig CONFIG;
+    public static ModConfig CONFIG;
+    public static GeneralConfig GENERAL_CONFIG;
     
     public static void init()
     {
-        AutoConfig.register(ServerConfigWrapper.class, PartitioningSerializer.wrap(JanksonConfigSerializer::new));
-        CONFIG = AutoConfig.getConfigHolder(ServerConfigWrapper.class).getConfig().server;
+        AutoConfig.register(ModConfig.class, PartitioningSerializer.wrap(JanksonConfigSerializer::new));
+        CONFIG = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
+        GENERAL_CONFIG = CONFIG.general;
 
         ModItems.init();
         ModEffects.init();

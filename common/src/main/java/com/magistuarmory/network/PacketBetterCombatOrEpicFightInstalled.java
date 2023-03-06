@@ -1,48 +1,37 @@
 package com.magistuarmory.network;
 
 import com.magistuarmory.KnightlyArmory;
-import com.magistuarmory.item.LanceItem;
 import dev.architectury.networking.NetworkManager;
 import io.netty.buffer.Unpooled;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.ItemStack;
 
 
-public class PacketBetterCombatOrEpicFightInstalled extends PacketBase
+public class PacketBetterCombatOrEpicFightInstalled
 {
 	public static final ResourceLocation ID = new ResourceLocation(KnightlyArmory.ID, "packet_bc_or_ef_installed");
-
-	private final boolean betterCombatOrEpicFightInstalled;
-
-	PacketBetterCombatOrEpicFightInstalled(boolean betterCombatOrEpicFightInstalled)
+	
+	public static void sendToPlayer(ServerPlayer player)
 	{
-		this.betterCombatOrEpicFightInstalled = betterCombatOrEpicFightInstalled;
+		NetworkManager.sendToPlayer(player, ID, PacketBetterCombatOrEpicFightInstalled.encode(KnightlyArmory.BC_or_EF_installed));
 	}
 
-	@Override
-	FriendlyByteBuf encode()
+	static FriendlyByteBuf encode(boolean bcorefinstalled)
 	{
 		FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
-		buf.writeBoolean(this.betterCombatOrEpicFightInstalled);
+		buf.writeBoolean(bcorefinstalled);
 		return buf;
 	}
 
 	public static void apply(FriendlyByteBuf buf, NetworkManager.PacketContext context)
 	{
-		apply(buf.readBoolean());
+		boolean bcorefinstalled = buf.readBoolean();
+		context.queue(() -> execute(bcorefinstalled));
 	}
 
-	static void apply(boolean betterCombatOrEpicFightInstalled)
+	static void execute(boolean bcorefinstalled)
 	{
-		KnightlyArmory.BC_or_EF_installed = betterCombatOrEpicFightInstalled;
-	}
-	
-	public static void sendToPlayer(ServerPlayer player)
-	{
-		NetworkManager.sendToPlayer(player, ID, new PacketBetterCombatOrEpicFightInstalled(KnightlyArmory.BC_or_EF_installed).encode());
+		KnightlyArmory.BC_or_EF_installed = bcorefinstalled;
 	}
 }

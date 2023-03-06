@@ -4,7 +4,8 @@ import com.magistuarmory.KnightlyArmory;
 import com.magistuarmory.init.ModMerchOffers;
 
 import com.magistuarmory.network.PacketBetterCombatOrEpicFightInstalled;
-import com.magistuarmory.util.EquipmentHelper;
+import com.magistuarmory.util.MobEquipment;
+import com.magistuarmory.util.MobEquipmentHelper;
 import com.magistuarmory.init.ModLoot;
 import com.magistuarmory.item.MedievalShieldItem;
 import com.magistuarmory.item.MedievalWeaponItem;
@@ -47,12 +48,14 @@ public class CommonEvents
 
     public static void onServerStarting(MinecraftServer server)
     {
+        MobEquipment.init(server);
         KnightlyArmory.checkBetterCombatOrEpicFightInstalled();
     }
     
     public static EventResult onEntityJoinLevel(Entity entity, Level level)
     {
-        EquipmentHelper.equip(entity);
+        if (entity instanceof LivingEntity livingentity)
+            MobEquipmentHelper.equip(livingentity);
         return EventResult.pass();
     }
 

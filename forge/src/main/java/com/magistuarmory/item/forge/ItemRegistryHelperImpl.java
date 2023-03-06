@@ -1,6 +1,8 @@
 package com.magistuarmory.item.forge;
 
 import com.magistuarmory.client.render.model.Models;
+import com.magistuarmory.item.ShieldType;
+import com.magistuarmory.item.WeaponType;
 import com.magistuarmory.forge.item.LanceItemForge;
 import com.magistuarmory.forge.item.MedievalShieldItemForge;
 import com.magistuarmory.forge.item.MedievalWeaponItemForge;

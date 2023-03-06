@@ -1,6 +1,8 @@
 package com.magistuarmory.item.fabric;
 
 import com.magistuarmory.client.render.model.Models;
+import com.magistuarmory.item.ShieldType;
+import com.magistuarmory.item.WeaponType;
 import com.magistuarmory.fabric.item.LanceItemFabric;
 import com.magistuarmory.fabric.item.MedievalWeaponItemFabric;
 import com.magistuarmory.item.*;

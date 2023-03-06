@@ -43,7 +43,7 @@ public class LanceItem extends MedievalWeaponItem
 	private List<ItemStack> dropItems = new ArrayList<>();
 	protected int clickedticks = 0;
 
-	public LanceItem(Item.Properties properties, ModItemTier material, WeaponType type)
+	public LanceItem(Properties properties, ModItemTier material, WeaponType type)
 	{
 		super(properties, material, type);
 		this.setDropItems(material);
@@ -74,6 +74,9 @@ public class LanceItem extends MedievalWeaponItem
 	@Override
 	public boolean onAttackClickEntity(ItemStack stack, Player player, Entity entity)
 	{
+		if (KnightlyArmory.GENERAL_CONFIG.disableLanceCollision)
+			return super.onAttackClickEntity(stack, player, entity);
+		
 		if (player.isPassenger() && !this.isRaised(player) && !player.getCooldowns().isOnCooldown(this))
 			this.clickedticks = 15;
 		player.swing(InteractionHand.MAIN_HAND);
@@ -96,7 +99,7 @@ public class LanceItem extends MedievalWeaponItem
             {
 				float attackreach = CombatHelper.getAttackReach(player, this);
 				Vec3 vec = player.getViewVector(1.0f);
-				boolean dismount = ((this.clickedticks > 0 ? 0.3 : 0.0) + 0.6 + 0.2 * victim.getBoundingBox().getCenter().subtract(player.getEyePosition(1.0f).add(player.getViewVector(attackreach))).dot(vec) / vec.length()) * Math.random() > 1;
+				boolean dismount = ((this.clickedticks > 0 ? 0.3 : 0.0) + 0.6 + 0.2 * victim.getBoundingBox().getCenter().subtract(player.getEyePosition(1.0f).add(player.getViewVector(attackreach))).dot(vec) / vec.length()) * victim.level.getRandom().nextDouble() > 1;
                 PacketLanceCollision.sendToServer(victim.getId(), speed, dismount);
 				player.resetAttackStrengthTicker();
             }
@@ -106,6 +109,9 @@ public class LanceItem extends MedievalWeaponItem
 	@Override
 	public boolean onHurtEntity(DamageSource source, LivingEntity victim, float damage)
 	{
+		if (KnightlyArmory.GENERAL_CONFIG.disableLanceCollision)
+			return super.onHurtEntity(source, victim, damage);
+		
 		if (victim.level.isClientSide() || ModDamageSource.isAdditional(source) || !(source.getEntity() instanceof LivingEntity attacker))
 			return true;
 		
@@ -134,7 +140,7 @@ public class LanceItem extends MedievalWeaponItem
 			if (stack.getDamageValue() >= stack.getMaxDamage() - 1)
 				this.onBroken(player);
 			else if (!player.isCreative() && (victim.getArmorValue() >= 18 || victim.isBlocking()))
-				stack.setDamageValue(stack.getDamageValue() + (int) ((0.6 + bonusdamage / 20) * Math.random() * stack.getMaxDamage()));
+				stack.setDamageValue(stack.getDamageValue() + (int) ((0.6 + bonusdamage / 20) * victim.level.getRandom().nextDouble() * stack.getMaxDamage()));
 
 			for (ItemStack stack0 : player.getInventory().items)
 			{
@@ -183,6 +189,12 @@ public class LanceItem extends MedievalWeaponItem
 	@Override
 	public void inventoryTick(ItemStack stack, Level level, Entity entity, int i, boolean selected)
 	{
+		if (KnightlyArmory.GENERAL_CONFIG.disableLanceCollision) 
+		{
+			super.inventoryTick(stack, level, entity, i, selected);
+			return;
+		}
+		
 		if (entity instanceof Player player)
 		{
 			if (level.isClientSide && player.getMainHandItem().getItem() instanceof LanceItem)

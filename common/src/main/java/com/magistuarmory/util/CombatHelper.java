@@ -21,7 +21,7 @@ public class CombatHelper
 
 	public static float getBaseAttackDamage(ModItemTier material, WeaponType type)
 	{
-		return type.baseAttackDamage + 1.6f * material.getAttackDamageBonus() / type.getAttackSpeed(material);
+		return type.getBaseAttackDamage() + 1.6f * material.getAttackDamageBonus() / type.getAttackSpeed(material);
 	}
 
 	public static float getBaseAttackSpeed(ModItemTier material, WeaponType type)
@@ -31,12 +31,12 @@ public class CombatHelper
 
 	public static float getDecreasedAttackDamage(float baseattackdamage, WeaponType type)
 	{
-		return type.twoHanded > 1 ? 14.0f * baseattackdamage / (3.0f * type.twoHanded + 12.0f) : baseattackdamage;
+		return type.getTwoHanded() > 1 ? 14.0f * baseattackdamage / (3.0f * type.getTwoHanded() + 12.0f) : baseattackdamage;
 	}
 
 	public static float getDecreasedAttackSpeed(float baseattackspeed, WeaponType type)
 	{
-		return 14.0f * (baseattackspeed + 4.0f) / (5.0f * type.twoHanded + 10.0f) - 4.0f;
+		return 14.0f * (baseattackspeed + 4.0f) / (5.0f * type.getTwoHanded() + 10.0f) - 4.0f;
 	}
 
 	public static float getSilverAttackDamage(ModItemTier material, WeaponType type)
@@ -51,7 +51,7 @@ public class CombatHelper
 		{
 			if (livingentity.getMainHandItem().getItem() instanceof MedievalWeaponItem weapon)
 			{
-				float f2 = ((float) weapon.type.armorPiercing) / 100.0f;
+				float f2 = ((float) weapon.type.getArmorPiercing()) / 100.0f;
 				f = f2 / (1.0f - f2);
 			}
 		}

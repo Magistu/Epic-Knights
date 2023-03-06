@@ -8,7 +8,7 @@
     "Magistu"
   ],
   "contributors": [
-    "StaxiHD", "Mino", "Lexiolty", "Jackiecrazy", "CrazyBarkley"
+    "StaxiHD", "Mino", "Lexiolty", "Jackiecrazy", "CrazyBarkley", "Ryuje"
   ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/epic-knights-armor-and-weapons",
@@ -24,6 +24,9 @@
     ],
     "mm:early_risers": [
       "com.magistuarmory.fabric.init.HeraldryPatternsEarlyRiser"
+    ],
+    "modmenu": [
+      "com.magistuarmory.fabric.config.ModMenuFabric"
     ]
   },
   "depends": {

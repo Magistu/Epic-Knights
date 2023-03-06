@@ -1,9 +1,7 @@
 package com.magistuarmory.network;
 
 import com.magistuarmory.KnightlyArmory;
-
 import com.magistuarmory.item.MedievalWeaponItem;
-import com.magistuarmory.util.CombatHelper;
 import dev.architectury.networking.NetworkManager;
 import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
@@ -15,31 +13,33 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 
 
-public class PacketLongReachAttack extends PacketBase
+public class PacketLongReachAttack
 {
 	public static final ResourceLocation ID = new ResourceLocation(KnightlyArmory.ID, "packet_long_reach_attack");
 
-	private final int entityId;
-	
-	PacketLongReachAttack(int entityId) 
+	public static void sendToServer(int entityid)
 	{
-		this.entityId = entityId;
+		NetworkManager.sendToServer(ID, PacketLongReachAttack.encode(entityid));
 	}
-
-	@Override
-	FriendlyByteBuf encode() 
+	
+	static FriendlyByteBuf encode(int entityId)
 	{
 		FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
-		buf.writeInt(this.entityId);
+		buf.writeInt(entityId);
 		return buf;
 	}
 
 	public static void apply(FriendlyByteBuf buf, NetworkManager.PacketContext context)
 	{
-		apply(context.getPlayer().level.getEntity(buf.readInt()), (ServerPlayer) context.getPlayer());
+		if (!(context.getPlayer() instanceof ServerPlayer player))
+			return;
+		Entity victim = player.level.getEntity(buf.readInt());
+		if (victim == null)
+			return;
+		context.queue(() -> execute(victim, player));
 	}
 
-	static void apply(Entity victim, ServerPlayer player) 
+	static void execute(Entity victim, ServerPlayer player)
 	{
 		ItemStack stack = player.getItemBySlot(EquipmentSlot.MAINHAND);
 		if (!(stack.getItem() instanceof MedievalWeaponItem weapon) || !weapon.isLong())
@@ -47,10 +47,5 @@ public class PacketLongReachAttack extends PacketBase
 		player.attack(victim);
 		player.swing(InteractionHand.MAIN_HAND, true);
 		player.resetAttackStrengthTicker();
-	}
-
-	public static void sendToServer(int entityid)
-	{
-		NetworkManager.sendToServer(ID, new PacketLongReachAttack(entityid).encode());
 	}
 }

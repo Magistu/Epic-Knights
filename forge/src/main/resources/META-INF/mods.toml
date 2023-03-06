@@ -8,11 +8,10 @@ modId = "magistuarmory"
 version = "${version}"
 displayName = "Epic Knights Mod"
 authors = "Magistu"
-credits = ["StaxiHD", "Mino", "Lexiolty", "Jackiecrazy", "CrazyBarkley"]
+credits = ["StaxiHD", "Mino", "Lexiolty", "Jackiecrazy", "CrazyBarkley", "Ryuje"]
 description = '''
 Adds medieval stuff to the game
 '''
-logoFile = "assets/magistuarmory/icon.png"
 
 [[dependencies.magistuarmory]]
 modId = "forge"

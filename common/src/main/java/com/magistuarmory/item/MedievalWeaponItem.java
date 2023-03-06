@@ -54,7 +54,7 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 
 	public MedievalWeaponItem(Properties properties, ModItemTier material, WeaponType type)
 	{
-		super(material, (int) CombatHelper.getBaseAttackDamage(material, type), CombatHelper.getBaseAttackSpeed(material, type), properties);
+		super(material, (int) CombatHelper.getBaseAttackDamage(material, type), CombatHelper.getBaseAttackSpeed(material, type), properties.durability(type.getDurability(material)));
 		this.type = type;
 		this.attackDamage = CombatHelper.getBaseAttackDamage(material, type);
 		this.attackSpeed = CombatHelper.getBaseAttackSpeed(material, type);
@@ -109,7 +109,7 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 		if (entity instanceof LivingEntity livingentity)
 		{
 			boolean flag = false;
-			if (type.twoHanded > 0 && !livingentity.getOffhandItem().getItem().equals(Items.AIR)) 
+			if (type.getTwoHanded() > 0 && !livingentity.getOffhandItem().getItem().equals(Items.AIR)) 
 			{
 				if (this.getAttackDamage(stack) != this.decreasedAttackDamage)
 				{
@@ -158,16 +158,16 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 		if (victim.level.isClientSide() || ModDamageSource.isAdditional(source) || !(source.getEntity() instanceof LivingEntity attacker))
 			return true;
 		
-		if (type.isFlamebladed)
+		if (type.isFlamebladed())
 			LacerationEffect.apply(victim, damage);
 		
-		if (type.isHalberd && victim.isPassenger() && new Random().nextInt(20) >= 14)
+		if (type.isHalberd() && victim.isPassenger() && victim.level.getRandom().nextInt(20) >= 14)
 			victim.stopRiding();
 		
 		boolean flag = false;
 		if (this.isSilver())
 			flag = this.dealSilverDamage(attacker, victim, damage);
-		if (!flag && this.type.armorPiercing != 0 && victim.getArmorValue() > 0)
+		if (!flag && this.type.getArmorPiercing() != 0 && victim.getArmorValue() > 0)
 			flag = this.dealArmorPiercingDamage(attacker, victim, damage);
 		return flag;
 	}
@@ -177,17 +177,17 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 	{
 		if (this.isSilver)
 			tooltip.add(new TextComponent("+" + this.getSilverDamage(stack, this.getAttackDamage(stack)) + " ").append(new TranslatableComponent("silvertools.hurt")).withStyle(ChatFormatting.GREEN));
-		if (type.isFlamebladed)
+		if (type.isFlamebladed())
 			tooltip.add(new TranslatableComponent("flamebladed.hurt").withStyle(ChatFormatting.BLUE));
-		if (type.isHalberd)
+		if (type.isHalberd())
 			tooltip.add(new TranslatableComponent("halberd.hurt").withStyle(ChatFormatting.BLUE));
-		if (type.armorPiercing != 0)
-			tooltip.add(new TextComponent(type.armorPiercing + "% ").append(new TranslatableComponent("armorpiercing")).withStyle(ChatFormatting.BLUE));
+		if (type.getArmorPiercing() != 0)
+			tooltip.add(new TextComponent(type.getArmorPiercing() + "% ").append(new TranslatableComponent("armorpiercing")).withStyle(ChatFormatting.BLUE));
 		if (this.isLong())
-			tooltip.add(new TextComponent("+" + type.bonusAttackReach + " ").append(new TranslatableComponent("bonusattackreach")).withStyle(ChatFormatting.BLUE));
-		if (type.twoHanded == 1)
+			tooltip.add(new TextComponent("+" + type.getBonusAttackReach() + " ").append(new TranslatableComponent("bonusattackreach")).withStyle(ChatFormatting.BLUE));
+		if (type.getTwoHanded() == 1)
 			tooltip.add(new TranslatableComponent("twohandedi").withStyle(ChatFormatting.BLUE));
-		else if (type.twoHanded > 1)
+		else if (type.getTwoHanded() > 1)
 			tooltip.add(new TranslatableComponent("twohandedii").withStyle(ChatFormatting.BLUE));
 		if (this.canBlock())
 			tooltip.add(new TextComponent(getMaxBlockDamage() + " ").append(new TranslatableComponent("maxdamageblock")).withStyle(ChatFormatting.BLUE));
@@ -250,7 +250,7 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 
 	public float getBonusAttackReach()
 	{
-		return KnightlyArmory.BC_or_EF_installed ? 0.0f : type.bonusAttackReach;
+		return KnightlyArmory.BC_or_EF_installed ? 0.0f : type.getBonusAttackReach();
 	}
 	
 	public boolean isLong()
@@ -265,12 +265,12 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 
 	public float getMaxBlockDamage()
 	{
-		return type.maxBlockDamage;
+		return type.getMaxBlockDamage();
 	}
 
 	public float getWeight()
 	{
-		return type.weight;
+		return type.getWeight();
 	}
 
 	public boolean isSilver()
@@ -278,9 +278,14 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 		return this.isSilver;
 	}
 
+	public boolean canBlock(Player player)
+	{
+		return player.getAttackStrengthScale(0.0f) == 1.0f && this.canBlock();
+	}
+
 	public boolean canBlock()
 	{
-		return type.canBlock;
+		return type.canBlock();
 	}
 
 	boolean haveBlocked(Random rand, DamageSource source)
@@ -290,13 +295,13 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 	
 	public boolean hasTwoHandedPenalty(ItemStack stack)
 	{
-		return this.type.twoHanded > 0 && this.getAttackSpeed(stack) == this.decreasedAttackSpeed;
+		return this.type.getTwoHanded() > 0 && this.getAttackSpeed(stack) == this.decreasedAttackSpeed;
 	}
 
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
 	{
-		if (canBlock() && blockingPriority)
+		if (canBlock(player) && blockingPriority)
 		{
 			ItemStack stack = player.getItemInHand(hand);
 			player.startUsingItem(hand);
@@ -330,7 +335,7 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 		{
 			victim.hurt(ModDamageSource.additional(), damage);
 		}
-		else if (!haveBlocked(new Random(), source))
+		else if (!haveBlocked(victim.level.getRandom(), source))
 		{
 			victim.hurt(ModDamageSource.additional(), damage);
 		}
@@ -358,7 +363,7 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 	{
 		float afterabsorb = CombatRules.getDamageAfterAbsorb(damage, (float) victim.getArmorValue(), (float) victim.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
 		afterabsorb = Math.max(afterabsorb - victim.getAbsorptionAmount(), 0.0f);
-		float pierced = Math.max(((float) type.armorPiercing) / 100.0f * (damage - afterabsorb), 0.0f);
+		float pierced = Math.max(((float) type.getArmorPiercing()) / 100.0f * (damage - afterabsorb), 0.0f);
 		victim.hurt(ModDamageSource.armorPiercing(attacker), afterabsorb + pierced);
 		return true;
 	}

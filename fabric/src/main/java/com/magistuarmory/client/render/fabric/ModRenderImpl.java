@@ -1,9 +1,9 @@
 package com.magistuarmory.client.render.fabric;
 
 import com.magistuarmory.client.render.model.Models;
-import com.magistuarmory.client.render.tileentity.HeraldryItemStackRenderer;
 import com.magistuarmory.fabric.client.render.entity.layer.MedievalArmorLayer;
 import com.magistuarmory.fabric.client.render.tileentity.HeraldryItemStackRendererFabric;
+import com.magistuarmory.item.MedievalShieldItem;
 import com.magistuarmory.item.ModItems;
 import com.magistuarmory.item.armor.MedievalArmorItem;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -18,18 +18,15 @@ public class ModRenderImpl
 {
 	public static void setupPlatform()
 	{
-		for (RegistrySupplier<MedievalArmorItem> supplier : ModItems.armorItems)
+		for (RegistrySupplier<MedievalArmorItem> supplier : ModItems.ARMOR_ITEMS)
 		{
 			ArmorRendererRegistryImpl.register(new MedievalArmorLayer(), supplier.get());
 		}
-		
-		for (ModItems.ShieldsSupply shields : ModItems.shieldsSupply)
-		{
-			shields.get().forEach(supplier -> 
-					BuiltinItemRendererRegistry.INSTANCE.register(supplier.get(), (BuiltinItemRendererRegistry.DynamicItemRenderer) supplier.get().getRenderer()));
-		}
 
-		BuiltinItemRendererRegistry.INSTANCE.register(ModItems.CORRUPTED_ROUND_SHIELD.get(), (BuiltinItemRendererRegistry.DynamicItemRenderer) ModItems.CORRUPTED_ROUND_SHIELD.get().getRenderer());
+		for (RegistrySupplier<MedievalShieldItem> supplier : ModItems.SHIELD_ITEMS)
+		{
+			BuiltinItemRendererRegistry.INSTANCE.register(supplier.get(), (BuiltinItemRendererRegistry.DynamicItemRenderer) supplier.get().getRenderer());
+		}
 	}
 
 	public static BlockEntityWithoutLevelRenderer getHeraldryItemStackRenderer(String id, String name, Models.ShieldEnum modelkey)

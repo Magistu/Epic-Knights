@@ -69,6 +69,45 @@
     },
     {
       "item": "magistuarmory:messer_sword"
+    },
+    {
+      "item": "magistuarmory:rustedbarbute"
+    },
+    {
+      "item": "magistuarmory:rustedhalfarmor_chestplate"
+    },
+    {
+      "item": "magistuarmory:rustedgreathelm"
+    },
+    {
+      "item": "magistuarmory:rustedcrusader_chestplate"
+    },
+    {
+      "item": "magistuarmory:rustedcrusader_boots"
+    },
+    {
+      "item": "magistuarmory:rustednorman_helmet"
+    },
+    {
+      "item": "magistuarmory:rustedchainmail_helmet"
+    },
+    {
+      "item": "magistuarmory:rustedchainmail_chestplate"
+    },
+    {
+      "item": "magistuarmory:rustedchainmail_leggings"
+    },
+    {
+      "item": "magistuarmory:rustedchainmail_boots"
+    },
+    {
+      "item": "magistuarmory:rustedkettlehat"
+    },
+    {
+      "item": "magistuarmory:rusted_bastardsword"
+    },
+    {
+      "item": "magistuarmory:rusted_heavymace"
     }
   ],
   "result": "minecraft:iron_nugget",

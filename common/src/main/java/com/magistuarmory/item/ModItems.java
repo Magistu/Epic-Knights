@@ -4,7 +4,7 @@ import com.magistuarmory.KnightlyArmory;
 import com.magistuarmory.client.render.model.Models;
 import com.magistuarmory.init.HeraldryPattern;
 import com.magistuarmory.init.ModCreativeTabs;
-import com.magistuarmory.item.armor.ArmorMaterials;
+import com.magistuarmory.item.armor.ArmorTypes;
 import com.magistuarmory.item.armor.*;
 import dev.architectury.platform.Platform;
 import dev.architectury.registry.registries.DeferredRegister;
@@ -19,106 +19,114 @@ import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.level.block.entity.BannerPattern;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class ModItems
 {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(KnightlyArmory.ID, Registry.ITEM_REGISTRY);
 
+	public static final List<RegistrySupplier<MedievalShieldItem>> SHIELD_ITEMS = new ArrayList<>();
+	public static final List<RegistrySupplier<MedievalWeaponItem>> WEAPON_ITEMS = new ArrayList<>();
+	public static final List<RegistrySupplier<? extends Item>> DYEABLE_ITEMS = new ArrayList<>();
+	public static final List<RegistrySupplier<MedievalArmorItem>> ARMOR_ITEMS = new ArrayList<>();
+	public static final List<RegistrySupplier<Item>> INGREDIENT_ITEMS = new ArrayList<>();
+	
 	//Armor
-	public static final RegistrySupplier<MedievalArmorItem> ARMET = ItemRegistryHelper.registerKnightItem("armet", ArmorMaterials.ARMET, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> KNIGHT_CHESTPLATE = ItemRegistryHelper.registerMedievalArmorItem("knight_chestplate", ArmorMaterials.KNIGHT, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> KNIGHT_LEGGINGS = ItemRegistryHelper.registerMedievalArmorItem("knight_leggings", ArmorMaterials.KNIGHT, EquipmentSlot.LEGS, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> KNIGHT_BOOTS = ItemRegistryHelper.registerMedievalArmorItem("knight_boots", ArmorMaterials.KNIGHT, EquipmentSlot.FEET, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> ARMET = addKnightItem("armet", ArmorTypes.ARMET, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> KNIGHT_CHESTPLATE = addMedievalArmorItem("knight_chestplate", ArmorTypes.KNIGHT, EquipmentSlot.CHEST, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> KNIGHT_LEGGINGS = addMedievalArmorItem("knight_leggings", ArmorTypes.KNIGHT, EquipmentSlot.LEGS, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> KNIGHT_BOOTS = addMedievalArmorItem("knight_boots", ArmorTypes.KNIGHT, EquipmentSlot.FEET, new Properties().tab(ModCreativeTabs.ARMOR));
 
-	public static final RegistrySupplier<MedievalArmorItem> STECHHELM = ItemRegistryHelper.registerJoustingItem("stechhelm", ArmorMaterials.STECHHELM, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> JOUSTING_CHESTPLATE = ItemRegistryHelper.registerJoustingItem("jousting_chestplate", ArmorMaterials.JOUSTING, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> JOUSTING_LEGGINGS = ItemRegistryHelper.registerJoustingItem("jousting_leggings", ArmorMaterials.JOUSTING, EquipmentSlot.LEGS, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> JOUSTING_BOOTS = ItemRegistryHelper.registerJoustingItem("jousting_boots", ArmorMaterials.JOUSTING, EquipmentSlot.FEET, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> STECHHELM = addJoustingItem("stechhelm", ArmorTypes.STECHHELM, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> JOUSTING_CHESTPLATE = addJoustingItem("jousting_chestplate", ArmorTypes.JOUSTING, EquipmentSlot.CHEST, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> JOUSTING_LEGGINGS = addJoustingItem("jousting_leggings", ArmorTypes.JOUSTING, EquipmentSlot.LEGS, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> JOUSTING_BOOTS = addJoustingItem("jousting_boots", ArmorTypes.JOUSTING, EquipmentSlot.FEET, new Properties().tab(ModCreativeTabs.ARMOR));
 
-	public static final RegistrySupplier<MedievalArmorItem> SALLET = ItemRegistryHelper.registerMedievalArmorItem("sallet", ArmorMaterials.SALLET, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR), Models.ArmorEnum.SALLET);
-	public static final RegistrySupplier<MedievalArmorItem> GOTHIC_CHESTPLATE = ItemRegistryHelper.registerMedievalArmorItem("gothic_chestplate", ArmorMaterials.GOTHIC, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> GOTHIC_LEGGINGS = ItemRegistryHelper.registerMedievalArmorItem("gothic_leggings", ArmorMaterials.GOTHIC, EquipmentSlot.LEGS, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> GOTHIC_BOOTS = ItemRegistryHelper.registerMedievalArmorItem("gothic_boots", ArmorMaterials.GOTHIC, EquipmentSlot.FEET, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> SALLET = addMedievalArmorItem("sallet", ArmorTypes.SALLET, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.ARMOR), Models.ArmorEnum.SALLET);
+	public static final RegistrySupplier<MedievalArmorItem> GOTHIC_CHESTPLATE = addMedievalArmorItem("gothic_chestplate", ArmorTypes.GOTHIC, EquipmentSlot.CHEST, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> GOTHIC_LEGGINGS = addMedievalArmorItem("gothic_leggings", ArmorTypes.GOTHIC, EquipmentSlot.LEGS, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> GOTHIC_BOOTS = addMedievalArmorItem("gothic_boots", ArmorTypes.GOTHIC, EquipmentSlot.FEET, new Properties().tab(ModCreativeTabs.ARMOR));
 
-	public static final RegistrySupplier<MedievalArmorItem> MAXIMILIAN_HELMET = ItemRegistryHelper.registerMedievalArmorItem("maximilian_helmet", ArmorMaterials.MAXIMILIANHELMET, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR), Models.ArmorEnum.MAXIMILIAN_HELMET);
-	public static final RegistrySupplier<MedievalArmorItem> MAXIMILIAN_CHESTPLATE = ItemRegistryHelper.registerMedievalArmorItem("maximilian_chestplate", ArmorMaterials.MAXIMILIAN, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> MAXIMILIAN_LEGGINGS = ItemRegistryHelper.registerMedievalArmorItem("maximilian_leggings", ArmorMaterials.MAXIMILIAN, EquipmentSlot.LEGS, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> MAXIMILIAN_BOOTS = ItemRegistryHelper.registerMedievalArmorItem("maximilian_boots", ArmorMaterials.MAXIMILIAN, EquipmentSlot.FEET, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> MAXIMILIAN_HELMET = addMedievalArmorItem("maximilian_helmet", ArmorTypes.MAXIMILIAN_HELMET, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.ARMOR), Models.ArmorEnum.MAXIMILIAN_HELMET);
+	public static final RegistrySupplier<MedievalArmorItem> MAXIMILIAN_CHESTPLATE = addMedievalArmorItem("maximilian_chestplate", ArmorTypes.MAXIMILIAN, EquipmentSlot.CHEST, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> MAXIMILIAN_LEGGINGS = addMedievalArmorItem("maximilian_leggings", ArmorTypes.MAXIMILIAN, EquipmentSlot.LEGS, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> MAXIMILIAN_BOOTS = addMedievalArmorItem("maximilian_boots", ArmorTypes.MAXIMILIAN, EquipmentSlot.FEET, new Properties().tab(ModCreativeTabs.ARMOR));
 
-	public static final RegistrySupplier<MedievalArmorItem> CHAINMAIL_HELMET = ItemRegistryHelper.registerMedievalArmorItem("chainmail_helmet", ArmorMaterials.CHAINMAIL, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> CHAINMAIL_CHESTPLATE = ItemRegistryHelper.registerMedievalArmorItem("chainmail_chestplate", ArmorMaterials.CHAINMAIL, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> CHAINMAIL_LEGGINGS = ItemRegistryHelper.registerMedievalArmorItem("chainmail_leggings", ArmorMaterials.CHAINMAIL, EquipmentSlot.LEGS, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> CHAINMAIL_BOOTS = ItemRegistryHelper.registerMedievalArmorItem("chainmail_boots", ArmorMaterials.CHAINMAIL, EquipmentSlot.FEET, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> CHAINMAIL_HELMET = addMedievalArmorItem("chainmail_helmet", ArmorTypes.CHAINMAIL, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> CHAINMAIL_CHESTPLATE = addMedievalArmorItem("chainmail_chestplate", ArmorTypes.CHAINMAIL, EquipmentSlot.CHEST, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> CHAINMAIL_LEGGINGS = addMedievalArmorItem("chainmail_leggings", ArmorTypes.CHAINMAIL, EquipmentSlot.LEGS, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> CHAINMAIL_BOOTS = addMedievalArmorItem("chainmail_boots", ArmorTypes.CHAINMAIL, EquipmentSlot.FEET, new Properties().tab(ModCreativeTabs.ARMOR));
 
-	public static final RegistrySupplier<MedievalArmorItem> KETTLEHAT = ItemRegistryHelper.registerMedievalArmorItem("kettlehat", ArmorMaterials.KETTLEHAT, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR), Models.ArmorEnum.KETTLEHAT);
-	public static final RegistrySupplier<MedievalArmorItem> PLATEMAIL_CHESTPLATE = ItemRegistryHelper.registerMedievalArmorItem("platemail_chestplate", ArmorMaterials.PLATEMAIL, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> PLATEMAIL_LEGGINGS = ItemRegistryHelper.registerMedievalArmorItem("platemail_leggings", ArmorMaterials.PLATEMAIL, EquipmentSlot.LEGS, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> PLATEMAIL_BOOTS = ItemRegistryHelper.registerMedievalArmorItem("platemail_boots", ArmorMaterials.PLATEMAIL, EquipmentSlot.FEET, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> KETTLEHAT = addMedievalArmorItem("kettlehat", ArmorTypes.KETTLEHAT, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.ARMOR), Models.ArmorEnum.KETTLEHAT);
+	public static final RegistrySupplier<MedievalArmorItem> PLATEMAIL_CHESTPLATE = addMedievalArmorItem("platemail_chestplate", ArmorTypes.PLATEMAIL, EquipmentSlot.CHEST, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> PLATEMAIL_LEGGINGS = addMedievalArmorItem("platemail_leggings", ArmorTypes.PLATEMAIL, EquipmentSlot.LEGS, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> PLATEMAIL_BOOTS = addMedievalArmorItem("platemail_boots", ArmorTypes.PLATEMAIL, EquipmentSlot.FEET, new Properties().tab(ModCreativeTabs.ARMOR));
 
-	public static final RegistrySupplier<MedievalArmorItem> BARBUTE = ItemRegistryHelper.registerMedievalArmorItem("barbute", ArmorMaterials.BARBUTE, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR), Models.ArmorEnum.BARBUTE);
-	public static final RegistrySupplier<MedievalArmorItem> HALFARMOR_CHESTPLATE = ItemRegistryHelper.registerMedievalArmorItem("halfarmor_chestplate", ArmorMaterials.HALFARMOR, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> BARBUTE = addMedievalArmorItem("barbute", ArmorTypes.BARBUTE, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.ARMOR), Models.ArmorEnum.BARBUTE);
+	public static final RegistrySupplier<MedievalArmorItem> HALFARMOR_CHESTPLATE = addMedievalArmorItem("halfarmor_chestplate", ArmorTypes.HALFARMOR, EquipmentSlot.CHEST, new Properties().tab(ModCreativeTabs.ARMOR));
 
-	public static final RegistrySupplier<MedievalArmorItem> GREATHELM = ItemRegistryHelper.registerMedievalArmorItem("greathelm", ArmorMaterials.CRUSADER, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> CRUSADER_CHESTPLATE = ItemRegistryHelper.registerDyeableMedievalArmorItem("crusader_chestplate", ArmorMaterials.CRUSADER, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR), -3227226);
-	public static final RegistrySupplier<MedievalArmorItem> CRUSADER_LEGGINGS = ItemRegistryHelper.registerMedievalArmorItem("crusader_leggings", ArmorMaterials.CRUSADER, EquipmentSlot.LEGS, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> CRUSADER_BOOTS = ItemRegistryHelper.registerDyeableMedievalArmorItem("crusader_boots", ArmorMaterials.CRUSADER, EquipmentSlot.FEET, new Item.Properties().tab(ModCreativeTabs.ARMOR), -3227226);
+	public static final RegistrySupplier<MedievalArmorItem> GREATHELM = addMedievalArmorItem("greathelm", ArmorTypes.CRUSADER, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> CRUSADER_CHESTPLATE = addDyeableMedievalArmorItem("crusader_chestplate", ArmorTypes.CRUSADER, EquipmentSlot.CHEST, new Properties().tab(ModCreativeTabs.ARMOR), -3227226);
+	public static final RegistrySupplier<MedievalArmorItem> CRUSADER_LEGGINGS = addMedievalArmorItem("crusader_leggings", ArmorTypes.CRUSADER, EquipmentSlot.LEGS, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> CRUSADER_BOOTS = addDyeableMedievalArmorItem("crusader_boots", ArmorTypes.CRUSADER, EquipmentSlot.FEET, new Properties().tab(ModCreativeTabs.ARMOR), -3227226);
 
-	public static final RegistrySupplier<MedievalArmorItem> CEREMONIAL_ARMET = ItemRegistryHelper.registerKnightItem("ceremonialarmet", ArmorMaterials.CEREMONIAL_ARMET, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> CEREMONIAL_CHESTPLATE = ItemRegistryHelper.registerMedievalArmorItem("ceremonial_chestplate", ArmorMaterials.CEREMONIAL, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> CEREMONIAL_BOOTS = ItemRegistryHelper.registerMedievalArmorItem("ceremonial_boots", ArmorMaterials.CEREMONIAL, EquipmentSlot.FEET, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> CEREMONIAL_ARMET = addKnightItem("ceremonialarmet", ArmorTypes.CEREMONIAL_ARMET, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> CEREMONIAL_CHESTPLATE = addMedievalArmorItem("ceremonial_chestplate", ArmorTypes.CEREMONIAL, EquipmentSlot.CHEST, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> CEREMONIAL_BOOTS = addMedievalArmorItem("ceremonial_boots", ArmorTypes.CEREMONIAL, EquipmentSlot.FEET, new Properties().tab(ModCreativeTabs.ARMOR));
 
-	public static final RegistrySupplier<MedievalArmorItem> COIF = ItemRegistryHelper.registerDyeableMedievalArmorItem("coif", ArmorMaterials.GAMBESON, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR), -4280691);
-	public static final RegistrySupplier<MedievalArmorItem> GAMBESON = ItemRegistryHelper.registerDyeableMedievalArmorItem("gambeson_chestplate", ArmorMaterials.GAMBESON, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR), -4280691);
-	public static final RegistrySupplier<MedievalArmorItem> PANTYHOSE = ItemRegistryHelper.registerDyeableMedievalArmorItem("pantyhose", ArmorMaterials.GAMBESON, EquipmentSlot.LEGS, new Item.Properties().tab(ModCreativeTabs.ARMOR), -14531028);
-	public static final RegistrySupplier<MedievalArmorItem> GAMBESON_BOOTS = ItemRegistryHelper.registerDyeableMedievalArmorItem("gambeson_boots", ArmorMaterials.GAMBESON, EquipmentSlot.FEET, new Item.Properties().tab(ModCreativeTabs.ARMOR), -4280691);
+	public static final RegistrySupplier<MedievalArmorItem> COIF = addDyeableMedievalArmorItem("coif", ArmorTypes.GAMBESON, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.ARMOR), -4280691);
+	public static final RegistrySupplier<MedievalArmorItem> GAMBESON = addDyeableMedievalArmorItem("gambeson_chestplate", ArmorTypes.GAMBESON, EquipmentSlot.CHEST, new Properties().tab(ModCreativeTabs.ARMOR), -4280691);
+	public static final RegistrySupplier<MedievalArmorItem> PANTYHOSE = addDyeableMedievalArmorItem("pantyhose", ArmorTypes.GAMBESON, EquipmentSlot.LEGS, new Properties().tab(ModCreativeTabs.ARMOR), -14531028);
+	public static final RegistrySupplier<MedievalArmorItem> GAMBESON_BOOTS = addDyeableMedievalArmorItem("gambeson_boots", ArmorTypes.GAMBESON, EquipmentSlot.FEET, new Properties().tab(ModCreativeTabs.ARMOR), -4280691);
 
-	public static final RegistrySupplier<MedievalArmorItem> BRIGANDINE = ItemRegistryHelper.registerDyeableMedievalArmorItem("brigandine_chestplate", ArmorMaterials.BRIGANDINE, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR), 10511680);
+	public static final RegistrySupplier<MedievalArmorItem> BRIGANDINE = addDyeableMedievalArmorItem("brigandine_chestplate", ArmorTypes.BRIGANDINE, EquipmentSlot.CHEST, new Properties().tab(ModCreativeTabs.ARMOR), 10511680);
 
-	public static final RegistrySupplier<MedievalArmorItem> NORMAN_HELMET = ItemRegistryHelper.registerMedievalArmorItem("norman_helmet", ArmorMaterials.NORMAN, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> NORMAN_HELMET = addMedievalArmorItem("norman_helmet", ArmorTypes.NORMAN, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.ARMOR));
 
-	public static final RegistrySupplier<MedievalArmorItem> SHISHAK = ItemRegistryHelper.registerMedievalArmorItem("shishak", ArmorMaterials.SHISHAK, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> SHISHAK = addMedievalArmorItem("shishak", ArmorTypes.SHISHAK, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.ARMOR));
 
-	public static final RegistrySupplier<MedievalArmorItem> RUSTED_BARBUTE = ItemRegistryHelper.registerMedievalArmorItem("rustedbarbute", ArmorMaterials.RUSTED_BARBUTE, EquipmentSlot.HEAD, new Item.Properties(), Models.ArmorEnum.BARBUTE);
-	public static final RegistrySupplier<MedievalArmorItem> RUSTED_HALFARMOR_CHESTPLATE = ItemRegistryHelper.registerMedievalArmorItem("rustedhalfarmor_chestplate", ArmorMaterials.RUSTED_HALFARMOR, EquipmentSlot.CHEST, new Item.Properties());
+	public static final RegistrySupplier<MedievalArmorItem> RUSTED_BARBUTE = addMedievalArmorItem("rustedbarbute", ArmorTypes.RUSTED_BARBUTE, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.RUSTED), Models.ArmorEnum.BARBUTE);
+	public static final RegistrySupplier<MedievalArmorItem> RUSTED_HALFARMOR_CHESTPLATE = addMedievalArmorItem("rustedhalfarmor_chestplate", ArmorTypes.RUSTED_HALFARMOR, EquipmentSlot.CHEST, new Properties().tab(ModCreativeTabs.RUSTED));
 
-	public static final RegistrySupplier<MedievalArmorItem> RUSTED_GREATHELM = ItemRegistryHelper.registerMedievalArmorItem("rustedgreathelm", ArmorMaterials.RUSTED_CRUSADER, EquipmentSlot.HEAD, new Item.Properties());
-	public static final RegistrySupplier<MedievalArmorItem> RUSTED_CRUSADER_CHESTPLATE = ItemRegistryHelper.registerMedievalArmorItem("rustedcrusader_chestplate", ArmorMaterials.RUSTED_CRUSADER, EquipmentSlot.CHEST, new Item.Properties());
-	public static final RegistrySupplier<MedievalArmorItem> RUSTED_CRUSADER_BOOTS = ItemRegistryHelper.registerMedievalArmorItem("rustedcrusader_boots", ArmorMaterials.RUSTED_CRUSADER, EquipmentSlot.FEET, new Item.Properties());
+	public static final RegistrySupplier<MedievalArmorItem> RUSTED_GREATHELM = addMedievalArmorItem("rustedgreathelm", ArmorTypes.RUSTED_CRUSADER, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.RUSTED));
+	public static final RegistrySupplier<MedievalArmorItem> RUSTED_CRUSADER_CHESTPLATE = addMedievalArmorItem("rustedcrusader_chestplate", ArmorTypes.RUSTED_CRUSADER, EquipmentSlot.CHEST, new Properties().tab(ModCreativeTabs.RUSTED));
+	public static final RegistrySupplier<MedievalArmorItem> RUSTED_CRUSADER_BOOTS = addMedievalArmorItem("rustedcrusader_boots", ArmorTypes.RUSTED_CRUSADER, EquipmentSlot.FEET, new Properties().tab(ModCreativeTabs.RUSTED));
 
-	public static final RegistrySupplier<MedievalArmorItem> RUSTED_NORMAN_HELMET = ItemRegistryHelper.registerMedievalArmorItem("rustednorman_helmet", ArmorMaterials.RUSTED_NORMAN, EquipmentSlot.HEAD, new Item.Properties());
+	public static final RegistrySupplier<MedievalArmorItem> RUSTED_NORMAN_HELMET = addMedievalArmorItem("rustednorman_helmet", ArmorTypes.RUSTED_NORMAN, EquipmentSlot.HEAD,new Properties().tab(ModCreativeTabs.RUSTED));
 
-	public static final RegistrySupplier<MedievalArmorItem> RUSTED_CHAINMAIL_HELMET = ItemRegistryHelper.registerMedievalArmorItem("rustedchainmail_helmet", ArmorMaterials.RUSTED_CHAINMAIL, EquipmentSlot.HEAD, (new Item.Properties()));
-	public static final RegistrySupplier<MedievalArmorItem> RUSTED_CHAINMAIL_CHESTPLATE = ItemRegistryHelper.registerMedievalArmorItem("rustedchainmail_chestplate", ArmorMaterials.RUSTED_CHAINMAIL, EquipmentSlot.CHEST, (new Item.Properties()));
-	public static final RegistrySupplier<MedievalArmorItem> RUSTED_CHAINMAIL_LEGGINGS = ItemRegistryHelper.registerMedievalArmorItem("rustedchainmail_leggings", ArmorMaterials.RUSTED_CHAINMAIL, EquipmentSlot.LEGS, (new Item.Properties()));
-	public static final RegistrySupplier<MedievalArmorItem> RUSTED_CHAINMAIL_BOOTS = ItemRegistryHelper.registerMedievalArmorItem("rustedchainmail_boots", ArmorMaterials.RUSTED_CHAINMAIL, EquipmentSlot.FEET, (new Item.Properties()));
+	public static final RegistrySupplier<MedievalArmorItem> RUSTED_CHAINMAIL_HELMET = addMedievalArmorItem("rustedchainmail_helmet", ArmorTypes.RUSTED_CHAINMAIL, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.RUSTED));
+	public static final RegistrySupplier<MedievalArmorItem> RUSTED_CHAINMAIL_CHESTPLATE = addMedievalArmorItem("rustedchainmail_chestplate", ArmorTypes.RUSTED_CHAINMAIL, EquipmentSlot.CHEST, new Properties().tab(ModCreativeTabs.RUSTED));
+	public static final RegistrySupplier<MedievalArmorItem> RUSTED_CHAINMAIL_LEGGINGS = addMedievalArmorItem("rustedchainmail_leggings", ArmorTypes.RUSTED_CHAINMAIL, EquipmentSlot.LEGS, new Properties().tab(ModCreativeTabs.RUSTED));
+	public static final RegistrySupplier<MedievalArmorItem> RUSTED_CHAINMAIL_BOOTS = addMedievalArmorItem("rustedchainmail_boots", ArmorTypes.RUSTED_CHAINMAIL, EquipmentSlot.FEET, new Properties().tab(ModCreativeTabs.RUSTED));
 
-	public static final RegistrySupplier<MedievalArmorItem> RUSTED_KETTLEHAT = ItemRegistryHelper.registerMedievalArmorItem("rustedkettlehat", ArmorMaterials.RUSTED_KETTLEHAT, EquipmentSlot.HEAD, (new Item.Properties()), Models.ArmorEnum.KETTLEHAT);
+	public static final RegistrySupplier<MedievalArmorItem> RUSTED_KETTLEHAT = addMedievalArmorItem("rustedkettlehat", ArmorTypes.RUSTED_KETTLEHAT, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.RUSTED), Models.ArmorEnum.KETTLEHAT);
 
-	public static final RegistrySupplier<MedievalArmorItem> BASCINET = ItemRegistryHelper.registerMedievalArmorItem("bascinet", ArmorMaterials.BASCINET, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR), Models.ArmorEnum.BASCINET);
-	public static final RegistrySupplier<MedievalArmorItem> XIV_CENTURY_KNIGHT_CHESTPLATE = ItemRegistryHelper.registerMedievalArmorItem("xivcenturyknight_chestplate", ArmorMaterials.XIV_CENTURY_KNIGHT, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> XIV_CENTURY_KNIGHT_LEGGINGS = ItemRegistryHelper.registerMedievalArmorItem("xivcenturyknight_leggings", ArmorMaterials.XIV_CENTURY_KNIGHT, EquipmentSlot.LEGS, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> XIV_CENTURY_KNIGHT_BOOTS = ItemRegistryHelper.registerMedievalArmorItem("xivcenturyknight_boots", ArmorMaterials.XIV_CENTURY_KNIGHT, EquipmentSlot.FEET, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> BASCINET = addMedievalArmorItem("bascinet", ArmorTypes.BASCINET, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.ARMOR), Models.ArmorEnum.BASCINET);
+	public static final RegistrySupplier<MedievalArmorItem> XIV_CENTURY_KNIGHT_CHESTPLATE = addMedievalArmorItem("xivcenturyknight_chestplate", ArmorTypes.XIV_CENTURY_KNIGHT, EquipmentSlot.CHEST, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> XIV_CENTURY_KNIGHT_LEGGINGS = addMedievalArmorItem("xivcenturyknight_leggings", ArmorTypes.XIV_CENTURY_KNIGHT, EquipmentSlot.LEGS, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> XIV_CENTURY_KNIGHT_BOOTS = addMedievalArmorItem("xivcenturyknight_boots", ArmorTypes.XIV_CENTURY_KNIGHT, EquipmentSlot.FEET, new Properties().tab(ModCreativeTabs.ARMOR));
 
-	public static final RegistrySupplier<MedievalArmorItem> WINGED_HUSSAR_CHESTPLATE = ItemRegistryHelper.registerMedievalArmorItem("wingedhussar_chestplate", ArmorMaterials.WINGEDHUSSARCHESTPLATE, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR), Models.ArmorEnum.WINGED_HUSSAR_CHESTPLATE);
+	public static final RegistrySupplier<MedievalArmorItem> WINGED_HUSSAR_CHESTPLATE = addMedievalArmorItem("wingedhussar_chestplate", ArmorTypes.WINGED_HUSSAR_CHESTPLATE, EquipmentSlot.CHEST, new Properties().tab(ModCreativeTabs.ARMOR), Models.ArmorEnum.WINGED_HUSSAR_CHESTPLATE);
 
-	public static final RegistrySupplier<MedievalArmorItem> BURGONET = ItemRegistryHelper.registerMedievalArmorItem("cuirassier_helmet", ArmorMaterials.CUIRASSIER, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> CUIRASSIER_CHESTPLATE = ItemRegistryHelper.registerDyeableMedievalArmorItem("cuirassier_chestplate", ArmorMaterials.CUIRASSIER, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR), -5465480);
-	public static final RegistrySupplier<MedievalArmorItem> CUIRASSIER_LEGGINGS = ItemRegistryHelper.registerDyeableMedievalArmorItem("cuirassier_leggings", ArmorMaterials.CUIRASSIER, EquipmentSlot.LEGS, new Item.Properties().tab(ModCreativeTabs.ARMOR), -5465480);
-	public static final RegistrySupplier<MedievalArmorItem> CUIRASSIER_BOOTS = ItemRegistryHelper.registerMedievalArmorItem("cuirassier_boots", ArmorMaterials.CUIRASSIER, EquipmentSlot.FEET, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> BURGONET = addMedievalArmorItem("cuirassier_helmet", ArmorTypes.CUIRASSIER, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> CUIRASSIER_CHESTPLATE = addDyeableMedievalArmorItem("cuirassier_chestplate", ArmorTypes.CUIRASSIER, EquipmentSlot.CHEST, new Properties().tab(ModCreativeTabs.ARMOR), -5465480);
+	public static final RegistrySupplier<MedievalArmorItem> CUIRASSIER_LEGGINGS = addDyeableMedievalArmorItem("cuirassier_leggings", ArmorTypes.CUIRASSIER, EquipmentSlot.LEGS, new Properties().tab(ModCreativeTabs.ARMOR), -5465480);
+	public static final RegistrySupplier<MedievalArmorItem> CUIRASSIER_BOOTS = addMedievalArmorItem("cuirassier_boots", ArmorTypes.CUIRASSIER, EquipmentSlot.FEET, new Properties().tab(ModCreativeTabs.ARMOR));
 
-	public static final RegistrySupplier<MedievalArmorItem> GRAND_BASCINET = ItemRegistryHelper.registerMedievalArmorItem("grand_bascinet", ArmorMaterials.GRAND_BASCINET, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR), Models.ArmorEnum.GRAND_BASCINET);
-	public static final RegistrySupplier<MedievalArmorItem> KASTENBRUST_CHESTPLATE = ItemRegistryHelper.registerMedievalArmorItem("kastenbrust_chestplate", ArmorMaterials.KASTENBRUST, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> KASTENBRUST_LEGGINGS = ItemRegistryHelper.registerMedievalArmorItem("kastenbrust_leggings", ArmorMaterials.KASTENBRUST, EquipmentSlot.LEGS, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> KASTENBRUST_BOOTS = ItemRegistryHelper.registerMedievalArmorItem("kastenbrust_boots", ArmorMaterials.KASTENBRUST, EquipmentSlot.FEET, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> GRAND_BASCINET = addMedievalArmorItem("grand_bascinet", ArmorTypes.GRAND_BASCINET, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.ARMOR), Models.ArmorEnum.GRAND_BASCINET);
+	public static final RegistrySupplier<MedievalArmorItem> KASTENBRUST_CHESTPLATE = addMedievalArmorItem("kastenbrust_chestplate", ArmorTypes.KASTENBRUST, EquipmentSlot.CHEST, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> KASTENBRUST_LEGGINGS = addMedievalArmorItem("kastenbrust_leggings", ArmorTypes.KASTENBRUST, EquipmentSlot.LEGS, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> KASTENBRUST_BOOTS = addMedievalArmorItem("kastenbrust_boots", ArmorTypes.KASTENBRUST, EquipmentSlot.FEET, new Properties().tab(ModCreativeTabs.ARMOR));
 
-	public static final RegistrySupplier<MedievalArmorItem> FACE_HELMET = ItemRegistryHelper.registerMedievalArmorItem("face_helmet", ArmorMaterials.LAMELLAR, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> LAMELLAR_CHESTPLATE = ItemRegistryHelper.registerMedievalArmorItem("lamellar_chestplate", ArmorMaterials.LAMELLAR, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final RegistrySupplier<MedievalArmorItem> LAMELLAR_BOOTS = ItemRegistryHelper.registerMedievalArmorItem("lamellar_boots", ArmorMaterials.LAMELLAR, EquipmentSlot.FEET, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> FACE_HELMET = addMedievalArmorItem("face_helmet", ArmorTypes.LAMELLAR, EquipmentSlot.HEAD, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> LAMELLAR_CHESTPLATE = addMedievalArmorItem("lamellar_chestplate", ArmorTypes.LAMELLAR, EquipmentSlot.CHEST, new Properties().tab(ModCreativeTabs.ARMOR));
+	public static final RegistrySupplier<MedievalArmorItem> LAMELLAR_BOOTS = addMedievalArmorItem("lamellar_boots", ArmorTypes.LAMELLAR, EquipmentSlot.FEET, new Properties().tab(ModCreativeTabs.ARMOR));
 
-	public static final RegistrySupplier<MedievalHorseArmorItem> BARDING = ITEMS.register("barding", () -> new MedievalHorseArmorItem(12, new ResourceLocation(KnightlyArmory.ID, "textures/entity/horse/armor/barding.png"), new Item.Properties().stacksTo(1).tab(ModCreativeTabs.ARMOR)));
-	public static final RegistrySupplier<MedievalHorseArmorItem> CHAINMAIL_HORSE_ARMOR = ITEMS.register("chainmail_horse_armor", () -> new MedievalHorseArmorItem(6, new ResourceLocation(KnightlyArmory.ID, "textures/entity/horse/armor/horse_armor_chainmail.png"), new Item.Properties().stacksTo(1).tab(ModCreativeTabs.ARMOR)));
+	public static final RegistrySupplier<MedievalHorseArmorItem> BARDING = ITEMS.register("barding", () -> new MedievalHorseArmorItem(12, new ResourceLocation(KnightlyArmory.ID, "textures/entity/horse/armor/barding.png"), new Properties().stacksTo(1).tab(ModCreativeTabs.ARMOR)));
+	public static final RegistrySupplier<MedievalHorseArmorItem> CHAINMAIL_HORSE_ARMOR = ITEMS.register("chainmail_horse_armor", () -> new MedievalHorseArmorItem(6, new ResourceLocation(KnightlyArmory.ID, "textures/entity/horse/armor/horse_armor_chainmail.png"), new Properties().stacksTo(1).tab(ModCreativeTabs.ARMOR)));
 
 	//Weapons
 	public static final WeaponsSupply STILETTOS = new WeaponsSupply(WeaponsWorkshop.STILETTO);
@@ -142,17 +150,17 @@ public class ModItems
 	public static final WeaponsSupply FLAILS = new WeaponsSupply(WeaponsWorkshop.FLAIL);
 	public static final WeaponsSupply GUISARMES = new WeaponsSupply(WeaponsWorkshop.GUISARME);
 
-	public static final RegistrySupplier<MedievalWeaponItem> BLACKSMITH_HAMMER = ItemRegistryHelper.registerMedievalWeaponItem("blacksmith_hammer", new Item.Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.STEEL, WeaponType.BLACKSMITH_HAMMER);
-	public static final RegistrySupplier<MedievalWeaponItem> BARBED_CLUB = ItemRegistryHelper.registerMedievalWeaponItem("barbedclub", new Item.Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.IRON, WeaponType.BARBED_CLUB);
-	public static final RegistrySupplier<MedievalWeaponItem> PITCHFORK = ItemRegistryHelper.registerMedievalWeaponItem("pitchfork", new Item.Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.IRON, WeaponType.PITCHFORK);
-	public static final RegistrySupplier<MedievalWeaponItem> NOBLE_SWORD = ItemRegistryHelper.registerMedievalWeaponItem("noble_sword", new Item.Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.IRON, WeaponType.NOBLE_SWORD);
-	public static final RegistrySupplier<MedievalWeaponItem> RUSTED_BASTARD_SWORD = ItemRegistryHelper.registerMedievalWeaponItem("rusted_bastardsword", new Item.Properties(), ModItemTier.IRON, WeaponType.RUSTED_BASTARD_SWORD);
-	public static final RegistrySupplier<MedievalWeaponItem> RUSTED_HEAVY_MACE = ItemRegistryHelper.registerMedievalWeaponItem("rusted_heavymace", new Item.Properties(), ModItemTier.IRON, WeaponType.RUSTED_HEAVY_MACE);
-	public static final RegistrySupplier<MedievalWeaponItem> CLUB = ItemRegistryHelper.registerMedievalWeaponItem("club", new Item.Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.WOOD, WeaponType.CLUB);
-	public static final RegistrySupplier<MedievalWeaponItem> MESSER_SWORD = ItemRegistryHelper.registerMedievalWeaponItem("messer_sword", new Item.Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.IRON, WeaponType.MESSER_SWORD);
+	public static final RegistrySupplier<MedievalWeaponItem> BLACKSMITH_HAMMER = addMedievalWeaponItem("blacksmith_hammer", new Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.STEEL, WeaponTypes.BLACKSMITH_HAMMER);
+	public static final RegistrySupplier<MedievalWeaponItem> BARBED_CLUB = addMedievalWeaponItem("barbedclub", new Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.IRON, WeaponTypes.BARBED_CLUB);
+	public static final RegistrySupplier<MedievalWeaponItem> PITCHFORK = addMedievalWeaponItem("pitchfork", new Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.IRON, WeaponTypes.PITCHFORK);
+	public static final RegistrySupplier<MedievalWeaponItem> NOBLE_SWORD = addMedievalWeaponItem("noble_sword", new Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.IRON, WeaponTypes.NOBLE_SWORD);
+	public static final RegistrySupplier<MedievalWeaponItem> RUSTED_BASTARD_SWORD = addMedievalWeaponItem("rusted_bastardsword", new Properties().tab(ModCreativeTabs.RUSTED), ModItemTier.IRON, WeaponTypes.RUSTED_BASTARD_SWORD);
+	public static final RegistrySupplier<MedievalWeaponItem> RUSTED_HEAVY_MACE = addMedievalWeaponItem("rusted_heavymace", new Properties().tab(ModCreativeTabs.RUSTED), ModItemTier.IRON, WeaponTypes.RUSTED_HEAVY_MACE);
+	public static final RegistrySupplier<MedievalWeaponItem> CLUB = addMedievalWeaponItem("club", new Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.WOOD, WeaponTypes.CLUB);
+	public static final RegistrySupplier<MedievalWeaponItem> MESSER_SWORD = addMedievalWeaponItem("messer_sword", new Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.IRON, WeaponTypes.MESSER_SWORD);
 
-	public static final RegistrySupplier<BowItem> LONGBOW = ITEMS.register("longbow", () -> new MedievalBowItem(new Item.Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS).stacksTo(1).durability(420), 4.2f, 26.0f));
-	public static final RegistrySupplier<CrossbowItem> HEAVY_CROSSBOW = ITEMS.register("heavy_crossbow", () -> new MedievalCrossbowItem(new Item.Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS).stacksTo(1).durability(500), 4.3f, 50));
+	public static final RegistrySupplier<BowItem> LONGBOW = ITEMS.register("longbow", () -> new MedievalBowItem(new Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS).stacksTo(1).durability(420), 4.2f, 26.0f));
+	public static final RegistrySupplier<CrossbowItem> HEAVY_CROSSBOW = ITEMS.register("heavy_crossbow", () -> new MedievalCrossbowItem(new Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS).stacksTo(1).durability(500), 4.3f, 50));
 
 	//Shields
 	public static final ShieldsSupply HEATER_SHIELDS = new ShieldsSupply(ShieldsWorkshop.HEATER_SHIELD, "heatershield");
@@ -165,49 +173,49 @@ public class ModItems
 	public static final ShieldsSupply PAVESES = new ShieldsSupply(ShieldsWorkshop.PAVESE, "pavese");
 	public static final ShieldsSupply KITE_SHIELDS = new ShieldsSupply(ShieldsWorkshop.KITE_SHIELD, "kiteshield");
 
-	public static final RegistrySupplier<MedievalShieldItem> CORRUPTED_ROUND_SHIELD = ItemRegistryHelper.registerMedievalShieldItem("corruptedroundshield", "corruptedroundshield", new Item.Properties(), ModItemTier.WOOD, false, true, ShieldType.CORRUPTED_ROUND_SHIELD, Models.ShieldEnum.CORRUPTED_ROUND_SHIELD);
+	public static final RegistrySupplier<MedievalShieldItem> CORRUPTED_ROUND_SHIELD = addMedievalShieldItem("corruptedroundshield", "corruptedroundshield", new Properties().tab(ModCreativeTabs.RUSTED), ModItemTier.WOOD, false, true, ShieldTypes.CORRUPTED_ROUND_SHIELD, Models.ShieldEnum.CORRUPTED_ROUND_SHIELD);
 
 	//Patterns
-	public static final RegistrySupplier<Item> APOSTOLIC_CROSS_PATTERN = ITEMS.register("apostolic_cross_pattern", () -> new HeraldryPatternItem(HeraldryPattern.APOSTOLIC_CROSS_PATTERN, new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> BOWL_PATTERN = ITEMS.register("bowl_pattern", () -> new HeraldryPatternItem(HeraldryPattern.BOWL_PATTERN, new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> BULL_PATTERN = ITEMS.register("bull_pattern", () -> new HeraldryPatternItem(HeraldryPattern.BULL_PATTERN, new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> CHESS_PATTERN = ITEMS.register("chess_pattern", () -> new HeraldryPatternItem(HeraldryPattern.CHESS_PATTERN, new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> CRUSADER_CROSS_PATTERN = ITEMS.register("crusader_cross_pattern", () -> new HeraldryPatternItem(HeraldryPattern.CRUSADER_CROSS_PATTERN, new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> DRAGON_PATTERN = ITEMS.register("dragon_pattern", () -> new HeraldryPatternItem(HeraldryPattern.DRAGON_PATTERN, new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> EAGLE_PATTERN = ITEMS.register("eagle_pattern", () -> new HeraldryPatternItem(HeraldryPattern.EAGLE_PATTERN, new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> HORSE_PATTERN = ITEMS.register("horse_pattern", () -> new HeraldryPatternItem(HeraldryPattern.HORSE_PATTERN, new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> LILY_PATTERN = ITEMS.register("lily_pattern", () -> new HeraldryPatternItem(HeraldryPattern.LILY_PATTERN, new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> LION1_PATTERN = ITEMS.register("lion1_pattern", () -> new HeraldryPatternItem(HeraldryPattern.LION1_PATTERN, new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> LION2_PATTERN = ITEMS.register("lion2_pattern", () -> new HeraldryPatternItem(HeraldryPattern.LION2_PATTERN, new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> ORTHODOX_CROSS_PATTERN = ITEMS.register("orthodox_cross_pattern", () -> new HeraldryPatternItem(HeraldryPattern.ORTHODOX_CROSS_PATTERN, new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> SNAKE_PATTERN = ITEMS.register("snake_pattern", () -> new HeraldryPatternItem(HeraldryPattern.SNAKE_PATTERN, new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> SUN_PATTERN = ITEMS.register("sun_pattern", () -> new HeraldryPatternItem(HeraldryPattern.SUN_PATTERN, new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> SWORDS_PATTERN = ITEMS.register("swords_pattern", () -> new HeraldryPatternItem(HeraldryPattern.SWORDS_PATTERN, new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> TOWER_PATTERN = ITEMS.register("tower_pattern", () -> new HeraldryPatternItem(HeraldryPattern.TOWER_PATTERN, new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> TREE_PATTERN = ITEMS.register("tree_pattern", () -> new HeraldryPatternItem(HeraldryPattern.TREE_PATTERN, new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> TWOHEADED_EAGLE_PATTERN = ITEMS.register("two-headed_eagle_pattern", () -> new HeraldryPatternItem(HeraldryPattern.TWOHEADED_EAGLE_PATTERN, new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> APOSTOLIC_CROSS_PATTERN = ITEMS.register("apostolic_cross_pattern", () -> new HeraldryPatternItem(HeraldryPattern.APOSTOLIC_CROSS_PATTERN, new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> BOWL_PATTERN = ITEMS.register("bowl_pattern", () -> new HeraldryPatternItem(HeraldryPattern.BOWL_PATTERN, new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> BULL_PATTERN = ITEMS.register("bull_pattern", () -> new HeraldryPatternItem(HeraldryPattern.BULL_PATTERN, new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> CHESS_PATTERN = ITEMS.register("chess_pattern", () -> new HeraldryPatternItem(HeraldryPattern.CHESS_PATTERN, new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> CRUSADER_CROSS_PATTERN = ITEMS.register("crusader_cross_pattern", () -> new HeraldryPatternItem(HeraldryPattern.CRUSADER_CROSS_PATTERN, new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> DRAGON_PATTERN = ITEMS.register("dragon_pattern", () -> new HeraldryPatternItem(HeraldryPattern.DRAGON_PATTERN, new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> EAGLE_PATTERN = ITEMS.register("eagle_pattern", () -> new HeraldryPatternItem(HeraldryPattern.EAGLE_PATTERN, new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> HORSE_PATTERN = ITEMS.register("horse_pattern", () -> new HeraldryPatternItem(HeraldryPattern.HORSE_PATTERN, new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> LILY_PATTERN = ITEMS.register("lily_pattern", () -> new HeraldryPatternItem(HeraldryPattern.LILY_PATTERN, new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> LION1_PATTERN = ITEMS.register("lion1_pattern", () -> new HeraldryPatternItem(HeraldryPattern.LION1_PATTERN, new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> LION2_PATTERN = ITEMS.register("lion2_pattern", () -> new HeraldryPatternItem(HeraldryPattern.LION2_PATTERN, new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> ORTHODOX_CROSS_PATTERN = ITEMS.register("orthodox_cross_pattern", () -> new HeraldryPatternItem(HeraldryPattern.ORTHODOX_CROSS_PATTERN, new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> SNAKE_PATTERN = ITEMS.register("snake_pattern", () -> new HeraldryPatternItem(HeraldryPattern.SNAKE_PATTERN, new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> SUN_PATTERN = ITEMS.register("sun_pattern", () -> new HeraldryPatternItem(HeraldryPattern.SUN_PATTERN, new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> SWORDS_PATTERN = ITEMS.register("swords_pattern", () -> new HeraldryPatternItem(HeraldryPattern.SWORDS_PATTERN, new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> TOWER_PATTERN = ITEMS.register("tower_pattern", () -> new HeraldryPatternItem(HeraldryPattern.TOWER_PATTERN, new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> TREE_PATTERN = ITEMS.register("tree_pattern", () -> new HeraldryPatternItem(HeraldryPattern.TREE_PATTERN, new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> TWOHEADED_EAGLE_PATTERN = ITEMS.register("two-headed_eagle_pattern", () -> new HeraldryPatternItem(HeraldryPattern.TWOHEADED_EAGLE_PATTERN, new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 
 	//Materials
-	public static final RegistrySupplier<Item> STEEL_INGOT = ITEMS.register("steel_ingot", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> STEEL_NUGGET = ITEMS.register("steel_nugget", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> STEEL_RING = ITEMS.register("steel_ring", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> STEEL_CHAINMAIL = ITEMS.register("steel_chainmail", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> STEEL_PLATE = ITEMS.register("steel_plate", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> LEATHER_STRIP = ITEMS.register("leather_strip", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> HILT = ITEMS.register("hilt", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> POLE = ITEMS.register("pole", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> STEEL_CHAIN = ITEMS.register("steel_chain", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> WOOLEN_FABRIC = ITEMS.register("woolen_fabric", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> SMALL_STEEL_PLATE = ITEMS.register("small_steel_plate", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistrySupplier<Item> LAMELLAR_ROWS = ITEMS.register("lamellar_rows", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	
+	public static final RegistrySupplier<Item> STEEL_INGOT = addIngredientItem("steel_ingot", () -> new Item(new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> STEEL_NUGGET = addIngredientItem("steel_nugget", () -> new Item(new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> STEEL_RING = addIngredientItem("steel_ring", () -> new Item(new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> STEEL_CHAINMAIL = addIngredientItem("steel_chainmail", () -> new Item(new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> STEEL_PLATE = addIngredientItem("steel_plate", () -> new Item(new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> LEATHER_STRIP = addIngredientItem("leather_strip", () -> new Item(new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> HILT = addIngredientItem("hilt", () -> new Item(new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> POLE = addIngredientItem("pole", () -> new Item(new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> STEEL_CHAIN = addIngredientItem("steel_chain", () -> new Item(new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> WOOLEN_FABRIC = addIngredientItem("woolen_fabric", () -> new Item(new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> SMALL_STEEL_PLATE = addIngredientItem("small_steel_plate", () -> new Item(new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistrySupplier<Item> LAMELLAR_ROWS = addIngredientItem("lamellar_rows", () -> new Item(new Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+
 	static
 	{
 		if (Platform.isFabric())
 		{
-			ITEMS.register("tin_ingot", () -> new Item(new Item.Properties()));
-			ITEMS.register("silver_ingot", () -> new Item(new Item.Properties()));
-			ITEMS.register("bronze_ingot", () -> new Item(new Item.Properties()));
+			ITEMS.register("tin_ingot", () -> new Item(new Properties()));
+			ITEMS.register("silver_ingot", () -> new Item(new Properties()));
+			ITEMS.register("bronze_ingot", () -> new Item(new Properties()));
 		}
 	}
 
@@ -226,7 +234,7 @@ public class ModItems
 		public RegistrySupplier<T> tin;
 		public RegistrySupplier<T> bronze;
 
-		public ItemsSupply(BiFunction<ModItemTier, Item.Properties, RegistrySupplier<T>> workshop, Item.Properties prop)
+		public ItemsSupply(BiFunction<ModItemTier, Properties, RegistrySupplier<T>> workshop, Properties prop)
 		{
 			this.wood = workshop.apply(ModItemTier.WOOD, prop);
 			this.stone = workshop.apply(ModItemTier.STONE, prop);
@@ -264,9 +272,9 @@ public class ModItems
 
 	public static class WeaponsSupply extends ItemsSupply<MedievalWeaponItem>
 	{
-		public WeaponsSupply(BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> workshop)
+		public WeaponsSupply(BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> workshop)
 		{
-			super(workshop, new Item.Properties().tab(ModCreativeTabs.WEAPONS));
+			super(workshop, new Properties().tab(ModCreativeTabs.WEAPONS));
 		}
 	}
 
@@ -289,7 +297,7 @@ public class ModItems
 
 		public ShieldsSupply(BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> workshop, String shieldName)
 		{
-			super(workshop, new Item.Properties().tab(ModCreativeTabs.SHIELDS));
+			super(workshop, new Properties().tab(ModCreativeTabs.SHIELDS));
 
 			this.shieldName = shieldName;
 
@@ -339,141 +347,139 @@ public class ModItems
 					String filename = bannerPattern.getFilename();
 					if (filename.contains(":"))
 						filename = filename.split(":")[1];
-					ResourceLocation location = new ResourceLocation(KnightlyArmory.ID, "entity/" + shieldName + "/" + filename);
+					ResourceLocation location = new ResourceLocation(KnightlyArmory.ID, "entity/" + this.shieldName + "/" + filename);
 					adder.accept(location);
 				}
 			}
 		}
 	}
 
-	public static final ShieldsSupply[] shieldsSupply = new ShieldsSupply[] {HEATER_SHIELDS, TARGETS, BUCKLERS, RONDACHES, TARTSCHES, ELLIPTICAL_SHIELDS, ROUND_SHIELDS, PAVESES, KITE_SHIELDS};
-	public static final WeaponsSupply[] weaponsSupply = new WeaponsSupply[] {STILETTOS, SHORT_SWORDS, KATZBALGERS, PIKES, RANSEURS, AHLSPIESSES, GIANT_LANCES, BASTARD_SWORDS, ESTOCS, CLAYMORS, ZWEIHANDERS, FLAME_BLADED_SWORDS, LOCHABER_AXES, CONCAVE_EDGED_HALBERDS, HEAVY_MACES, HEAVY_WAR_HAMMERS, LUCERNE_HAMMERS, MORNINGSTARS, FLAILS, GUISARMES};
-	public static ArrayList<RegistrySupplier<? extends Item>> dyeableItems;
-	static
+	public static RegistrySupplier<MedievalArmorItem> addKnightItem(String id, ArmorType type, EquipmentSlot slot, Item.Properties properties)
 	{
-		dyeableItems = new ArrayList<>();
-		dyeableItems.add(ARMET);
-		dyeableItems.add(CRUSADER_CHESTPLATE);
-		dyeableItems.add(CRUSADER_BOOTS);
-		dyeableItems.add(CEREMONIAL_ARMET);
-		dyeableItems.add(COIF);
-		dyeableItems.add(GAMBESON);
-		dyeableItems.add(PANTYHOSE);
-		dyeableItems.add(GAMBESON_BOOTS);
-		dyeableItems.add(BRIGANDINE);
-		dyeableItems.add(CUIRASSIER_CHESTPLATE);
-		dyeableItems.add(CUIRASSIER_LEGGINGS);
-		dyeableItems.addAll(GIANT_LANCES.get());
+		if (type.isDisabled())
+			return null;
+		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerKnightItem(id, type, slot, properties);
+		DYEABLE_ITEMS.add(armor);
+		ARMOR_ITEMS.add(armor);
+		return armor;
 	}
 
-	public static ArrayList<RegistrySupplier<MedievalArmorItem>> armorItems;
+	public static RegistrySupplier<MedievalArmorItem> addJoustingItem(String id, ArmorType type, EquipmentSlot slot, Item.Properties properties)
+	{
+		if (type.isDisabled())
+			return null;
+		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerJoustingItem(id, type, slot, properties);
+		ARMOR_ITEMS.add(armor);
+		return armor;
+	}
 
-	static {
-		armorItems = new ArrayList<>();
-		armorItems.add(ARMET);
-		armorItems.add(KNIGHT_CHESTPLATE);
-		armorItems.add(KNIGHT_LEGGINGS);
-		armorItems.add(KNIGHT_BOOTS);
-		armorItems.add(STECHHELM);
-		armorItems.add(JOUSTING_CHESTPLATE);
-		armorItems.add(JOUSTING_LEGGINGS);
-		armorItems.add(JOUSTING_BOOTS);
-		armorItems.add(SALLET);
-		armorItems.add(GOTHIC_CHESTPLATE);
-		armorItems.add(GOTHIC_LEGGINGS);
-		armorItems.add(GOTHIC_BOOTS);
-		armorItems.add(MAXIMILIAN_HELMET);
-		armorItems.add(MAXIMILIAN_CHESTPLATE);
-		armorItems.add(MAXIMILIAN_LEGGINGS);
-		armorItems.add(MAXIMILIAN_BOOTS);
-		armorItems.add(CHAINMAIL_HELMET);
-		armorItems.add(CHAINMAIL_CHESTPLATE);
-		armorItems.add(CHAINMAIL_LEGGINGS);
-		armorItems.add(CHAINMAIL_BOOTS);
-		armorItems.add(KETTLEHAT);
-		armorItems.add(PLATEMAIL_CHESTPLATE);
-		armorItems.add(PLATEMAIL_LEGGINGS);
-		armorItems.add(PLATEMAIL_BOOTS);
-		armorItems.add(BARBUTE);
-		armorItems.add(HALFARMOR_CHESTPLATE);
-		armorItems.add(GREATHELM);
-		armorItems.add(CRUSADER_CHESTPLATE);
-		armorItems.add(CRUSADER_LEGGINGS);
-		armorItems.add(CRUSADER_BOOTS);
-		armorItems.add(CEREMONIAL_ARMET);
-		armorItems.add(CEREMONIAL_CHESTPLATE);
-		armorItems.add(CEREMONIAL_BOOTS);
-		armorItems.add(COIF);
-		armorItems.add(GAMBESON);
-		armorItems.add(PANTYHOSE);
-		armorItems.add(GAMBESON_BOOTS);
-		armorItems.add(BRIGANDINE);
-		armorItems.add(NORMAN_HELMET);
-		armorItems.add(SHISHAK);
-		armorItems.add(RUSTED_BARBUTE);
-		armorItems.add(RUSTED_HALFARMOR_CHESTPLATE);
-		armorItems.add(RUSTED_GREATHELM);
-		armorItems.add(RUSTED_CRUSADER_CHESTPLATE);
-		armorItems.add(RUSTED_CRUSADER_BOOTS);
-		armorItems.add(RUSTED_NORMAN_HELMET);
-		armorItems.add(RUSTED_CHAINMAIL_HELMET);
-		armorItems.add(RUSTED_CHAINMAIL_CHESTPLATE);
-		armorItems.add(RUSTED_CHAINMAIL_LEGGINGS);
-		armorItems.add(RUSTED_CHAINMAIL_BOOTS);
-		armorItems.add(RUSTED_KETTLEHAT);
-		armorItems.add(BASCINET);
-		armorItems.add(XIV_CENTURY_KNIGHT_CHESTPLATE);
-		armorItems.add(XIV_CENTURY_KNIGHT_LEGGINGS);
-		armorItems.add(XIV_CENTURY_KNIGHT_BOOTS);
-		armorItems.add(WINGED_HUSSAR_CHESTPLATE);
-		armorItems.add(BURGONET);
-		armorItems.add(CUIRASSIER_CHESTPLATE);
-		armorItems.add(CUIRASSIER_LEGGINGS);
-		armorItems.add(CUIRASSIER_BOOTS);
-		armorItems.add(GRAND_BASCINET);
-		armorItems.add(KASTENBRUST_CHESTPLATE);
-		armorItems.add(KASTENBRUST_LEGGINGS);
-		armorItems.add(KASTENBRUST_BOOTS);
-		armorItems.add(FACE_HELMET);
-		armorItems.add(LAMELLAR_CHESTPLATE);
-		armorItems.add(LAMELLAR_BOOTS);
+	public static RegistrySupplier<MedievalArmorItem> addMedievalArmorItem(String id, ArmorType type, EquipmentSlot slot, Item.Properties properties)
+	{
+		if (type.isDisabled())
+			return null;
+		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerMedievalArmorItem(id, type, slot, properties);
+		ARMOR_ITEMS.add(armor);
+		return armor;
+	}
+
+	public static RegistrySupplier<MedievalArmorItem> addMedievalArmorItem(String id, ArmorType type, EquipmentSlot slot, Item.Properties properties, Models.ArmorEnum modelkey)
+	{
+		if (type.isDisabled())
+			return null;
+		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerMedievalArmorItem(id, type, slot, properties, modelkey);
+		ARMOR_ITEMS.add(armor);
+		return armor;
+	}
+
+	public static RegistrySupplier<MedievalArmorItem> addDyeableMedievalArmorItem(String id, ArmorType type, EquipmentSlot slot, Item.Properties properties, int defaultcolor)
+	{
+		if (type.isDisabled())
+			return null;
+		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerDyeableMedievalArmorItem(id, type, slot, properties, defaultcolor);
+		DYEABLE_ITEMS.add(armor);
+		ARMOR_ITEMS.add(armor);
+		return armor;
+	}
+
+	public static RegistrySupplier<MedievalArmorItem> addDyeableMedievalArmorItem(String id, ArmorType type, EquipmentSlot slot, Item.Properties properties, int defaultcolor, Models.ArmorEnum modelkey)
+	{
+		if (type.isDisabled())
+			return null;
+		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerDyeableMedievalArmorItem(id, type, slot, properties, defaultcolor, modelkey);
+		DYEABLE_ITEMS.add(armor);
+		ARMOR_ITEMS.add(armor);
+		return armor;
+	}
+
+	public static RegistrySupplier<MedievalWeaponItem> addMedievalWeaponItem(String id, Item.Properties properties, ModItemTier material, WeaponType type)
+	{
+		if (type.isDisabled())
+			return null;
+		RegistrySupplier<MedievalWeaponItem> weapon = ItemRegistryHelper.registerMedievalWeaponItem(id, properties, material, type);
+		WEAPON_ITEMS.add(weapon);
+		return weapon;
+	}
+
+	public static RegistrySupplier<MedievalWeaponItem> addLanceItem(String id, Item.Properties properties, ModItemTier material, WeaponType type)
+	{
+		if (type.isDisabled())
+			return null;
+		RegistrySupplier<MedievalWeaponItem> weapon = ItemRegistryHelper.registerLanceItem(id, properties, material, type);
+		WEAPON_ITEMS.add(weapon);
+		return weapon;
+	}
+
+	public static RegistrySupplier<Item> addIngredientItem(String id, Supplier<Item> supplier)
+	{
+		RegistrySupplier<Item> registrysupplier = ITEMS.register(id, supplier);
+		INGREDIENT_ITEMS.add(registrysupplier);
+		return registrysupplier;
+	}
+
+	public static RegistrySupplier<MedievalShieldItem> addMedievalShieldItem(String id, String name, Item.Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Models.ShieldEnum modelkey)
+	{
+		if (type.isDisabled())
+			return null;
+		RegistrySupplier<MedievalShieldItem> shield = ItemRegistryHelper.registerMedievalShieldItem(id, name, properties, material, paintable, is3d, type, modelkey);
+		SHIELD_ITEMS.add(shield);
+		return shield;
 	}
 
 	static class ShieldsWorkshop
 	{
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalShieldItem>> HEATER_SHIELD = (material, prop) -> ItemRegistryHelper.registerMedievalShieldItem(material.getMaterialName() + "_heatershield", "heatershield", prop, material, true, true, ShieldType.HEATERSHIELD, Models.ShieldEnum.HEATER_SHIELD);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalShieldItem>> TARGET = (material, prop) -> ItemRegistryHelper.registerMedievalShieldItem(material.getMaterialName() + "_target", "target", prop, material, false, true, ShieldType.TARGET, Models.ShieldEnum.TARGET);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalShieldItem>> BUCKLER = (material, prop) -> ItemRegistryHelper.registerMedievalShieldItem(material.getMaterialName() + "_buckler", "buckler", prop, material, false, true, ShieldType.BUCKLER, Models.ShieldEnum.BUCKLER);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalShieldItem>> RONDACHE = (material, prop) -> ItemRegistryHelper.registerMedievalShieldItem(material.getMaterialName() + "_rondache", "rondache", prop, material, false, true, ShieldType.RONDACHE, Models.ShieldEnum.RONDACHE);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalShieldItem>> TARTSCHE = (material, prop) -> ItemRegistryHelper.registerMedievalShieldItem(material.getMaterialName() + "_tartsche", "tartsche", prop, material, true, true, ShieldType.TARTSCHE, Models.ShieldEnum.TARTSCHE);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalShieldItem>> ELLIPTICAL_SHIELD = (material, prop) -> ItemRegistryHelper.registerMedievalShieldItem(material.getMaterialName() + "_ellipticalshield", "ellipticalshield", prop, material, true, true, ShieldType.ELLIPTICALSHIELD, Models.ShieldEnum.ELLIPTICAL_SHIELD);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalShieldItem>> ROUND_SHIELD = (material, prop) -> ItemRegistryHelper.registerMedievalShieldItem(material.getMaterialName() + "_roundshield", "roundshield", prop, material, true, true, ShieldType.ROUNDSHIELD, Models.ShieldEnum.ROUND_SHIELD);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalShieldItem>> PAVESE = (material, prop) -> ItemRegistryHelper.registerMedievalShieldItem(material.getMaterialName() + "_pavese", "pavese", prop, material, true, true, ShieldType.PAVESE, Models.ShieldEnum.PAVESE);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalShieldItem>> KITE_SHIELD = (material, prop) -> ItemRegistryHelper.registerMedievalShieldItem(material.getMaterialName() + "_kiteshield", "kiteshield", prop, material, true, true, ShieldType.KITESHIELD, Models.ShieldEnum.KITE_SHIELD);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> HEATER_SHIELD = (material, prop) -> addMedievalShieldItem(material.getMaterialName() + "_heatershield", "heatershield", prop, material, true, true, ShieldTypes.HEATER_SHIELD, Models.ShieldEnum.HEATER_SHIELD);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> TARGET = (material, prop) -> addMedievalShieldItem(material.getMaterialName() + "_target", "target", prop, material, false, true, ShieldTypes.TARGET, Models.ShieldEnum.TARGET);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> BUCKLER = (material, prop) -> addMedievalShieldItem(material.getMaterialName() + "_buckler", "buckler", prop, material, false, true, ShieldTypes.BUCKLER, Models.ShieldEnum.BUCKLER);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> RONDACHE = (material, prop) -> addMedievalShieldItem(material.getMaterialName() + "_rondache", "rondache", prop, material, false, true, ShieldTypes.RONDACHE, Models.ShieldEnum.RONDACHE);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> TARTSCHE = (material, prop) -> addMedievalShieldItem(material.getMaterialName() + "_tartsche", "tartsche", prop, material, true, true, ShieldTypes.TARTSCHE, Models.ShieldEnum.TARTSCHE);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> ELLIPTICAL_SHIELD = (material, prop) -> addMedievalShieldItem(material.getMaterialName() + "_ellipticalshield", "ellipticalshield", prop, material, true, true, ShieldTypes.ELLIPTICAL_SHIELD, Models.ShieldEnum.ELLIPTICAL_SHIELD);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> ROUND_SHIELD = (material, prop) -> addMedievalShieldItem(material.getMaterialName() + "_roundshield", "roundshield", prop, material, true, true, ShieldTypes.ROUND_SHIELD, Models.ShieldEnum.ROUND_SHIELD);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> PAVESE = (material, prop) -> addMedievalShieldItem(material.getMaterialName() + "_pavese", "pavese", prop, material, true, true, ShieldTypes.PAVESE, Models.ShieldEnum.PAVESE);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> KITE_SHIELD = (material, prop) -> addMedievalShieldItem(material.getMaterialName() + "_kiteshield", "kiteshield", prop, material, true, true, ShieldTypes.KITE_SHIELD, Models.ShieldEnum.KITE_SHIELD);
 	}
 
 	static class WeaponsWorkshop
 	{
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> STILETTO = (material, prop) -> ItemRegistryHelper.registerMedievalWeaponItem(material.getMaterialName() + "_stylet", prop.durability(material.getUses()), material, WeaponType.STILETTO);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> SHORT_SWORD = (material, prop) -> ItemRegistryHelper.registerMedievalWeaponItem(material.getMaterialName() + "_shortsword", prop.durability(material.getUses()), material, WeaponType.SHORT_SWORD);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> KATZBALGER = (material, prop) -> ItemRegistryHelper.registerMedievalWeaponItem(material.getMaterialName() + "_katzbalger", prop.durability(material.getUses()), material, WeaponType.KATZBALGER);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> PIKE = (material, prop) -> ItemRegistryHelper.registerMedievalWeaponItem(material.getMaterialName() + "_pike", prop.durability(material.getUses()), material, WeaponType.PIKE);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> RANSEUR = (material, prop) -> ItemRegistryHelper.registerMedievalWeaponItem(material.getMaterialName() + "_ranseur", prop.durability(material.getUses()), material, WeaponType.RANSEUR);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> AHLSPIESS = (material, prop) -> ItemRegistryHelper.registerMedievalWeaponItem(material.getMaterialName() + "_ahlspiess", prop.durability(material.getUses()), material, WeaponType.AHLSPIESS);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> GIANT_LANCE = (material, prop) -> ItemRegistryHelper.registerLanceItem(material.getMaterialName() + "_chivalrylance", prop.durability(material.getUses()), material, WeaponType.GIANT_LANCE);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> BASTARD_SWORD = (material, prop) -> ItemRegistryHelper.registerMedievalWeaponItem(material.getMaterialName() + "_bastardsword", prop.durability(material.getUses()), material, WeaponType.BASTARD_SWORD);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> ESTOC = (material, prop) -> ItemRegistryHelper.registerMedievalWeaponItem(material.getMaterialName() + "_estoc", prop.durability(material.getUses()), material, WeaponType.ESTOC);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> CLAYMORE = (material, prop) -> ItemRegistryHelper.registerMedievalWeaponItem(material.getMaterialName() + "_claymore", prop.durability(material.getUses()), material, WeaponType.CLAYMORE);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> ZWEIHANDER = (material, prop) -> ItemRegistryHelper.registerMedievalWeaponItem(material.getMaterialName() + "_zweihander", prop.durability(material.getUses()), material, WeaponType.ZWEIHANDER);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> FlAME_BLADED_SWORD = (material, prop) -> ItemRegistryHelper.registerMedievalWeaponItem(material.getMaterialName() + "_flamebladedsword", prop.durability(material.getUses()), material, WeaponType.FlAME_BLADED_SWORD);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> LOCHABER_AXE = (material, prop) -> ItemRegistryHelper.registerMedievalWeaponItem(material.getMaterialName() + "_lochaberaxe", prop.durability(material.getUses()), material, WeaponType.LOCHABER_AXE);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> CONCAVE_EDGED_HALBERD = (material, prop) -> ItemRegistryHelper.registerMedievalWeaponItem(material.getMaterialName() + "_concavehalberd", prop.durability(material.getUses()), material, WeaponType.CONCAVE_EDGED_HALBERD);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> HEAVY_MACE = (material, prop) -> ItemRegistryHelper.registerMedievalWeaponItem(material.getMaterialName() + "_heavymace", prop.durability(material.getUses()), material, WeaponType.HEAVY_MACE);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> HEAVY_WAR_HAMMER = (material, prop) -> ItemRegistryHelper.registerMedievalWeaponItem(material.getMaterialName() + "_heavywarhammer", prop.durability(material.getUses()), material, WeaponType.HEAVY_WAR_HAMMER);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> LUCERNE_HAMMER = (material, prop) -> ItemRegistryHelper.registerMedievalWeaponItem(material.getMaterialName() + "_lucernhammer", prop.durability(material.getUses()), material, WeaponType.LUCERNE_HAMMER);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> MORNINGSTAR = (material, prop) -> ItemRegistryHelper.registerMedievalWeaponItem(material.getMaterialName() + "_morgenstern", prop.durability(material.getUses()), material, WeaponType.MORNINGSTAR);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> FLAIL = (material, prop) -> ItemRegistryHelper.registerMedievalWeaponItem(material.getMaterialName() + "_chainmorgenstern", prop.durability(material.getUses()), material, WeaponType.FLAIL);
-		public static final BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalWeaponItem>> GUISARME = (material, prop) -> ItemRegistryHelper.registerMedievalWeaponItem(material.getMaterialName() + "_guisarme", prop.durability(material.getUses()), material, WeaponType.GUISARME);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> STILETTO = (material, prop) -> addMedievalWeaponItem(material.getMaterialName() + "_stylet", prop, material, WeaponTypes.STILETTO);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> SHORT_SWORD = (material, prop) -> addMedievalWeaponItem(material.getMaterialName() + "_shortsword", prop, material, WeaponTypes.SHORT_SWORD);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> KATZBALGER = (material, prop) -> addMedievalWeaponItem(material.getMaterialName() + "_katzbalger", prop, material, WeaponTypes.KATZBALGER);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> PIKE = (material, prop) -> addMedievalWeaponItem(material.getMaterialName() + "_pike", prop, material, WeaponTypes.PIKE);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> RANSEUR = (material, prop) -> addMedievalWeaponItem(material.getMaterialName() + "_ranseur", prop, material, WeaponTypes.RANSEUR);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> AHLSPIESS = (material, prop) -> addMedievalWeaponItem(material.getMaterialName() + "_ahlspiess", prop, material, WeaponTypes.AHLSPIESS);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> GIANT_LANCE = (material, prop) -> addLanceItem(material.getMaterialName() + "_chivalrylance", prop, material, WeaponTypes.GIANT_LANCE);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> BASTARD_SWORD = (material, prop) -> addMedievalWeaponItem(material.getMaterialName() + "_bastardsword", prop, material, WeaponTypes.BASTARD_SWORD);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> ESTOC = (material, prop) -> addMedievalWeaponItem(material.getMaterialName() + "_estoc", prop, material, WeaponTypes.ESTOC);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> CLAYMORE = (material, prop) -> addMedievalWeaponItem(material.getMaterialName() + "_claymore", prop, material, WeaponTypes.CLAYMORE);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> ZWEIHANDER = (material, prop) -> addMedievalWeaponItem(material.getMaterialName() + "_zweihander", prop, material, WeaponTypes.ZWEIHANDER);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> FlAME_BLADED_SWORD = (material, prop) -> addMedievalWeaponItem(material.getMaterialName() + "_flamebladedsword", prop, material, WeaponTypes.FlAME_BLADED_SWORD);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> LOCHABER_AXE = (material, prop) -> addMedievalWeaponItem(material.getMaterialName() + "_lochaberaxe", prop, material, WeaponTypes.LOCHABER_AXE);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> CONCAVE_EDGED_HALBERD = (material, prop) -> addMedievalWeaponItem(material.getMaterialName() + "_concavehalberd", prop, material, WeaponTypes.CONCAVE_EDGED_HALBERD);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> HEAVY_MACE = (material, prop) -> addMedievalWeaponItem(material.getMaterialName() + "_heavymace", prop, material, WeaponTypes.HEAVY_MACE);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> HEAVY_WAR_HAMMER = (material, prop) -> addMedievalWeaponItem(material.getMaterialName() + "_heavywarhammer", prop, material, WeaponTypes.HEAVY_WAR_HAMMER);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> LUCERNE_HAMMER = (material, prop) -> addMedievalWeaponItem(material.getMaterialName() + "_lucernhammer", prop, material, WeaponTypes.LUCERNE_HAMMER);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> MORNINGSTAR = (material, prop) -> addMedievalWeaponItem(material.getMaterialName() + "_morgenstern", prop, material, WeaponTypes.MORNINGSTAR);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> FLAIL = (material, prop) -> addMedievalWeaponItem(material.getMaterialName() + "_chainmorgenstern", prop, material, WeaponTypes.FLAIL);
+		public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> GUISARME = (material, prop) -> addMedievalWeaponItem(material.getMaterialName() + "_guisarme", prop, material, WeaponTypes.GUISARME);
 	}
 
 	public static void init()

@@ -28,7 +28,7 @@ body:
     attributes:
       label: Actual Behavior
       description: Describe what actually happened
-  - type: textarea
+  - type: input
     validations:
       required: true
     attributes:
@@ -44,3 +44,8 @@ body:
     attributes:
       label: Additional Comments
       description: Optionally, add further comments which may enhance the issue
+  - type: checkboxes
+    attributes:
+      label: Conclusion
+      options:
+      - label: I agree that I am inattentively reading the description, just filling out everything

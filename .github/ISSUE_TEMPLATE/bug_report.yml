@@ -1,0 +1,46 @@
+name: Bug Report
+description: Create a report to help us improve our mod
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Before submitting a new issue, ensure your bug hasn't already been reported. If it has, reply to the open issue instead.
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: Steps to Reproduce
+      description: Provide clear and unambiguous steps on how to reproduce the bug
+      placeholder: |
+        1. Use this mods
+        2. Open Minecraft 1.** version
+        3. Click on this
+        4. Observe that
+  - type: input
+    validations:
+      required: true
+    attributes:
+      label: Expected Behavior
+      description: Describe what you expected to happen
+  - type: input
+    validations:
+      required: true
+    attributes:
+      label: Actual Behavior
+      description: Describe what actually happened
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: Your Minecraft version
+      description: E.g. Minecraft 1.18.2 Forge
+  - type: input
+    validations:
+      required: true
+    attributes:
+      label: Your error log
+      description: Paste link to your latest.log (use https://gist.github.com/ for this)
+  - type: textarea
+    attributes:
+      label: Additional Comments
+      description: Optionally, add further comments which may enhance the issue

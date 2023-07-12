@@ -9,7 +9,7 @@ public class MedievalHorseArmorItem extends HorseArmorItem
 	private final int protection;
 	private final ResourceLocation texture;
 
-	public MedievalHorseArmorItem(int i, ResourceLocation texture, Properties properties) {
+	public MedievalHorseArmorItem(int i, ResourceLocation texture, Item.Properties properties) {
 		super(i, "", properties);
 		this.protection = i;
 		this.texture = texture;

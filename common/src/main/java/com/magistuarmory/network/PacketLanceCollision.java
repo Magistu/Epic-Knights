@@ -1,6 +1,6 @@
 package com.magistuarmory.network;
 
-import com.magistuarmory.KnightlyArmory;
+import com.magistuarmory.EpicKnights;
 import com.magistuarmory.item.LanceItem;
 import dev.architectury.networking.NetworkManager;
 import io.netty.buffer.Unpooled;
@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class PacketLanceCollision
 {
-	public static final ResourceLocation ID = new ResourceLocation(KnightlyArmory.ID, "packet_lance_collision");
+	public static final ResourceLocation ID = new ResourceLocation(EpicKnights.ID, "packet_lance_collision");
 
 	public static void sendToServer(int entityid, float damage, boolean dismount)
 	{

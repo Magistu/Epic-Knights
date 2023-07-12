@@ -1,6 +1,6 @@
 package com.magistuarmory.network;
 
-import com.magistuarmory.KnightlyArmory;
+import com.magistuarmory.EpicKnights;
 import com.magistuarmory.item.MedievalWeaponItem;
 import dev.architectury.networking.NetworkManager;
 import io.netty.buffer.Unpooled;
@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class PacketLongReachAttack
 {
-	public static final ResourceLocation ID = new ResourceLocation(KnightlyArmory.ID, "packet_long_reach_attack");
+	public static final ResourceLocation ID = new ResourceLocation(EpicKnights.ID, "packet_long_reach_attack");
 
 	public static void sendToServer(int entityid)
 	{

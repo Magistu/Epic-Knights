@@ -324,11 +324,12 @@
 
 
 
-  "itemGroup.magistuarmory.armor": "Medieval Armor", 
-  "itemGroup.magistuarmory.weapons": "Medieval Weapons", 
-  "itemGroup.magistuarmory.particular_weapons": "Medieval Weapons", 
+  "itemGroup.magistuarmory.armor": "Medieval Armor",
+  "itemGroup.magistuarmory.weapons": "Medieval Weapons",
+  "itemGroup.magistuarmory.particular_weapons": "Medieval Weapons",
   "itemGroup.magistuarmory.shields": "Medieval Shields",
   "itemGroup.magistuarmory.rusted": "Rusted Items",
+  "itemGroup.magistuarmory.armor_decorations": "Armor Decorations",
 
 
 
@@ -402,22 +403,24 @@
 
 
 
-  "silvertools.hurt": "damage against undead",
+  "silvertools.hurt": "+%1$f damage against undead",
   "flamebladed.hurt": "Reduces enemy's maximum health",
   "halberd.hurt": "Has a chance to push the enemy off the horse",
-  "bonusattackreach": " reach distance",
+  "bonusattackreach": "%1$f reach distance",
   "slowmovementspeed": "Slow movement speed",
   "effect.laceration": "Laceration",
   "lance.rideronly": "Used only when riding",
   "lance.leftclick": "Left-click before hitting to dismount target",
+  "medieval_bag.rightclick": "Right-click to get contents",
   "lance.bonusdamage": "Damage is based on mass and speed",
-  "armorpiercing": "armor piercing", 
+  "armorpiercing": "%1$f% armor piercing", 
   "twohandedi": "Two-Handed I", 
   "twohandedii": "Two-Handed II", 
-  "kgweight": "kg weight", 
-  "maxdamageblock": "max damage block",
-  "twohandedpenalty_1": "Attack speed and damage reduced due to ",
+  "kgweight": "%1$fkg weight", 
+  "maxdamageblock": "%1$f max damage block",
+  "twohandedpenalty_1": "Attack speed or/and damage reduced due to ",
   "twohandedpenalty_2": "single-handed use of two-handed weapon",
+  "canbeplacedonground": "Press Shift+Right-click to place on the ground",
 
 
 
@@ -440,6 +443,40 @@
 
 
 
+  "item.magistuarmory.torse_and_mantle_decoration": "Torse And Mantle Decoration",
+  "item.magistuarmory.gazelle_horns_decoration": "Gazelle Horns Decoration",
+  "item.magistuarmory.duck_decoration": "Duck Decoration",
+  "item.magistuarmory.spike_decoration": "Spike Decoration",
+  "item.magistuarmory.horse_decoration": "Horse Decoration",
+  "item.magistuarmory.crown_decoration": "Crown Decoration",
+  "item.magistuarmory.flowercrown_decoration": "Flowercrown Decoration",
+  "item.magistuarmory.unicorn_decoration": "Unicorn Decoration",
+  "item.magistuarmory.bullhorns_decoration": "Bullhorns Decoration",
+  "item.magistuarmory.dragon_decoration": "Dragon Decoration",
+  "item.magistuarmory.minicrown_decoration": "Minicrown",
+  "item.magistuarmory.torse_decoration": "Torse Decoration",
+  "item.magistuarmory.two_plumes_decoration": "Two Plumes Decoration",
+  "item.magistuarmory.antlers_decoration": "Antlers Decoration",
+  "item.magistuarmory.plume_left_decoration": "Plume Left Decoration",
+  "item.magistuarmory.plume_middle_decoration": "Plume Middle Decoration",
+  "item.magistuarmory.plume_right_decoration": "Plume Right Decoration",
+  "item.magistuarmory.bear_decoration": "Bear Decoration",
+  "item.magistuarmory.lily_decoration": "Lily Decoration",
+  "item.magistuarmory.lion_decoration": "Lion Decoration",
+  "item.magistuarmory.demon_horns_decoration": "Demon Horns Decoration",
+  "item.magistuarmory.feathers_decoration": "Feathers Decoration",
+  "item.magistuarmory.viking_horns_decoration": "Viking Horns Decoration",
+  "item.magistuarmory.griffin_decoration": "Griffin Decoration",
+  "item.magistuarmory.hood_decoration": "Hood Decoration",
+  "item.magistuarmory.ecranche_decoration": "Ecranche Decoration",
+  "item.magistuarmory.rondel_decoration": "Rondel Decoration",
+
+
+
+  "item.magistuarmory.medieval_bag": "Bag Full of Stuff",
+
+
+
   "item.magistuarmory.blacksmith_hammer": "Blacksmith Hammer",
   "item.magistuarmory.pitchfork": "Pitchfork",
   "item.magistuarmory.barbedclub": "Barbed Club",
@@ -456,38 +493,42 @@
 
 
 
-  "magistuarmory.withsurcoat.black": " with Black Surcoat",
-  "magistuarmory.withsurcoat.red": " with Red Surcoat",
-  "magistuarmory.withsurcoat.green": " with Green Surcoat",
-  "magistuarmory.withsurcoat.brown": " with Brown Surcoat",
-  "magistuarmory.withsurcoat.blue": " with Blue Surcoat",
-  "magistuarmory.withsurcoat.purple": " with Purple Surcoat",
-  "magistuarmory.withsurcoat.cyan": " with Cyan Surcoat",
-  "magistuarmory.withsurcoat.light_gray": " with Light Gray Surcoat",
-  "magistuarmory.withsurcoat.gray": " with Gray Surcoat",
-  "magistuarmory.withsurcoat.pink": " with Pink Surcoat",
-  "magistuarmory.withsurcoat.lime": " with Lime Surcoat",
-  "magistuarmory.withsurcoat.yellow": " with Yellow Surcoat",
-  "magistuarmory.withsurcoat.light_blue": " with Light Blue Surcoat",
-  "magistuarmory.withsurcoat.magenta": " with Magenta Surcoat",
-  "magistuarmory.withsurcoat.orange": " with Orange Surcoat",
-  "magistuarmory.withsurcoat.white": " with White Surcoat",
-  "magistuarmory.withcaparison.black": " with Black Caparison",
-  "magistuarmory.withcaparison.red": " with Red Caparison",
-  "magistuarmory.withcaparison.green": " with Green Caparison",
-  "magistuarmory.withcaparison.brown": " with Brown Caparison",
-  "magistuarmory.withcaparison.blue": " with Blue Caparison",
-  "magistuarmory.withcaparison.purple": " with Purple Caparison",
-  "magistuarmory.withcaparison.cyan": " with Cyan Caparison",
-  "magistuarmory.withcaparison.light_gray": " with Light Gray Caparison",
-  "magistuarmory.withcaparison.gray": " with Gray Caparison",
-  "magistuarmory.withcaparison.pink": " with Pink Caparison",
-  "magistuarmory.withcaparison.lime": " with Lime Caparison",
-  "magistuarmory.withcaparison.yellow": " with Yellow Caparison",
-  "magistuarmory.withcaparison.light_blue": " with Light Blue Caparison",
-  "magistuarmory.withcaparison.magenta": " with Magenta Caparison",
-  "magistuarmory.withcaparison.orange": " with Orange Caparison",
-  "magistuarmory.withcaparison.white": " with White Caparison",
+  "magistuarmory.withsurcoat.black": "%1$s with Black Surcoat",
+  "magistuarmory.withsurcoat.red": "%1$s with Red Surcoat",
+  "magistuarmory.withsurcoat.green": "%1$s with Green Surcoat",
+  "magistuarmory.withsurcoat.brown": "%1$s with Brown Surcoat",
+  "magistuarmory.withsurcoat.blue": "%1$s with Blue Surcoat",
+  "magistuarmory.withsurcoat.purple": "%1$s with Purple Surcoat",
+  "magistuarmory.withsurcoat.cyan": "%1$s with Cyan Surcoat",
+  "magistuarmory.withsurcoat.light_gray": "%1$s with Light Gray Surcoat",
+  "magistuarmory.withsurcoat.gray": "%1$s with Gray Surcoat",
+  "magistuarmory.withsurcoat.pink": "%1$s with Pink Surcoat",
+  "magistuarmory.withsurcoat.lime": "%1$s with Lime Surcoat",
+  "magistuarmory.withsurcoat.yellow": "%1$s with Yellow Surcoat",
+  "magistuarmory.withsurcoat.light_blue": "%1$s with Light Blue Surcoat",
+  "magistuarmory.withsurcoat.magenta": "%1$s with Magenta Surcoat",
+  "magistuarmory.withsurcoat.orange": "%1$s with Orange Surcoat",
+  "magistuarmory.withsurcoat.white": "%1$s with White Surcoat",
+  "magistuarmory.withcaparison.black": "%1$s with Black Caparison",
+  "magistuarmory.withcaparison.red": "%1$s with Red Caparison",
+  "magistuarmory.withcaparison.green": "%1$s with Green Caparison",
+  "magistuarmory.withcaparison.brown": "%1$s with Brown Caparison",
+  "magistuarmory.withcaparison.blue": "%1$s with Blue Caparison",
+  "magistuarmory.withcaparison.purple": "%1$s with Purple Caparison",
+  "magistuarmory.withcaparison.cyan": "%1$s with Cyan Caparison",
+  "magistuarmory.withcaparison.light_gray": "%1$s with Light Gray Caparison",
+  "magistuarmory.withcaparison.gray": "%1$s with Gray Caparison",
+  "magistuarmory.withcaparison.pink": "%1$s with Pink Caparison",
+  "magistuarmory.withcaparison.lime": "%1$s with Lime Caparison",
+  "magistuarmory.withcaparison.yellow": "%1$s with Yellow Caparison",
+  "magistuarmory.withcaparison.light_blue": "%1$s with Light Blue Caparison",
+  "magistuarmory.withcaparison.magenta": "%1$s with Magenta Caparison",
+  "magistuarmory.withcaparison.orange": "%1$s with Orange Caparison",
+  "magistuarmory.withcaparison.white": "%1$s with White Caparison",
+
+
+
+  "magistuarmory.decorated": "Decorated %1$s",
 
 
 
@@ -538,17 +579,21 @@
 
 
 
-  "death.attack.additional": "%1$s was slain by %2$s",
-  "death.attack.additional.item": "%1$s was slain by %2$s using %3$s",
+  "death.attack.additional": "%1$s was slain",
+  "death.attack.additional.item": "%1$s was slain using %2$s",
+  "death.attack.additional.player": "%1$s was slain",
   "death.attack.entity": "%1$s was slain by %2$s",
   "death.attack.entity.item": "%1$s was slain by %2$s using %3$s",
+  "death.attack.entity.player": "%1$s was slain by %2$s",
   "death.attack.armorPiercing": "%1$s was slain by %2$s",
   "death.attack.armorPiercing.item": "%1$s was slain by %2$s using %3$s",
+  "death.attack.armorPiercing.player": "%1$s was slain by %2$s",
   "death.attack.silver": "%1$swas burned with silver by %2$s",
-  "death.attack.silver.player": "%1$s was burned with silver whilst fighting %2$s",
   "death.attack.silver.item": "%1$s was burned with silver by %2$s using %3$s",
+  "death.attack.silver.player": "%1$s was burned with silver whilst fighting %2$s",
   "death.attack.entityAdditional": "%1$s was slain by %2$s",
   "death.attack.entityAdditional.item": "%1$s was slain by %2$s using %3$s",
+  "death.attack.entityAdditional.player": "%1$s was slain by %2$s",
   
   
   

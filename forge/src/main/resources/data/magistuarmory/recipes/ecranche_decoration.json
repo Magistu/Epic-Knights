@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "pp",
+    "ll"
+  ],
+  "key": {
+    "l": {
+      "item": "magistuarmory:leather_strip"
+    },
+    "p": {
+      "tag": "forge:plates/steel"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:ecranche_decoration",
+    "count": 1
+  }
+}

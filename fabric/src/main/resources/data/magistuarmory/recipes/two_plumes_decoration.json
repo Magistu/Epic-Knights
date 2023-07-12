@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "f f",
+    "i i"
+  ],
+  "key": {
+    "f": {
+      "item": "minecraft:feather"
+    },
+    "i": {
+      "tag": "c:steel_ingots"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:two_plumes_decoration",
+    "count": 1
+  }
+}

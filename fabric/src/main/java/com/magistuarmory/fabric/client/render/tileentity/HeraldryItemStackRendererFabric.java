@@ -1,6 +1,5 @@
 package com.magistuarmory.fabric.client.render.tileentity;
 
-import com.magistuarmory.client.render.model.Models;
 import com.magistuarmory.client.render.tileentity.HeraldryItemStackRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.api.EnvType;

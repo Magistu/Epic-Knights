@@ -1,56 +1,86 @@
+// 
+// Decompiled by Procyon v0.5.36
+// 
+
 package com.magistuarmory.config;
 
-import me.shedaniel.autoconfig.ConfigData;
-import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
+import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.autoconfig.ConfigData;
 
 @Config(name = "armor")
 public class ArmorConfig implements ConfigData
 {
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableKnightArmor = true;
+    public boolean enableKnightArmor;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableJoustingArmor = true;
+    public boolean enableJoustingArmor;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableGothicArmor = true;
+    public boolean enableGothicArmor;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableMaximilianArmor = true;
+    public boolean enableMaximilianArmor;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableChainmailArmor = true;
+    public boolean enableChainmailArmor;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enablePlatemailArmor = true;
+    public boolean enablePlatemailArmor;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableHalfarmor = true;
+    public boolean enableHalfarmor;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableCrusaderArmor = true;
+    public boolean enableCrusaderArmor;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableBrigandineArmor = true;
+    public boolean enableBrigandineArmor;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableGambesonArmor = true;
+    public boolean enableGambesonArmor;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableCeremonialArmor = true;
+    public boolean enableCeremonialArmor;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableShishak = true;
+    public boolean enableShishak;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableNormanHelmet = true;
+    public boolean enableNormanHelmet;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableRustedHalfarmorArmor = true;
+    public boolean enableRustedHalfarmorArmor;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableRustedChainmailArmor = true;
+    public boolean enableRustedChainmailArmor;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableRustedKettlehat = true;
+    public boolean enableRustedKettlehat;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableRustedNormanHelmet = true;
+    public boolean enableRustedNormanHelmet;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableRustedCrusaderArmor = true;
+    public boolean enableRustedCrusaderArmor;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableXIVCenturyKnightArmor = true;
+    public boolean enableXIVCenturyKnightArmor;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableWingedHussarArmor = true;
+    public boolean enableWingedHussarArmor;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableCuirassierArmor = true;
+    public boolean enableCuirassierArmor;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableKastenbrustArmor = true;
+    public boolean enableKastenbrustArmor;
     @ConfigEntry.Gui.RequiresRestart
-    public boolean enableLamellarArmor = true;
+    public boolean enableLamellarArmor;
+    
+    public ArmorConfig() {
+        this.enableKnightArmor = true;
+        this.enableJoustingArmor = true;
+        this.enableGothicArmor = true;
+        this.enableMaximilianArmor = true;
+        this.enableChainmailArmor = true;
+        this.enablePlatemailArmor = true;
+        this.enableHalfarmor = true;
+        this.enableCrusaderArmor = true;
+        this.enableBrigandineArmor = true;
+        this.enableGambesonArmor = true;
+        this.enableCeremonialArmor = true;
+        this.enableShishak = true;
+        this.enableNormanHelmet = true;
+        this.enableRustedHalfarmorArmor = true;
+        this.enableRustedChainmailArmor = true;
+        this.enableRustedKettlehat = true;
+        this.enableRustedNormanHelmet = true;
+        this.enableRustedCrusaderArmor = true;
+        this.enableXIVCenturyKnightArmor = true;
+        this.enableWingedHussarArmor = true;
+        this.enableCuirassierArmor = true;
+        this.enableKastenbrustArmor = true;
+        this.enableLamellarArmor = true;
+    }
 }

@@ -1,5 +1,8 @@
 package com.magistuarmory.client.render.model;
 
+import com.magistuarmory.client.render.model.armor.*;
+import com.magistuarmory.client.render.model.block.PaviseBlockModel;
+import com.magistuarmory.client.render.model.decoration.*;
 import com.magistuarmory.client.render.model.item.*;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -33,7 +36,7 @@ public class Models
     public enum ShieldEnum
     {
         HEATER_SHIELD,
-        PAVESE,
+	    PAVISE,
         ROUND_SHIELD,
         ELLIPTICAL_SHIELD,
         TARTSCHE,
@@ -42,6 +45,25 @@ public class Models
         BUCKLER,
         TARGET,
         CORRUPTED_ROUND_SHIELD,
+    }
+    
+    public enum ArmorDecorationEnum
+    {
+        SURCOAT,
+        HORNS,
+        TORSE_AND_MANTLE,
+        CROWN,
+        FLOWERCROWN,
+        ECRANCHE,
+        RONDEL,
+        HOOD,
+        TOP_DECORATION,
+        TOP_DECORATION_2,
+        MINICROWN,
+        TORSE,
+        PLUME_LEFT,
+        PLUME_MIDDLE,
+        PLUME_RIGHT,
     }
 
     public static final HumanoidModel<LivingEntity> ARMET = new HumanoidModel<>(ArmetModel.createModel());
@@ -72,7 +94,7 @@ public class Models
     );
 
     public static MedievalShieldModel HEATER_SHIELD = new HeaterShieldModel(HeaterShieldModel.createLayer().bakeRoot());
-    public static MedievalShieldModel PAVESE = new PaviseModel(PaviseModel.createLayer().bakeRoot());
+    public static MedievalShieldModel PAVISE = new PaviseModel(PaviseModel.createLayer().bakeRoot());
     public static MedievalShieldModel ROUND_SHIELD = new RoundShieldModel(RoundShieldModel.createLayer().bakeRoot());
     public static MedievalShieldModel ELLIPTICAL_SHIELD = new EllipticalShieldModel(EllipticalShieldModel.createLayer().bakeRoot());
     public static MedievalShieldModel TARTSCHE = new TartscheModel(TartscheModel.createLayer().bakeRoot());
@@ -84,7 +106,7 @@ public class Models
 
     public static final Map<ShieldEnum, MedievalShieldModel> SHIELD_MAP = Map.ofEntries(
             entry(ShieldEnum.HEATER_SHIELD, HEATER_SHIELD),
-            entry(ShieldEnum.PAVESE, PAVESE),
+            entry(ShieldEnum.PAVISE, PAVISE),
             entry(ShieldEnum.ROUND_SHIELD, ROUND_SHIELD),
             entry(ShieldEnum.ELLIPTICAL_SHIELD, ELLIPTICAL_SHIELD),
             entry(ShieldEnum.TARTSCHE, TARTSCHE),
@@ -95,7 +117,72 @@ public class Models
             entry(ShieldEnum.CORRUPTED_ROUND_SHIELD, CORRUPTED_ROUND_SHIELD)
     );
 
-    public static final SurcoatModel<LivingEntity> SURCOAT = new SurcoatModel<>(SurcoatModel.createLayer().bakeRoot());
+    public static class ArmorDecorations<T extends LivingEntity>
+    {
+        public final SurcoatModel<T> surcoat;
+        public final HornsModel<T> horns;
+        public final TorseAndMantleModel<T> torseAndMantle;
+        public final CrownModel<T> crown;
+        public final FlowercrownModel<T> flowercrown;
+        public final EcrancheModel<T> ecranche;
+        public final RondelModel<T> rondel;
+        public final HoodModel<T> hood;
+        public final TopDecorationModel<T> topDecoration;
+        public final TopDecoration2Model<T> topDecoration2;
+        public final MiniCrownModel<T> minicrown;
+        public final TorseModel<T> torse;
+        public final PlumeLeftModel<T> plumeLeft;
+        public final PlumeMiddleModel<T> plumeMiddle;
+        public final PlumeRightModel<T> plumeRight;
+
+        final Map<String, ArmorDecorationModel<T>> map;
+
+        public ArmorDecorations()
+        {
+            this.surcoat = new SurcoatModel<>(SurcoatModel.createLayer().bakeRoot());
+            this.horns = new HornsModel<>(HornsModel.createLayer().bakeRoot());
+            this.torseAndMantle = new TorseAndMantleModel<>(TorseAndMantleModel.createLayer().bakeRoot());
+            this.crown = new CrownModel<>(CrownModel.createLayer().bakeRoot());
+            this.flowercrown = new FlowercrownModel<>(FlowercrownModel.createLayer().bakeRoot());
+            this.ecranche = new EcrancheModel<>(EcrancheModel.createLayer().bakeRoot());
+            this.rondel = new RondelModel<>(RondelModel.createLayer().bakeRoot());
+            this.hood = new HoodModel<>(HoodModel.createLayer().bakeRoot());
+            this.topDecoration = new TopDecorationModel<>(TopDecorationModel.createLayer().bakeRoot());
+            this.topDecoration2 = new TopDecoration2Model<>(TopDecoration2Model.createLayer().bakeRoot());
+            this.minicrown = new MiniCrownModel<>(MiniCrownModel.createLayer().bakeRoot());
+            this.torse = new TorseModel<>(TorseModel.createLayer().bakeRoot());
+            this.plumeLeft = new PlumeLeftModel<>(PlumeLeftModel.createLayer().bakeRoot());
+            this.plumeMiddle = new PlumeMiddleModel<>(PlumeMiddleModel.createLayer().bakeRoot());
+            this.plumeRight = new PlumeRightModel<>(PlumeRightModel.createLayer().bakeRoot());
+
+            this.map = Map.ofEntries(
+                    entry(ArmorDecorationEnum.SURCOAT.toString().toLowerCase(), this.surcoat),
+                    entry(ArmorDecorationEnum.HORNS.toString().toLowerCase(), this.horns),
+                    entry(ArmorDecorationEnum.TORSE_AND_MANTLE.toString().toLowerCase(), this.torseAndMantle),
+                    entry(ArmorDecorationEnum.CROWN.toString().toLowerCase(), this.crown),
+                    entry("flowercrown", this.flowercrown),
+                    entry(ArmorDecorationEnum.ECRANCHE.toString().toLowerCase(), this.ecranche),
+                    entry(ArmorDecorationEnum.RONDEL.toString().toLowerCase(), this.rondel),
+                    entry(ArmorDecorationEnum.HOOD.toString().toLowerCase(), this.hood),
+                    entry(ArmorDecorationEnum.TORSE.toString().toLowerCase(), this.torse),
+                    entry("demon_horns", this.topDecoration2),
+                    entry("griffin", this.topDecoration2),
+                    entry("feathers", this.topDecoration2),
+                    entry(ArmorDecorationEnum.MINICROWN.toString().toLowerCase(), this.minicrown),
+                    entry(ArmorDecorationEnum.PLUME_LEFT.toString().toLowerCase(), this.plumeLeft),
+                    entry(ArmorDecorationEnum.PLUME_MIDDLE.toString().toLowerCase(), this.plumeMiddle),
+                    entry(ArmorDecorationEnum.PLUME_RIGHT.toString().toLowerCase(), this.plumeRight)
+            );
+        }
+        
+        public ArmorDecorationModel<T> getModelByName(String name)
+        {
+            return this.map.getOrDefault(name, this.topDecoration);
+        }
+    }
+    
     public static final CaparisonModel<Horse> CAPARISON = new CaparisonModel<>(CaparisonModel.createLayer().bakeRoot());
 
+    public static final LayerDefinition PAVISE_BLOCK_LAYER = PaviseBlockModel.createLayer();
+    public static final PaviseBlockModel PAVISE_BLOCK = new PaviseBlockModel(PAVISE_BLOCK_LAYER.bakeRoot());
 }

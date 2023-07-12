@@ -8,18 +8,18 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.IItemRenderProperties;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
-
+import net.minecraftforge.client.IItemRenderProperties;
 import java.util.function.Consumer;
+
 
 public class MedievalShieldItemForge extends MedievalShieldItem
 {
 	public MedievalShieldItemForge(String id, String name, Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Models.ShieldEnum modelkey)
-    {
+	{
 		super(id, name, properties, material, paintable, is3d, type, modelkey);
-    }
+	}
 
 	@Override
 	public boolean canPerformAction(ItemStack stack, ToolAction action)

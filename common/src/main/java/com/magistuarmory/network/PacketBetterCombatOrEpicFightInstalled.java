@@ -1,6 +1,6 @@
 package com.magistuarmory.network;
 
-import com.magistuarmory.KnightlyArmory;
+import com.magistuarmory.EpicKnights;
 import dev.architectury.networking.NetworkManager;
 import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
@@ -10,11 +10,11 @@ import net.minecraft.server.level.ServerPlayer;
 
 public class PacketBetterCombatOrEpicFightInstalled
 {
-	public static final ResourceLocation ID = new ResourceLocation(KnightlyArmory.ID, "packet_bc_or_ef_installed");
+	public static final ResourceLocation ID = new ResourceLocation(EpicKnights.ID, "packet_bc_or_ef_installed");
 	
 	public static void sendToPlayer(ServerPlayer player)
 	{
-		NetworkManager.sendToPlayer(player, ID, PacketBetterCombatOrEpicFightInstalled.encode(KnightlyArmory.BC_or_EF_installed));
+		NetworkManager.sendToPlayer(player, ID, PacketBetterCombatOrEpicFightInstalled.encode(EpicKnights.BC_or_EF_installed));
 	}
 
 	static FriendlyByteBuf encode(boolean bcorefinstalled)
@@ -32,6 +32,6 @@ public class PacketBetterCombatOrEpicFightInstalled
 
 	static void execute(boolean bcorefinstalled)
 	{
-		KnightlyArmory.BC_or_EF_installed = bcorefinstalled;
+		EpicKnights.BC_or_EF_installed = bcorefinstalled;
 	}
 }

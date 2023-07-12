@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "magistuarmory:item/two_plumes_decoration",
+    "layer1": "magistuarmory:item/two_plumes_decoration_overlay"
+  }
+}

@@ -5,24 +5,24 @@ import com.magistuarmory.fabric.client.render.entity.layer.MedievalArmorLayer;
 import com.magistuarmory.fabric.client.render.tileentity.HeraldryItemStackRendererFabric;
 import com.magistuarmory.item.MedievalShieldItem;
 import com.magistuarmory.item.ModItems;
-import com.magistuarmory.item.armor.MedievalArmorItem;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.impl.client.rendering.ArmorRendererRegistryImpl;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.world.item.Item;
 
 @Environment(EnvType.CLIENT)
 public class ModRenderImpl
 {
 	public static void setupPlatform()
 	{
-		for (RegistrySupplier<MedievalArmorItem> supplier : ModItems.ARMOR_ITEMS)
+		for (RegistrySupplier<? extends Item> supplier : ModItems.ARMOR_ITEMS)
 		{
 			ArmorRendererRegistryImpl.register(new MedievalArmorLayer(), supplier.get());
 		}
-
+		
 		for (RegistrySupplier<MedievalShieldItem> supplier : ModItems.SHIELD_ITEMS)
 		{
 			BuiltinItemRendererRegistry.INSTANCE.register(supplier.get(), (BuiltinItemRendererRegistry.DynamicItemRenderer) supplier.get().getRenderer());

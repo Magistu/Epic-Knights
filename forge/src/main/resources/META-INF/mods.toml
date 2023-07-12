@@ -1,14 +1,14 @@
 modLoader = "javafml"
 loaderVersion = "[40,)"
-issueTrackerURL = "https://github.com/Magistu/Knightly-Armory/issues"
-displayURL="https://github.com/Magistu/Knightly-Armory"
+issueTrackerURL = "https://github.com/Magistu/Epic-Knights/issues"
+displayURL="https://github.com/Magistu/Epic-Knights"
 license = "All Right Reserved"
 [[mods]]
 modId = "magistuarmory"
 version = "${version}"
 displayName = "Epic Knights Mod"
 authors = "Magistu"
-credits = ["StaxiHD", "Mino", "Lexiolty", "Jackiecrazy", "CrazyBarkley", "Ryuje"]
+credits = ["StaxiHD", "Mino", "Lexiolty", "Jackiecrazy", "CrazyBarkley", "Ryuje", "Cole3050"]
 description = '''
 Adds medieval stuff to the game
 '''
@@ -23,20 +23,20 @@ side = "BOTH"
 [[dependencies.magistuarmory]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.18.0,)"
+versionRange = "[1.18,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.magistuarmory]]
 modId = "architectury"
 mandatory = true
-versionRange = "[4.9.83,)"
+versionRange = "[4,)"
 ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.magistuarmory]]
 modId = "cloth_config"
 mandatory = true
-versionRange = "[6.4.90,)"
+versionRange = "[6,)"
 ordering = "AFTER"
 side = "BOTH"

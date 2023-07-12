@@ -10,13 +10,13 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.IItemRenderProperties;
-
 import java.util.function.Consumer;
+
 
 public class KnightItemForge extends KnightItem implements DyeableLeatherItem
 {
-	public KnightItemForge(ArmorMaterial material, EquipmentSlot slot, Properties properties) {
-		super(material, slot, properties);
+	public KnightItemForge(ArmorMaterial material, EquipmentSlot type, Properties properties) {
+		super(material, type, properties);
 	}
 
     @Override

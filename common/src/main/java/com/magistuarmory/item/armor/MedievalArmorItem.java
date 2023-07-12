@@ -9,13 +9,14 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
+import org.apache.commons.io.output.ThresholdingOutputStream;
 
 
 public class MedievalArmorItem extends ArmorItem implements ISurcoat
 {
-	public MedievalArmorItem(ArmorMaterial material, EquipmentSlot slot, Properties properties)
+	public MedievalArmorItem(ArmorMaterial material, EquipmentSlot type, Properties properties)
 	{
-		super(material, slot, properties);
+		super(material, type, properties);
 	}
 
 	@Environment(EnvType.CLIENT)

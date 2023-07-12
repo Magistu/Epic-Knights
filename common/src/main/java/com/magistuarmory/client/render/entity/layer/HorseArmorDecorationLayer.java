@@ -1,6 +1,6 @@
 package com.magistuarmory.client.render.entity.layer;
 
-import com.magistuarmory.client.render.model.HorseArmorDecorationModel;
+import com.magistuarmory.client.render.model.decoration.HorseArmorDecorationModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.EnvType;
@@ -13,10 +13,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.horse.Horse;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.HorseArmorItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.entity.BannerBlockEntity;
 import net.minecraft.world.level.block.entity.BannerPattern;
 
@@ -49,7 +46,7 @@ public class HorseArmorDecorationLayer extends RenderLayer<Horse, HorseModel<Hor
          this.model.prepareMobModel(entity, f, f2, f3);
          this.model.setupAnim(entity, f, f2, f4, f5, f6);
 
-         if (stack.getTagElement("BlockEntityTag") != null)
+         if (BlockItem.getBlockEntityData(stack) != null)
          {
             List<Pair<BannerPattern, DyeColor>> list = BannerBlockEntity.createPatterns(ShieldItem.getColor(stack), BannerBlockEntity.getItemPatterns(stack));
 

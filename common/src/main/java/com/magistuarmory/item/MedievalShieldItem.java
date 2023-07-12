@@ -4,7 +4,7 @@ import com.magistuarmory.client.render.ModRender;
 import com.magistuarmory.client.render.model.Models;
 import com.magistuarmory.client.render.tileentity.HeraldryItemStackRenderer;
 import com.magistuarmory.util.CombatHelper;
-import com.magistuarmory.util.ModDamageSource;
+import com.magistuarmory.util.ModDamageSources;
 import dev.architectury.platform.Platform;
 import dev.architectury.registry.item.ItemPropertiesRegistry;
 import dev.architectury.utils.Env;
@@ -13,6 +13,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageSource;
@@ -28,14 +29,14 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Supplier;
+
 
 public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
 {
 	private final ShieldType type;
+	private final String id;
 	private Supplier<Ingredient> repairItem = () -> Ingredient.of(ItemTags.PLANKS);
 	protected HeraldryItemStackRenderer renderer;
 	private final boolean paintable;
@@ -46,30 +47,33 @@ public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
     {
 		super(properties.durability(type.getDurability(material)));
 		this.type = type;
+	    this.id = id;
 		this.paintable = paintable;
 		this.maxBlockDamage = type.getMaxBlockDamage() + material.getAttackDamageBonus();
 		this.weight = type.getWeight() + material.getAttackDamageBonus();
+		
 		if (type.isRepairable())
-		{
 			this.repairItem = material::getRepairIngredient;
-		}
+		
 		if (is3d && Platform.getEnvironment() == Env.CLIENT)
-		{
-			renderer = (HeraldryItemStackRenderer) ModRender.getHeraldryItemStackRenderer(id, name, modelkey);
-		}
+			this.renderer = (HeraldryItemStackRenderer) ModRender.getHeraldryItemStackRenderer(id, name, modelkey);
     }
-	
+
+	public String getId()
+	{
+		return this.id;
+	}
+
 	@Override
-	public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag)
-    {
-    	list.add(new TextComponent(getMaxBlockDamage() + " max damage block").withStyle(ChatFormatting.BLUE));
-    	list.add(new TextComponent(getWeight() + "kg weight").withStyle(ChatFormatting.BLUE));
+	public void appendHoverText(@NotNull ItemStack stack, @javax.annotation.Nullable Level level, List<Component> list, TooltipFlag flag)
+	{
+		list.add(new TranslatableComponent("maxdamageblock", this.getMaxBlockDamage()).withStyle(ChatFormatting.BLUE));
+		list.add(new TranslatableComponent("kgweight", this.getWeight()).withStyle(ChatFormatting.BLUE));
 		if (this.getWeight() >= 10)
-		{
-			list.add(new TextComponent("Slow movement speed").withStyle(ChatFormatting.RED));
-		}
-	    BannerItem.appendHoverTextFromBannerBlockEntityTag(stack, list);
-    }
+			list.add(new TranslatableComponent("slowmovementspeed").withStyle(ChatFormatting.RED));
+		
+		BannerItem.appendHoverTextFromBannerBlockEntityTag(stack, list);
+	}
 	
 	@Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int i, boolean selected)
@@ -121,7 +125,7 @@ public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
 
 	public void onBlocked(ItemStack stack, float damage, LivingEntity victim, DamageSource source) 
 	{
-		if (ModDamageSource.isAdditional(source))
+		if (ModDamageSources.isAdditional(source))
 			return;
 		
 		Entity attacker = source.getEntity();
@@ -131,7 +135,7 @@ public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
 		{
 			f *= 1.5f;
 			float damage2 = damage - getMaxBlockDamage();
-			victim.hurt(ModDamageSource.additional(), damage2);
+			victim.hurt(ModDamageSources.additional(), damage2);
 		}
 		
 		stack.hurtAndBreak((int) (f * damage), victim, entity -> entity.broadcastBreakEvent(EquipmentSlot.MAINHAND));

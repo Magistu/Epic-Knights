@@ -13,11 +13,12 @@ import net.minecraftforge.client.IItemRenderProperties;
 
 import java.util.function.Consumer;
 
+
 public class DyeableMedievalArmorItemForge extends DyeableMedievalArmorItem implements DyeableLeatherItem
 {
-	public DyeableMedievalArmorItemForge(ArmorMaterial material, EquipmentSlot slot, Properties properties, int defaultcolor)
+	public DyeableMedievalArmorItemForge(ArmorMaterial material, EquipmentSlot type, Properties properties, int defaultcolor)
     {
-        super(material, slot, properties, defaultcolor);
+        super(material, type, properties, defaultcolor);
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.magistuarmory.item;
 
 import java.util.List;
 
-import com.magistuarmory.init.HeraldryPattern;
+import com.magistuarmory.misc.HeraldryPattern;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;

@@ -1,6 +1,0 @@
-{
-  "parent": "magistuarmory:item/iron_shortsword",
-  "textures": {
-    "layer0": "magistuarmory:item/netherite_shortsword"
-  }
-}

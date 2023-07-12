@@ -1,11 +1,9 @@
 package com.magistuarmory.fabric.event;
 
-import com.magistuarmory.KnightlyArmory;
+import com.magistuarmory.EpicKnights;
 import com.magistuarmory.client.render.entity.layer.ArmorDecorationLayer;
 import com.magistuarmory.client.render.entity.layer.HorseArmorDecorationLayer;
 import com.magistuarmory.client.render.model.Models;
-import dev.architectury.event.events.client.ClientRawInputEvent;
-import dev.architectury.platform.Platform;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
@@ -30,15 +28,15 @@ public class ClientEventsFabric
     {
         if (renderer.getModel() instanceof HumanoidModel)
         {
-            helper.register(new ArmorDecorationLayer(renderer, Models.SURCOAT, new ResourceLocation(KnightlyArmory.ID, "textures/models/armor/surcoat.png"), "surcoat"));
+            helper.register(new ArmorDecorationLayer(renderer));
         }
         else if (renderer instanceof HorseRenderer renderer0)
         {
-            helper.register(new HorseArmorDecorationLayer(renderer0, Models.CAPARISON, new ResourceLocation(KnightlyArmory.ID, "textures/entity/horse/armor/caparison.png"), "caparison"));
+            helper.register(new HorseArmorDecorationLayer(renderer0, Models.CAPARISON, new ResourceLocation(EpicKnights.ID, "textures/entity/horse/armor/caparison.png"), "caparison"));
         }
         else if (renderer instanceof PlayerRenderer renderer0)
         {
-            helper.register(new ArmorDecorationLayer(renderer0, Models.SURCOAT, new ResourceLocation(KnightlyArmory.ID, "textures/models/armor/surcoat.png"), "surcoat"));
+            helper.register(new ArmorDecorationLayer(renderer0));
         }
     }
 }

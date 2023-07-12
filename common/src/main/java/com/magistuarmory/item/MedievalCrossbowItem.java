@@ -30,9 +30,9 @@ public class MedievalCrossbowItem extends CrossbowItem implements IHasModelPrope
 	protected boolean startSoundPlayed = false;
 	protected boolean midLoadSoundPlayed = false;
 
-    public MedievalCrossbowItem(Properties properties, float projectileSpeed, int pullTime)
+    public MedievalCrossbowItem(Properties p_40660_, float projectileSpeed, int pullTime)
     {
-        super(properties);
+        super(p_40660_);
 		this.projectileSpeed = projectileSpeed;
         this.pullTime = pullTime;
     }

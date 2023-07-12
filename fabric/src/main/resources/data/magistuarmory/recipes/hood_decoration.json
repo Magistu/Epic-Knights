@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " f ",
+    "f f",
+    "fff"
+  ],
+  "key": {
+    "f": {
+      "item": "magistuarmory:woolen_fabric"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:hood_decoration",
+    "count": 1
+  }
+}

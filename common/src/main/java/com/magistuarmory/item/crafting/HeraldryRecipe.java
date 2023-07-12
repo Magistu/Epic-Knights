@@ -1,10 +1,14 @@
 package com.magistuarmory.item.crafting;
 
-import com.magistuarmory.KnightlyArmory;
+import com.magistuarmory.EpicKnights;
+import com.magistuarmory.item.ArmorDecorationItem;
 import com.magistuarmory.item.MedievalShieldItem;
 import com.magistuarmory.item.armor.ISurcoat;
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -16,111 +20,81 @@ import net.minecraft.world.level.Level;
 
 public class HeraldryRecipe extends CustomRecipe
 {
-    public HeraldryRecipe(ResourceLocation p_44296_)
+    public HeraldryRecipe(ResourceLocation location)
     {
-        super(p_44296_);
+        super(location);
     }
 
     @Override
-    public boolean matches(CraftingContainer p_44308_, Level p_44309_)
+    public boolean matches(CraftingContainer container, Level level)
     {
-        ItemStack itemstack = ItemStack.EMPTY;
-        ItemStack itemstack1 = ItemStack.EMPTY;
+        ItemStack stack = ItemStack.EMPTY;
+        ItemStack stack2 = ItemStack.EMPTY;
 
-        for(int i = 0; i < p_44308_.getContainerSize(); ++i)
+        for(int i = 0; i < container.getContainerSize(); ++i)
         {
-            ItemStack itemstack2 = p_44308_.getItem(i);
-            if (!itemstack2.isEmpty())
+            ItemStack stack3 = container.getItem(i);
+            if (!stack3.isEmpty())
             {
-                if (itemstack2.getItem() instanceof BannerItem)
+                if (stack3.getItem() instanceof BannerItem)
                 {
-                    if (!itemstack1.isEmpty())
-                    {
+                    if (!stack2.isEmpty())
                         return false;
-                    }
 
-                    itemstack1 = itemstack2;
+                    stack2 = stack3;
                 }
                 else
                 {
-                    if (!isApplicableForBanner(itemstack2.getItem()))
-                    {
+                    if (!isApplicableForBanner(stack3.getItem()))
                         return false;
-                    }
 
-                    if (!itemstack.isEmpty())
-                    {
+                    if (!stack.isEmpty())
                         return false;
-                    }
 
-                    if (itemstack2.getTagElement("BlockEntityTag") != null)
-                    {
+                    if (BlockItem.getBlockEntityData(stack3) != null)
                         return false;
-                    }
 
-                    itemstack = itemstack2;
+                    stack = stack3;
                 }
             }
         }
-        
-        return !itemstack.isEmpty() && !itemstack1.isEmpty();
+
+        return !stack.isEmpty() && !stack2.isEmpty();
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer p_44306_)
+    public ItemStack assemble(CraftingContainer container)
     {
-        ItemStack itemstack = ItemStack.EMPTY;
-        ItemStack itemstack1 = ItemStack.EMPTY;
+        ItemStack stack = ItemStack.EMPTY;
+        ItemStack stack1 = ItemStack.EMPTY;
 
-        for(int i = 0; i < p_44306_.getContainerSize(); ++i)
+        for(int i = 0; i < container.getContainerSize(); ++i)
         {
-            ItemStack itemstack2 = p_44306_.getItem(i);
-            if (!itemstack2.isEmpty())
+            ItemStack stack2 = container.getItem(i);
+            if (!stack2.isEmpty())
             {
-                if (itemstack2.getItem() instanceof BannerItem)
-                {
-                    itemstack = itemstack2;
-                }
-                else if (isApplicableForBanner(itemstack2.getItem()))
-                {
-                    itemstack1 = itemstack2.copy();
-                }
+                if (stack2.getItem() instanceof BannerItem)
+                    stack = stack2;
+                else if (isApplicableForBanner(stack2.getItem()))
+                    stack1 = stack2.copy();
             }
         }
 
-        if (!itemstack1.isEmpty())
+        if (!stack1.isEmpty())
         {
-            CompoundTag compoundtag = itemstack.getTagElement("BlockEntityTag");
+            CompoundTag compoundtag = BlockItem.getBlockEntityData(stack);
             CompoundTag compoundtag1 = compoundtag == null ? new CompoundTag() : compoundtag.copy();
-            DyeColor basecolor = ((BannerItem) itemstack.getItem()).getColor();
-            compoundtag1.putInt("Base", ((BannerItem) itemstack.getItem()).getColor().getId());
+            DyeColor basecolor = ((BannerItem) stack.getItem()).getColor();
+            compoundtag1.putInt("Base", ((BannerItem) stack.getItem()).getColor().getId());
 
-            if (wornWithSurcoat(itemstack1.getItem()))
-            {
-                if (itemstack1.getHoverName() instanceof TranslatableComponent)
-                {
-                    itemstack1.setHoverName(new TranslatableComponent(((TranslatableComponent) itemstack1.getHoverName()).getKey()).append(new TranslatableComponent("magistuarmory.withsurcoat." + basecolor.getName())));
-                }
-                else
-                {
-                    itemstack1.setHoverName(new TranslatableComponent(itemstack1.getHoverName().toString()).append(new TranslatableComponent("magistuarmory.withsurcoat." + basecolor.getName())));
-                }
-            }
-            else if (wornWithCaparison(itemstack1.getItem()))
-            {
-                if (itemstack1.getHoverName() instanceof TranslatableComponent)
-                {
-                    itemstack1.setHoverName(new TranslatableComponent(((TranslatableComponent) itemstack1.getHoverName()).getKey()).append(new TranslatableComponent("magistuarmory.withcaparison." + basecolor.getName())));
-                }
-                else
-                {
-                    itemstack1.setHoverName(new TranslatableComponent(itemstack1.getHoverName().toString()).append(new TranslatableComponent("magistuarmory.withcaparison." + basecolor.getName())));
-                }
-            }
+            if (wornWithSurcoat(stack1.getItem()))
+                stack1.setHoverName(new TranslatableComponent("magistuarmory.withsurcoat." + basecolor.getName(), stack1.getHoverName().getString()));
+            else if (wornWithCaparison(stack1.getItem()))
+                stack1.setHoverName(new TranslatableComponent("magistuarmory.withcaparison." + basecolor.getName(), stack1.getHoverName().getString()));
 
-            itemstack1.addTagElement("BlockEntityTag", compoundtag1);
+            stack1.addTagElement("BlockEntityTag", compoundtag1);
         }
-        return itemstack1;
+        return stack1;
     }
 
     @Override
@@ -153,7 +127,7 @@ public class HeraldryRecipe extends CustomRecipe
 
     static boolean wornWithSurcoat(Item item)
     {
-        return item instanceof ArmorItem && (KnightlyArmory.GENERAL_CONFIG.enableSurcoatRecipeForAllArmor || item instanceof ISurcoat) && ((ArmorItem) item).getSlot().equals(EquipmentSlot.CHEST);
+        return item instanceof ArmorItem && (EpicKnights.GENERAL_CONFIG.enableSurcoatRecipeForAllArmor || item instanceof ISurcoat) && ((ArmorItem) item).getSlot().equals(EquipmentSlot.CHEST);
     }
 
     static boolean isApplicableForBanner(Item item)

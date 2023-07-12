@@ -1,6 +1,6 @@
 package com.magistuarmory.util;
 
-import com.magistuarmory.KnightlyArmory;
+import com.magistuarmory.EpicKnights;
 import com.magistuarmory.config.MobEquipmentConfig;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -14,13 +14,12 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.level.Level;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
 public class MobEquipment
 {
-    public static final MobEquipmentConfig MOBS_EQUIPMENT_CONFIG = KnightlyArmory.CONFIG.mobEquipments;
+    public static final MobEquipmentConfig MOBS_EQUIPMENT_CONFIG = EpicKnights.CONFIG.mobEquipments;
     static Map<DualKey<EntityType<? extends LivingEntity>, ResourceKey<Level>>, List<MobEquipment>> EQUIPMENTS = new HashMap<>();
 
     public List<EntityType<? extends LivingEntity>> entities = new ArrayList<>();
@@ -41,7 +40,7 @@ public class MobEquipment
     MobEquipment(MinecraftServer server, String[] ids)
     {
         List<ResourceKey<Level>> dimensions = new ArrayList<>();
-        this.chance = KnightlyArmory.GENERAL_CONFIG.equipChance;
+        this.chance = EpicKnights.GENERAL_CONFIG.equipChance;
         
         for (String id : ids)
         {
@@ -95,7 +94,6 @@ public class MobEquipment
             if (id.matches("[-+]?[0-9]*\\.?[0-9]+"))
             {
                 this.chance = Double.parseDouble(id);
-                System.out.println("chance: " + this.chance);
                 continue;
             }
         }
@@ -115,7 +113,7 @@ public class MobEquipment
         MobEquipmentHelper.setRandomItemSlot(entity, EquipmentSlot.OFFHAND, this.shields, 0.5f * chance, rand);
     }
     
-    public static void init(MinecraftServer server)
+    public static void setup(MinecraftServer server)
     {
         for (String ids : MOBS_EQUIPMENT_CONFIG.equipments)
         {

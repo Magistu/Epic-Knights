@@ -1,5 +1,5 @@
 {
-    "parent": "bettercombat:spear",
+    "parent": "bettercombat:lance",
     "attributes": {
         "pose": "",
         "attack_range": 3.7,

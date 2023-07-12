@@ -1,7 +1,7 @@
 package com.magistuarmory.fabric.client.render.entity.layer;
 
 import com.google.common.collect.Maps;
-import com.magistuarmory.KnightlyArmory;
+import com.magistuarmory.EpicKnights;
 import com.magistuarmory.client.render.model.Models;
 import com.magistuarmory.item.armor.MedievalArmorItem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -98,7 +98,7 @@ public class MedievalArmorLayer implements ArmorRenderer
    {
       ResourceLocation materiallocation = new ResourceLocation(armor.getMaterial().getName());
       String name = materiallocation.getPath();
-      String location = new ResourceLocation(KnightlyArmory.ID, "textures/models/armor/" + name + "_layer_" + (secondLayer ? 2 : 1) + (suffix == null ? "" : "_" + suffix) + ".png").toString();
+      String location = new ResourceLocation(EpicKnights.ID, "textures/models/armor/" + name + "_layer_" + (secondLayer ? 2 : 1) + (suffix == null ? "" : "_" + suffix) + ".png").toString();
       return ARMOR_LOCATION_CACHE.computeIfAbsent(location, ResourceLocation::new);
    }
 }

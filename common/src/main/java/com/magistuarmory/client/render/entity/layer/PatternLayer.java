@@ -1,6 +1,6 @@
 package com.magistuarmory.client.render.entity.layer;
 
-import com.magistuarmory.KnightlyArmory;
+import com.magistuarmory.EpicKnights;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.datafixers.util.Pair;
@@ -20,7 +20,7 @@ import java.util.List;
 @Environment(EnvType.CLIENT)
 public interface PatternLayer
 {
-   default void renderPatterns(PoseStack pose, MultiBufferSource buffer, int p, int overlay, List<Pair<BannerPattern, DyeColor>> list, boolean hasfoil, ModelPart[] modelparts, float r, float g, float b, String dir, ResourceLocation basetexture)
+   default void renderPatterns(PoseStack pose, MultiBufferSource buffer, int p, int overlay, List<Pair<BannerPattern, DyeColor>> list, boolean hasfoil, ModelPart[] modelparts, float r, float g, float b, String dirprefix, ResourceLocation basetexture)
    {
       VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.entityCutout(basetexture), false, hasfoil);
 
@@ -32,7 +32,7 @@ public interface PatternLayer
          {
             Pair<BannerPattern, DyeColor> pair = list.get(i);
             float[] color = pair.getSecond().getTextureDiffuseColors();
-            VertexConsumer vertexconsumer2 = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.entityNoOutline(new ResourceLocation(KnightlyArmory.ID, dir + pair.getFirst().getFilename() + ".png")), false, hasfoil);
+            VertexConsumer vertexconsumer2 = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.entityNoOutline(new ResourceLocation(EpicKnights.ID, dirprefix + pair.getFirst().getFilename() + ".png")), false, hasfoil);
 
             part.render(pose, vertexconsumer2, p, overlay, color[0], color[1], color[2], 1.0F);
          }

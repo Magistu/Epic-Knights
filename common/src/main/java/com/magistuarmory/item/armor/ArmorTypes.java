@@ -1,19 +1,17 @@
 package com.magistuarmory.item.armor;
 
-import com.magistuarmory.KnightlyArmory;
+import com.magistuarmory.EpicKnights;
 import com.magistuarmory.config.ArmorConfig;
-import com.magistuarmory.item.ModItems;
 import dev.architectury.platform.Platform;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 
 public final class ArmorTypes
 {
-	public static final ArmorConfig ARMOR_CONFIG = KnightlyArmory.CONFIG.armor;
+	public static final ArmorConfig ARMOR_CONFIG = EpicKnights.CONFIG.armor;
 
 	public static final ArmorType KNIGHT = new ArmorType("knight", 1.25f, 0.5f, new int[] { 230, 315, 335, 275 }, new int[] { 2, 5, 8, 3 }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.enableKnightArmor, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
 	public static final ArmorType ARMET = new ArmorType("armet", 1.25f, 0.5f, new int[] { 230, 315, 335, 275 }, new int[] { 2, 5, 8, 3 }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.enableKnightArmor, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
@@ -39,7 +37,7 @@ public final class ArmorTypes
 
 	public static final ArmorType BRIGANDINE = new ArmorType("brigandine", 0.25f, 0.0f, new int[] { 100, 200, 265, 170 }, new int[] { 2, 3, 5, 2 }, 9, SoundEvents.ARMOR_EQUIP_LEATHER, ARMOR_CONFIG.enableBrigandineArmor, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
 
-	public static final ArmorType GAMBESON = new ArmorType("gambeson", 0.0f, 0.0f, new int[] { 100, 0, 128, 88 }, new int[] { 1, 0, 2, 1 }, 9, SoundEvents.ARMOR_EQUIP_LEATHER, ARMOR_CONFIG.enableGambesonArmor, () -> Ingredient.of(() -> Registry.ITEM.getOptional(new ResourceLocation(KnightlyArmory.ID, "woolen_fabric")).orElse(Items.BARRIER)));
+	public static final ArmorType GAMBESON = new ArmorType("gambeson", 0.0f, 0.0f, new int[] { 100, 0, 128, 88 }, new int[] { 1, 0, 2, 1 }, 9, SoundEvents.ARMOR_EQUIP_LEATHER, ARMOR_CONFIG.enableGambesonArmor, () -> Ingredient.of(() -> Registry.ITEM.getOptional(new ResourceLocation(EpicKnights.ID, "woolen_fabric")).orElse(Items.BARRIER)));
 
 	public static final ArmorType CEREMONIAL_ARMET = new ArmorType("ceremonialarmet", 1.25f, 0.0f, new int[] { 230, 315, 335, 275 }, new int[] { 2, 5, 8, 3 }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.enableCeremonialArmor, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
 	public static final ArmorType CEREMONIAL = new ArmorType("ceremonial", 1.25f, 0.0f, new int[] { 230, 315, 335, 275 }, new int[] { 2, 5, 8, 3 }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.enableCeremonialArmor, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");

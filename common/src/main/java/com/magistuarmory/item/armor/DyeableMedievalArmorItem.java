@@ -2,6 +2,7 @@ package com.magistuarmory.item.armor;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.ItemStack;
@@ -10,9 +11,9 @@ public class DyeableMedievalArmorItem extends MedievalArmorItem implements Dyeab
 {
     int defaultcolor;
 
-	public DyeableMedievalArmorItem(ArmorMaterial material, EquipmentSlot slot, Properties properties, int defaultcolor)
+	public DyeableMedievalArmorItem(ArmorMaterial material, EquipmentSlot type, Properties properties, int defaultcolor)
     {
-        super(material, slot, properties);
+        super(material, type, properties);
         this.defaultcolor = defaultcolor;
     }
 

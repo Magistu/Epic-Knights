@@ -324,10 +324,12 @@
 
 
 
-  "itemGroup.magistuarmory.armor": "Средневековые доспехи", 
-  "itemGroup.magistuarmory.weapons": "Средневековые оружия", 
+  "itemGroup.magistuarmory.armor": "Средневековые доспехи",
+  "itemGroup.magistuarmory.weapons": "Средневековые оружия",
   "itemGroup.magistuarmory.particular_weapons": "Средневековые оружия",
   "itemGroup.magistuarmory.shields": "Средневековые щиты",
+  "itemGroup.magistuarmory.rusted": "Ржавые предметы",
+  "itemGroup.magistuarmory.armor_decorations": "Декорации для брони",
 
 
 
@@ -401,22 +403,24 @@
 
 
 
-  "silvertools.hurt": "урон против нежити",
+  "silvertools.hurt": "+%1$f урон против нежити",
   "flamebladed.hurt": "Наносит незаживающие раны",
+  "halberd.hurt": "С некоторым шансом сбрасывает противника с седла",
+  "bonusattackreach": "%1$f дополнительная дальность атаки",
+  "slowmovementspeed": "Снижает скорость передвижения",
   "effect.laceration": "Рваная рана",
   "lance.rideronly": "Только для всадника",
   "lance.leftclick": "ЛКМ перед ударом чтобы спешить цель",
-  "lance.bonusdamage": "+бонусный урон, зависящий от массы и скорости",
-  "halberd.hurt": "С некоторым шансом сбрасывает противника с седла",
-  "bonusattackreach": "дальность атаки",
-  "slowmovementspeed": "Снижает скорость передвижения",
-  "armorpiercing": "пробитие брони",
+  "medieval_bag.rightclick": "ПКМ чтобы вытащить содержимое",
+  "lance.bonusdamage": "Урон зависит от массы и скорости",
+  "armorpiercing": "%1$f% пробитие брони", 
   "twohandedi": "Двуручное оружие I", 
   "twohandedii": "Двуручное оружие II", 
-  "kgweight": "кг вес", 
-  "maxdamageblock": "максимальное блокирование урона",
+  "kgweight": "%1$fкг вес", 
+  "maxdamageblock": "%1$f максимальное блокирование урона",
   "twohandedpenalty_1": "Скорость атаки и урон уменьшены из-за ",
   "twohandedpenalty_2": "использования двуручного оружия одной рукой",
+  "canbeplacedonground": "Shift+ПКМ чтобы поставить на землю",
 
 
 
@@ -428,8 +432,8 @@
   "item.magistuarmory.leather_strip": "Полоска кожи", 
   "item.magistuarmory.hilt": "Рукоять", 
   "item.magistuarmory.pole": "Шест", 
-  "item.magistuarmory.steel_chain": "Стальная цепь",
-  "item.magistuarmory.woolen_fabric": "Шерстяная ткань", 
+  "item.magistuarmory.steel_chain": "Стальная цепь", 
+  "item.magistuarmory.woolen_fabric": "Шерстяная ткань",
   "item.magistuarmory.small_steel_plate": "Маленькая стальная пластина",  
   "item.magistuarmory.lamellar_rows": "Пластинчатые ряды",
 
@@ -439,9 +443,43 @@
 
 
 
+  "item.magistuarmory.torse_and_mantle_decoration": "Бурелет с намётом",
+  "item.magistuarmory.gazelle_horns_decoration": "Рога антилопы",
+  "item.magistuarmory.duck_decoration": "Нашлемник \"Утка\"",
+  "item.magistuarmory.spike_decoration": "Декоративный шип для шлема",
+  "item.magistuarmory.horse_decoration": "Нашлемник \"Конская голова\"",
+  "item.magistuarmory.crown_decoration": "Нашлемная корона",
+  "item.magistuarmory.flowercrown_decoration": "Цветочный венец для шлема",
+  "item.magistuarmory.unicorn_decoration": "Нашлемник \"Единорог\"",
+  "item.magistuarmory.bullhorns_decoration": "Бычьи рога",
+  "item.magistuarmory.dragon_decoration": "Нашлемник \"Дракон\"",
+  "item.magistuarmory.minicrown_decoration": "Нашлемная маленькая корона",
+  "item.magistuarmory.torse_decoration": "Бурелет",
+  "item.magistuarmory.two_plumes_decoration": "Два пера",
+  "item.magistuarmory.antlers_decoration": "Оленьи рога",
+  "item.magistuarmory.plume_left_decoration": "Перо отклонённое влево",
+  "item.magistuarmory.plume_middle_decoration": "Перо стоящее прямо",
+  "item.magistuarmory.plume_right_decoration": "Перо отклонённое вправо",
+  "item.magistuarmory.bear_decoration": "Нашлемник \"Медведь\"",
+  "item.magistuarmory.lily_decoration": "Нашлемник \"Геральдическая лилия\"",
+  "item.magistuarmory.lion_decoration": "Нашлемник \"Лев\"",
+  "item.magistuarmory.demon_horns_decoration": "Рога демона",
+  "item.magistuarmory.feathers_decoration": "Плюмаж",
+  "item.magistuarmory.viking_horns_decoration": "Рога викинга",
+  "item.magistuarmory.griffin_decoration": "Нашлемник \"Грифон\"",
+  "item.magistuarmory.hood_decoration": "Капюшон надеваемый поверх доспеха",
+  "item.magistuarmory.ecranche_decoration": "Наплечный щиток",
+  "item.magistuarmory.rondel_decoration": "Рондель",
+
+
+
+  "item.magistuarmory.medieval_bag": "Мешок полный предметов",
+
+
+
   "item.magistuarmory.blacksmith_hammer": "Кузнечный молот",
-  "item.magistuarmory.barbedclub": "Дубина с шипами",
   "item.magistuarmory.pitchfork": "Вилы",
+  "item.magistuarmory.barbedclub": "Дубина с шипами",
   "item.magistuarmory.noble_sword": "Дворянский меч",
   "item.magistuarmory.rusted_bastardsword": "Ржавый полуторный меч",
   "item.magistuarmory.rusted_heavymace": "Ржавая тяжёлая булава",
@@ -455,38 +493,42 @@
 
 
 
-  "magistuarmory.withsurcoat.black": " с чёрным сюрко",
-  "magistuarmory.withsurcoat.red": " с красным сюрко",
-  "magistuarmory.withsurcoat.green": " с зелёным сюрко",
-  "magistuarmory.withsurcoat.brown": " с коричневым сюрко",
-  "magistuarmory.withsurcoat.blue": " с синим сюрко",
-  "magistuarmory.withsurcoat.purple": " с фиолетовым сюрко",
-  "magistuarmory.withsurcoat.cyan": " с бирюзовым сюрко",
-  "magistuarmory.withsurcoat.light_gray": " со светло-серым сюрко",
-  "magistuarmory.withsurcoat.gray": " с серым сюрко",
-  "magistuarmory.withsurcoat.pink": " с розовым сюрко",
-  "magistuarmory.withsurcoat.lime": " с лаймовым сюрко",
-  "magistuarmory.withsurcoat.yellow": " с жёлтым сюрко",
-  "magistuarmory.withsurcoat.light_blue": " с голубым сюрко",
-  "magistuarmory.withsurcoat.magenta": " с пурпурным сюрко",
-  "magistuarmory.withsurcoat.orange": " с оранжевым сюрко",
-  "magistuarmory.withsurcoat.white": " с белым сюрко",
-  "magistuarmory.withcaparison.black": " с чёрным чепраком",
-  "magistuarmory.withcaparison.red": " с красным чепраком",
-  "magistuarmory.withcaparison.green": " с зелёным чепраком",
-  "magistuarmory.withcaparison.brown": " с коричневым чепраком",
-  "magistuarmory.withcaparison.blue": " с синим чепраком",
-  "magistuarmory.withcaparison.purple": " с фиолетовым чепраком",
-  "magistuarmory.withcaparison.cyan": " с бирюзовым чепраком",
-  "magistuarmory.withcaparison.light_gray": " со светло-серым чепраком",
-  "magistuarmory.withcaparison.gray": " с серым чепраком",
-  "magistuarmory.withcaparison.pink": " с розовым чепраком",
-  "magistuarmory.withcaparison.lime": " с лаймовым чепраком",
-  "magistuarmory.withcaparison.yellow": " с жёлтым чепраком",
-  "magistuarmory.withcaparison.light_blue": " с голубым чепраком",
-  "magistuarmory.withcaparison.magenta": " с пурпурным чепраком",
-  "magistuarmory.withcaparison.orange": " с оранжевым чепраком",
-  "magistuarmory.withcaparison.white": " с белым чепраком",
+  "magistuarmory.withsurcoat.black": "%1$s с чёрным сюрко",
+  "magistuarmory.withsurcoat.red": "%1$s с красным сюрко",
+  "magistuarmory.withsurcoat.green": "%1$s с зелёным сюрко",
+  "magistuarmory.withsurcoat.brown": "%1$s с коричневым сюрко",
+  "magistuarmory.withsurcoat.blue": "%1$s с синим сюрко",
+  "magistuarmory.withsurcoat.purple": "%1$s с фиолетовым сюрко",
+  "magistuarmory.withsurcoat.cyan": "%1$s с бирюзовым сюрко",
+  "magistuarmory.withsurcoat.light_gray": "%1$s со светло-серым сюрко",
+  "magistuarmory.withsurcoat.gray": "%1$s с серым сюрко",
+  "magistuarmory.withsurcoat.pink": "%1$s с розовым сюрко",
+  "magistuarmory.withsurcoat.lime": "%1$s с лаймовым сюрко",
+  "magistuarmory.withsurcoat.yellow": "%1$s с жёлтым сюрко",
+  "magistuarmory.withsurcoat.light_blue": "%1$s с голубым сюрко",
+  "magistuarmory.withsurcoat.magenta": "%1$s с пурпурным сюрко",
+  "magistuarmory.withsurcoat.orange": "%1$s с оранжевым сюрко",
+  "magistuarmory.withsurcoat.white": "%1$s с белым сюрко",
+  "magistuarmory.withcaparison.black": "%1$s с чёрным чепраком",
+  "magistuarmory.withcaparison.red": "%1$s с красным чепраком",
+  "magistuarmory.withcaparison.green": "%1$s с зелёным чепраком",
+  "magistuarmory.withcaparison.brown": "%1$s с коричневым чепраком",
+  "magistuarmory.withcaparison.blue": "%1$s с синим чепраком",
+  "magistuarmory.withcaparison.purple": "%1$s с фиолетовым чепраком",
+  "magistuarmory.withcaparison.cyan": "%1$s с бирюзовым чепраком",
+  "magistuarmory.withcaparison.light_gray": "%1$s со светло-серым чепраком",
+  "magistuarmory.withcaparison.gray": "%1$s с серым чепраком",
+  "magistuarmory.withcaparison.pink": "%1$s с розовым чепраком",
+  "magistuarmory.withcaparison.lime": "%1$s с лаймовым чепраком",
+  "magistuarmory.withcaparison.yellow": "%1$s с жёлтым чепраком",
+  "magistuarmory.withcaparison.light_blue": "%1$s с голубым чепраком",
+  "magistuarmory.withcaparison.magenta": "%1$s с пурпурным чепраком",
+  "magistuarmory.withcaparison.orange": "%1$s с оранжевым чепраком",
+  "magistuarmory.withcaparison.white": "%1$s с белым чепраком",
+
+
+
+  "magistuarmory.decorated": "%1$s с декорацией",
 
 
 
@@ -539,13 +581,17 @@
 
   "death.attack.additional": "%1$s был убит %2$s",
   "death.attack.additional.item": "%1$s был убит %2$s используя %3$s",
+  "death.attack.additional.player": "%1$s был убит",
   "death.attack.entity": "%1$s был убит %2$s",
   "death.attack.entity.item": "%1$s был убит %2$s используя %3$s",
+  "death.attack.entity.player": "%1$s был убит %2$s",
   "death.attack.armorPiercing": "%1$s был убит %2$s",
   "death.attack.armorPiercing.item": "%1$s был убит %2$s используя %3$s",
+  "death.attack.armorPiercing.player": "%1$s был убит %2$s",
   "death.attack.silver": "%1$s был сожжен серебром %2$s",
-  "death.attack.silver.player": "%1$s был сожжен серебром пока сражался с %2$s",
   "death.attack.silver.item": "%1$s был сожжен серебром %2$s используя %3$s",
+  "death.attack.silver.player": "%1$s был сожжен серебром пока сражался с %2$s",
   "death.attack.entityAdditional": "%1$s был убит %2$s",
-  "death.attack.entityAdditional.item": "%1$s был убит %2$s используя %3$s"
-} 
+  "death.attack.entityAdditional.item": "%1$s был убит %2$s используя %3$s",
+  "death.attack.entityAdditional.player": "%1$s был убит %2$s"
+}

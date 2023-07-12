@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ff",
+    "i "
+  ],
+  "key": {
+    "i": {
+      "tag": "forge:ingots/steel"
+    },
+    "f": {
+      "item": "magistuarmory:woolen_fabric"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:spike_decoration",
+    "count": 1
+  }
+}

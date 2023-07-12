@@ -2,8 +2,7 @@ package com.magistuarmory.item.armor;
 
 import java.util.function.Supplier;
 
-import com.magistuarmory.KnightlyArmory;
-
+import com.magistuarmory.EpicKnights;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -22,12 +21,12 @@ public final class ArmorType implements ArmorMaterial
 	private final int enchantmentValue;
 	private final SoundEvent equipSound;
 	private final boolean enabled;
-	
+
 	private Supplier<Ingredient> repairIngredient = () -> Ingredient.EMPTY;;
 
 	ArmorType(String name, float toughness, float knockbackResistance, int[] durability, int[] defenseForSlot, int enchantmentValue, SoundEvent equipSound, boolean enabled)
 	{
-		this.name = KnightlyArmory.ID + ":" + name;
+		this.name = EpicKnights.ID + ":" + name;
 		this.toughness = toughness;
 		this.knockbackResistance = knockbackResistance;
 		this.durability = durability;
@@ -36,13 +35,13 @@ public final class ArmorType implements ArmorMaterial
 		this.equipSound = equipSound;
 		this.enabled = enabled;
 	}
-	
+
 	ArmorType(String name, float toughness, float knockbackResistance, int[] durability, int[] defenseForSlot, int enchantmentValue, SoundEvent equipSound, boolean enabled, Supplier<Ingredient> repairIngredient)
 	{
 		this(name, toughness, knockbackResistance, durability, defenseForSlot, enchantmentValue, equipSound, enabled);
 		this.repairIngredient = repairIngredient;
 	}
-	
+
 	ArmorType(String name, float toughness, float knockbackResistance, int[] durability, int[] defenseForSlot, int enchantmentValue, SoundEvent equipSound, boolean enabled, String repairitemtag)
 	{
 		this(name, toughness, knockbackResistance, durability, defenseForSlot, enchantmentValue, equipSound, enabled);
@@ -88,7 +87,7 @@ public final class ArmorType implements ArmorMaterial
 	public Ingredient getRepairIngredient() {
 		return this.repairIngredient.get();
 	}
-	
+
 	public boolean isDisabled()
 	{
 		return !this.enabled;

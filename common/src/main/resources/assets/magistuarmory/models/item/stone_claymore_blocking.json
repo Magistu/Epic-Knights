@@ -1,6 +1,0 @@
-{
-  "parent": "magistuarmory:item/iron_claymore_blocking",
-  "textures": {
-    "layer0": "magistuarmory:item/stone_claymore"
-  }
-}

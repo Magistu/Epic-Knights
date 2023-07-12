@@ -1,6 +1,6 @@
 package com.magistuarmory.item;
 
-import com.magistuarmory.KnightlyArmory;
+import com.magistuarmory.EpicKnights;
 
 public class WeaponType
 {
@@ -80,27 +80,27 @@ public class WeaponType
 
     public int getArmorPiercing()
     {
-        return !KnightlyArmory.GENERAL_CONFIG.disableArmorPiercing ? this.armorPiercing : 0;
+        return !EpicKnights.GENERAL_CONFIG.disableArmorPiercing ? this.armorPiercing : 0;
     }
 
     public float getBonusAttackReach()
     {
-        return !KnightlyArmory.GENERAL_CONFIG.disableAttackReach ? this.bonusAttackReach : 0.0f;
+        return !EpicKnights.GENERAL_CONFIG.disableAttackReach ? this.bonusAttackReach : 0.0f;
     }
 
     public int getTwoHanded()
     {
-        return !KnightlyArmory.GENERAL_CONFIG.disableTwoHanded ? this.twoHanded : 0;
+        return !EpicKnights.GENERAL_CONFIG.disableTwoHanded ? this.twoHanded : 0;
     }
 
     public float getMaxBlockDamage()
     {
-        return !KnightlyArmory.GENERAL_CONFIG.disableWeaponBlocking ? this.maxBlockDamage : 0.0f;
+        return !EpicKnights.GENERAL_CONFIG.disableWeaponBlocking ? this.maxBlockDamage : 0.0f;
     }
 
     public boolean canBlock()
     {
-        return !KnightlyArmory.GENERAL_CONFIG.disableWeaponBlocking && this.canBlock;
+        return !EpicKnights.GENERAL_CONFIG.disableWeaponBlocking && this.canBlock;
     }
 
     public boolean isFlamebladed()

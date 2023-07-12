@@ -1,14 +1,14 @@
 package com.magistuarmory.event;
 
-import com.magistuarmory.KnightlyArmory;
-import com.magistuarmory.init.ModMerchOffers;
-
+import com.magistuarmory.EpicKnights;
+import com.magistuarmory.misc.ModMerchOffers;
 import com.magistuarmory.network.PacketBetterCombatOrEpicFightInstalled;
-import com.magistuarmory.util.MobEquipment;
-import com.magistuarmory.util.MobEquipmentHelper;
-import com.magistuarmory.init.ModLoot;
+import com.magistuarmory.misc.ModLoot;
 import com.magistuarmory.item.MedievalShieldItem;
 import com.magistuarmory.item.MedievalWeaponItem;
+import com.magistuarmory.util.MobEquipment;
+import com.magistuarmory.util.MobEquipmentHelper;
+import com.magistuarmory.util.ModDamageSources;
 import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.EntityEvent;
 import dev.architectury.event.events.common.LifecycleEvent;
@@ -24,6 +24,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootTables;
 
+
 public class CommonEvents
 {
     public static void init()
@@ -31,12 +32,13 @@ public class CommonEvents
         LootEvent.MODIFY_LOOT_TABLE.register(CommonEvents::onModifyLootTable);
         LifecycleEvent.SETUP.register(CommonEvents::onSetup);
         LifecycleEvent.SERVER_STARTING.register(CommonEvents::onServerStarting);
+        LifecycleEvent.SERVER_LEVEL_LOAD.register(CommonEvents::onServerLevelLoad);
         EntityEvent.ADD.register(CommonEvents::onEntityJoinLevel);
         EntityEvent.LIVING_HURT.register(CommonEvents::onLivingHurt);
         PlayerEvent.PLAYER_JOIN.register(CommonEvents::onPlayerJoin);
     }
 
-    public static void onModifyLootTable(LootTables tables, ResourceLocation id, LootEvent.LootTableModificationContext context, boolean builtin)
+    public static void onModifyLootTable(LootTables lootmanager, ResourceLocation id, LootEvent.LootTableModificationContext context, boolean builtin)
     {
         ModLoot.modifyLootTable(id, context);
     }
@@ -48,8 +50,13 @@ public class CommonEvents
 
     public static void onServerStarting(MinecraftServer server)
     {
-        MobEquipment.init(server);
-        KnightlyArmory.checkBetterCombatOrEpicFightInstalled();
+        MobEquipment.setup(server);
+        EpicKnights.checkBetterCombatOrEpicFightInstalled();
+    }
+
+    public static void onServerLevelLoad(Level level)
+    {
+        ModDamageSources.setup(level.registryAccess());
     }
     
     public static EventResult onEntityJoinLevel(Entity entity, Level level)

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mm ",
+    "mmh"
+  ],
+  "key": {
+    "m": {
+      "item": "minecraft:gold_ingot"
+    },
+    "h": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:gold_target",
+    "count": 1
+  }
+}

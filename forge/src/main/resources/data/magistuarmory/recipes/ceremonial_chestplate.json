@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "gdg",
+    "dad",
+    "gdg"
+  ],
+  "key": {
+    "a": {
+      "item": "magistuarmory:knight_chestplate"
+    },
+    "g": {
+      "tag": "forge:nuggets/gold"
+    },
+    "d": {
+      "item": "minecraft:black_dye"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:ceremonial_chestplate",
+    "count": 1
+  }
+}

@@ -1,0 +1,52 @@
+﻿{
+  "variants": {
+    "rotation=0": {
+      "model": "magistuarmory:block/pavise"
+    },
+    "rotation=1": {
+      "model": "magistuarmory:block/pavise"
+    },
+    "rotation=2": {
+      "model": "magistuarmory:block/pavise"
+    },
+    "rotation=3": {
+      "model": "magistuarmory:block/pavise"
+    },
+    "rotation=4": {
+      "model": "magistuarmory:block/pavise"
+    },
+    "rotation=5": {
+      "model": "magistuarmory:block/pavise"
+    },
+    "rotation=6": {
+      "model": "magistuarmory:block/pavise"
+    },
+    "rotation=7": {
+      "model": "magistuarmory:block/pavise"
+    },
+    "rotation=8": {
+      "model": "magistuarmory:block/pavise"
+    },
+    "rotation=9": {
+      "model": "magistuarmory:block/pavise"
+    },
+    "rotation=10": {
+      "model": "magistuarmory:block/pavise"
+    },
+    "rotation=11": {
+      "model": "magistuarmory:block/pavise"
+    },
+    "rotation=12": {
+      "model": "magistuarmory:block/pavise"
+    },
+    "rotation=13": {
+      "model": "magistuarmory:block/pavise"
+    },
+    "rotation=14": {
+      "model": "magistuarmory:block/pavise"
+    },
+    "rotation=15": {
+      "model": "magistuarmory:block/pavise"
+    }
+  }
+}

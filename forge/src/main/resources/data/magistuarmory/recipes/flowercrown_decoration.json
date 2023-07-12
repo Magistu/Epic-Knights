@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " f ",
+    "f f",
+    " f "
+  ],
+  "key": {
+    "f": {
+      "tag": "forge:flowers"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:flowercrown_decoration",
+    "count": 1
+  }
+}

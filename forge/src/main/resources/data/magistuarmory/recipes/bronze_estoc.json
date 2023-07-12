@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " m",
+    "t "
+  ],
+  "key": {
+    "t": {
+      "item": "magistuarmory:bronze_shortsword"
+    },
+    "m": {
+      "tag": "forge:ingots/bronze"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:bronze_estoc",
+    "count": 1
+  }
+}

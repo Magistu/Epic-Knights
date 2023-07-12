@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ppp",
+    "pkp",
+    "p p"
+  ],
+  "key": {
+    "k": {
+      "item": "magistuarmory:knight_leggings"
+    },
+    "p": {
+      "tag": "forge:plates/steel"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:jousting_leggings",
+    "count": 1
+  }
+}

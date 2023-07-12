@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " h",
+    "h "
+  ],
+  "key": {
+    "h": {
+      "item": "magistuarmory:hilt"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:pole",
+    "count": 1
+  }
+}

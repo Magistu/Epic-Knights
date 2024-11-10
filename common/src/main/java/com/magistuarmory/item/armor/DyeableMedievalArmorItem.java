@@ -11,7 +11,7 @@ public class DyeableMedievalArmorItem extends MedievalArmorItem implements Dyeab
 {
     int defaultcolor;
 
-	public DyeableMedievalArmorItem(ArmorMaterial material, EquipmentSlot type, Properties properties, int defaultcolor)
+	public DyeableMedievalArmorItem(ArmorMaterial material, Type type, Properties properties, int defaultcolor)
     {
         super(material, type, properties);
         this.defaultcolor = defaultcolor;

@@ -10,7 +10,7 @@
       "tag": "c:steel_nuggets"
     },
     "c": {
-      "item": "magistuarmory:steel_chainmail"
+      "tag": "magistuarmory:chainmails/steel"
     },
     "i": {
       "tag": "c:steel_ingots"

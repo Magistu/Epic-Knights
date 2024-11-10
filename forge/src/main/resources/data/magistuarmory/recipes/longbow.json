@@ -13,7 +13,7 @@
       "tag": "forge:rods/wooden"
     },
     "h": {
-      "item": "magistuarmory:hilt"
+      "tag": "magistuarmory:hilts"
     }
   },
   "result": {

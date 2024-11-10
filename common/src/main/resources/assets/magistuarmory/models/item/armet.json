@@ -1,8 +1,16 @@
 {
 	"credit": "Made with Blockbench",
 	"parent": "item/generated",
+	"overrides": [
+		{
+			"predicate": {
+				"magistuarmory:has_plume": 1
+			},
+			"model": "magistuarmory:item/armet_with_plume"
+		}
+	],
 	"textures": {
-		"layer0": "magistuarmory:item/knight_helmet",
+		"layer0": "magistuarmory:item/empty",
 		"layer1": "magistuarmory:item/knight_helmet_overlay"
 	},
 	"display": {

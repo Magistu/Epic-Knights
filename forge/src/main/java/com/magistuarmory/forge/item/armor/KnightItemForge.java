@@ -6,26 +6,27 @@ import dev.architectury.utils.Env;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.IItemRenderProperties;
-import java.util.function.Consumer;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 
+import java.util.function.Consumer;
 
 public class KnightItemForge extends KnightItem implements DyeableLeatherItem
 {
-	public KnightItemForge(ArmorMaterial material, EquipmentSlot type, Properties properties) {
+	public KnightItemForge(ArmorMaterial material, ArmorItem.Type type, Properties properties) {
 		super(material, type, properties);
 	}
 
     @Override
-    public void initializeClient(Consumer<IItemRenderProperties> consumer)
+    public void initializeClient(Consumer<IClientItemExtensions> consumer)
     {
-        consumer.accept(new IItemRenderProperties()
+        consumer.accept(new IClientItemExtensions()
         {
             @Override
-            public HumanoidModel<?> getArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> _default)
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> _default)
             {
                 return Platform.getEnvironment() == Env.CLIENT ? KnightItemForge.this.getArmorModel(slot, _default) : null;
             }

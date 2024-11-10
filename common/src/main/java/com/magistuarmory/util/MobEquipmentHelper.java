@@ -1,28 +1,28 @@
 package com.magistuarmory.util;
 
 import com.magistuarmory.EpicKnights;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 
 import java.util.List;
-import java.util.Random;
 
 public class MobEquipmentHelper
 {
     public static void equip(LivingEntity entity)
     {
-        if (!entity.level.isClientSide() && EpicKnights.GENERAL_CONFIG.equipMonsters && (!EpicKnights.GENERAL_CONFIG.equipMonstersOnlyIfHard || entity.level.getDifficulty().equals(Difficulty.HARD)))
+        if (!entity.level().isClientSide() && EpicKnights.GENERAL_CONFIG.equipMonsters && (!EpicKnights.GENERAL_CONFIG.equipMonstersOnlyIfHard || entity.level().getDifficulty().equals(Difficulty.HARD)))
         {
-            Random rand = entity.level.getRandom();
+            RandomSource rand = entity.level().getRandom();
             List<MobEquipment> equipments = MobEquipment.get(entity);
             if (equipments.size() > 0)
                 equipments.get(rand.nextInt(equipments.size())).equip(entity, rand);
         }
     }
 
-    static void setRandomItemSlot(LivingEntity entity, EquipmentSlot slot, List<? extends Item> items, double chance, Random rand)
+    static void setRandomItemSlot(LivingEntity entity, EquipmentSlot slot, List<? extends Item> items, double chance, RandomSource rand)
     {
         if (items.size() == 0)
         {

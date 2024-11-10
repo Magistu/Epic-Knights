@@ -15,17 +15,16 @@ public class PacketLanceCollision
 {
 	public static final ResourceLocation ID = new ResourceLocation(EpicKnights.ID, "packet_lance_collision");
 
-	public static void sendToServer(int entityid, float damage, boolean dismount)
+	public static void sendToServer(int entityid, float damage)
 	{
-		NetworkManager.sendToServer(ID, PacketLanceCollision.encode(entityid, damage, dismount));
+		NetworkManager.sendToServer(ID, PacketLanceCollision.encode(entityid, damage));
 	}
 
-	static FriendlyByteBuf encode(int entityid, float speed, boolean dismount)
+	static FriendlyByteBuf encode(int entityid, float speed)
 	{
 		FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
 		buf.writeInt(entityid);
 		buf.writeFloat(speed);
-		buf.writeBoolean(dismount);
 		return buf;
 	}
 
@@ -33,20 +32,20 @@ public class PacketLanceCollision
 	{
 		if (!(context.getPlayer() instanceof ServerPlayer player))
 			return;
-		Entity victim = player.level.getEntity(buf.readInt());
+		Entity victim = player.level().getEntity(buf.readInt());
 		if (victim == null)
 			return;
 		float speed = buf.readFloat();
-		boolean dismount = buf.readBoolean();
-		context.queue(() -> execute(victim, speed, dismount, player));
+		context.queue(() -> execute(victim, speed, player));
 	}
 
-	static void execute(Entity victim, float speed, boolean dismount, ServerPlayer player)
+	static void execute(Entity victim, float speed, ServerPlayer player)
 	{
 		ItemStack stack = player.getMainHandItem();
 
 		if (stack.getItem() instanceof LanceItem lance)
 		{
+			boolean dismount = victim.level().getRandom().nextDouble() > (1.0 - lance.getClickedScale());
 			lance.setRideSpeed(stack, speed);
 			lance.setDismount(stack, dismount);
 			player.attack(victim);

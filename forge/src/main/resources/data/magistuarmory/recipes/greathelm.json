@@ -6,11 +6,11 @@
     "ici"
   ],
   "key": {
-    "c": {
-      "item": "magistuarmory:steel_chainmail"
-    },
     "i": {
       "tag": "forge:ingots/steel"
+    },
+    "c": {
+      "tag": "magistuarmory:chainmails/steel"
     }
   },
   "result": {

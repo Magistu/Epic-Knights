@@ -7,13 +7,13 @@
   ],
   "key": {
     "s": {
-      "item": "magistuarmory:leather_strip"
+      "tag": "magistuarmory:leather_strips"
     },
     "l": {
       "item": "minecraft:leather"
     },
     "r": {
-      "item": "magistuarmory:lamellar_rows"
+      "tag": "magistuarmory:lamellar_rows/steel"
     }
   },
   "result": {

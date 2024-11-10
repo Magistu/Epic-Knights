@@ -2,7 +2,6 @@ package com.magistuarmory.client.render.model.armor;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
@@ -10,7 +9,7 @@ import net.minecraft.client.model.geom.builders.*;
 public class GrandBascinetModel
 {
 	
-	public static ModelPart createModel() 
+	public static LayerDefinition createLayer() 
 	{
 	    MeshDefinition meshdefinition = new MeshDefinition();
 	    PartDefinition partdefinition = meshdefinition.getRoot();
@@ -29,7 +28,7 @@ public class GrandBascinetModel
 		partdefinition.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.ZERO);
 		partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.ZERO);
 		
-		return LayerDefinition.create(meshdefinition, 64, 32).bakeRoot();
+		return LayerDefinition.create(meshdefinition, 64, 32);
 		
 	}
 }

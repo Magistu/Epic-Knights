@@ -13,9 +13,9 @@ import net.minecraft.world.entity.LivingEntity;
 @Environment(EnvType.CLIENT)
 public class SurcoatModel<T extends LivingEntity> extends ArmorDecorationModel<T>
 {
-	public SurcoatModel(ModelPart modelpart)
+	public SurcoatModel(ModelPart root)
 	{
-		super(modelpart);
+		super(root);
 	}
 
 	public static LayerDefinition createLayer()

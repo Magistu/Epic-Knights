@@ -1,8 +1,16 @@
 {
 	"credit": "Made with Blockbench",
 	"parent": "item/generated",
+	"overrides": [
+		{
+			"predicate": {
+				"magistuarmory:has_plume": 1
+			},
+			"model": "magistuarmory:item/ceremonialarmet_with_plume"
+		}
+	],
 	"textures": {
-		"layer0": "magistuarmory:item/ceremonialarmet",
+		"layer0": "magistuarmory:item/empty",
 		"layer1": "magistuarmory:item/ceremonialarmet_overlay"
 	},
 	"display": {

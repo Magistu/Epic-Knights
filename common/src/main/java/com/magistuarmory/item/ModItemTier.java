@@ -2,6 +2,7 @@ package com.magistuarmory.item;
 
 import dev.architectury.platform.Platform;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Tier;
@@ -54,7 +55,7 @@ public class ModItemTier implements Tier
 		this.speed = speed;
 		this.attackDamageBonus = attack;
 		this.enchantmentValue = enchantment;
-		this.repairIngredient = () -> Ingredient.of(TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(repairitemtag)));
+		this.repairIngredient = () -> Ingredient.of(TagKey.create(Registries.ITEM, new ResourceLocation(repairitemtag)));
 		this.density = density;
 	}
 

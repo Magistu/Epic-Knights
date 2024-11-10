@@ -7,10 +7,10 @@
   ],
   "key": {
     "w": {
-      "item": "magistuarmory:woolen_fabric"
+      "tag": "magistuarmory:woolen_fabrics"
     },
     "s": {
-      "item": "magistuarmory:leather_strip"
+      "tag": "magistuarmory:leather_strips"
     },
     "l": {
       "item": "minecraft:leather"

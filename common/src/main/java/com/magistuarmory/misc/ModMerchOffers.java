@@ -37,20 +37,20 @@ public class ModMerchOffers
 		};
 
 		WANDERING_TRADER_TRADES = new VillagerTrades.ItemListing[] {
-			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.GAZELLE_HORNS_DECORATION.get()), 3, 0, 1),
-			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.DUCK_DECORATION.get()), 3, 0, 1),
-			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.HORSE_DECORATION.get()), 3, 0, 1),
+			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.GAZELLE_HORNS_DECORATION.get()), 5, 0, 1),
+			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.DUCK_DECORATION.get()), 5, 0, 1),
+			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.HORSE_DECORATION.get()), 5, 0, 1),
 			new SimpleTrade(new ItemStack(Items.EMERALD, 10), ItemStack.EMPTY, new ItemStack(ModItems.CROWN_DECORATION.get()), 1, 0, 1),
-			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.UNICORN_DECORATION.get()), 3, 0, 1),
-			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.BULLHORNS_DECORATION.get()), 3, 0, 1),
-			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.DRAGON_DECORATION.get()), 3, 0, 1),
-			new SimpleTrade(new ItemStack(Items.EMERALD, 8), ItemStack.EMPTY, new ItemStack(ModItems.MINICROWN.get()), 1, 0, 1),
-			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.ANTLERS_DECORATION.get()), 3, 0, 1),
-			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.BEAR_DECORATION.get()), 3, 0, 1),
-			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.LILY_DECORATION.get()), 3, 0, 1),
-			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.LION_DECORATION.get()), 3, 0, 1),
-			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.DEMON_HORNS_DECORATION.get()), 3, 0, 1),
-			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.GRIFFIN_DECORATION.get()), 3, 0, 1),
+			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.UNICORN_DECORATION.get()), 5, 0, 1),
+			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.BULLHORNS_DECORATION.get()), 5, 0, 1),
+			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.DRAGON_DECORATION.get()), 5, 0, 1),
+			new SimpleTrade(new ItemStack(Items.EMERALD, 8), ItemStack.EMPTY, new ItemStack(ModItems.MINICROWN_DECORATION.get()), 1, 0, 1),
+			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.ANTLERS_DECORATION.get()), 5, 0, 1),
+			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.BEAR_DECORATION.get()), 5, 0, 1),
+			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.LILY_DECORATION.get()), 5, 0, 1),
+			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.LION_DECORATION.get()), 5, 0, 1),
+			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.DEMON_HORNS_DECORATION.get()), 5, 0, 1),
+			new SimpleTrade(new ItemStack(Items.EMERALD), ItemStack.EMPTY, new ItemStack(ModItems.GRIFFIN_DECORATION.get()), 5, 0, 1),
 		};
 		
 		TradeRegistry.registerVillagerTrade(VillagerProfession.SHEPHERD, 1, ModMerchOffers.SHEPHERD_TRADES);

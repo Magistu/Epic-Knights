@@ -1,5 +1,6 @@
 package com.magistuarmory.client.render.entity.layer;
 
+import com.magistuarmory.client.render.model.ModModels;
 import com.magistuarmory.client.render.model.decoration.HorseArmorDecorationModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
@@ -7,6 +8,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.HorseModel;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -20,21 +22,21 @@ import net.minecraft.world.level.block.entity.BannerPattern;
 import java.util.List;
 
 @Environment(EnvType.CLIENT)
-public class HorseArmorDecorationLayer extends RenderLayer<Horse, HorseModel<Horse>> implements PatternLayer
+public class HorseArmorDecorationLayer extends RenderLayer<Horse, HorseModel<Horse>> implements ArmorPatternLayer
 {
    private static final String BASE_DIR = "textures/entity/horse/armor/";
    private final HorseArmorDecorationModel<Horse> model;
    private final ResourceLocation baseTexture;
    private final String name;
-   private final String dir;
+   private final String dirprefix;
 
-   public HorseArmorDecorationLayer(RenderLayerParent<Horse, HorseModel<Horse>> parent, HorseArmorDecorationModel<Horse> model, ResourceLocation texture, String name)
+   public HorseArmorDecorationLayer(RenderLayerParent<Horse, HorseModel<Horse>> parent, EntityRendererProvider.Context context, ResourceLocation texture, String name)
    {
       super(parent);
-      this.model = model;
-      this.baseTexture = texture;
       this.name = name;
-      this.dir = BASE_DIR + name + "/";
+      this.dirprefix = BASE_DIR + name + "/";
+      this.baseTexture = texture;
+      this.model = new HorseArmorDecorationModel<>(context.bakeLayer(ModModels.createDecorationLocation(new ResourceLocation(texture.getNamespace(), name))));
    }
 
    public void render(PoseStack pose, MultiBufferSource buffer, int p, Horse entity, float f, float f2, float f3, float f4, float f5, float f6)
@@ -48,20 +50,27 @@ public class HorseArmorDecorationLayer extends RenderLayer<Horse, HorseModel<Hor
 
          if (BlockItem.getBlockEntityData(stack) != null)
          {
-            List<Pair<BannerPattern, DyeColor>> list = BannerBlockEntity.createPatterns(ShieldItem.getColor(stack), BannerBlockEntity.getItemPatterns(stack));
+            List<Pair<Holder<BannerPattern>, DyeColor>> list = BannerBlockEntity.createPatterns(ShieldItem.getColor(stack), BannerBlockEntity.getItemPatterns(stack));
 
             this.renderPatterns(pose, buffer, p, OverlayTexture.NO_OVERLAY, list, false, this.model);
          }
       }
    }
 
+   @Override
    public ResourceLocation getBaseTexture()
    {
-      return baseTexture;
+      return this.baseTexture;
    }
 
-   public void renderPatterns(PoseStack pose, MultiBufferSource buffer, int p, int overlay, List<Pair<BannerPattern, DyeColor>> list, boolean hasfoil, HorseArmorDecorationModel<Horse> model)
+   @Override
+   public ResourceLocation getPatternTexture(ResourceLocation patternlocation)
    {
-      this.renderPatterns(pose, buffer, p, overlay, list, hasfoil, model.getParts(), 1.0f, 1.0f, 1.0f, this.dir, getBaseTexture());
+      return new ResourceLocation(this.baseTexture.getNamespace(), this.dirprefix + patternlocation.getPath() + ".png");
+   }
+
+   public void renderPatterns(PoseStack pose, MultiBufferSource buffer, int p, int overlay, List<Pair<Holder<BannerPattern>, DyeColor>> list, boolean hasfoil, HorseArmorDecorationModel<Horse> model)
+   {
+      this.renderPatterns(pose, buffer, p, overlay, list, hasfoil, model.parts(), 1.0f, 1.0f, 1.0f);
    }
 }

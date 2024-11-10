@@ -1,26 +1,26 @@
 package com.magistuarmory.item.crafting;
 
-import com.magistuarmory.item.ArmorDecorationItem;
+import com.magistuarmory.item.ArmorDecoration;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-
 public class ArmorDecorationRecipe extends CustomRecipe
 {
-    public ArmorDecorationRecipe(ResourceLocation location)
+    public static RecipeSerializer<ArmorDecorationRecipe> SERIALIZER = new SimpleCraftingRecipeSerializer<>(ArmorDecorationRecipe::new);
+    
+    public ArmorDecorationRecipe(CraftingBookCategory category)
     {
-        super(location);
+        super(category);
+        //super(location, CraftingBookCategory.MISC);
     }
 
     @Override
@@ -29,13 +29,12 @@ public class ArmorDecorationRecipe extends CustomRecipe
         ItemStack armorstack = ItemStack.EMPTY;
         ItemStack decorationstack = ItemStack.EMPTY;
         
-        for(int i = 0; i < container.getContainerSize(); ++i)
+        for(ItemStack stack : container.getItems())
         {
-            ItemStack stack = container.getItem(i);
             if (stack.isEmpty())
                 continue;
             
-            if (stack.getItem() instanceof ArmorDecorationItem)
+            if (stack.getItem() instanceof ArmorDecoration)
             {
                 if (!decorationstack.isEmpty())
                     return false;
@@ -55,29 +54,30 @@ public class ArmorDecorationRecipe extends CustomRecipe
             
             return false;
         }
-
-        return isApplicableForDecoration(armorstack, decorationstack.getItem());
+        
+        if (decorationstack.getItem() instanceof ArmorDecoration decoration)
+            return decoration.isApplicableForDecoration(armorstack);
+        return false;
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer container)
+    public ItemStack assemble(CraftingContainer container, @NotNull RegistryAccess access)
     {
         ItemStack armorstack = ItemStack.EMPTY;
         ItemStack decorationstack = ItemStack.EMPTY;
 
-        for(int i = 0; i < container.getContainerSize(); ++i)
+        for(ItemStack stack : container.getItems())
         {
-            ItemStack stack = container.getItem(i);
             if (stack.isEmpty())
                 continue;
-            if (stack.getItem() instanceof ArmorDecorationItem)
+            if (stack.getItem() instanceof ArmorDecoration)
                 decorationstack = stack;
             else if (stack.getItem() instanceof ArmorItem)
                 armorstack = stack.copy();
         }
 
-        if (!armorstack.isEmpty() && !decorationstack.isEmpty())
-            attachDecoration(armorstack, decorationstack);
+        if (!armorstack.isEmpty() && !decorationstack.isEmpty() && decorationstack.getItem() instanceof ArmorDecoration decoration)
+            decoration.decorate(armorstack, decorationstack);
         
         return armorstack;
     }
@@ -98,56 +98,5 @@ public class ArmorDecorationRecipe extends CustomRecipe
     public static RecipeSerializer<ArmorDecorationRecipe> getSerializerInstance()
     {
         throw new AssertionError();
-    }
-
-    static boolean isApplicableForDecoration(ItemStack stack, Item decorationitem)
-    {
-        return getDecorations(stack).size() < 8 && 
-                stack.getItem() instanceof ArmorItem armor && 
-                decorationitem instanceof ArmorDecorationItem decoration && 
-                decoration.getArmorType() == armor.getSlot();
-    }
-    
-    static ListTag getDecorations(ItemStack stack)
-    {
-        CompoundTag compoundtag = stack.getTagElement("ArmorDecoration");
-        if (compoundtag == null)
-            return new ListTag();
-        
-        return compoundtag.getList("Items", 10);
-    }
-
-    static void attachDecoration(ItemStack stack, ItemStack decorationstack)
-    {
-        CompoundTag compoundtag = stack.getTagElement("ArmorDecoration");
-        ListTag listtag = getDecorations(stack);
-        CompoundTag compoundtag1 = compoundtag != null ? compoundtag.copy() : new CompoundTag();
-        
-        boolean decoratedOnce = listtag.size() > 0;
-        
-        ArmorDecorationItem decorationitem = (ArmorDecorationItem) decorationstack.getItem();
-        CompoundTag decorationdata = decorationitem.getItemArmorDecorationData(decorationstack);
-        String name = decorationdata.getString("name");
-
-        boolean set = false;
-        for (int i = 0; i < listtag.size(); ++i)
-        {
-            if (listtag.getCompound(i).getString("name").equals(name))
-            {
-                listtag.set(i, decorationdata);
-                set = true;
-                break;
-            }
-        }
-        if (!set)
-        {
-            listtag.add(decorationdata);
-        }
-        
-        compoundtag1.put("Items", listtag);
-        
-        if (!decoratedOnce)
-            stack.setHoverName(new TranslatableComponent("magistuarmory.decorated", stack.getHoverName().getString()));
-        stack.addTagElement("ArmorDecoration", compoundtag1);
     }
 }

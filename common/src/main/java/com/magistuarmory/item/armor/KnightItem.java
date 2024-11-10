@@ -1,34 +1,79 @@
 package com.magistuarmory.item.armor;
 
-import com.magistuarmory.client.render.model.Models;
+import com.magistuarmory.EpicKnights;
+import com.magistuarmory.item.ArmorDecorationItem;
+import com.magistuarmory.item.IHasModelProperty;
+import com.magistuarmory.item.ModItems;
+import dev.architectury.registry.item.ItemPropertiesRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.Level;
-import org.objectweb.asm.TypeReference;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.DyeableLeatherItem;
+import net.minecraft.world.item.ItemStack;
 
-public class KnightItem extends MedievalArmorItem implements ISurcoat, DyeableLeatherItem
+import java.util.Objects;
+
+import static com.magistuarmory.item.ArmorDecorationItem.createDecorations;
+import static com.magistuarmory.item.ArmorDecorationItem.getDecorationTags;
+
+public class KnightItem extends MedievalArmorItem implements ISurcoat, DyeableLeatherItem, IHasModelProperty
 {
-	public KnightItem(ArmorMaterial material, EquipmentSlot type, Item.Properties properties) {
+	public KnightItem(ArmorMaterial material, Type type, Properties properties) {
 		super(material, type, properties);
 	}
 
-	@Environment(EnvType.CLIENT)
 	@Override
-	public HumanoidModel<? extends LivingEntity> getArmorModel(EquipmentSlot slot, HumanoidModel<? extends LivingEntity> _default)
+	public boolean hasCustomColor(ItemStack itemstack)
 	{
-		return slot == EquipmentSlot.HEAD ? Models.ARMET : super.getArmorModel(slot, _default);
+		return getColor(itemstack) != 0;
 	}
 
 	@Override
-    public int getColor(ItemStack stack)
+    public int getColor(ItemStack itemstack)
     {
-        CompoundTag compoundnbt = stack.getTagElement("display");
-        return compoundnbt != null && compoundnbt.contains("color", 99) ? compoundnbt.getInt("color") : -10092544;
+	    ArmorDecorationItem.DecorationInfo info = getPlumeDecorationInfo(itemstack);
+		return info != null ? info.color() : 0;
     }
+
+	@Override
+	public void setColor(ItemStack itemstack, int col)
+	{
+		ListTag listtag = getDecorationTags(itemstack);
+		String plumename = ModItems.BIG_PLUME_DECORATION.get().getResourceLocation().toString();
+		for (int i = 0; i < listtag.size(); ++i)
+		{
+			CompoundTag tag = listtag.getCompound(i);
+			if (Objects.equals(tag.getString("name"), plumename))
+				tag.putInt("color", col);
+		}
+	}
+
+	public boolean hasPlume(ItemStack itemstack)
+	{
+		return getPlumeDecorationInfo(itemstack) != null;
+	}
+	
+	public ArmorDecorationItem.DecorationInfo getPlumeDecorationInfo(ItemStack itemstack)
+	{
+		CompoundTag tag = itemstack.getTagElement("ArmorDecoration");
+		if (tag == null)
+			return null;
+		String plumename = ModItems.BIG_PLUME_DECORATION.get().getResourceLocation().toString();
+		for (ArmorDecorationItem.DecorationInfo info : createDecorations(getDecorationTags(itemstack)))
+		{
+			if (Objects.equals(info.name(), plumename))
+				return info;
+		}
+		return null;
+	}
+
+	@Override
+	@Environment(EnvType.CLIENT)
+	public void registerModelProperty()
+	{
+		ItemPropertiesRegistry.register(this, new ResourceLocation(EpicKnights.ID, "has_plume"), (stack, level, entity, i) -> this.hasPlume(stack) ? 1 : 0);
+	}
 }

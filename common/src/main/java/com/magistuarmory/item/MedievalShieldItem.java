@@ -1,19 +1,16 @@
 package com.magistuarmory.item;
 
 import com.magistuarmory.client.render.ModRender;
-import com.magistuarmory.client.render.model.Models;
 import com.magistuarmory.client.render.tileentity.HeraldryItemStackRenderer;
 import com.magistuarmory.util.CombatHelper;
 import com.magistuarmory.util.ModDamageSources;
 import dev.architectury.platform.Platform;
 import dev.architectury.registry.item.ItemPropertiesRegistry;
-import dev.architectury.utils.Env;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageSource;
@@ -29,6 +26,8 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -37,26 +36,30 @@ public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
 {
 	private final ShieldType type;
 	private final String id;
+	private final ResourceLocation location;
+	private final boolean is3d;
 	private Supplier<Ingredient> repairItem = () -> Ingredient.of(ItemTags.PLANKS);
 	protected HeraldryItemStackRenderer renderer;
 	private final boolean paintable;
 	private final float maxBlockDamage;
 	private final float weight;
 
-	public MedievalShieldItem(String id, String name, Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Models.ShieldEnum modelkey)
+	public MedievalShieldItem(String id, ResourceLocation location, Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type)
     {
 		super(properties.durability(type.getDurability(material)));
 		this.type = type;
 	    this.id = id;
+		this.location = location;
+		this.is3d = is3d;
 		this.paintable = paintable;
 		this.maxBlockDamage = type.getMaxBlockDamage() + material.getAttackDamageBonus();
 		this.weight = type.getWeight() + material.getAttackDamageBonus();
 		
 		if (type.isRepairable())
 			this.repairItem = material::getRepairIngredient;
-		
-		if (is3d && Platform.getEnvironment() == Env.CLIENT)
-			this.renderer = (HeraldryItemStackRenderer) ModRender.getHeraldryItemStackRenderer(id, name, modelkey);
+
+	    if (this.is3d && Platform.getEnv() == EnvType.CLIENT)
+		    this.renderer = ModRender.createHeraldryItemStackRenderer(this.id, this.location);
     }
 
 	public String getId()
@@ -65,13 +68,13 @@ public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
 	}
 
 	@Override
-	public void appendHoverText(@NotNull ItemStack stack, @javax.annotation.Nullable Level level, List<Component> list, TooltipFlag flag)
+	public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag)
 	{
-		list.add(new TranslatableComponent("maxdamageblock", this.getMaxBlockDamage()).withStyle(ChatFormatting.BLUE));
-		list.add(new TranslatableComponent("kgweight", this.getWeight()).withStyle(ChatFormatting.BLUE));
+		list.add(Component.translatable("maxdamageblock", this.getMaxBlockDamage()).withStyle(ChatFormatting.BLUE));
+		list.add(Component.translatable("kgweight", this.getWeight()).withStyle(ChatFormatting.BLUE));
 		if (this.getWeight() >= 10)
-			list.add(new TranslatableComponent("slowmovementspeed").withStyle(ChatFormatting.RED));
-		
+			list.add(Component.translatable("slowmovementspeed").withStyle(ChatFormatting.RED));
+
 		BannerItem.appendHoverTextFromBannerBlockEntityTag(stack, list);
 	}
 	
@@ -113,7 +116,13 @@ public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
 		return this.paintable;
 	}
 	
-	public HeraldryItemStackRenderer getRenderer() 
+	public void loadModel(EntityRendererProvider.Context context) 
+	{
+		if (this.is3d)
+			this.renderer.loadModel(context);
+	}
+	
+	public HeraldryItemStackRenderer getRenderer()
 	{
 		return this.renderer;
 	}
@@ -125,8 +134,16 @@ public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
 
 	public void onBlocked(ItemStack stack, float damage, LivingEntity victim, DamageSource source) 
 	{
-		if (ModDamageSources.isAdditional(source))
+		try
+		{
+			if (ModDamageSources.isAdditional(source))
+				return;
+		}
+		catch (NullPointerException e)
+		{
+			System.out.println(e.getMessage());
 			return;
+		}
 		
 		Entity attacker = source.getEntity();
 		float f = CombatHelper.getArmorPiercingFactor(attacker);
@@ -147,5 +164,10 @@ public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
 	{
 		ItemPropertiesRegistry.register(this, new ResourceLocation("blocking"), (stack, level, entity, i) ->
 				entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
+	}
+
+	public boolean is3d()
+	{
+		return this.is3d;
 	}
 }

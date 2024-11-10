@@ -10,10 +10,10 @@
       "tag": "c:cobblestones"
     },
     "p": {
-      "item": "magistuarmory:pole"
+      "tag": "magistuarmory:poles"
     },
     "h": {
-      "item": "magistuarmory:hilt"
+      "tag": "magistuarmory:hilts"
     }
   },
   "result": {

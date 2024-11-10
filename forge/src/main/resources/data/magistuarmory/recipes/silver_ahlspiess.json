@@ -10,7 +10,7 @@
       "tag": "forge:ingots/silver"
     },
     "p": {
-      "item": "magistuarmory:pole"
+      "tag": "magistuarmory:poles"
     }
   },
   "result": {

@@ -13,7 +13,7 @@
       "tag": "c:wooden_rods"
     },
     "h": {
-      "item": "magistuarmory:hilt"
+      "tag": "magistuarmory:hilts"
     }
   },
   "result": {

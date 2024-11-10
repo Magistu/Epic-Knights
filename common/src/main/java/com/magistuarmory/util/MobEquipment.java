@@ -2,11 +2,13 @@ package com.magistuarmory.util;
 
 import com.magistuarmory.EpicKnights;
 import com.magistuarmory.config.MobEquipmentConfig;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -46,7 +48,7 @@ public class MobEquipment
         {
             ResourceLocation resloc = new ResourceLocation(id);
 
-            Optional<EntityType<?>> entityoptional = Registry.ENTITY_TYPE.getOptional(resloc);
+            Optional<EntityType<?>> entityoptional = BuiltInRegistries.ENTITY_TYPE.getOptional(resloc);
             if (entityoptional.isPresent())
             {
                 try
@@ -60,12 +62,12 @@ public class MobEquipment
                 }
             }
 
-            Optional<Item> itemoptional = Registry.ITEM.getOptional(resloc);
+            Optional<Item> itemoptional = BuiltInRegistries.ITEM.getOptional(resloc);
             if (itemoptional.isPresent())
             {
                 if (itemoptional.get() instanceof ArmorItem armor)
                 {
-                    switch (armor.getSlot())
+                    switch (armor.getType().getSlot())
                     {
                         case HEAD -> this.helmets.add(armor);
                         case CHEST -> this.chestplates.add(armor);
@@ -83,7 +85,7 @@ public class MobEquipment
                 continue;
             }
 
-            ResourceKey<Level> resourcekey = ResourceKey.create(Registry.DIMENSION_REGISTRY, resloc);
+            ResourceKey<Level> resourcekey = ResourceKey.create(Registries.DIMENSION, resloc);
             ServerLevel serverlevel = server.getLevel(resourcekey);
             if (serverlevel != null)
             {
@@ -103,7 +105,7 @@ public class MobEquipment
         this.dimensions = dimensions;
     }
 
-    public void equip(LivingEntity entity, Random rand)
+    public void equip(LivingEntity entity, RandomSource rand)
     {
         MobEquipmentHelper.setRandomItemSlot(entity, EquipmentSlot.HEAD, this.helmets, this.chance, rand);
         MobEquipmentHelper.setRandomItemSlot(entity, EquipmentSlot.CHEST, this.chestplates, this.chance, rand);
@@ -128,6 +130,6 @@ public class MobEquipment
     
     public static List<MobEquipment> get(LivingEntity entity)
     {
-        return EQUIPMENTS.getOrDefault(new DualKey<>(entity.getType(), entity.level.dimension()), new ArrayList<>());
+        return EQUIPMENTS.getOrDefault(new DualKey<>(entity.getType(), entity.level().dimension()), new ArrayList<>());
     }
 }

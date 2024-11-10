@@ -16,7 +16,7 @@
       "tag": "forge:ingots/steel"
     },
     "p": {
-      "item": "magistuarmory:pole"
+      "tag": "magistuarmory:poles"
     }
   },
   "result": {

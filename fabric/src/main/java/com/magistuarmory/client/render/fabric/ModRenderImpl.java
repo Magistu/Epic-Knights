@@ -1,36 +1,68 @@
 package com.magistuarmory.client.render.fabric;
 
-import com.magistuarmory.client.render.model.Models;
+import com.magistuarmory.EpicKnights;
+import com.magistuarmory.client.render.ModRender;
+import com.magistuarmory.client.render.entity.layer.ArmorDecorationLayer;
+import com.magistuarmory.client.render.entity.layer.HorseArmorDecorationLayer;
+import com.magistuarmory.client.render.model.decoration.ArmorDecorationModelSet;
+import com.magistuarmory.client.render.tileentity.HeraldryItemStackRenderer;
 import com.magistuarmory.fabric.client.render.entity.layer.MedievalArmorLayer;
 import com.magistuarmory.fabric.client.render.tileentity.HeraldryItemStackRendererFabric;
 import com.magistuarmory.item.MedievalShieldItem;
+import com.magistuarmory.api.item.ModItemsProvider;
 import com.magistuarmory.item.ModItems;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
-import net.fabricmc.fabric.impl.client.rendering.ArmorRendererRegistryImpl;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.HorseRenderer;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 
 @Environment(EnvType.CLIENT)
 public class ModRenderImpl
 {
-	public static void setupPlatform()
+	static void addLayers(ModItemsProvider content, EntityType<? extends LivingEntity> entitytype, LivingEntityRenderer<?, ?> renderer, LivingEntityFeatureRendererRegistrationCallback.RegistrationHelper helper, EntityRendererProvider.Context context)
 	{
-		for (RegistrySupplier<? extends Item> supplier : ModItems.ARMOR_ITEMS)
-		{
-			ArmorRendererRegistryImpl.register(new MedievalArmorLayer(), supplier.get());
-		}
-		
-		for (RegistrySupplier<MedievalShieldItem> supplier : ModItems.SHIELD_ITEMS)
-		{
-			BuiltinItemRendererRegistry.INSTANCE.register(supplier.get(), (BuiltinItemRendererRegistry.DynamicItemRenderer) supplier.get().getRenderer());
-		}
+		if (content.armorDecorationItems.isEmpty())
+			return;
+		if (renderer.getModel() instanceof HumanoidModel)
+			helper.register(new ArmorDecorationLayer(new ArmorDecorationModelSet<>(content.armorDecorationItems, context), renderer, context, new ResourceLocation(EpicKnights.ID, "surcoat")));
+		else if (renderer instanceof PlayerRenderer renderer0)
+			helper.register(new ArmorDecorationLayer(new ArmorDecorationModelSet<>(content.armorDecorationItems, context), renderer0, context, new ResourceLocation(EpicKnights.ID, "surcoat")));
+		if (renderer instanceof HorseRenderer renderer0 && content instanceof ModItems)
+			helper.register(new HorseArmorDecorationLayer(renderer0, context, new ResourceLocation(content.modId, "textures/entity/horse/armor/caparison.png"), "caparison"));
+
+	}
+	
+	public static void setupPlatform(ModItemsProvider content)
+	{
+		for (RegistrySupplier<? extends Item> supplier : content.armorItems)
+			ArmorRenderer.register(new MedievalArmorLayer(), supplier.get());
+
+		for (RegistrySupplier<? extends MedievalShieldItem> supplier : content.shieldItems)
+			if (supplier.get().is3d())
+				BuiltinItemRendererRegistry.INSTANCE.register(supplier.get(), (BuiltinItemRendererRegistry.DynamicItemRenderer) supplier.get().getRenderer());
 	}
 
-	public static BlockEntityWithoutLevelRenderer getHeraldryItemStackRenderer(String id, String name, Models.ShieldEnum modelkey)
+	public static void registerModelsLoadListener(ModItemsProvider content)
 	{
-		return new HeraldryItemStackRendererFabric(id, name, Models.SHIELD_MAP.get(modelkey));
+		LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entitytype, renderer, helper, context) -> {
+			ModRender.loadModels(content, context);
+			addLayers(content, entitytype, renderer, helper, context);
+		});
+	}
+
+	public static HeraldryItemStackRenderer createHeraldryItemStackRenderer(String id, ResourceLocation location)
+	{
+		return new HeraldryItemStackRendererFabric(id, location);
 	}
 }

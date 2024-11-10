@@ -13,7 +13,7 @@
       "tag": "forge:ingots/iron"
     },
     "h": {
-      "item": "magistuarmory:hilt"
+      "tag": "magistuarmory:hilts"
     }
   },
   "result": {

@@ -2,7 +2,6 @@ package com.magistuarmory.fabric.client.render.entity.layer;
 
 import com.google.common.collect.Maps;
 import com.magistuarmory.EpicKnights;
-import com.magistuarmory.client.render.model.Models;
 import com.magistuarmory.item.armor.MedievalArmorItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -10,9 +9,14 @@ import java.util.Map;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
+import net.minecraft.client.model.HumanoidArmorModel;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
@@ -26,13 +30,16 @@ import org.jetbrains.annotations.Nullable;
 @Environment(EnvType.CLIENT)
 public class MedievalArmorLayer implements ArmorRenderer
 {
+   public static final HumanoidModel<LivingEntity> OUTER_ARMOR = new HumanoidModel<>(LayerDefinition.create(HumanoidModel.createMesh(new CubeDeformation(1.0F), 0.0F), 64, 32).bakeRoot());
+   public static final HumanoidModel<LivingEntity> INNER_ARMOR = new HumanoidModel<>(LayerDefinition.create(HumanoidModel.createMesh(new CubeDeformation(0.5F), 0.0F), 64, 32).bakeRoot());
+
    private static final Map<String, ResourceLocation> ARMOR_LOCATION_CACHE = Maps.newHashMap();
    
    @Override
    public void render(PoseStack pose, MultiBufferSource buffer, ItemStack stack, LivingEntity entity, EquipmentSlot slot, int i, HumanoidModel<LivingEntity> contextmodel)
    {
       if (stack.getItem() instanceof MedievalArmorItem armor) {
-         if (armor.getSlot() == slot)
+         if (armor.getType().getSlot() == slot)
          {
             HumanoidModel<? extends LivingEntity> model = armor.getArmorModel(slot, getVanillaArmorModel(slot));
             ((HumanoidModel)contextmodel).copyPropertiesTo(model);
@@ -87,7 +94,7 @@ public class MedievalArmorLayer implements ArmorRenderer
 
    private HumanoidModel<? extends LivingEntity> getVanillaArmorModel(EquipmentSlot slot)
    {
-      return usesInnerModel(slot) ? Models.ARMOR_LEGGINGS : Models.ARMOR;
+      return usesInnerModel(slot) ? this.INNER_ARMOR : this.OUTER_ARMOR;
    }
 
    private boolean usesInnerModel(EquipmentSlot slot) {
@@ -97,8 +104,7 @@ public class MedievalArmorLayer implements ArmorRenderer
    private ResourceLocation getArmorLocation(ArmorItem armor, boolean secondLayer, @Nullable String suffix)
    {
       ResourceLocation materiallocation = new ResourceLocation(armor.getMaterial().getName());
-      String name = materiallocation.getPath();
-      String location = new ResourceLocation(EpicKnights.ID, "textures/models/armor/" + name + "_layer_" + (secondLayer ? 2 : 1) + (suffix == null ? "" : "_" + suffix) + ".png").toString();
+      String location = new ResourceLocation(materiallocation.getNamespace(), "textures/models/armor/" + materiallocation.getPath() + "_layer_" + (secondLayer ? 2 : 1) + (suffix == null ? "" : "_" + suffix) + ".png").toString();
       return ARMOR_LOCATION_CACHE.computeIfAbsent(location, ResourceLocation::new);
    }
 }

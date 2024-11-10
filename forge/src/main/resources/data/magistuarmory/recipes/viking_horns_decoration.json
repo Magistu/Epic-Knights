@@ -1,11 +1,11 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "b b"
+    "h h"
   ],
   "key": {
-    "b": {
-      "item": "minecraft:bone"
+    "h": {
+      "item": "minecraft:goat_horn"
     }
   },
   "result": {

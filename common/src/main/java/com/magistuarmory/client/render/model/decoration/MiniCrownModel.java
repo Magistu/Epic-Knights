@@ -13,9 +13,9 @@ import net.minecraft.world.entity.LivingEntity;
 @Environment(EnvType.CLIENT)
 public class MiniCrownModel<T extends LivingEntity> extends ArmorDecorationModel<T>
 {
-	public MiniCrownModel(ModelPart modelpart)
+	public MiniCrownModel(ModelPart root)
 	{
-		super(modelpart);
+		super(root);
 	}
 
 	public static LayerDefinition createLayer()
@@ -31,10 +31,5 @@ public class MiniCrownModel<T extends LivingEntity> extends ArmorDecorationModel
 	    partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.ZERO);
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
-	}
-
-	public ModelPart[] getParts()
-	{
-		return new ModelPart[] { head };
 	}
 }

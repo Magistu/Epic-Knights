@@ -20,9 +20,11 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.storage.loot.LootTables;
+import net.minecraft.world.level.storage.loot.LootDataManager;
 
 
 public class CommonEvents
@@ -38,7 +40,7 @@ public class CommonEvents
         PlayerEvent.PLAYER_JOIN.register(CommonEvents::onPlayerJoin);
     }
 
-    public static void onModifyLootTable(LootTables lootmanager, ResourceLocation id, LootEvent.LootTableModificationContext context, boolean builtin)
+    public static void onModifyLootTable(LootDataManager lootmanager, ResourceLocation id, LootEvent.LootTableModificationContext context, boolean builtin)
     {
         ModLoot.modifyLootTable(id, context);
     }
@@ -68,7 +70,13 @@ public class CommonEvents
 
     public static EventResult onLivingHurt(LivingEntity victim, DamageSource source, float damage) 
     {
+        if (victim.level().isClientSide())
+            return EventResult.pass();
+        
         ItemStack stack = victim.getUseItem();
+        
+        if (victim.isInvulnerable() || (victim instanceof Player player && player.isCreative()))
+            return EventResult.pass();
 
         if (victim.isBlocking() && stack.getItem() instanceof MedievalShieldItem shield)
         {

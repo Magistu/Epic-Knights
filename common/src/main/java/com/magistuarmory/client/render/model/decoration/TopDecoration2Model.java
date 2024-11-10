@@ -13,9 +13,9 @@ import net.minecraft.world.entity.LivingEntity;
 @Environment(EnvType.CLIENT)
 public class TopDecoration2Model<T extends LivingEntity> extends ArmorDecorationModel<T>
 {
-	public TopDecoration2Model(ModelPart modelpart)
+	public TopDecoration2Model(ModelPart root)
 	{
-		super(modelpart);
+		super(root);
 	}
 
 	public static LayerDefinition createLayer()
@@ -33,10 +33,5 @@ public class TopDecoration2Model<T extends LivingEntity> extends ArmorDecoration
 	    partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.ZERO);
 
 		return LayerDefinition.create(meshdefinition, 128, 128);
-	}
-
-	public ModelPart[] getParts()
-	{
-		return new ModelPart[] { head };
 	}
 }

@@ -1,24 +1,24 @@
 package com.magistuarmory.forge.item;
 
-import com.magistuarmory.client.render.model.Models;
 import com.magistuarmory.item.MedievalShieldItem;
 import com.magistuarmory.item.ModItemTier;
 import com.magistuarmory.item.ShieldType;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
-import net.minecraftforge.client.IItemRenderProperties;
-import java.util.function.Consumer;
 
+import java.util.function.Consumer;
 
 public class MedievalShieldItemForge extends MedievalShieldItem
 {
-	public MedievalShieldItemForge(String id, String name, Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Models.ShieldEnum modelkey)
+	public MedievalShieldItemForge(String id, ResourceLocation location, Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type)
 	{
-		super(id, name, properties, material, paintable, is3d, type, modelkey);
+		super(id, location, properties, material, paintable, is3d, type);
 	}
 
 	@Override
@@ -29,12 +29,12 @@ public class MedievalShieldItemForge extends MedievalShieldItem
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void initializeClient(Consumer<IItemRenderProperties> consumer)
+	public void initializeClient(Consumer<IClientItemExtensions> consumer)
 	{
-		consumer.accept(new IItemRenderProperties()
+		consumer.accept(new IClientItemExtensions()
 		{
 			@Override
-			public BlockEntityWithoutLevelRenderer getItemStackRenderer()
+			public BlockEntityWithoutLevelRenderer getCustomRenderer()
 			{
 				return renderer;
 			}

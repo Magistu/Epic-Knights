@@ -10,7 +10,7 @@
       "tag": "minecraft:planks"
     },
     "h": {
-      "item": "magistuarmory:hilt"
+      "tag": "magistuarmory:hilts"
     }
   },
   "result": {

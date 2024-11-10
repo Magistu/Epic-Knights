@@ -7,10 +7,10 @@
   ],
   "key": {
     "p": {
-      "item": "magistuarmory:small_steel_plate"
+      "tag": "magistuarmory:small_plates/steel"
     },
     "s": {
-      "item": "magistuarmory:leather_strip"
+      "tag": "magistuarmory:leather_strips"
     }
   },
   "result": {

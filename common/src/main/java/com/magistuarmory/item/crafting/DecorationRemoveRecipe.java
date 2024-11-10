@@ -1,21 +1,21 @@
 package com.magistuarmory.item.crafting;
 
-import com.magistuarmory.EpicKnights;
-import com.magistuarmory.item.ArmorDecorationItem;
-import com.magistuarmory.item.DyeableArmorDecorationItem;
-import com.magistuarmory.item.MedievalBagItem;
-import com.magistuarmory.item.ModItems;
+import com.magistuarmory.item.*;
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BannerBlock;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +23,12 @@ import java.util.List;
 
 public class DecorationRemoveRecipe extends CustomRecipe
 {
-    public DecorationRemoveRecipe(ResourceLocation location)
+    public static RecipeSerializer<DecorationRemoveRecipe> SERIALIZER = new SimpleCraftingRecipeSerializer<>(DecorationRemoveRecipe::new);
+
+    public DecorationRemoveRecipe(CraftingBookCategory category)
     {
-        super(location);
+        super(category);
+        //super(location, CraftingBookCategory.MISC);
     }
 
     @Override
@@ -55,7 +58,7 @@ public class DecorationRemoveRecipe extends CustomRecipe
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer container)
+    public ItemStack assemble(CraftingContainer container, @NotNull RegistryAccess access)
     {
         ItemStack stack = ItemStack.EMPTY;
 
@@ -148,7 +151,7 @@ public class DecorationRemoveRecipe extends CustomRecipe
                 CompoundTag tag = listtag.getCompound(listtag.size() - 1);
                 String name = tag.getString("name");
                 int color = tag.getInt("color");
-                ArmorDecorationItem decoration = (ArmorDecorationItem) Registry.ITEM.get(new ResourceLocation(EpicKnights.ID, name + "_decoration"));
+                ArmorDecoration decoration = (ArmorDecoration) BuiltInRegistries.ITEM.get(new ResourceLocation(name + "_decoration"));
                 ItemStack decorationstack = new ItemStack(decoration);
                 if (decoration instanceof DyeableArmorDecorationItem dyeabedecoration)
                     dyeabedecoration.setColor(decorationstack, color);

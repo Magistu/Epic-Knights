@@ -9,7 +9,7 @@
       "tag": "forge:ingots/steel"
     },
     "f": {
-      "item": "magistuarmory:woolen_fabric"
+      "tag": "magistuarmory:woolen_fabrics"
     }
   },
   "result": {

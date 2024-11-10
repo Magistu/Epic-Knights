@@ -1,7 +1,7 @@
 package com.magistuarmory.item;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.ItemStack;
@@ -10,16 +10,15 @@ public class DyeableArmorDecorationItem extends ArmorDecorationItem implements D
 {
 	int defaultcolor;
 
-	public DyeableArmorDecorationItem(String name, Properties properties, EquipmentSlot armorType)
+	public DyeableArmorDecorationItem(ResourceLocation location, Properties properties, ArmorItem.Type armorType)
 	{
-		this(name, properties, armorType, 16777215);
-		this.name = name;
+		this(location, properties, armorType, 16777215);
 		this.armorType = armorType;
 	}
 
-	public DyeableArmorDecorationItem(String name, Properties properties, EquipmentSlot armorType, int defaultcolor)
+	public DyeableArmorDecorationItem(ResourceLocation location, Properties properties, ArmorItem.Type armorType, int defaultcolor)
 	{
-		super(name, properties, armorType);
+		super(location, properties, armorType);
 		this.defaultcolor = defaultcolor;
 	}
 	
@@ -31,10 +30,10 @@ public class DyeableArmorDecorationItem extends ArmorDecorationItem implements D
 	}
 
 	@Override
-	public CompoundTag getItemArmorDecorationData(ItemStack stack) {
+	public CompoundTag getCompoundTag(ItemStack stack) {
 		CompoundTag compoundnbt = new CompoundTag();
 
-		compoundnbt.putString("name", this.name);
+		compoundnbt.putString("name", this.location.toString());
 		compoundnbt.putBoolean("dyeable", true);
 		compoundnbt.putInt("color", this.getColor(stack));
 		

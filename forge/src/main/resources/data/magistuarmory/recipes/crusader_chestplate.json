@@ -10,7 +10,7 @@
       "item": "magistuarmory:platemail_chestplate"
     },
     "w": {
-      "item": "magistuarmory:woolen_fabric"
+      "tag": "magistuarmory:woolen_fabrics"
     }
   },
   "result": {

@@ -13,9 +13,9 @@ import net.minecraft.world.entity.LivingEntity;
 @Environment(EnvType.CLIENT)
 public class TorseModel<T extends LivingEntity> extends ArmorDecorationModel<T>
 {
-	public TorseModel(ModelPart modelpart)
+	public TorseModel(ModelPart root)
 	{
-		super(modelpart);
+		super(root);
 	}
 
 	public static LayerDefinition createLayer()
@@ -33,10 +33,5 @@ public class TorseModel<T extends LivingEntity> extends ArmorDecorationModel<T>
 		partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.ZERO);
 		
 		return LayerDefinition.create(meshdefinition, 128, 64);
-	}
-
-	public ModelPart[] getParts()
-	{
-		return new ModelPart[] { this.head };
 	}
 }

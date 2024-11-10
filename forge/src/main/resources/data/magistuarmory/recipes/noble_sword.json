@@ -1,19 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "nt",
-    "nn"
-  ],
-  "key": {
-    "t": {
-      "item": "magistuarmory:iron_bastardsword"
-    },
-    "n": {
-      "tag": "forge:nuggets/gold"
-    }
+  "type": "minecraft:smithing_transform",
+  "base": {
+    "item": "magistuarmory:iron_bastardsword"
+  },
+  "addition": {
+    "tag": "forge:ingots/gold"
   },
   "result": {
     "item": "magistuarmory:noble_sword",
     "count": 1
+  },
+  "template": {
+    "item": "magistuarmory:gilding_template"
   }
 }

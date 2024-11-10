@@ -33,7 +33,7 @@ public class PacketLongReachAttack
 	{
 		if (!(context.getPlayer() instanceof ServerPlayer player))
 			return;
-		Entity victim = player.level.getEntity(buf.readInt());
+		Entity victim = player.level().getEntity(buf.readInt());
 		if (victim == null)
 			return;
 		context.queue(() -> execute(victim, player));

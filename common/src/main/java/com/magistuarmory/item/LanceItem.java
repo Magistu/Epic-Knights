@@ -5,16 +5,19 @@ import com.magistuarmory.client.ClientHelper;
 import com.magistuarmory.network.PacketLanceCollision;
 import com.magistuarmory.util.CombatHelper;
 import com.magistuarmory.util.ModDamageSources;
+import dev.architectury.platform.Platform;
 import dev.architectury.registry.item.ItemPropertiesRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -27,40 +30,56 @@ import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import javax.annotation.Nullable;
+import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class LanceItem extends MedievalWeaponItem
 {
+	private final ModItemTier material;
 	private List<ItemStack> dropItems = new ArrayList<>();
 	protected int clickedticks = 0;
+	static int CLICKED_TICKS_COOLDOWN = 5;
 
 	public LanceItem(Properties properties, ModItemTier material, WeaponType type)
 	{
 		super(properties, material, type);
-		this.setDropItems(material);
+		this.material = material;
 	}
 
-	public LanceItem setDropItems(ModItemTier material)
+	public void resetClickedTicks()
+	{
+		this.clickedticks = CLICKED_TICKS_COOLDOWN;
+	}
+
+	public float getClickedScale()
+	{
+		return Mth.clamp((float) this.clickedticks / CLICKED_TICKS_COOLDOWN, 0.0F, 1.0F);
+	}
+
+	public void setupDropItems()
 	{
 		this.dropItems.add(new ItemStack(Items.STICK, 2));
-		ItemStack[] repairItems = material.getRepairIngredient().getItems();
-		if (repairItems.length > 0)
-			this.dropItems.add(repairItems[0]);
-		return this;
-	}
-
-	public LanceItem setDropItems(List<ItemStack> stacks)
-	{
-		this.dropItems = stacks;
-		return this;
+		String materialname = this.material.getMaterialName();
+		switch (materialname)
+		{
+			case "iron" -> this.dropItems.add(new ItemStack(Items.IRON_INGOT));
+			case "gold" -> this.dropItems.add(new ItemStack(Items.GOLD_INGOT));
+			case "diamond" -> this.dropItems.add(new ItemStack(Items.DIAMOND));
+			case "netherite" ->
+			{
+				this.dropItems.add(new ItemStack(Items.NETHERITE_INGOT));
+				this.dropItems.add(new ItemStack(Items.DIAMOND));
+			}
+			case "steel" -> this.dropItems.add(new ItemStack(ModItems.STEEL_INGOT.get()));
+		}
 	}
 
 	@Override
@@ -77,7 +96,7 @@ public class LanceItem extends MedievalWeaponItem
 			return super.onAttackClickEntity(stack, player, entity);
 
 		if (player.isPassenger() && !this.isRaised(player) && !player.getCooldowns().isOnCooldown(this))
-			this.clickedticks = 15;
+			this.resetClickedTicks();
 		player.swing(InteractionHand.MAIN_HAND);
 
 		return false;
@@ -96,10 +115,7 @@ public class LanceItem extends MedievalWeaponItem
 					speed >= ((Horse)player.getRootVehicle()).getAttribute(Attributes.MOVEMENT_SPEED).getValue())
 					|| (!(player.getRootVehicle() instanceof Horse) && speed >= 0.233))
 			{
-				float attackreach = CombatHelper.getAttackReach(player, this);
-				Vec3 vec = player.getViewVector(1.0f);
-				boolean dismount = level.getRandom().nextDouble() * (this.clickedticks / 15.0 * 0.5 + 0.5) > 0.45;
-				PacketLanceCollision.sendToServer(victim.getId(), speed, dismount);
+				PacketLanceCollision.sendToServer(victim.getId(), speed);
 				player.resetAttackStrengthTicker();
 			}
 		}
@@ -111,7 +127,7 @@ public class LanceItem extends MedievalWeaponItem
 		if (EpicKnights.GENERAL_CONFIG.disableLanceCollision)
 			return super.onHurtEntity(source, victim, damage);
 
-		if (victim.level.isClientSide() || ModDamageSources.isAdditional(source) || !(source.getEntity() instanceof LivingEntity attacker))
+		if (victim.level().isClientSide() || ModDamageSources.isAdditional(source) || !(source.getEntity() instanceof LivingEntity attacker))
 			return true;
 
 		float speed = 0.0f;
@@ -138,8 +154,12 @@ public class LanceItem extends MedievalWeaponItem
 
 			if (stack.getDamageValue() >= stack.getMaxDamage() - 1)
 				this.onBroken(player);
-			else if (!player.isCreative() && (victim.getArmorValue() >= 18 || victim.isBlocking()))
-				stack.setDamageValue(stack.getDamageValue() + (int) ((0.6 + bonusdamage / 20) * victim.level.getRandom().nextDouble() * stack.getMaxDamage()));
+			else if (!player.isCreative()) {
+				if (victim.getArmorValue() >= 9 * (this.material.getLevel() + 1) || victim.isBlocking())
+					stack.setDamageValue(stack.getDamageValue() + (int) ((0.6 + bonusdamage / 20) * victim.level().getRandom().nextDouble() * stack.getMaxDamage()));
+				else
+					stack.setDamageValue(stack.getDamageValue() + 1);
+			}
 
 			for (ItemStack stack0 : player.getInventory().items)
 			{
@@ -232,9 +252,9 @@ public class LanceItem extends MedievalWeaponItem
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag)
 	{
-		tooltip.add(new TranslatableComponent("lance.rideronly").withStyle(ChatFormatting.BLUE));
-		tooltip.add(new TranslatableComponent("lance.leftclick").withStyle(ChatFormatting.BLUE));
-		tooltip.add(new TranslatableComponent("lance.bonusdamage").withStyle(ChatFormatting.BLUE));
+		tooltip.add(Component.translatable("lance.rideronly").withStyle(ChatFormatting.BLUE));
+		tooltip.add(Component.translatable("lance.leftclick").withStyle(ChatFormatting.BLUE));
+		tooltip.add(Component.translatable("lance.bonusdamage").withStyle(ChatFormatting.BLUE));
 
 		super.appendHoverText(stack, level, tooltip, flag);
 	}

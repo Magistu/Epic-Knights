@@ -1,1 +1,1 @@
-﻿{"sources": [{"type": "directory", "source": "entity/banner", "prefix": "entity/banner/"}]}
+﻿{"sources": [{"type": "directory", "source": "entity/banner", "prefix": "entity/banner/"}, {"type": "directory", "source": "entity/banner", "prefix": "entity/banner/"}]}

@@ -10,10 +10,9 @@ import net.minecraft.world.entity.animal.horse.AbstractHorse;
 @Environment(EnvType.CLIENT)
 public class CaparisonModel<T extends AbstractHorse> extends HorseArmorDecorationModel<T>
 {
-
-    public CaparisonModel(ModelPart modelpart)
+    public CaparisonModel(ModelPart root)
     {
-        super(modelpart);
+        super(root);
     }
 
     public static LayerDefinition createLayer()
@@ -42,10 +41,4 @@ public class CaparisonModel<T extends AbstractHorse> extends HorseArmorDecoratio
 
         return LayerDefinition.create(meshdefinition, 64, 64);
 	}
-
-    @Override
-    public ModelPart[] getParts()
-    {
-        return new ModelPart[] { body };
-    }
 }

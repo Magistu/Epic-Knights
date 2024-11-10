@@ -13,9 +13,9 @@ import net.minecraft.world.entity.LivingEntity;
 @Environment(EnvType.CLIENT)
 public class HoodModel<T extends LivingEntity> extends ArmorDecorationModel<T>
 {
-	public HoodModel(ModelPart modelpart)
+	public HoodModel(ModelPart root)
 	{
-		super(modelpart);
+		super(root);
 	}
 
 	public static LayerDefinition createLayer()
@@ -31,10 +31,5 @@ public class HoodModel<T extends LivingEntity> extends ArmorDecorationModel<T>
 	    partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.ZERO);
 		
 		return LayerDefinition.create(meshdefinition, 32, 64);
-	}
-
-	public ModelPart[] getParts()
-	{
-		return new ModelPart[] { body, leftArm, rightArm };
 	}
 }

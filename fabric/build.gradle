@@ -1,8 +1,12 @@
 plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
-    id "me.shedaniel.unified-publishing"
     id "com.matthewprenger.cursegradle"
-    id "com.modrinth.minotaur"
+}
+
+version = rootProject.mod_version
+
+loom {
+    accessWidenerPath = project(":common").loom.accessWidenerPath
 }
 
 architectury {
@@ -18,17 +22,10 @@ configurations {
     developmentFabric.extendsFrom common
 }
 
-repositories {
-    maven { url 'https://maven.shedaniel.me' }
-    maven { url 'https://maven.minecraftforge.net/' }
-    maven { url 'https://jitpack.io' }
-    maven { url "https://maven.terraformersmc.com/releases/" }
-}
-
-
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}+${rootProject.minecraft_version}"
+    modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+    // Remove the next line if you don't want to depend on the API
     modApi "dev.architectury:architectury-fabric:${rootProject.architectury_version}"
 
     modApi("me.shedaniel.cloth:cloth-config-fabric:${rootProject.cloth_config_version}") {
@@ -41,36 +38,35 @@ dependencies {
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
-    
-    modImplementation("com.github.Chocohead:Fabric-ASM:v${rootProject.fabric_asm_version}") {
-        exclude (group: "net.fabricmc.fabric-api")
-    }
-    include("com.github.Chocohead:Fabric-ASM:v${rootProject.fabric_asm_version}")
 }
 
 processResources {
     inputs.property "version", project.version
+    inputs.property "mc_version", project.minecraft_version
+    inputs.property "loader_version", project.fabric_loader_version
 
     filesMatching("fabric.mod.json") {
-        expand "version": project.version
+        expand "version": project.version,
+                "mc_version": project.minecraft_version,
+                "loader_version": project.fabric_loader_version
     }
 }
 
 shadowJar {
     exclude "architectury.common.json"
-
+    
     configurations = [project.configurations.shadowCommon]
-    classifier "dev-shadow"
+    archiveClassifier.set("dev-shadow")
 }
 
 remapJar {
-    input.set shadowJar.archiveFile
+    inputFile.set shadowJar.archiveFile
     dependsOn shadowJar
-    classifier null
+    archiveClassifier.set(null)
 }
 
 jar {
-    classifier "dev"
+    archiveClassifier.set("dev")
 }
 
 sourcesJar {
@@ -79,8 +75,19 @@ sourcesJar {
     from commonSources.archiveFile.map { zipTree(it) }
 }
 
+//task copy(type: Copy) {
+//    from "${project.buildDir}/libs"
+//    into "${rootProject.buildDir}/libs"
+//    dependsOn remapJar
+//}
+//
+//build.finalizedBy(copy)
+
 components.java {
     withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
         skip()
     }
 }
+
+rootProject.tasks.getByName("curseforge").dependsOn tasks.getByName("curseforge")
+

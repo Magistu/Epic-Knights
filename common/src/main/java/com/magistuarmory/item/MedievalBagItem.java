@@ -4,7 +4,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -48,7 +47,7 @@ public class MedievalBagItem extends Item
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag tooltipflag)
 	{
-		list.add(new TranslatableComponent("medieval_bag.rightclick").withStyle(ChatFormatting.BLUE));
+		list.add(Component.translatable("medieval_bag.rightclick").withStyle(ChatFormatting.BLUE));
 	}
 		
 	public static void setContents(ItemStack bagstack, List<ItemStack> stacks)

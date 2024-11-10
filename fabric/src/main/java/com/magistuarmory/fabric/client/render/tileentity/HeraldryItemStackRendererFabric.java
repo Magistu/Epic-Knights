@@ -5,21 +5,22 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
-import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
 @Environment(EnvType.CLIENT)
 public class HeraldryItemStackRendererFabric extends HeraldryItemStackRenderer implements BuiltinItemRendererRegistry.DynamicItemRenderer
 {
-	public HeraldryItemStackRendererFabric(String id, String name, Model model)
+	public HeraldryItemStackRendererFabric(String id, ResourceLocation location)
 	{
-		super(id, name, model);
+		super(id, location);
 	}
 
 	@Override
-	public void render(ItemStack stack, ItemTransforms.TransformType mode, PoseStack matrices, MultiBufferSource vertexConsumers, int p, int overlay)
+	public void render(ItemStack stack, ItemDisplayContext mode, PoseStack matrices, MultiBufferSource vertexConsumers, int p, int overlay)
 	{
 		super.renderByItem(stack, mode, matrices, vertexConsumers, p, overlay);
 	}

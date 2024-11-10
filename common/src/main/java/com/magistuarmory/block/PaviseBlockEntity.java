@@ -3,9 +3,10 @@ package com.magistuarmory.block;
 import com.google.common.collect.Lists;
 import com.magistuarmory.EpicKnights;
 import com.mojang.datafixers.util.Pair;
+import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -16,7 +17,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
-import javax.annotation.Nullable;
 import java.util.List;
 
 
@@ -30,7 +30,7 @@ public class PaviseBlockEntity extends BlockEntity
     private boolean enchanted = false;
     private CompoundTag stackCompound;
     @Nullable
-    private List<Pair<BannerPattern, DyeColor>> patterns;
+    private List<Pair<Holder<BannerPattern>, DyeColor>> patterns;
 
     public PaviseBlockEntity(BlockPos blockpos, BlockState blockstate)
     {
@@ -114,7 +114,7 @@ public class PaviseBlockEntity extends BlockEntity
         return compound != null && compound.contains("Patterns") ? compound.getList("Patterns", 10).size() : 0;
     }
 
-    public List<Pair<BannerPattern, DyeColor>> getPatterns()
+    public List<Pair<Holder<BannerPattern>, DyeColor>> getPatterns()
     {
         if (this.patterns == null)
             this.patterns = createPatterns(this.baseColor, this.itemPatterns);
@@ -122,17 +122,17 @@ public class PaviseBlockEntity extends BlockEntity
         return this.patterns;
     }
 
-    public static List<Pair<BannerPattern, DyeColor>> createPatterns(DyeColor color, @Nullable ListTag listtag)
+    public static List<Pair<Holder<BannerPattern>, DyeColor>> createPatterns(DyeColor color, @Nullable ListTag listtag)
     {
-        List<Pair<BannerPattern, DyeColor>> list = Lists.newArrayList();
-        list.add(Pair.of(BannerPattern.BASE, color));
+        List<Pair<Holder<BannerPattern>, DyeColor>> list = Lists.newArrayList();
+        list.add(Pair.of(BuiltInRegistries.BANNER_PATTERN.getHolderOrThrow(BannerPatterns.BASE), color));
         if (listtag == null)
             return list;
         
         for(int i = 0; i < listtag.size(); ++i)
         {
             CompoundTag compound = listtag.getCompound(i);
-            BannerPattern holder = BannerPattern.byHash(compound.getString("Pattern"));
+            Holder<BannerPattern> holder = BannerPattern.byHash(compound.getString("Pattern"));
             if (holder != null)
             {
                 int j = compound.getInt("Color");
@@ -162,7 +162,7 @@ public class PaviseBlockEntity extends BlockEntity
 
     public ItemStack getItem()
     {
-        ItemStack stack = new ItemStack(Registry.ITEM.get(new ResourceLocation(EpicKnights.ID, this.shieldId)));
+        ItemStack stack = new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation(EpicKnights.ID, this.shieldId)));
         stack.setTag(this.stackCompound.copy());
         return stack;
     }

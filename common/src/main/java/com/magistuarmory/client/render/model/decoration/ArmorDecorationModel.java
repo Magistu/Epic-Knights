@@ -7,12 +7,18 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.LivingEntity;
 
 @Environment(EnvType.CLIENT)
-public abstract class ArmorDecorationModel<T extends LivingEntity> extends HumanoidModel<T>
+public class ArmorDecorationModel<T extends LivingEntity> extends HumanoidModel<T>
 {
-    public ArmorDecorationModel(ModelPart modelpart)
+    ModelPart[] parts;
+    
+    public ArmorDecorationModel(ModelPart root)
     {
-        super(modelpart);
+        super(root);
+        this.parts = new ModelPart[] { this.head, this.body, this.rightArm, this.leftArm };
     }
 
-    public abstract ModelPart[] getParts();
+    public ModelPart[] parts()
+    {
+        return this.parts;
+    }
 }

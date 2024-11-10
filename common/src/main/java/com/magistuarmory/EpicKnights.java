@@ -1,12 +1,14 @@
 package com.magistuarmory;
 
 import com.magistuarmory.block.ModBlocks;
+import com.magistuarmory.client.render.model.ModModels;
 import com.magistuarmory.config.GeneralConfig;
 import com.magistuarmory.config.ModConfig;
 import com.magistuarmory.effects.ModEffects;
 import com.magistuarmory.block.ModBlockEntityTypes;
 import com.magistuarmory.event.ClientEvents;
 import com.magistuarmory.event.CommonEvents;
+import com.magistuarmory.misc.ModBannerPatterns;
 import com.magistuarmory.misc.ModCreativeTabs;
 import com.magistuarmory.item.ModItems;
 import com.magistuarmory.item.crafting.ModRecipes;
@@ -25,22 +27,30 @@ public class EpicKnights
     public static ModConfig CONFIG;
     public static GeneralConfig GENERAL_CONFIG;
     
-    public static void init()
+    static
     {
         AutoConfig.register(ModConfig.class, PartitioningSerializer.wrap(JanksonConfigSerializer::new));
         CONFIG = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
         GENERAL_CONFIG = CONFIG.general;
-
-        ModItems.init();
-        ModCreativeTabs.init();
+    }
+    
+    public static void init()
+    {
         ModEffects.init();
         ModPackets.init();
         ModRecipes.init();
+        ModBannerPatterns.init();
         ModBlocks.init();
         ModBlockEntityTypes.init();
         CommonEvents.init();
         if (Platform.getEnv() == EnvType.CLIENT)
+        {
             ClientEvents.init();
+            ModModels.INSTANCE.init(ModItems.INSTANCE);
+        }
+        
+        ModItems.INSTANCE.init();
+        ModCreativeTabs.init();
     }
     
     public static void checkBetterCombatOrEpicFightInstalled()

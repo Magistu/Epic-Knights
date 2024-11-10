@@ -1,13 +1,10 @@
 package com.magistuarmory.client.render.model.item;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
 
 // Made with Blockbench 4.1.5
 // Exported for Minecraft version 1.17 with Mojang mappings
@@ -16,17 +13,9 @@ import net.minecraft.client.renderer.RenderType;
 @Environment(EnvType.CLIENT)
 public class KiteShieldModel extends MedievalShieldModel
 {
-	private final ModelPart root;
-	private final ModelPart plate;
-	private final ModelPart handle;
-
-	public KiteShieldModel(ModelPart part)
+	public KiteShieldModel(ModelPart root)
 	{
-		super(RenderType::entityCutout);
-		this.root = part;
-		this.plate = part.getChild("plate");
-		this.handle = part.getChild("handle");
-
+		super(root);
 	}
 	
 	public static LayerDefinition createLayer() 
@@ -39,20 +28,5 @@ public class KiteShieldModel extends MedievalShieldModel
 		partdefinition.addOrReplaceChild("handle", CubeListBuilder.create().texOffs(48, 52).addBox(-1.0F, -3.0F, -1.0F, 2.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
-	}
-	
-	public ModelPart plate() 
-	{
-		return this.plate;
-	}
-
-	public ModelPart handle() 
-	{
-		return this.handle;
-	}
-
-	public void renderToBuffer(PoseStack pose, VertexConsumer vertexconsumer, int i, int j, float f, float g, float h, float k)
-	{
-		this.root.render(pose, vertexconsumer, i, j, f, g, h, k);
 	}
 }

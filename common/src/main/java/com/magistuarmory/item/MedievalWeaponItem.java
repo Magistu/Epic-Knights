@@ -5,21 +5,23 @@ import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 import com.magistuarmory.EpicKnights;
 import com.magistuarmory.effects.LacerationEffect;
-import com.magistuarmory.util.CombatHelper;
 import com.magistuarmory.network.PacketLongReachAttack;
+import com.magistuarmory.util.CombatHelper;
 import com.magistuarmory.util.ModDamageSources;
+import dev.architectury.platform.Platform;
 import dev.architectury.registry.item.ItemPropertiesRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.CombatRules;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -32,9 +34,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import javax.annotation.Nullable;
+import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import java.util.List;
-import java.util.Random;
 
 
 public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
@@ -65,16 +66,25 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 			this.isSilver = true;
 			this.silverAttackDamage = CombatHelper.getSilverAttackDamage(material, type);
 		}
-		
+
+		this.defaultModifiers = this.getDefaultAttributeModifiersBuilder().build();
+		this.decreasedModifiers = this.getDecreasedAttributeModifiersBuilder().build();
+	}
+	
+	public Builder<Attribute, AttributeModifier> getDefaultAttributeModifiersBuilder() 
+	{
 		Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", this.attackDamage, Operation.ADDITION));
 		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", this.attackSpeed, Operation.ADDITION));
-		this.defaultModifiers = builder.build();
+		return builder;
+	}
 
-		Builder<Attribute, AttributeModifier> builder2 = ImmutableMultimap.builder();
-		builder2.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", this.decreasedAttackDamage, Operation.ADDITION));
-		builder2.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", this.decreasedAttackSpeed, Operation.ADDITION));
-		this.decreasedModifiers = builder2.build();
+	public Builder<Attribute, AttributeModifier> getDecreasedAttributeModifiersBuilder()
+	{
+		Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", this.decreasedAttackDamage, Operation.ADDITION));
+		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", this.decreasedAttackSpeed, Operation.ADDITION));
+		return builder;
 	}
 
 	public boolean onAttackClickEntity(ItemStack stack, Player player, Entity entity)
@@ -123,20 +133,23 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 
 	public boolean onHurtEntity(DamageSource source, LivingEntity victim, float damage)
 	{
-		if (victim.level.isClientSide() || ModDamageSources.isAdditional(source) || !(source.getEntity() instanceof LivingEntity attacker))
+		if (victim.level().isClientSide() || ModDamageSources.isAdditional(source) || !(source.getEntity() instanceof LivingEntity attacker))
 			return true;
 		
-		if (type.isFlamebladed())
-			LacerationEffect.apply(victim, damage);
+		float attackscale = source.getEntity() instanceof LivingEntity livingentity ? damage / this.getAttackDamage(livingentity.getMainHandItem()) : 1.0f;
 		
-		if (type.isHalberd() && victim.isPassenger() && victim.level.getRandom().nextInt(20) >= 14)
+		if (type.isHalberd() && victim.isPassenger() && victim.level().getRandom().nextInt(20) * attackscale >= 14)
 			victim.stopRiding();
 		
 		boolean flag = false;
 		if (this.isSilver())
-			flag = this.dealSilverDamage(attacker, victim, damage);
+			flag = this.dealSilverDamage(source, attacker, victim, damage, attackscale);
 		if (!flag && this.type.getArmorPiercing() != 0 && victim.getArmorValue() > 0)
-			flag = this.dealArmorPiercingDamage(attacker, victim, damage);
+			flag = this.dealArmorPiercingDamage(source, attacker, victim, damage);
+
+		if (type.isFlamebladed())
+			LacerationEffect.apply(source, victim, damage * attackscale);
+
 		return flag;
 	}
 
@@ -144,26 +157,26 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag)
 	{
 		if (this.isSilver)
-			tooltip.add(new TranslatableComponent("silvertools.hurt", this.silverAttackDamage).withStyle(ChatFormatting.GREEN));
+			tooltip.add(Component.translatable("silvertools.hurt", this.silverAttackDamage).withStyle(ChatFormatting.GREEN));
 		if (type.isFlamebladed())
-			tooltip.add(new TranslatableComponent("flamebladed.hurt").withStyle(ChatFormatting.BLUE));
+			tooltip.add(Component.translatable("flamebladed.hurt").withStyle(ChatFormatting.BLUE));
 		if (type.isHalberd())
-			tooltip.add(new TranslatableComponent("halberd.hurt").withStyle(ChatFormatting.BLUE));
+			tooltip.add(Component.translatable("halberd.hurt").withStyle(ChatFormatting.BLUE));
 		if (type.getArmorPiercing() != 0)
-			tooltip.add(new TranslatableComponent("armorpiercing", this.type.getArmorPiercing()).withStyle(ChatFormatting.BLUE));
+			tooltip.add(Component.translatable("armorpiercing", this.type.getArmorPiercing()).withStyle(ChatFormatting.BLUE));
 		if (this.isLong())
-			tooltip.add(new TranslatableComponent("bonusattackreach", this.type.getBonusAttackReach()).withStyle(ChatFormatting.BLUE));
+			tooltip.add(Component.translatable("bonusattackreach", this.type.getBonusAttackReach()).withStyle(ChatFormatting.BLUE));
 		if (type.getTwoHanded() == 1)
-			tooltip.add(new TranslatableComponent("twohandedi").withStyle(ChatFormatting.BLUE));
+			tooltip.add(Component.translatable("twohandedi").withStyle(ChatFormatting.BLUE));
 		else if (type.getTwoHanded() > 1)
-			tooltip.add(new TranslatableComponent("twohandedii").withStyle(ChatFormatting.BLUE));
+			tooltip.add(Component.translatable("twohandedii").withStyle(ChatFormatting.BLUE));
 		if (this.canBlock())
-			tooltip.add(new TranslatableComponent("maxdamageblock", this.getMaxBlockDamage()).withStyle(ChatFormatting.BLUE));
-		tooltip.add(new TranslatableComponent("kgweight", this.getWeight()).withStyle(ChatFormatting.BLUE));
+			tooltip.add(Component.translatable("maxdamageblock", this.getMaxBlockDamage()).withStyle(ChatFormatting.BLUE));
+		tooltip.add(Component.translatable("kgweight", this.getWeight()).withStyle(ChatFormatting.BLUE));
 		if (this.hasTwoHandedPenalty(stack))
 		{
-			tooltip.add(new TranslatableComponent("twohandedpenalty_1").withStyle(ChatFormatting.RED));
-			tooltip.add(new TranslatableComponent("twohandedpenalty_2").withStyle(ChatFormatting.RED));
+			tooltip.add(Component.translatable("twohandedpenalty_1").withStyle(ChatFormatting.RED));
+			tooltip.add(Component.translatable("twohandedpenalty_2").withStyle(ChatFormatting.RED));
 		}
 		super.appendHoverText(stack, level, tooltip, flag);
 	}
@@ -171,7 +184,7 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 	public void setTwoHandedPenalty(ItemStack stack, boolean b)
 	{
 		CompoundTag nbt = stack.getOrCreateTag();
-		nbt.putBoolean("twoHandedPenalty", b);
+		nbt.putInt("twoHandedPenalty", b ? this.type.getTwoHanded() : 0);
 		stack.setTag(nbt);
 	}
 
@@ -181,7 +194,7 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 		{
 			CompoundTag nbt = stack.getTag();
 			if (nbt.contains("twoHandedPenalty"))
-				return nbt.getBoolean("twoHandedPenalty");
+				return nbt.getInt("twoHandedPenalty") > 0;
 		}
 
 		return false;
@@ -218,6 +231,7 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 		return this.getBonusAttackReach() > 0.0;
 	}
 
+	@Deprecated(forRemoval = true)
 	public float getSilverDamage(ItemStack stack, float damage)
 	{
 		return this.silverAttackDamage * damage / this.getAttackDamage(stack);
@@ -248,9 +262,9 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 		return type.canBlock();
 	}
 
-	boolean haveBlocked(Random rand, DamageSource source)
+	boolean haveBlocked(RandomSource rand, DamageSource source)
 	{
-		return !source.isProjectile() && rand.nextInt(18) > this.getWeight();
+		return !source.isIndirect() && rand.nextInt(18) > this.getWeight();
 	}
 
 	@Override
@@ -286,11 +300,11 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 		Entity attacker = source.getEntity();
 		float f = CombatHelper.getArmorPiercingFactor(attacker);
 
-		if (source.isExplosion())
+		if (source.is(DamageTypes.PLAYER_EXPLOSION) || source.is(DamageTypes.EXPLOSION))
 		{
 			victim.hurt(ModDamageSources.additional(), damage);
 		}
-		else if (!haveBlocked(victim.level.getRandom(), source))
+		else if (!haveBlocked(victim.level().getRandom(), source))
 		{
 			victim.hurt(ModDamageSources.additional(), damage);
 		}
@@ -304,22 +318,22 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 		stack.hurtAndBreak((int) (f * damage), victim, entity -> entity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
 	}
 
-	public boolean dealSilverDamage(LivingEntity attacker, LivingEntity victim, float damage)
+	public boolean dealSilverDamage(DamageSource source, LivingEntity attacker, LivingEntity victim, float damage, float attackscale)
 	{
 		if (victim.getMobType().equals(MobType.UNDEAD))
 		{
-			victim.hurt(ModDamageSources.silverAttack(attacker), damage + this.getSilverDamage(attacker.getMainHandItem(), damage));
+			victim.hurt(ModDamageSources.silverAttack(attacker), CombatHelper.getDamageAfterAbsorb(source, victim, this.silverAttackDamage) * attackscale + damage);
 			return true;
 		}
 		return false;
 	}
 
-	public boolean dealArmorPiercingDamage(LivingEntity attacker, LivingEntity victim, float damage)
+	public boolean dealArmorPiercingDamage(DamageSource source, LivingEntity attacker, LivingEntity victim, float damage)
 	{
-		float afterabsorb = CombatRules.getDamageAfterAbsorb(damage, (float) victim.getArmorValue(), (float) victim.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
+		float afterabsorb = CombatHelper.getDamageAfterAbsorb(source, victim, damage);
 		afterabsorb = Math.max(afterabsorb - victim.getAbsorptionAmount(), 0.0f);
 		float pierced = Math.max(((float) type.getArmorPiercing()) / 100.0f * (damage - afterabsorb), 0.0f);
-		victim.hurt(ModDamageSources.armorPiercing(attacker), afterabsorb + pierced);
+		victim.hurt(ModDamageSources.armorPiercing(attacker), damage + pierced);
 		return true;
 	}
 

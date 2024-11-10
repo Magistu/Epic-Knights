@@ -328,8 +328,8 @@
   "itemGroup.magistuarmory.weapons": "史诗骑士武器",
   "itemGroup.magistuarmory.particular_weapons": "史诗骑士武器",
   "itemGroup.magistuarmory.shields": "史诗骑士盾牌",
-  "itemGroup.magistuarmory.rusted": "?????Rusted Items??????",
-  "itemGroup.magistuarmory.armor_decorations": "?????Armor Decorations??????",
+  "itemGroup.magistuarmory.rusted": "生锈的物品",
+  "itemGroup.magistuarmory.armor_decorations": "装备装饰",
 
 
 
@@ -406,21 +406,21 @@
   "silvertools.hurt": "对亡灵单位+%1$f伤害",
   "flamebladed.hurt": "造成无法愈合的伤口",
   "halberd.hurt": "一定几率将敌人推下马",
-  "bonusattackreach": "%1$f延伸范围",
+  "bonusattackreach": "+%1$f延伸范围",
   "slowmovementspeed": "慢速",
   "effect.laceration": "撕裂",
   "lance.rideronly": "只能骑马使用",
   "lance.leftclick": "右键放下骑枪后左键攻击可击落对手",
-  "medieval_bag.rightclick": "?????Right-click to get contents??????",
+  "medieval_bag.rightclick": "右键查看",
   "lance.bonusdamage": "根据重量和速度增加额外伤害",
-  "armorpiercing": "%1$f%护甲穿透", 
+  "armorpiercing": "%1$f%%护甲穿透", 
   "twohandedi": "双手武器 I", 
   "twohandedii": "双手武器 II", 
   "kgweight": "%1$f重量", 
   "maxdamageblock": "%1$f格挡伤害上限",
   "twohandedpenalty_1": "由于单手使用双手武器，",
   "twohandedpenalty_2": "攻击速度和伤害降低",
-  "canbeplacedonground": "?????Press Shift+Right-click to place on the ground??????",
+  "canbeplacedonground": "按住右键+Shift放置到地上",
 
 
 
@@ -443,37 +443,38 @@
 
 
 
-  "item.magistuarmory.torse_and_mantle_decoration": "?????Torse And Mantle Decoration??????",
-  "item.magistuarmory.gazelle_horns_decoration": "?????Gazelle Horns Decoration??????",
-  "item.magistuarmory.duck_decoration": "?????Duck Decoration??????",
-  "item.magistuarmory.spike_decoration": "?????Spike Decoration??????",
-  "item.magistuarmory.horse_decoration": "?????Horse Decoration??????",
-  "item.magistuarmory.crown_decoration": "?????Crown Decoration??????",
-  "item.magistuarmory.flowercrown_decoration": "?????Flowercrown Decoration??????",
-  "item.magistuarmory.unicorn_decoration": "?????Unicorn Decoration??????",
-  "item.magistuarmory.bullhorns_decoration": "?????Bullhorns Decoration??????",
-  "item.magistuarmory.dragon_decoration": "?????Dragon Decoration??????",
-  "item.magistuarmory.minicrown_decoration": "?????Minicrown??????",
-  "item.magistuarmory.torse_decoration": "?????Torse Decoration??????",
-  "item.magistuarmory.two_plumes_decoration": "?????Two Plumes Decoration??????",
-  "item.magistuarmory.antlers_decoration": "?????Antlers Decoration??????",
-  "item.magistuarmory.plume_left_decoration": "?????Plume Left Decoration??????",
-  "item.magistuarmory.plume_middle_decoration": "?????Plume Middle Decoration??????",
-  "item.magistuarmory.plume_right_decoration": "?????Plume Right Decoration??????",
-  "item.magistuarmory.bear_decoration": "?????Bear Decoration??????",
-  "item.magistuarmory.lily_decoration": "?????Lily Decoration??????",
-  "item.magistuarmory.lion_decoration": "?????Lion Decoration??????",
-  "item.magistuarmory.demon_horns_decoration": "?????Demon Horns Decoration??????",
-  "item.magistuarmory.feathers_decoration": "?????Feathers Decoration??????",
-  "item.magistuarmory.viking_horns_decoration": "?????Viking Horns Decoration??????",
-  "item.magistuarmory.griffin_decoration": "?????Griffin Decoration??????",
-  "item.magistuarmory.hood_decoration": "?????Hood Decoration??????",
-  "item.magistuarmory.ecranche_decoration": "?????Ecranche Decoration??????",
-  "item.magistuarmory.rondel_decoration": "?????Rondel Decoration??????",
-
-
-
-  "item.magistuarmory.medieval_bag": "?????Bag Full of Stuff??????",
+  "item.magistuarmory.torse_and_mantle_decoration": "环式带斗篷装饰",
+  "item.magistuarmory.gazelle_horns_decoration": "羚羊装饰角",
+  "item.magistuarmory.duck_decoration": "鸭子装饰",
+  "item.magistuarmory.spike_decoration": "尖状装饰",
+  "item.magistuarmory.horse_decoration": "马装饰",
+  "item.magistuarmory.crown_decoration": "王冠装饰",
+  "item.magistuarmory.flowercrown_decoration": "花冠装饰",
+  "item.magistuarmory.unicorn_decoration": "独角兽装饰",
+  "item.magistuarmory.bullhorns_decoration": "牛角装饰",
+  "item.magistuarmory.dragon_decoration": "龙状装饰",
+  "item.magistuarmory.minicrown_decoration": "迷你王冠",
+  "item.magistuarmory.torse_decoration": "环式装饰",
+  "item.magistuarmory.two_plumes_decoration": "双翼装饰",
+  "item.magistuarmory.antlers_decoration": "鹿角装饰",
+  "item.magistuarmory.big_plume_decoration": "大羽毛装饰",
+  "item.magistuarmory.plume_left_decoration": "左羽毛",
+  "item.magistuarmory.plume_middle_decoration": "中羽毛",
+  "item.magistuarmory.plume_right_decoration": "右羽毛",
+  "item.magistuarmory.bear_decoration": "熊装饰",
+  "item.magistuarmory.lily_decoration": "百合花装饰",
+  "item.magistuarmory.lion_decoration": "狮子装饰",
+  "item.magistuarmory.demon_horns_decoration": "恶魔装饰角",
+  "item.magistuarmory.feathers_decoration": "羽毛装饰",
+  "item.magistuarmory.viking_horns_decoration": "维京装饰角",
+  "item.magistuarmory.griffin_decoration": "狮鹫装饰",
+  "item.magistuarmory.hood_decoration": "带罩装饰",
+  "item.magistuarmory.ecranche_decoration": "护心盾装饰",
+  "item.magistuarmory.rondel_decoration": "匕首装饰",
+  
+  
+  
+  "item.magistuarmory.medieval_bag": "装满东西的袋子",
 
 
 
@@ -528,7 +529,7 @@
 
 
 
-  "magistuarmory.decorated": "?????Decorated %1$s??????",
+  "magistuarmory.decorated": "已装饰的%1$s",
 
 
 
@@ -581,17 +582,17 @@
 
   "death.attack.additional": "%1$s was slain by %2$s",
   "death.attack.additional.item": "%1$s was slain by %2$s using %3$s",
-  "death.attack.additional.player": "?????%1$s was slain??????",
+  "death.attack.additional.player": "%1$s 被杀害",
   "death.attack.entity": "%1$s was slain by %2$s",
   "death.attack.entity.item": "%1$s was slain by %2$s using %3$s",
-  "death.attack.entity.player": "?????%1$s was slain by %2$s??????",
+  "death.attack.entity.player": "%1$s 被 %2$s杀害",
   "death.attack.armorPiercing": "%1$s was slain by %2$s",
   "death.attack.armorPiercing.item": "%1$s was slain by %2$s using %3$s",
-  "death.attack.armorPiercing.player": "?????%1$s was slain by %2$s??????",
+  "death.attack.armorPiercing.player": "%1$s 被 %2$s杀害",
   "death.attack.silver": "%1$swas burned with silver by %2$s",
   "death.attack.silver.item": "%1$swas burned with silver by %2$s using %3$s",
   "death.attack.silver.player": "%1$s was burned with silver whilst fighting %2$s",
   "death.attack.entityAdditional": "%1$s was slain by %2$s",
   "death.attack.entityAdditional.item": "%1$s was slain by %2$s using %3$s",
-  "death.attack.entityAdditional.player": "?????%1$s was slain by %2$s??????"
+  "death.attack.entityAdditional.player": "%1$s 被 %2$s杀害"
 }

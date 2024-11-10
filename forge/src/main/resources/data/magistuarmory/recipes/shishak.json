@@ -10,7 +10,7 @@
       "tag": "forge:nuggets/steel"
     },
     "c": {
-      "item": "magistuarmory:steel_chainmail"
+      "tag": "magistuarmory:chainmails/steel"
     },
     "i": {
       "tag": "forge:ingots/steel"

@@ -105,7 +105,7 @@ public class WeaponType
 
     public boolean isFlamebladed()
     {
-        return this.isFlamebladed;
+        return !EpicKnights.GENERAL_CONFIG.disableLaceration && this.isFlamebladed;
     }
 
     public boolean isHalberd()

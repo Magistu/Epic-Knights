@@ -13,9 +13,9 @@ import net.minecraft.world.entity.LivingEntity;
 @Environment(EnvType.CLIENT)
 public class FlowercrownModel<T extends LivingEntity> extends ArmorDecorationModel<T>
 {
-	public FlowercrownModel(ModelPart modelpart)
+	public FlowercrownModel(ModelPart root)
 	{
-		super(modelpart);
+		super(root);
 	}
 
 	public static LayerDefinition createLayer()
@@ -31,10 +31,5 @@ public class FlowercrownModel<T extends LivingEntity> extends ArmorDecorationMod
 	    partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.ZERO);
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
-	}
-
-	public ModelPart[] getParts()
-	{
-		return new ModelPart[] { head };
 	}
 }

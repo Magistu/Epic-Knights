@@ -9,20 +9,25 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 public class HeraldryRecipe extends CustomRecipe
 {
-    public HeraldryRecipe(ResourceLocation location)
+    public static RecipeSerializer<HeraldryRecipe> SERIALIZER = new SimpleCraftingRecipeSerializer<>(HeraldryRecipe::new);
+
+    public HeraldryRecipe(CraftingBookCategory category)
     {
-        super(location);
+        super(category);
+        //super(location, CraftingBookCategory.MISC);
     }
 
     @Override
@@ -63,7 +68,7 @@ public class HeraldryRecipe extends CustomRecipe
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer container)
+    public ItemStack assemble(CraftingContainer container, @NotNull RegistryAccess access)
     {
         ItemStack stack = ItemStack.EMPTY;
         ItemStack stack1 = ItemStack.EMPTY;
@@ -74,9 +79,13 @@ public class HeraldryRecipe extends CustomRecipe
             if (!stack2.isEmpty())
             {
                 if (stack2.getItem() instanceof BannerItem)
+                {
                     stack = stack2;
+                }
                 else if (isApplicableForBanner(stack2.getItem()))
+                {
                     stack1 = stack2.copy();
+                }
             }
         }
 
@@ -88,9 +97,9 @@ public class HeraldryRecipe extends CustomRecipe
             compoundtag1.putInt("Base", ((BannerItem) stack.getItem()).getColor().getId());
 
             if (wornWithSurcoat(stack1.getItem()))
-                stack1.setHoverName(new TranslatableComponent("magistuarmory.withsurcoat." + basecolor.getName(), stack1.getHoverName().getString()));
+                stack1.setHoverName(Component.translatable("magistuarmory.withsurcoat." + basecolor.getName(), stack1.getHoverName().getString()));
             else if (wornWithCaparison(stack1.getItem()))
-                stack1.setHoverName(new TranslatableComponent("magistuarmory.withcaparison." + basecolor.getName(), stack1.getHoverName().getString()));
+                stack1.setHoverName(Component.translatable("magistuarmory.withcaparison." + basecolor.getName(), stack1.getHoverName().getString()));
 
             stack1.addTagElement("BlockEntityTag", compoundtag1);
         }
@@ -104,7 +113,7 @@ public class HeraldryRecipe extends CustomRecipe
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer()
+    public @NotNull RecipeSerializer<?> getSerializer()
     {
         return getSerializerInstance();
     }
@@ -127,7 +136,7 @@ public class HeraldryRecipe extends CustomRecipe
 
     static boolean wornWithSurcoat(Item item)
     {
-        return item instanceof ArmorItem && (EpicKnights.GENERAL_CONFIG.enableSurcoatRecipeForAllArmor || item instanceof ISurcoat) && ((ArmorItem) item).getSlot().equals(EquipmentSlot.CHEST);
+        return item instanceof ArmorItem && (EpicKnights.GENERAL_CONFIG.enableSurcoatRecipeForAllArmor || item instanceof ISurcoat) && ((ArmorItem) item).getType().getSlot().equals(EquipmentSlot.CHEST);
     }
 
     static boolean isApplicableForBanner(Item item)

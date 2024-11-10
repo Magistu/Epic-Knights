@@ -341,7 +341,7 @@
   "item.magistuarmory.jousting_chestplate": "Turnierbrustpanzer", 
   "item.magistuarmory.jousting_leggings": "Turnierbeinschutz", 
   "item.magistuarmory.jousting_boots": "Turnierschuhe", 
-  "item.magistuarmory.sallet": "Salute", 
+  "item.magistuarmory.sallet": "Schaller", 
   "item.magistuarmory.gothic_chestplate": "Gotischer Brustpanzer", 
   "item.magistuarmory.gothic_leggings": "Gotischer Beinschutz", 
   "item.magistuarmory.gothic_boots": "Gotische Schuhe", 
@@ -406,14 +406,14 @@
   "silvertools.hurt": "+%1$f Schaden gegen Untote",
   "flamebladed.hurt": "Verursacht unheilbare Wunden",
   "halberd.hurt": "Hat eine Chance den Gegner vom Pferd zu schubsen",
-  "bonusattackreach": "%1$f Reichweite",
+  "bonusattackreach": "+%1$f Reichweite",
   "slowmovementspeed": "Verlangsamte Bewegungsgeschwindigkeit",
   "effect.laceration": "Platzwunde",
   "lance.rideronly": "Wird nur beim Reiten verwendet",
   "lance.leftclick": "Vor dem Schlagen mit der linken Maustaste klicken, um vom Ziel abzusteigen",
   "medieval_bag.rightclick": "Rechtsklick um Inhalte zu erhalten",
   "lance.bonusdamage": "Bonusschaden basierend auf Masse und Geschwindigkeit",
-  "armorpiercing": "%1$f% Rüstungsdurchdringung", 
+  "armorpiercing": "%1$f%% Rüstungsdurchdringung", 
   "twohandedi": "Zweihändig I", 
   "twohandedii": "Zweihändig II", 
   "kgweight": "%1$fkg Gewicht", 
@@ -457,6 +457,7 @@
   "item.magistuarmory.torse_decoration": "Torsodekoration",
   "item.magistuarmory.two_plumes_decoration": "Dekoration mit zwei Federn",
   "item.magistuarmory.antlers_decoration": "Geweihdekoration",
+  "item.magistuarmory.big_plume_decoration": "Große Feder",
   "item.magistuarmory.plume_left_decoration": "Dekoration mit Feder links",
   "item.magistuarmory.plume_middle_decoration": "Dekoration mit Feder mittig",
   "item.magistuarmory.plume_right_decoration": "Dekoration mit Feder rechts",
@@ -528,7 +529,7 @@
 
 
 
-  "magistuarmory.decorated": "%1$ mit Dekoration",
+  "magistuarmory.decorated": "%1$s mit Dekoration",
 
 
 
@@ -593,5 +594,18 @@
   "death.attack.silver.player": "%1$s was burned with silver whilst fighting %2$s",
   "death.attack.entityAdditional": "%1$s wurde von %2$s erschlagen",
   "death.attack.entityAdditional.item": "%1$s wurde von %2$s mit %3$s erschlagen",
-  "death.attack.entityAdditional.player": "%1$s wurde von %2$s erschlagen"
+  "death.attack.entityAdditional.player": "%1$s wurde von %2$s erschlagen",
+
+  "item.magistuarmory.darkening_template": "Verdunklungsvorlage",
+  "item.magistuarmory.gilding_template": "Vergoldungsvorlage",
+  "magistuarmory.darkening_template.applies_to": "Manche Rüstungen von Epic Knights Mod",
+  "magistuarmory.darkening_template.ingredients": "Schwarzer Farbstoff",
+  "magistuarmory.darkening_template.upgrade_description": "",
+  "magistuarmory.darkening_template.base_slot_description": "",
+  "magistuarmory.darkening_template.additions_slot_description": "",
+  "magistuarmory.gilding_template.applies_to": "Manche Rüstungen von Epic Knights Mod",
+  "magistuarmory.gilding_template.ingredients": "Gold oder Silberbarren",
+  "magistuarmory.gilding_template.upgrade_description": "",
+  "magistuarmory.gilding_template.base_slot_description": "",
+  "magistuarmory.gilding_template.additions_slot_description": ""
 }

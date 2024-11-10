@@ -406,7 +406,7 @@
   "silvertools.hurt": "アンデットに対して追加ダメージ",
   "flamebladed.hurt": "回復しづらい傷を与える",
   "halberd.hurt": "敵を馬上から突き落とすことがある",
-  "bonusattackreach": "リーチ距離",
+  "bonusattackreach": "+リーチ距離",
   "slowmovementspeed": "移動速度が低下する",
   "effect.laceration": "裂傷",
   "lance.rideronly": "騎乗時のみ使用可能",
@@ -832,5 +832,17 @@
   "text.autoconfig.epicknights.option.armor.enableKastenbrustArmor": "カステンブラストの防具を有効化",
   "text.autoconfig.epicknights.option.armor.enableLamellarArmor": "ラメラーの防具を有効化",
 
-  "text.autoconfig.epicknights.option.mobEquipments.equipments": "リスト"
+  "text.autoconfig.epicknights.option.mobEquipments.equipments": "リスト",
+  "item.magistuarmory.darkening_template": "暗転テンプレート",
+  "item.magistuarmory.gilding_template": "金メッキテンプレート",
+  "magistuarmory.darkening_template.applies_to": "エピック・ナイツのアーマー",
+  "magistuarmory.darkening_template.ingredients": "黒染め",
+  "magistuarmory.darkening_template.upgrade_description": "",
+  "magistuarmory.darkening_template.base_slot_description": "",
+  "magistuarmory.darkening_template.additions_slot_description": "",
+  "magistuarmory.gilding_template.applies_to": "エピック・ナイツのアーマー",
+  "magistuarmory.gilding_template.ingredients": "金と銀のインゴット",
+  "magistuarmory.gilding_template.upgrade_description": "",
+  "magistuarmory.gilding_template.base_slot_description": "",
+  "magistuarmory.gilding_template.additions_slot_description": ""
 }

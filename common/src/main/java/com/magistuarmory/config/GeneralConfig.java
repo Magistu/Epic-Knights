@@ -27,6 +27,8 @@ public final class GeneralConfig implements ConfigData
     public boolean disableLanceCollision;
     @Comment("If true, all the weapons don't penetrate armor. It's recommended to set to true to avoid conflicts with some combat mods. Default value is false.")
     public boolean disableArmorPiercing;
+    @Comment("If true, flame-bladed swords won't add laceration effect.")
+    public boolean disableLaceration;
     @Comment("If true, all the weapons don't have any debuff as long as you hold something with both hands. It's recommended to set to true to avoid conflicts with some combat mods. Default value is false.")
     public boolean disableTwoHanded;
     @Comment("If true, you can't block with the weapons from the mod. It's recommended to set to true to avoid conflicts with some combat mods. Default value is false.")

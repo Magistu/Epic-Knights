@@ -1,23 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "gdg",
-    "dad",
-    "gdg"
-  ],
-  "key": {
-    "a": {
-      "item": "magistuarmory:knight_chestplate"
-    },
-    "g": {
-      "tag": "c:gold_nuggets"
-    },
-    "d": {
-      "item": "minecraft:black_dye"
-    }
+  "type": "minecraft:smithing_transform",
+  "base": {
+    "item": "magistuarmory:knight_chestplate"
+  },
+  "addition": {
+    "tag": "c:gold_ingots"
   },
   "result": {
     "item": "magistuarmory:ceremonial_chestplate",
     "count": 1
+  },
+  "template": {
+    "item": "magistuarmory:gilding_template"
   }
 }

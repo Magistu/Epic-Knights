@@ -1,12 +1,11 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "f ",
-    " f"
+    "p"
   ],
   "key": {
-    "f": {
-      "tag": "forge:feathers"
+    "p": {
+      "item": "magistuarmory:plume_right_decoration"
     }
   },
   "result": {

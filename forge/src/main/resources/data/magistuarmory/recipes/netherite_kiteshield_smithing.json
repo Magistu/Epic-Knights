@@ -1,5 +1,5 @@
 {
-    "type": "minecraft:smithing",
+    "type": "minecraft:smithing_transform",
     "base": {
         "item": "magistuarmory:diamond_kiteshield"
     },
@@ -9,5 +9,8 @@
     "result": {
         "item": "magistuarmory:netherite_kiteshield",
         "count": 1
+    },
+    "template": {
+        "item": "minecraft:netherite_upgrade_smithing_template"
     }
 }

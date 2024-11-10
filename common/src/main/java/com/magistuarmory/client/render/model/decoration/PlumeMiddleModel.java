@@ -13,9 +13,9 @@ import net.minecraft.world.entity.LivingEntity;
 @Environment(EnvType.CLIENT)
 public class PlumeMiddleModel<T extends LivingEntity> extends ArmorDecorationModel<T>
 {
-	public PlumeMiddleModel(ModelPart modelpart)
+	public PlumeMiddleModel(ModelPart root)
 	{
-		super(modelpart);
+		super(root);
 	}
 
 	public static LayerDefinition createLayer()
@@ -32,10 +32,5 @@ public class PlumeMiddleModel<T extends LivingEntity> extends ArmorDecorationMod
 	    partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.ZERO);
 
 		return LayerDefinition.create(meshdefinition, 32, 16);
-	}
-
-	public ModelPart[] getParts()
-	{
-		return new ModelPart[] { head };
 	}
 }

@@ -7,7 +7,7 @@
   ],
   "key": {
     "c": {
-      "item": "magistuarmory:steel_chain"
+      "tag": "magistuarmory:chains/steel"
     },
     "s": {
       "tag": "c:wooden_rods"
@@ -16,7 +16,7 @@
       "tag": "c:gold_ingots"
     },
     "h": {
-      "item": "magistuarmory:hilt"
+      "tag": "magistuarmory:hilts"
     }
   },
   "result": {

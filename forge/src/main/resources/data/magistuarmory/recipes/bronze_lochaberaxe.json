@@ -10,7 +10,7 @@
       "tag": "forge:ingots/bronze"
     },
     "p": {
-      "item": "magistuarmory:pole"
+      "tag": "magistuarmory:poles"
     }
   },
   "result": {

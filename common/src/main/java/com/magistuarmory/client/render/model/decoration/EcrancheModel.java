@@ -13,9 +13,9 @@ import net.minecraft.world.entity.LivingEntity;
 @Environment(EnvType.CLIENT)
 public class EcrancheModel<T extends LivingEntity> extends ArmorDecorationModel<T>
 {
-	public EcrancheModel(ModelPart modelpart)
+	public EcrancheModel(ModelPart root)
 	{
-		super(modelpart);
+		super(root);
 	}
 
 	public static LayerDefinition createLayer()
@@ -31,10 +31,5 @@ public class EcrancheModel<T extends LivingEntity> extends ArmorDecorationModel<
 	    partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.ZERO);
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
-	}
-
-	public ModelPart[] getParts()
-	{
-		return new ModelPart[] { leftArm };
 	}
 }

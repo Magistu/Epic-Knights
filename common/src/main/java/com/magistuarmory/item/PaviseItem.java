@@ -1,7 +1,6 @@
 package com.magistuarmory.item;
 
 import com.magistuarmory.block.ModBlocks;
-import com.magistuarmory.client.render.model.Models;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -9,13 +8,14 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -41,9 +41,9 @@ public class PaviseItem extends MedievalShieldItem
 {
 	private final Direction attachmentDirection = Direction.DOWN;
 	
-	public PaviseItem(String id, String name, Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Models.ShieldEnum modelkey)
+	public PaviseItem(String id, ResourceLocation location, Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type)
 	{
-		super(id, name, properties, material, paintable, is3d, type, modelkey);
+		super(id, location, properties, material, paintable, is3d, type);
 	}
 
 	private static <T extends Comparable<T>> BlockState updateState(BlockState blockstate, Property<T> property, String string)
@@ -124,6 +124,9 @@ public class PaviseItem extends MedievalShieldItem
 
 	public InteractionResult place(BlockPlaceContext context)
 	{
+		if (!this.getBlock().isEnabled(context.getLevel().enabledFeatures()))
+			return InteractionResult.FAIL;
+		
 		if (!context.canPlace())
 			return InteractionResult.FAIL;
 		
@@ -154,7 +157,7 @@ public class PaviseItem extends MedievalShieldItem
 
 		SoundType sound = blockstate2.getSoundType();
 		level.playSound(player, blockpos, this.getPlaceSound(blockstate2), SoundSource.BLOCKS, (sound.getVolume() + 1.0F) / 2.0F, sound.getPitch() * 0.8F);
-		level.gameEvent(player, GameEvent.BLOCK_PLACE, blockpos);
+		level.gameEvent(GameEvent.BLOCK_PLACE, blockpos, GameEvent.Context.of(player, blockstate2));
 		if (player == null || !player.getAbilities().instabuild)
 			stack.shrink(1);
 
@@ -224,12 +227,17 @@ public class PaviseItem extends MedievalShieldItem
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag tooltipflag)
 	{
 		super.appendHoverText(stack, level, list, tooltipflag);
-		list.add(new TranslatableComponent("canbeplacedonground").withStyle(ChatFormatting.BLUE));
+		list.add(Component.translatable("canbeplacedonground").withStyle(ChatFormatting.BLUE));
 	}
 
 	public Block getBlock()
 	{
 		return ModBlocks.PAVISE.get();
+	}
+
+	public FeatureFlagSet requiredFeatures()
+	{
+		return this.getBlock().requiredFeatures();
 	}
 
 	protected boolean canPlace(LevelReader levelreader, BlockState blockstate, BlockPos blockpos)

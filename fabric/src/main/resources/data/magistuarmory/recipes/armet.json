@@ -1,7 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "www",
     "pbp",
     " p "
   ],
@@ -11,9 +10,6 @@
     },
     "p": {
       "tag": "c:steel_plates"
-    },
-    "w": {
-      "item": "minecraft:red_wool"
     }
   },
   "result": {

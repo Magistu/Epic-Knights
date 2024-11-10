@@ -4,6 +4,9 @@
 	"textures": {
 		"layer0": "magistuarmory:item/iron_zweihander"
 	},
+	"overrides": [
+		{"predicate": {"blocking": 1}, "model": "magistuarmory:item/iron_zweihander_blocking"}
+	],
 	"display": {
 		"thirdperson_righthand": {
 			"rotation": [-46, -90, 0],
@@ -21,7 +24,7 @@
 			"scale": [1.5, 1.5, 1]
 		},
 		"firstperson_lefthand": {
-			"rotation": [0, 90, -30],
+			"rotation": [180, 90, 150],
 			"translation": [1.13, 10, -0.38],
 			"scale": [1.5, 1.5, 1]
 		},
@@ -29,13 +32,5 @@
 			"translation": [0, 4.25, 0],
 			"scale": [0.9375, 0.9375, 0.46875]
 		}
-	},
-	"overrides": [
-		{
-			"predicate": {
-				"blocking": 1
-			},
-			"model": "magistuarmory:item/iron_zweihander_blocking"
-		}
-	]
+	}
 }

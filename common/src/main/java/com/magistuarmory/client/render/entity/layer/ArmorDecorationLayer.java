@@ -1,25 +1,26 @@
 package com.magistuarmory.client.render.entity.layer;
 
-import com.google.common.collect.Lists;
-import com.magistuarmory.EpicKnights;
+import com.magistuarmory.client.render.model.ModModels;
 import com.magistuarmory.client.render.model.decoration.ArmorDecorationModel;
-import com.magistuarmory.client.render.model.Models;
+import com.magistuarmory.client.render.model.decoration.ArmorDecorationModelSet;
 import com.magistuarmory.client.render.model.decoration.SurcoatModel;
+import com.magistuarmory.item.ArmorDecorationItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Holder;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -27,41 +28,44 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.entity.BannerBlockEntity;
 import net.minecraft.world.level.block.entity.BannerPattern;
-import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
+
+import static com.magistuarmory.item.ArmorDecorationItem.createDecorations;
+import static com.magistuarmory.item.ArmorDecorationItem.getDecorationTags;
 
 
 @Environment(EnvType.CLIENT)
-public class ArmorDecorationLayer<T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> implements PatternLayer
+public class ArmorDecorationLayer<T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> implements ArmorPatternLayer
 {
-   private static final String BASE_DIR = "textures/models/armor/";
-   private final Models.ArmorDecorations<T> armorDecorations;
-   private final ArmorDecorationModel<T> surcoatModel;
-   private final String surcoatDirPrefix;
-   private final ResourceLocation surcoatBaseTexture;
+   private static final String ARMOR_DIR_PREFIX = "textures/models/armor/";
+   private final ArmorDecorationModel<T> coatModel;
+   private final String coatDirPrefix;
+   private final ResourceLocation coatTexture;
+   private final ArmorDecorationModelSet<T> decorationModels;
 
-   public ArmorDecorationLayer(RenderLayerParent<T, M> parent)
+   public ArmorDecorationLayer(ArmorDecorationModelSet<T> decorationModels, RenderLayerParent<T, M> parent, EntityRendererProvider.Context context, ResourceLocation location)
    {
       super(parent);
-      this.armorDecorations = new Models.ArmorDecorations<>();
-      this.surcoatModel = new SurcoatModel<>(SurcoatModel.createLayer().bakeRoot());
-      this.surcoatDirPrefix = this.getDirPrefix("surcoat");
-      this.surcoatBaseTexture = this.getTexture("surcoat");
+      this.decorationModels = decorationModels;
+      this.coatModel = new SurcoatModel<>(context.bakeLayer(ModModels.createDecorationLocation(location)));
+      this.coatDirPrefix = this.getDirPrefix(location);
+      this.coatTexture = this.getTexture(location);
    }
 
-   public ResourceLocation getTexture(String name)
+   public ResourceLocation getTexture(ResourceLocation location)
    {
-      return getTexture(name, false);
-   }
-   
-   public ResourceLocation getTexture(String name, boolean overlay)
-   {
-      return new ResourceLocation(EpicKnights.ID, "textures/models/armor/" + name + (overlay ? "_overlay.png" : ".png"));
+      return getTexture(location, false);
    }
 
-   public String getDirPrefix(String name)
+   public ResourceLocation getTexture(ResourceLocation location, boolean overlay)
    {
-      return BASE_DIR + name + "/";
+      return new ResourceLocation(location.getNamespace(), ARMOR_DIR_PREFIX + location.getPath() + (overlay ? "_overlay.png" : ".png"));
+   }
+
+   public String getDirPrefix(ResourceLocation location)
+   {
+      return ARMOR_DIR_PREFIX + location.getPath() + "/";
    }
 
    @Override
@@ -76,91 +80,76 @@ public class ArmorDecorationLayer<T extends LivingEntity, M extends HumanoidMode
    private void renderPiece(PoseStack pose, MultiBufferSource buffer, T entity, EquipmentSlot slot, int p)
    {
       ItemStack itemstack = entity.getItemBySlot(slot);
-      if (itemstack.getItem() instanceof ArmorItem armoritem && armoritem.getSlot() == slot)
+      if (itemstack.getItem() instanceof ArmorItem armoritem && armoritem.getEquipmentSlot() == slot)
       {
          if (itemstack.getTagElement("ArmorDecoration") != null)
          {
-            for (DecorationInfo info : createDecorations(getItemArmorDecorations(itemstack)))
+            for (ArmorDecorationItem.DecorationInfo info : createDecorations(getDecorationTags(itemstack)))
             {
-               String name = info.name();
-               ArmorDecorationModel<T> model = this.getArmorDecorationModel(name);
-               this.getParentModel().copyPropertiesTo(model);
-               if (info.dyeable())
+               ResourceLocation location = info.location();
+               ArmorDecorationModel<T> model = this.getArmorDecorationModel(location);
+               if (model != null)
                {
-                  int j = info.color();
-                  float r = (float) (j >> 16 & 255) / 255.0F;
-                  float g = (float) (j >> 8 & 255) / 255.0F;
-                  float b = (float) (j & 255) / 255.0F;
-                  renderDyeableDecoration(pose, buffer, p, OverlayTexture.NO_OVERLAY, r, g, b, itemstack.hasFoil(), model.getParts(), getTexture(name));
-                  renderDyeableDecoration(pose, buffer, p, OverlayTexture.NO_OVERLAY, 1.0f, 1.0f, 1.0f, itemstack.hasFoil(), model.getParts(), getTexture(name, true));
-               }
-               else
-               {
-                  renderDyeableDecoration(pose, buffer, p, OverlayTexture.NO_OVERLAY, itemstack.hasFoil(), model.getParts(), getTexture(name));
+                  this.getParentModel().copyPropertiesTo(model);
+                  if (info.dyeable())
+                  {
+                     int j = info.color();
+                     float r = (float) (j >> 16 & 255) / 255.0F;
+                     float g = (float) (j >> 8 & 255) / 255.0F;
+                     float b = (float) (j & 255) / 255.0F;
+                     renderDecoration(pose, buffer, p, OverlayTexture.NO_OVERLAY, r, g, b, itemstack.hasFoil(), model.parts(), getTexture(location));
+                     renderDecoration(pose, buffer, p, OverlayTexture.NO_OVERLAY, itemstack.hasFoil(), model.parts(), getTexture(location, true));
+                  }
+                  else
+                  {
+                     renderDecoration(pose, buffer, p, OverlayTexture.NO_OVERLAY, itemstack.hasFoil(), model.parts(), getTexture(location));
+                  }
                }
             }
          }
-         if (BlockItem.getBlockEntityData(itemstack) != null)
+         if (armoritem.getEquipmentSlot() == EquipmentSlot.CHEST && BlockItem.getBlockEntityData(itemstack) != null)
          {
-            this.getParentModel().copyPropertiesTo(this.surcoatModel);
+            this.getParentModel().copyPropertiesTo(this.coatModel);
+            renderDecoration(pose, buffer, p, OverlayTexture.NO_OVERLAY, itemstack.hasFoil(), this.coatModel.parts(), this.coatTexture);
             ListTag listtag = BannerBlockEntity.getItemPatterns(itemstack);
-            List<Pair<BannerPattern, DyeColor>> list = BannerBlockEntity.createPatterns(ShieldItem.getColor(itemstack), listtag);
-            renderPatterns(pose, buffer, p, OverlayTexture.NO_OVERLAY, list, itemstack.hasFoil(), this.surcoatModel);
+            List<Pair<Holder<BannerPattern>, DyeColor>> list = BannerBlockEntity.createPatterns(ShieldItem.getColor(itemstack), listtag);
+            renderPatterns(pose, buffer, p, OverlayTexture.NO_OVERLAY, list, itemstack.hasFoil(), this.coatModel);
          }
       }
    }
-   
-   public record DecorationInfo(String name, boolean dyeable, int color) {}
 
-   public static List<DecorationInfo> createDecorations(@Nullable ListTag listtag)
+   public ArmorDecorationModel<T> getArmorDecorationModel(ResourceLocation location)
    {
-      List<DecorationInfo> list = Lists.newArrayList();
-      if (listtag != null)
-      {
-         for (int i = 0; i < listtag.size(); ++i)
-         {
-            CompoundTag tag = listtag.getCompound(i);
-            String name = tag.getString("name");
-            boolean dyeable = tag.getBoolean("dyeable");
-            int j = tag.getInt("color");
-            list.add(new DecorationInfo(name, dyeable, j));
-         }
-      }
-
-      return list;
+      return this.decorationModels.get(location);
    }
 
-   @Nullable
-   public static ListTag getItemArmorDecorations(ItemStack itemstack)
+   public void renderPatterns(PoseStack pose, MultiBufferSource buffer, int p, int overlay, List<Pair<Holder<BannerPattern>, DyeColor>> list, boolean hasfoil, ArmorDecorationModel<T> model)
    {
-      ListTag listtag = null;
-      CompoundTag tag = itemstack.getTagElement("ArmorDecoration");
-      if (tag.contains("Items", 9))
-         listtag = tag.getList("Items", 10).copy();
-
-      return listtag;
+      this.renderPatterns(pose, buffer, p, overlay, list, hasfoil, model.parts(), 1.0f, 1.0f, 1.0f);
    }
 
-   private ArmorDecorationModel<T> getArmorDecorationModel(String name)
+   public void renderDecoration(PoseStack pose, MultiBufferSource buffer, int p, int overlay, boolean hasfoil, ModelPart[] modelparts, ResourceLocation texture)
    {
-      return this.armorDecorations.getModelByName(name);
+      renderDecoration(pose, buffer, p, overlay, 1.0f, 1.0f, 1.0f, hasfoil, modelparts, texture);
    }
 
-   public void renderPatterns(PoseStack pose, MultiBufferSource buffer, int p, int overlay, List<Pair<BannerPattern, DyeColor>> list, boolean hasfoil, ArmorDecorationModel<T> model)
-   {
-      this.renderPatterns(pose, buffer, p, overlay, list, hasfoil, model.getParts(), 1.0f, 1.0f, 1.0f, this.surcoatDirPrefix, this.surcoatBaseTexture);
-   }
-
-   public void renderDyeableDecoration(PoseStack pose, MultiBufferSource buffer, int p, int overlay, boolean hasfoil, ModelPart[] modelparts, ResourceLocation texture)
-   {
-      renderDyeableDecoration(pose, buffer, p, overlay, 1.0f, 1.0f, 1.0f, hasfoil, modelparts, texture);
-   }
-   
-   public void renderDyeableDecoration(PoseStack pose, MultiBufferSource buffer, int p, int overlay, float r, float g, float b, boolean hasfoil, ModelPart[] modelparts, ResourceLocation texture)
+   public void renderDecoration(PoseStack pose, MultiBufferSource buffer, int p, int overlay, float r, float g, float b, boolean hasfoil, ModelPart[] modelparts, ResourceLocation texture)
    {
       VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.entityCutoutNoCull(texture), false, hasfoil);
-      
+
       for (ModelPart part : modelparts)
          part.render(pose, vertexconsumer, p, overlay, r, g, b, 1.0F);
+   }
+
+   @Override
+   public ResourceLocation getBaseTexture()
+   {
+      return this.coatTexture;
+   }
+
+   @Override
+   public ResourceLocation getPatternTexture(ResourceLocation patternlocation)
+   {
+      return new ResourceLocation(this.coatTexture.getNamespace(), this.coatDirPrefix + patternlocation.getPath() + ".png");
    }
 }

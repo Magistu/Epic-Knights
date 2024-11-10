@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " ac",
+    "aca",
+    "ba "
+  ],
+  "key": {
+    "a": {
+      "tag": "forge:nuggets/steel"
+    },
+    "b": {
+      "tag": "forge:rods/wooden"
+    },
+    "c": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:barbedclub",
+    "count": 1
+  }
+}

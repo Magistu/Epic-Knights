@@ -19,4 +19,7 @@ classes/
 *.launch
 
 forge/run/**
+forge/server
 fabric/run/**
+fabric/run2
+fabric/server

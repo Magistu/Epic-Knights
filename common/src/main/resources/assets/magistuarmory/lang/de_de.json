@@ -413,7 +413,7 @@
   "lance.leftclick": "Vor dem Schlagen mit der linken Maustaste klicken, um vom Ziel abzusteigen",
   "medieval_bag.rightclick": "Rechtsklick um Inhalte zu erhalten",
   "lance.bonusdamage": "Bonusschaden basierend auf Masse und Geschwindigkeit",
-  "armorpiercing": "%1$f% Rüstungsdurchdringung", 
+  "armorpiercing": "%1$f%% Rüstungsdurchdringung", 
   "twohandedi": "Zweihändig I", 
   "twohandedii": "Zweihändig II", 
   "kgweight": "%1$fkg Gewicht", 
@@ -528,7 +528,7 @@
 
 
 
-  "magistuarmory.decorated": "%1$ mit Dekoration",
+  "magistuarmory.decorated": "%1$s mit Dekoration",
 
 
 

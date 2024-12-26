@@ -23,3 +23,63 @@ dependencies {
     // Remove the next line if you don't want to depend on the API
     modApi "dev.architectury:architectury:${rootProject.architectury_version}"
 }
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            groupId = rootProject.maven_group
+            artifactId = project.artifact_base_name
+            version = rootProject.mod_version
+
+            pom {
+                name = "Epic Knights"
+                description = "mod that adds medieval stuff to the game"
+                url = "https://github.com/magistu/epic-knights"
+                inceptionYear = "2021"
+
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'http://www.opensource.org/licenses/mit-license.php'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = "magistu"
+                    }
+                }
+
+                scm {
+                    connection = "scm:git:git:github.com/magistu/epic-knights.git"
+                    developerConnection = "scm:git:ssh://github.com/magistu/epic-knights.git"
+                    url = "https://github.com/magistu/epic-knights"
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = "OSSRH"
+            url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            credentials {
+                username = rootProject.properties["ossrh_username"]
+                password = rootProject.properties["ossrh_password"]
+            }
+        }
+    }
+}
+
+signing {
+    useGpgCmd()
+    sign publishing.publications.mavenJava
+}
+
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}

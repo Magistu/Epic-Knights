@@ -6,8 +6,6 @@ import com.magistuarmory.item.PaviseItem;
 import com.magistuarmory.item.ShieldType;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.client.IItemRenderProperties;
@@ -28,7 +26,6 @@ public class PaviseItemForge extends PaviseItem
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
 	public void initializeClient(Consumer<IItemRenderProperties> consumer)
 	{
 		consumer.accept(new IItemRenderProperties()

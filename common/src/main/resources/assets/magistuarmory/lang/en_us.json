@@ -413,7 +413,7 @@
   "lance.leftclick": "Left-click before hitting to dismount target",
   "medieval_bag.rightclick": "Right-click to get contents",
   "lance.bonusdamage": "Damage is based on mass and speed",
-  "armorpiercing": "%1$f% armor piercing", 
+  "armorpiercing": "%1$f%% armor piercing", 
   "twohandedi": "Two-Handed I", 
   "twohandedii": "Two-Handed II", 
   "kgweight": "%1$fkg weight", 

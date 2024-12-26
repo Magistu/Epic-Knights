@@ -413,7 +413,7 @@
   "lance.leftclick": "Clic gauche avant de frapper pour désarçonner la cible",
   "medieval_bag.rightclick": "Clic avec le bouton droit de la souris pour obtenir le contenu",
   "lance.bonusdamage": "Les dégâts sont basés sur la masse et la vitesse",
-  "armorpiercing": "%1$f% Perçage d'armure", 
+  "armorpiercing": "%1$f%% Perçage d'armure", 
   "twohandedi": "Deux mains I", 
   "twohandedii": "Deux mains II", 
   "kgweight": "%1$fpoids", 

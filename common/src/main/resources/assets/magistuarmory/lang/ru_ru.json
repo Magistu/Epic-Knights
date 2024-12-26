@@ -413,7 +413,7 @@
   "lance.leftclick": "ЛКМ перед ударом чтобы спешить цель",
   "medieval_bag.rightclick": "ПКМ чтобы вытащить содержимое",
   "lance.bonusdamage": "Урон зависит от массы и скорости",
-  "armorpiercing": "%1$f% пробитие брони", 
+  "armorpiercing": "%1$f%% пробитие брони", 
   "twohandedi": "Двуручное оружие I", 
   "twohandedii": "Двуручное оружие II", 
   "kgweight": "%1$fкг вес", 

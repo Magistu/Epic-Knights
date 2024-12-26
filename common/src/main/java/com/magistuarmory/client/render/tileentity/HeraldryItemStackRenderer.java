@@ -32,16 +32,16 @@ import net.minecraft.world.level.block.entity.BannerPattern;
 public class HeraldryItemStackRenderer extends BlockEntityWithoutLevelRenderer
 {
 	private final Model model;
-	private final Material materialPattern;
-	private final Material materialNoPattern;
+	private final ResourceLocation locationPattern;
+	private final ResourceLocation locationNoPattern;
 	private final String patternsDirectory;
 
 	public HeraldryItemStackRenderer(String id, String name, Model model)
 	{
 		super(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
 		this.model = model;
-		this.materialPattern = new Material(Sheets.SHIELD_SHEET, new ResourceLocation(EpicKnights.ID, "entity/" + id + "_pattern"));
-		this.materialNoPattern = new Material(Sheets.SHIELD_SHEET, new ResourceLocation(EpicKnights.ID, "entity/" + id + "_nopattern"));
+		this.locationPattern = new ResourceLocation(EpicKnights.ID, "entity/" + id + "_pattern");
+		this.locationNoPattern = new ResourceLocation(EpicKnights.ID, "entity/" + id + "_nopattern");
 		this.patternsDirectory = "entity/" + name + "/";
 	}
 
@@ -58,7 +58,7 @@ public class HeraldryItemStackRenderer extends BlockEntityWithoutLevelRenderer
 			boolean flag = BlockItem.getBlockEntityData(stack) != null;
 			pose.pushPose();
 			pose.scale(1.0F, -1.0F, -1.0F);
-			Material material = flag ? materialPattern : materialNoPattern;
+			Material material = flag ? new Material(Sheets.SHIELD_SHEET, locationPattern) : new Material(Sheets.SHIELD_SHEET, locationNoPattern);
 			VertexConsumer vertexconsumer = material.sprite().wrap(ItemRenderer.getFoilBufferDirect(buffer, this.model.renderType(material.atlasLocation()), true, stack.hasFoil()));
 			shieldmodel.handle().render(pose, vertexconsumer, p, overlay, 1.0F, 1.0F, 1.0F, 1.0F);
 			if (flag)

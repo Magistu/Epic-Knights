@@ -413,7 +413,7 @@
   "lance.leftclick": "Kliknij lewym przyciskiem myszy przed uderzeniem, aby zrzucić cel",
   "medieval_bag.rightclick": "Kliknij prawym przyciskiem myszy, aby wyświetlić zawartość",
   "lance.bonusdamage": "Obrażenia są oparte na masie i prędkości",
-  "armorpiercing": "%1$f% przebijanie pancerza", 
+  "armorpiercing": "%1$f%% przebijanie pancerza", 
   "twohandedi": "Dwuręczny I", 
   "twohandedii": "Dwuręczny II", 
   "kgweight": "%1$fkg waga",

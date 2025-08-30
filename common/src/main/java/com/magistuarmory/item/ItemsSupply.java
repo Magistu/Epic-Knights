@@ -3,8 +3,10 @@ package com.magistuarmory.item;
 import dev.architectury.registry.registries.RegistrySupplier;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.minecraft.world.item.Item;
+
 import java.util.ArrayList;
 import java.util.function.BiFunction;
+import java.util.function.Supplier;
 
 
 public class ItemsSupply<T extends Item>
@@ -22,20 +24,20 @@ public class ItemsSupply<T extends Item>
 	public @Nullable RegistrySupplier<T> tin;
 	public @Nullable RegistrySupplier<T> bronze;
 
-	public ItemsSupply(BiFunction<ModItemTier, Item.Properties, RegistrySupplier<T>> workshop, Item.Properties prop)
+	public ItemsSupply(BiFunction<ModItemTier, Item.Properties, RegistrySupplier<T>> workshop, Supplier<Item.Properties> prop)
 	{
-		this.wood = workshop.apply(ModItemTier.WOOD, prop);
-		this.stone = workshop.apply(ModItemTier.STONE, prop);
-		this.iron = workshop.apply(ModItemTier.IRON, prop);
-		this.gold = workshop.apply(ModItemTier.GOLD, prop);
-		this.diamond = workshop.apply(ModItemTier.DIAMOND, prop);
-		this.netherite = workshop.apply(ModItemTier.NETHERITE, prop.fireResistant());
+		this.wood = workshop.apply(ModItemTier.WOOD, prop.get());
+		this.stone = workshop.apply(ModItemTier.STONE, prop.get());
+		this.iron = workshop.apply(ModItemTier.IRON, prop.get());
+		this.gold = workshop.apply(ModItemTier.GOLD, prop.get());
+		this.diamond = workshop.apply(ModItemTier.DIAMOND, prop.get());
+		this.netherite = workshop.apply(ModItemTier.NETHERITE, prop.get().fireResistant());
 
-		this.copper = workshop.apply(ModItemTier.COPPER, prop);
-		this.steel = workshop.apply(ModItemTier.STEEL, prop);
-		this.silver = workshop.apply(ModItemTier.SILVER, prop);
-		this.tin = workshop.apply(ModItemTier.TIN, prop);
-		this.bronze = workshop.apply(ModItemTier.BRONZE, prop);
+		this.copper = workshop.apply(ModItemTier.COPPER, prop.get());
+		this.steel = workshop.apply(ModItemTier.STEEL, prop.get());
+		this.silver = workshop.apply(ModItemTier.SILVER, prop.get());
+		this.tin = workshop.apply(ModItemTier.TIN, prop.get());
+		this.bronze = workshop.apply(ModItemTier.BRONZE, prop.get());
 	}
 
 	public ArrayList<RegistrySupplier<T>> get()

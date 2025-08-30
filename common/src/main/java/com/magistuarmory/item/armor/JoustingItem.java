@@ -1,13 +1,11 @@
 package com.magistuarmory.item.armor;
 
-import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -16,7 +14,7 @@ import java.util.List;
 
 public class JoustingItem extends MedievalArmorItem implements ISurcoat
 {
-	public JoustingItem(ArmorMaterial material, Type type, Properties properties)
+	public JoustingItem(ArmorType material, Type type, Properties properties)
 	{
 		super(material, type, properties);
 	}
@@ -31,7 +29,7 @@ public class JoustingItem extends MedievalArmorItem implements ISurcoat
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag)
+	public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, List<Component> tooltip, TooltipFlag flag)
 	{
 		tooltip.add((Component.translatable("slowmovementspeed")).withStyle(ChatFormatting.RED));
 	}

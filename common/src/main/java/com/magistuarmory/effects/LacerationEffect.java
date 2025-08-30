@@ -1,28 +1,24 @@
 package com.magistuarmory.effects;
 
+import com.magistuarmory.EpicKnights;
 import com.magistuarmory.util.CombatHelper;
-import net.minecraft.world.damagesource.CombatRules;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Creeper;
-import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class LacerationEffect extends MobEffect 
-{
-	public static LacerationEffect INSTANCE = new LacerationEffect();
-	
+{	
 	public LacerationEffect()
 	{
 		super(MobEffectCategory.HARMFUL, -10092544);
-		addAttributeModifier(Attributes.MAX_HEALTH, "81AEAA56-376B-4498-935B-2F7F68070635", -2.0f, Operation.ADDITION);
+		addAttributeModifier(Attributes.MAX_HEALTH, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "laceration"), -2.0f, Operation.ADD_VALUE);
 	}
 
 	@Override
@@ -37,10 +33,15 @@ public class LacerationEffect extends MobEffect
 		return false;
 	}
 
-	public void applyEffectTick(LivingEntity victim, int i) 
+	@Override
+	public boolean applyEffectTick(LivingEntity victim, int i) 
 	{
 		if (victim.getHealth() > victim.getMaxHealth())
+		{
 			victim.setHealth(victim.getMaxHealth());
+			return true;
+		}
+		return false;
 	}
 
 	public static void apply(DamageSource source, LivingEntity victim, float damage)
@@ -53,14 +54,14 @@ public class LacerationEffect extends MobEffect
 		int amplifier = Math.min((int) damage, 2);
 		int duration = (int) (damage * 50);
 
-		if (victim.hasEffect(LacerationEffect.INSTANCE))
+		if (victim.hasEffect(ModEffects.LACERATION))
 		{
-			MobEffectInstance effect = victim.getEffect(LacerationEffect.INSTANCE);
+			MobEffectInstance effect = victim.getEffect(ModEffects.LACERATION);
 			amplifier = Math.max(effect.getAmplifier(), amplifier);
 			duration = Math.max(effect.getDuration(), duration);
-			victim.removeEffect(LacerationEffect.INSTANCE);
+			victim.removeEffect(ModEffects.LACERATION);
 		}
 		
-		victim.addEffect(new MobEffectInstance(LacerationEffect.INSTANCE, duration, amplifier, true, true, true));
+		victim.addEffect(new MobEffectInstance(ModEffects.LACERATION, duration, amplifier, true, true, true));
 	}
 }

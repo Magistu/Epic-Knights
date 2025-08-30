@@ -9,14 +9,22 @@ import net.minecraft.resources.ResourceLocation;
 
 public interface ShieldPatternLayer extends PatternLayer
 {
-    Material getBaseMaterial();
+    Material getBaseMaterial(boolean withPattern);
+    
+    Material getBasePatternMaterial();
 
     Material getPatternMaterial(ResourceLocation patternlocation);
     
     @Override
-    default VertexConsumer baseVertexConsumer(MultiBufferSource buffer, boolean hasfoil)
+    default VertexConsumer baseVertexConsumer(MultiBufferSource buffer, boolean withPattern, boolean hasfoil)
     {
-        return getBaseMaterial().buffer(buffer, RenderType::entityCutout, hasfoil);
+        return getBaseMaterial(withPattern).buffer(buffer, RenderType::entityCutout, hasfoil);
+    }
+
+    @Override
+    default VertexConsumer basePatternVertexConsumer(MultiBufferSource buffer, boolean hasfoil)
+    {
+        return getBasePatternMaterial().buffer(buffer, RenderType::entityNoOutline, hasfoil);
     }
 
     @Override

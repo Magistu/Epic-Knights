@@ -3,16 +3,17 @@ package com.magistuarmory.item;
 import com.google.common.collect.Lists;
 import com.magistuarmory.EpicKnights;
 import com.magistuarmory.client.render.model.ModModels;
+import com.magistuarmory.component.ModDataComponents;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class ArmorDecorationItem extends Item implements ArmorDecoration
 
 	public ArmorDecorationItem(ResourceLocation location, Properties properties, ArmorItem.Type armorType)
 	{
-		super(properties);
+		super(properties.stacksTo(1));
 		this.location = location;
 		this.armorType = armorType;
 	}
@@ -36,7 +37,7 @@ public class ArmorDecorationItem extends Item implements ArmorDecoration
 	}
 
 	@Override
-	public ArmorItem.Type getArmorType()
+	public ArmorItem.Type getType()
 	{
 		return this.armorType;
 	}
@@ -45,8 +46,8 @@ public class ArmorDecorationItem extends Item implements ArmorDecoration
 	{
 		public ResourceLocation location()
 		{
-			ResourceLocation loc = new ResourceLocation(this.name);
-			return new ResourceLocation(!loc.getNamespace().equals("minecraft") ? loc.getNamespace() : EpicKnights.ID, loc.getPath());
+			ResourceLocation loc = ResourceLocation.parse(this.name);
+			return ResourceLocation.fromNamespaceAndPath(!loc.getNamespace().equals("minecraft") ? loc.getNamespace() : EpicKnights.ID, loc.getPath());
 		}
 	}
 
@@ -84,16 +85,13 @@ public class ArmorDecorationItem extends Item implements ArmorDecoration
 	{
 		return getDecorationTags(stack).size() < 8 &&
 				stack.getItem() instanceof ArmorItem armor &&
-				this.getArmorType() == armor.getType();
+				this.getType() == armor.getType();
 	}
 
 	public static ListTag getDecorationTags(ItemStack stack)
 	{
-		CompoundTag compoundtag = stack.getTagElement("ArmorDecoration");
-		if (compoundtag == null)
-			return new ListTag();
-
-		return compoundtag.getList("Items", 10);
+		CustomData data = stack.get(ModDataComponents.ARMOR_DECORATION.get());
+		return data == null ? new ListTag() : data.copyTag().getList("Items", 10);
 	}
 
 	@Override

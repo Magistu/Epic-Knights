@@ -1,55 +1,37 @@
 package com.magistuarmory.item.armor;
 
 import com.magistuarmory.EpicKnights;
+import com.magistuarmory.component.ModDataComponents;
 import com.magistuarmory.item.ArmorDecorationItem;
+import com.magistuarmory.item.DyeableItemLike;
 import com.magistuarmory.item.IHasModelProperty;
 import com.magistuarmory.item.ModItems;
 import dev.architectury.registry.item.ItemPropertiesRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.DyeableLeatherItem;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 
 import java.util.Objects;
 
 import static com.magistuarmory.item.ArmorDecorationItem.createDecorations;
 import static com.magistuarmory.item.ArmorDecorationItem.getDecorationTags;
 
-public class KnightItem extends MedievalArmorItem implements ISurcoat, DyeableLeatherItem, IHasModelProperty
+public class KnightItem extends MedievalArmorItem implements ISurcoat, DyeableItemLike, IHasModelProperty
 {
-	public KnightItem(ArmorMaterial material, Type type, Properties properties) {
+	public KnightItem(ArmorType material, Type type, Properties properties) {
 		super(material, type, properties);
-	}
-
-	@Override
-	public boolean hasCustomColor(ItemStack itemstack)
-	{
-		return getColor(itemstack) != 0;
 	}
 
 	@Override
     public int getColor(ItemStack itemstack)
     {
 	    ArmorDecorationItem.DecorationInfo info = getPlumeDecorationInfo(itemstack);
-		return info != null ? info.color() : 0;
+		return FastColor.ARGB32.opaque(info != null ? info.color() : 0);
     }
-
-	@Override
-	public void setColor(ItemStack itemstack, int col)
-	{
-		ListTag listtag = getDecorationTags(itemstack);
-		String plumename = ModItems.BIG_PLUME_DECORATION.get().getResourceLocation().toString();
-		for (int i = 0; i < listtag.size(); ++i)
-		{
-			CompoundTag tag = listtag.getCompound(i);
-			if (Objects.equals(tag.getString("name"), plumename))
-				tag.putInt("color", col);
-		}
-	}
 
 	public boolean hasPlume(ItemStack itemstack)
 	{
@@ -58,22 +40,17 @@ public class KnightItem extends MedievalArmorItem implements ISurcoat, DyeableLe
 	
 	public ArmorDecorationItem.DecorationInfo getPlumeDecorationInfo(ItemStack itemstack)
 	{
-		CompoundTag tag = itemstack.getTagElement("ArmorDecoration");
-		if (tag == null)
+		if (!itemstack.has(ModDataComponents.ARMOR_DECORATION.get()))
 			return null;
+		
 		String plumename = ModItems.BIG_PLUME_DECORATION.get().getResourceLocation().toString();
-		for (ArmorDecorationItem.DecorationInfo info : createDecorations(getDecorationTags(itemstack)))
-		{
-			if (Objects.equals(info.name(), plumename))
-				return info;
-		}
-		return null;
+		return createDecorations(getDecorationTags(itemstack)).stream().filter(d -> Objects.equals(d.name(), plumename)).findFirst().orElse(null);
 	}
 
 	@Override
 	@Environment(EnvType.CLIENT)
 	public void registerModelProperty()
 	{
-		ItemPropertiesRegistry.register(this, new ResourceLocation(EpicKnights.ID, "has_plume"), (stack, level, entity, i) -> this.hasPlume(stack) ? 1 : 0);
+		ItemPropertiesRegistry.register(this, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "has_plume"), (stack, level, entity, i) -> this.hasPlume(stack) ? 1 : 0);
 	}
 }

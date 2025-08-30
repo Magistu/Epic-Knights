@@ -2,6 +2,7 @@ package com.magistuarmory.item;
 
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.world.item.Item;
+
 import java.util.function.BiFunction;
 
 
@@ -24,7 +25,7 @@ public class ShieldsSupply extends ItemsSupply<MedievalShieldItem>
 
 	public ShieldsSupply(BiFunction<ModItemTier, Item.Properties, RegistrySupplier<MedievalShieldItem>> workshop, String shieldName)
 	{
-		super(workshop, new Item.Properties());
+		super(workshop, Item.Properties::new);
 
 		this.shieldName = shieldName;
 

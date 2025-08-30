@@ -1,18 +1,20 @@
 package com.magistuarmory.event;
 
-import com.magistuarmory.client.ClientHelper;
+import com.magistuarmory.EpicKnights;
+import com.magistuarmory.client.HitResultHelper;
 import com.magistuarmory.client.render.ModRender;
 import com.magistuarmory.item.LanceItem;
 import com.magistuarmory.item.MedievalWeaponItem;
 import com.magistuarmory.util.CombatHelper;
 import dev.architectury.event.EventResult;
+import dev.architectury.event.events.client.ClientPlayerEvent;
 import dev.architectury.event.events.client.ClientRawInputEvent;
 import dev.architectury.event.events.common.LifecycleEvent;
-import dev.architectury.platform.Platform;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.EntityHitResult;
@@ -25,9 +27,16 @@ public class ClientEvents
 	{
 		ClientRawInputEvent.MOUSE_CLICKED_PRE.register(ClientEvents::onMouseInput);
 		LifecycleEvent.SETUP.register(ModRender::registerRenderers);
+		ClientPlayerEvent.CLIENT_PLAYER_JOIN.register(ClientEvents::onClientPlayerJoin);
 	}
-	
-	public static EventResult onMouseInput(Minecraft mc, int button, int action, int mods)
+
+	private static void onClientPlayerJoin(LocalPlayer player)
+	{
+		if (player.level().isClientSide() && player == Minecraft.getInstance().player)
+			EpicKnights.checkBetterCombatOrEpicFightInstalled();
+	}
+
+	private static EventResult onMouseInput(Minecraft mc, int button, int action, int mods)
 	{
 		if (mc.level == null || mc.screen != null || mc.isPaused())
 			return EventResult.pass();
@@ -42,7 +51,7 @@ public class ClientEvents
 			ItemStack stack = player.getMainHandItem();
 			if (stack.getItem() instanceof MedievalWeaponItem weapon) 
 			{
-				HitResult hit = ClientHelper.getMouseOver(mc, CombatHelper.getAttackReach(player, weapon));
+				HitResult hit = HitResultHelper.getMouseOver(mc, CombatHelper.getAttackReach(player, weapon));
 				if (hit instanceof EntityHitResult entityhit && !weapon.onAttackClickEntity(stack, player, entityhit.getEntity()))
 					return weapon instanceof LanceItem ? EventResult.interruptFalse() : EventResult.interruptDefault();
 			}

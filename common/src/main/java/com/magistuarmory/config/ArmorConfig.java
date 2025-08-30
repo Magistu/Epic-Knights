@@ -913,6 +913,10 @@ public class ArmorConfig implements ConfigData
         @ConfigEntry.Gui.RequiresRestart
         public float toughness;
         @ConfigEntry.Gui.RequiresRestart
+        public int helmetDurability;
+        @ConfigEntry.Gui.RequiresRestart
+        public int helmetDefense;
+        @ConfigEntry.Gui.RequiresRestart
         public int chestplateDurability;
         @ConfigEntry.Gui.RequiresRestart
         public int chestplateDefense;
@@ -923,6 +927,8 @@ public class ArmorConfig implements ConfigData
         public LamellarConfig() {
             this.enabled = true;
             this.toughness = 0.30f;
+            this.helmetDurability = 250;
+            this.helmetDefense = 6;
             this.chestplateDurability = 250;
             this.chestplateDefense = 6;
             this.bootsDurability = 200;

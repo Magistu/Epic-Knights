@@ -1,23 +1,17 @@
 package com.magistuarmory.item.crafting;
 
 import com.magistuarmory.EpicKnights;
-import com.magistuarmory.item.ArmorDecorationItem;
 import com.magistuarmory.item.MedievalShieldItem;
 import com.magistuarmory.item.armor.ISurcoat;
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
-import net.minecraft.world.item.crafting.CustomRecipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BannerPatternLayers;
 import org.jetbrains.annotations.NotNull;
 
 public class HeraldryRecipe extends CustomRecipe
@@ -31,12 +25,12 @@ public class HeraldryRecipe extends CustomRecipe
     }
 
     @Override
-    public boolean matches(CraftingContainer container, Level level)
+    public boolean matches(CraftingInput container, Level level)
     {
         ItemStack stack = ItemStack.EMPTY;
         ItemStack stack2 = ItemStack.EMPTY;
 
-        for(int i = 0; i < container.getContainerSize(); ++i)
+        for(int i = 0; i < container.size(); ++i)
         {
             ItemStack stack3 = container.getItem(i);
             if (!stack3.isEmpty())
@@ -55,8 +49,9 @@ public class HeraldryRecipe extends CustomRecipe
 
                     if (!stack.isEmpty())
                         return false;
-
-                    if (BlockItem.getBlockEntityData(stack3) != null)
+                    
+                    BannerPatternLayers patterns = stack3.get(DataComponents.BANNER_PATTERNS);
+                    if (patterns != null && !patterns.layers().isEmpty())
                         return false;
 
                     stack = stack3;
@@ -68,12 +63,12 @@ public class HeraldryRecipe extends CustomRecipe
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer container, @NotNull RegistryAccess access)
+    public @NotNull ItemStack assemble(CraftingInput container, @NotNull HolderLookup.Provider access)
     {
         ItemStack stack = ItemStack.EMPTY;
         ItemStack stack1 = ItemStack.EMPTY;
 
-        for(int i = 0; i < container.getContainerSize(); ++i)
+        for (int i = 0; i < container.size(); ++i)
         {
             ItemStack stack2 = container.getItem(i);
             if (!stack2.isEmpty())
@@ -91,17 +86,18 @@ public class HeraldryRecipe extends CustomRecipe
 
         if (!stack1.isEmpty())
         {
-            CompoundTag compoundtag = BlockItem.getBlockEntityData(stack);
-            CompoundTag compoundtag1 = compoundtag == null ? new CompoundTag() : compoundtag.copy();
-            DyeColor basecolor = ((BannerItem) stack.getItem()).getColor();
-            compoundtag1.putInt("Base", ((BannerItem) stack.getItem()).getColor().getId());
+            BannerPatternLayers patterns = stack.get(DataComponents.BANNER_PATTERNS);
+            DyeColor color = ((BannerItem) stack.getItem()).getColor();
 
             if (wornWithSurcoat(stack1.getItem()))
-                stack1.setHoverName(Component.translatable("magistuarmory.withsurcoat." + basecolor.getName(), stack1.getHoverName().getString()));
+                stack1.set(DataComponents.CUSTOM_NAME, Component.translatable("magistuarmory.withsurcoat." + color.getName(), stack1.getHoverName().getString()));
             else if (wornWithCaparison(stack1.getItem()))
-                stack1.setHoverName(Component.translatable("magistuarmory.withcaparison." + basecolor.getName(), stack1.getHoverName().getString()));
-
-            stack1.addTagElement("BlockEntityTag", compoundtag1);
+                stack1.set(DataComponents.CUSTOM_NAME, Component.translatable("magistuarmory.withcaparison." + color.getName(), stack1.getHoverName().getString()));
+            
+            if (patterns != null)
+                stack1.set(DataComponents.BANNER_PATTERNS, patterns);
+            
+            stack1.set(DataComponents.BASE_COLOR, color);
         }
         return stack1;
     }
@@ -131,7 +127,7 @@ public class HeraldryRecipe extends CustomRecipe
 
     static boolean wornWithCaparison(Item item)
     {
-        return item instanceof HorseArmorItem;
+        return item instanceof AnimalArmorItem animalarmor && animalarmor.getBodyType().equals(AnimalArmorItem.BodyType.EQUESTRIAN);
     }
 
     static boolean wornWithSurcoat(Item item)

@@ -3,19 +3,18 @@ package com.magistuarmory.item.armor;
 import com.magistuarmory.api.client.render.model.ModModelsProvider;
 import com.magistuarmory.item.ArmorDecoration;
 import com.magistuarmory.item.ArmorDecorationItem;
-import com.magistuarmory.item.armor.DyeableMedievalArmorItem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class DyeableWearableArmorDecorationItem extends DyeableMedievalArmorItem implements ArmorDecoration
 {
-	public DyeableWearableArmorDecorationItem(ArmorMaterial material, Type type, Properties properties, int defaultcolor)
+	public DyeableWearableArmorDecorationItem(ArmorType material, Type type, Properties properties, int defaultcolor)
 	{
 		super(material, type, properties, defaultcolor);
 	}
@@ -23,7 +22,7 @@ public class DyeableWearableArmorDecorationItem extends DyeableMedievalArmorItem
 	@Override
 	public ResourceLocation getResourceLocation()
 	{
-		return new ResourceLocation(this.getMaterial().getName());
+		return this.getArmorType().getLocation();
 	}
 
 	@Override
@@ -39,9 +38,9 @@ public class DyeableWearableArmorDecorationItem extends DyeableMedievalArmorItem
 	}
 
 	@Override
-	public Type getArmorType()
+	public @NotNull Type getType()
 	{
-		return this.getType();
+		return this.type;
 	}
 
 	@Override
@@ -50,7 +49,7 @@ public class DyeableWearableArmorDecorationItem extends DyeableMedievalArmorItem
 		return stack.getItem() != this &&
 				ArmorDecorationItem.getDecorationTags(stack).size() < 8 &&
 				stack.getItem() instanceof ArmorItem armor &&
-				this.getArmorType() == armor.getType();
+				this.getType() == armor.getType();
 	}
 
 	@Override

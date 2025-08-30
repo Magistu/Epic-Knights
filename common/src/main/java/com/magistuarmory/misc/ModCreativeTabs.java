@@ -5,18 +5,22 @@ import com.magistuarmory.item.ArmorDecoration;
 import com.magistuarmory.item.ModItems;
 import dev.architectury.platform.Platform;
 import dev.architectury.registry.CreativeTabRegistry;
+import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.DeferredSupplier;
 import dev.architectury.registry.registries.RegistrySupplier;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
-import dev.architectury.registry.registries.DeferredRegister;
 import net.minecraft.world.level.ItemLike;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class ModCreativeTabs
 {
@@ -26,19 +30,19 @@ public class ModCreativeTabs
 	static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(EpicKnights.ID, Registries.CREATIVE_MODE_TAB);
 
 	static final RegistrySupplier<CreativeModeTab> ARMOR = Platform.isFabric() ? TABS.register("armor", () -> CreativeTabRegistry.create(
-			Component.translatable("itemGroup." + EpicKnights.ID + ".armor"), ModItems.ARMET == null ? () -> new ItemStack(Items.BARRIER) : ARMET_WITH_PLUME_SUPPLIER)) : createTab("armor", ModItems.ARMET);
+		Component.translatable("itemGroup." + EpicKnights.ID + ".armor"), ARMET_WITH_PLUME_SUPPLIER)) : createTab("armor", ModItems.ARMET);
 	static final RegistrySupplier<CreativeModeTab> WEAPONS = createTab("weapons", ModItems.FLAME_BLADED_SWORDS.iron);
 	static final RegistrySupplier<CreativeModeTab> PARTICULAR_WEAPONS = createTab("particular_weapons", ModItems.NOBLE_SWORD);
 	static final RegistrySupplier<CreativeModeTab> SHIELDS = createTab("shields", ModItems.HEATER_SHIELDS.iron);
 	static final RegistrySupplier<CreativeModeTab> RUSTED = createTab("rusted", ModItems.RUSTED_BASTARD_SWORD);
 	static final RegistrySupplier<CreativeModeTab> ARMOR_DECORATIONS = createTab("armor_decorations", ModItems.CROWN_DECORATION);
 
-	public static final ResourceKey<CreativeModeTab> ARMOR_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(EpicKnights.ID, "armor"));
-	public static final ResourceKey<CreativeModeTab> WEAPONS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(EpicKnights.ID, "weapons"));
-	public static final ResourceKey<CreativeModeTab> PARTICULAR_WEAPONS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(EpicKnights.ID, "particular_weapons"));
-	public static final ResourceKey<CreativeModeTab> SHIELDS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(EpicKnights.ID, "shields"));
-	public static final ResourceKey<CreativeModeTab> RUSTED_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(EpicKnights.ID, "rusted"));
-	public static final ResourceKey<CreativeModeTab> ARMOR_DECORATIONS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(EpicKnights.ID, "armor_decorations"));
+	public static final ResourceKey<CreativeModeTab> ARMOR_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "armor"));
+	public static final ResourceKey<CreativeModeTab> WEAPONS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "weapons"));
+	public static final ResourceKey<CreativeModeTab> PARTICULAR_WEAPONS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "particular_weapons"));
+	public static final ResourceKey<CreativeModeTab> SHIELDS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "shields"));
+	public static final ResourceKey<CreativeModeTab> RUSTED_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "rusted"));
+	public static final ResourceKey<CreativeModeTab> ARMOR_DECORATIONS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "armor_decorations"));
 	public static final ResourceKey<CreativeModeTab> INGRIDIENTS_RESOURCE_KEY = CreativeModeTabs.INGREDIENTS;
 
 	public static RegistrySupplier<CreativeModeTab> createTab(String name, RegistrySupplier<? extends Item> supplier)
@@ -58,10 +62,11 @@ public class ModCreativeTabs
 	public static void init()
 	{
 		TABS.register();
-
-		if (ModItems.ARMET != null) {
-			CreativeTabRegistry.appendStack(ARMOR, ARMET_WITH_PLUME_SUPPLIER);
-		}
+		
+		if (Platform.isFabric())
+			appendStack(ARMOR, ARMET_WITH_PLUME_SUPPLIER);
+		else
+			append(ARMOR, ModItems.ARMET);
 		append(ARMOR, ModItems.KNIGHT_CHESTPLATE);
 		append(ARMOR, ModItems.KNIGHT_LEGGINGS);
 		append(ARMOR, ModItems.KNIGHT_BOOTS);
@@ -91,9 +96,10 @@ public class ModCreativeTabs
 		append(ARMOR, ModItems.CRUSADER_CHESTPLATE);
 		append(ARMOR, ModItems.CRUSADER_LEGGINGS);
 		append(ARMOR, ModItems.CRUSADER_BOOTS);
-		if (ModItems.ARMET != null) {
-			CreativeTabRegistry.appendStack(ARMOR, CEREMONIAL_ARMET_WITH_PLUME_SUPPLIER);
-		}
+		if (Platform.isFabric())
+			appendStack(ARMOR, CEREMONIAL_ARMET_WITH_PLUME_SUPPLIER);
+		else
+			append(ARMOR, ModItems.CEREMONIAL_ARMET);
 		append(ARMOR, ModItems.CEREMONIAL_CHESTPLATE);
 		append(ARMOR, ModItems.CEREMONIAL_BOOTS);
 		append(ARMOR, ModItems.COIF);
@@ -145,7 +151,7 @@ public class ModCreativeTabs
 		append(RUSTED, ModItems.RUSTED_CHAINMAIL_LEGGINGS);
 		append(RUSTED, ModItems.RUSTED_CHAINMAIL_BOOTS);
 		append(RUSTED, ModItems.RUSTED_KETTLEHAT);
-
+		
 		for (RegistrySupplier<? extends Item> item : ModItems.INSTANCE.ingredientItems)
 			append(INGRIDIENTS_RESOURCE_KEY, item);
 
@@ -208,9 +214,23 @@ public class ModCreativeTabs
 			append(SHIELDS, supplier);
 		for (RegistrySupplier<? extends Item> supplier : ModItems.KITE_SHIELDS.get())
 			append(SHIELDS, supplier);
-
-		for (RegistrySupplier<? extends ArmorDecoration> supplier : ModItems.INSTANCE.armorDecorationItems)
+		
+		for (RegistrySupplier<? extends ArmorDecoration> supplier : ModItems.INSTANCE.armorDecorationItems) {
+			if (supplier == ModItems.CAT_EARS_DECORATION) {
+				continue;
+			}
 			append(ARMOR_DECORATIONS, () -> supplier.get().asItem());
+		}
+	}
+
+	@SafeVarargs
+	public static <I extends ItemStack, T extends Supplier<I>> void appendStack(DeferredSupplier<CreativeModeTab> tab, T... stacks)
+	{
+		Arrays.stream(stacks).filter(Objects::nonNull).forEach((stack) -> {
+			if (!stack.get().isEmpty()) {
+				CreativeTabRegistry.appendStack(tab, stack.get());
+			}
+		});
 	}
 
 	@SafeVarargs
@@ -218,7 +238,7 @@ public class ModCreativeTabs
 	{
 		Arrays.stream(items).filter(Objects::nonNull).forEach((item) -> CreativeTabRegistry.append(tab, item));
 	}
-
+	
 	@SafeVarargs
 	public static <I extends ItemLike, T extends Supplier<I>> void append(DeferredSupplier<CreativeModeTab> tab, T... items)
 	{

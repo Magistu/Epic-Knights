@@ -1,12 +1,5 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "7.1.2"
-    id "com.matthewprenger.cursegradle"
-}
-
-version = rootProject.mod_version
-
-loom {
-    accessWidenerPath = project(":common").loom.accessWidenerPath
+    id 'com.github.johnrengelman.shadow'
 }
 
 architectury {
@@ -14,80 +7,72 @@ architectury {
     fabric()
 }
 
+loom {
+    accessWidenerPath = project(":common").loom.accessWidenerPath
+}
+
 configurations {
-    common
-    shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
+    common {
+        canBeResolved = true
+        canBeConsumed = false
+    }
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
     developmentFabric.extendsFrom common
+
+    // Files in this configuration will be bundled into your mod using the Shadow plugin.
+    // Don't use the `shadow` configuration from the plugin itself as it's meant for excluding files.
+    shadowBundle {
+        canBeResolved = true
+        canBeConsumed = false
+    }
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
-    // Remove the next line if you don't want to depend on the API
-    modApi "dev.architectury:architectury-fabric:${rootProject.architectury_version}"
-
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${rootProject.cloth_config_version}") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
-
-    //Modmenu
+    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"
+    modImplementation "dev.architectury:architectury-fabric:$rootProject.architectury_version"
+    modImplementation "me.shedaniel.cloth:cloth-config-fabric:${rootProject.cloth_config_version}"
+    common(project(path: ':common', configuration: 'namedElements')) { transitive false }
+    shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
     modImplementation("com.terraformersmc:modmenu:${rootProject.modmenu_version}") {
         exclude group: "net.fabricmc.fabric-api" }
-
-    common(project(path: ":common", configuration: "namedElements")) { transitive false }
-    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 }
 
 processResources {
-    inputs.property "version", project.version
-    inputs.property "mc_version", project.minecraft_version
-    inputs.property "loader_version", project.fabric_loader_version
+    var replaceProperties = [
+            minecraft_version           : minecraft_version,
+            minecraft_version_range     : minecraft_version_range,
+            minecraft_version_condition : minecraft_version_condition,
+            neoforge_version            : neoforge_version,
+            neoforge_version_range      : neoforge_version_range,
+            loader_version_range        : loader_version_range,
+            mod_update_json             : mod_update_json,
+            architectury_version        : architectury_version,
+            cloth_config_version        : cloth_config_version,
+            mod_id                      : mod_id,
+            mod_name                    : mod_name,
+            mod_license                 : mod_license,
+            mod_version                 : mod_version,
+            mod_authors                 : mod_authors,
+            mod_description             : mod_description,
+            mod_credits                 : mod_credits,
+            mod_issues_url              : mod_issues_url,
+            mod_sources_url             : mod_sources_url,
+            mod_home_url                : mod_home_url,
+    ]
+    inputs.properties replaceProperties
 
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version,
-                "mc_version": project.minecraft_version,
-                "loader_version": project.fabric_loader_version
+    filesMatching('fabric.mod.json') {
+        expand replaceProperties
     }
 }
 
 shadowJar {
-    exclude "architectury.common.json"
-    
-    configurations = [project.configurations.shadowCommon]
-    archiveClassifier.set("dev-shadow")
+    configurations = [project.configurations.shadowBundle]
+    archiveClassifier.set 'dev-shadow'
 }
 
 remapJar {
     inputFile.set shadowJar.archiveFile
-    dependsOn shadowJar
-    archiveClassifier.set(null)
 }
-
-jar {
-    archiveClassifier.set("dev")
-}
-
-sourcesJar {
-    def commonSources = project(":common").sourcesJar
-    dependsOn commonSources
-    from commonSources.archiveFile.map { zipTree(it) }
-}
-
-//task copy(type: Copy) {
-//    from "${project.buildDir}/libs"
-//    into "${rootProject.buildDir}/libs"
-//    dependsOn remapJar
-//}
-//
-//build.finalizedBy(copy)
-
-components.java {
-    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
-        skip()
-    }
-}
-
-rootProject.tasks.getByName("curseforge").dependsOn tasks.getByName("curseforge")
-

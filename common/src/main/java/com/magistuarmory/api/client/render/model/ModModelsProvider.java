@@ -49,22 +49,22 @@ public abstract class ModModelsProvider
 
 	public ModelLayerLocation createDecorationLocation(String name)
 	{
-		return createDecorationLocation(new ResourceLocation(this.modId, name));
+		return createDecorationLocation(ResourceLocation.fromNamespaceAndPath(this.modId, name));
 	}
 
 	public ModelLayerLocation createArmorLocation(String name)
 	{
-		return createArmorLocation(new ResourceLocation(this.modId, name));
+		return createArmorLocation(ResourceLocation.fromNamespaceAndPath(this.modId, name));
 	}
 	
 	public ModelLayerLocation createLocation(String name)
 	{
-		return createLocation(new ResourceLocation(this.modId, name));
+		return createLocation(ResourceLocation.fromNamespaceAndPath(this.modId, name));
 	}
 
 	public ModelLayerLocation createLocation(String name, String layer)
 	{
-		return createLocation(new ResourceLocation(this.modId, name), layer);
+		return createLocation(ResourceLocation.fromNamespaceAndPath(this.modId, name), layer);
 	}
 
 	public static ModelLayerLocation createDecorationLocation(ResourceLocation location)

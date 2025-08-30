@@ -4,9 +4,9 @@
 
 package com.magistuarmory.config;
 
-import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
-import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.ConfigData;
+import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
 @Config(name = "mobs_equipment")
 public class MobEquipmentConfig implements ConfigData

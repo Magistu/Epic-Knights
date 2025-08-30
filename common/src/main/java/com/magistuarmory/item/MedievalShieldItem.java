@@ -46,7 +46,7 @@ public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
 
 	public MedievalShieldItem(String id, ResourceLocation location, Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type)
     {
-		super(properties.durability(type.getDurability(material)));
+		super(properties.stacksTo(1).durability(type.getDurability(material)));
 		this.type = type;
 	    this.id = id;
 		this.location = location;
@@ -67,8 +67,13 @@ public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
 		return this.id;
 	}
 
+	public ResourceLocation getLocation()
+	{
+		return this.location;
+	}
+
 	@Override
-	public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag)
+	public void appendHoverText(@NotNull ItemStack stack, TooltipContext tooltipContext, List<Component> list, TooltipFlag flag)
 	{
 		list.add(Component.translatable("maxdamageblock", this.getMaxBlockDamage()).withStyle(ChatFormatting.BLUE));
 		list.add(Component.translatable("kgweight", this.getWeight()).withStyle(ChatFormatting.BLUE));
@@ -100,7 +105,7 @@ public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
     }
 	
 	@Override
-	public int getUseDuration(ItemStack stack)
+	public int getUseDuration(ItemStack stack, LivingEntity entity)
     {
         return (int) (12000 * this.weight);
     }
@@ -155,14 +160,14 @@ public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
 			victim.hurt(ModDamageSources.additional(), damage2);
 		}
 		
-		stack.hurtAndBreak((int) (f * damage), victim, entity -> entity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+		stack.hurtAndBreak((int) (f * damage), victim, EquipmentSlot.MAINHAND);
 	}
 	
 	@Override
 	@Environment(EnvType.CLIENT)
 	public void registerModelProperty() 
 	{
-		ItemPropertiesRegistry.register(this, new ResourceLocation("blocking"), (stack, level, entity, i) ->
+		ItemPropertiesRegistry.register(this, ResourceLocation.withDefaultNamespace("blocking"), (stack, level, entity, i) ->
 				entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
 	}
 

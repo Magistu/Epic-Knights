@@ -9,19 +9,27 @@ import net.minecraft.resources.ResourceLocation;
 
 public interface ArmorPatternLayer extends PatternLayer
 {
-    ResourceLocation getBaseTexture();
+    ResourceLocation getBaseTexture(boolean withPattern);
+    
+    ResourceLocation getBasePatternTexture();
 
     ResourceLocation getPatternTexture(ResourceLocation patternlocation);
     
     @Override
-    default VertexConsumer baseVertexConsumer(MultiBufferSource buffer, boolean hasfoil)
+    default VertexConsumer baseVertexConsumer(MultiBufferSource buffer, boolean withPattern, boolean hasfoil)
     {
-        return ItemRenderer.getArmorFoilBuffer(buffer, RenderType.entityCutout(getBaseTexture()), false, hasfoil);
+        return ItemRenderer.getArmorFoilBuffer(buffer, RenderType.entityCutout(getBaseTexture(withPattern)), hasfoil);
+    }
+    
+    @Override
+    default VertexConsumer basePatternVertexConsumer(MultiBufferSource buffer, boolean hasfoil)
+    {
+        return ItemRenderer.getArmorFoilBuffer(buffer, RenderType.entityCutout(getBasePatternTexture()), hasfoil);
     }
 
     @Override
     default VertexConsumer patternVertexConsumer(MultiBufferSource buffer, ResourceLocation patternlocation, boolean hasfoil)
     {
-        return ItemRenderer.getArmorFoilBuffer(buffer, RenderType.entityNoOutline(getPatternTexture(patternlocation)), false, hasfoil);
+        return ItemRenderer.getArmorFoilBuffer(buffer, RenderType.entityNoOutline(getPatternTexture(patternlocation)), hasfoil);
     }
 }

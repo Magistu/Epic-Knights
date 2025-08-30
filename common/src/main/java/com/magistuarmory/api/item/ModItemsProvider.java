@@ -1,5 +1,6 @@
 package com.magistuarmory.api.item;
 
+import com.magistuarmory.block.PaviseBlock;
 import com.magistuarmory.client.render.ModRender;
 import com.magistuarmory.item.*;
 import com.magistuarmory.item.armor.*;
@@ -7,12 +8,14 @@ import dev.architectury.event.events.common.LifecycleEvent;
 import dev.architectury.platform.Platform;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
+import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.fabricmc.api.EnvType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
-import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
@@ -26,7 +29,7 @@ public abstract class ModItemsProvider
 
 	public final List<RegistrySupplier<? extends MedievalShieldItem>> shieldItems = new ArrayList<>();
 	public final List<RegistrySupplier<? extends MedievalWeaponItem>> weaponItems = new ArrayList<>();
-	public final List<RegistrySupplier<? extends Item>> dyeableItems = new ArrayList<>();
+	public final List<RegistrySupplier<? extends DyeableItemLike>> dyeableItems = new ArrayList<>();
 	public final List<RegistrySupplier<? extends MedievalArmorItem>> armorItems = new ArrayList<>();
 	public final List<RegistrySupplier<? extends Item>> ingredientItems = new ArrayList<>();
 	public final List<RegistrySupplier<? extends ArmorDecoration>> armorDecorationItems = new ArrayList<>();
@@ -48,11 +51,11 @@ public abstract class ModItemsProvider
 		return new ShieldsSupply(workshop, shieldName);
 	}
 
-	public @Nullable RegistrySupplier<MedievalArmorItem> addKnightItem(String id, ArmorType type, ArmorItem.Type slot, Item.Properties properties)
+	public @Nullable RegistrySupplier<KnightItem> addKnightItem(String id, ArmorType type, ArmorItem.Type slot, Item.Properties properties)
 	{
 		if (type.isDisabled())
 			return null;
-		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerKnightItem(this.items, id, type, slot, properties);
+		RegistrySupplier<KnightItem> armor = ItemRegistryHelper.registerKnightItem(this.items, id, type, slot, properties);
 		this.dyeableItems.add(armor);
 		this.armorItems.add(armor);
 		return armor;
@@ -76,11 +79,11 @@ public abstract class ModItemsProvider
 		return armor;
 	}
 
-	public @Nullable RegistrySupplier<MedievalArmorItem> addDyeableMedievalArmorItem(String id, ArmorType type, ArmorItem.Type slot, Item.Properties properties, int defaultcolor)
+	public @Nullable RegistrySupplier<DyeableMedievalArmorItem> addDyeableMedievalArmorItem(String id, ArmorType type, ArmorItem.Type slot, Item.Properties properties, int defaultcolor)
 	{
 		if (type.isDisabled())
 			return null;
-		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerDyeableMedievalArmorItem(this.items, id, type, slot, properties, defaultcolor);
+		RegistrySupplier<DyeableMedievalArmorItem> armor = ItemRegistryHelper.registerDyeableMedievalArmorItem(this.items, id, type, slot, properties, defaultcolor);
 		this.dyeableItems.add(armor);
 		this.armorItems.add(armor);
 		return armor;
@@ -126,7 +129,7 @@ public abstract class ModItemsProvider
 		return registrysupplier;
 	}
 
-	public RegistrySupplier<WearableArmorDecorationItem> addWearableArmorDecorationItem(String id, ArmorMaterial material, ArmorItem.Type type, Item.Properties properties)
+	public RegistrySupplier<WearableArmorDecorationItem> addWearableArmorDecorationItem(String id, ArmorType material, ArmorItem.Type type, Item.Properties properties)
 	{
 		RegistrySupplier<WearableArmorDecorationItem> registrysupplier = ItemRegistryHelper.registerWearableArmorDecorationItem(this.items, id, material, type, properties);
 		this.armorDecorationItems.add(registrysupplier);
@@ -134,7 +137,7 @@ public abstract class ModItemsProvider
 		return registrysupplier;
 	}
 
-	public RegistrySupplier<DyeableWearableArmorDecorationItem> addDyeableWearableArmorDecorationItem(String id, ArmorMaterial material, ArmorItem.Type type, Item.Properties properties, int defaultcolor)
+	public RegistrySupplier<DyeableWearableArmorDecorationItem> addDyeableWearableArmorDecorationItem(String id, ArmorType material, ArmorItem.Type type, Item.Properties properties, int defaultcolor)
 	{
 		RegistrySupplier<DyeableWearableArmorDecorationItem> registrysupplier = ItemRegistryHelper.registerDyeableWearableArmorDecorationItem(this.items, id, material, type, properties, defaultcolor);
 		this.armorDecorationItems.add(registrysupplier);
@@ -147,16 +150,16 @@ public abstract class ModItemsProvider
 	{
 		if (type.isDisabled())
 			return null;
-		RegistrySupplier<MedievalShieldItem> shield = ItemRegistryHelper.registerMedievalShieldItem(this.items, id, new ResourceLocation(this.modId, name), properties, material, paintable, is3d, type);
+		RegistrySupplier<MedievalShieldItem> shield = ItemRegistryHelper.registerMedievalShieldItem(this.items, id, ResourceLocation.fromNamespaceAndPath(this.modId, name), properties, material, paintable, is3d, type);
 		this.shieldItems.add(shield);
 		return shield;
 	}
 
-	public @Nullable RegistrySupplier<MedievalShieldItem> addPaviseItem(String id, String name, Item.Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type)
+	public @Nullable RegistrySupplier<MedievalShieldItem> addPaviseItem(String id, String name, Item.Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Supplier<PaviseBlock> block)
 	{
 		if (type.isDisabled())
 			return null;
-		RegistrySupplier<MedievalShieldItem> shield = ItemRegistryHelper.registerPaviseItem(this.items, id, new ResourceLocation(this.modId, name), properties, material, paintable, is3d, type);
+		RegistrySupplier<MedievalShieldItem> shield = ItemRegistryHelper.registerPaviseItem(this.items, id, ResourceLocation.fromNamespaceAndPath(this.modId, name), properties, material, paintable, is3d, type, block);
 		this.shieldItems.add(shield);
 		return shield;
 	}
@@ -175,16 +178,16 @@ public abstract class ModItemsProvider
 		return crossbow;
 	}
 
-	public static ItemStack getDecoratedStack(RegistrySupplier<MedievalArmorItem> armorsuppler, RegistrySupplier<? extends ArmorDecorationItem> decorationsuppler)
+	public static ItemStack getDecoratedStack(RegistrySupplier<? extends Item> suppler, RegistrySupplier<? extends ArmorDecorationItem> decorationsuppler)
 	{
-		if (armorsuppler == null)
+		if (suppler == null)
 			return ItemStack.EMPTY;
-
-		ItemStack armorstack = new ItemStack(armorsuppler.get());
+		
+		ItemStack stack = new ItemStack(suppler.get());
 		ArmorDecorationItem decorationitem = decorationsuppler.get();
 		ItemStack decorationstack = new ItemStack(decorationitem);
-		decorationitem.decorate(armorstack, decorationstack);
-		return armorstack;
+		decorationitem.decorate(stack, decorationstack);
+		return stack;
 	}
 
 	public void onSetup()

@@ -1,119 +1,92 @@
 package com.magistuarmory.item;
 
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.ImmutableMultimap.Builder;
-import com.google.common.collect.Multimap;
 import com.magistuarmory.EpicKnights;
 import com.magistuarmory.effects.LacerationEffect;
-import com.magistuarmory.network.PacketLongReachAttack;
+import com.magistuarmory.component.ModDataComponents;
 import com.magistuarmory.util.CombatHelper;
 import com.magistuarmory.util.ModDamageSources;
-import dev.architectury.platform.Platform;
 import dev.architectury.registry.item.ItemPropertiesRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.damagesource.CombatRules;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobType;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
-import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import java.util.List;
 
 
 public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 {
-	private final Multimap<Attribute, AttributeModifier> defaultModifiers;
-	private final Multimap<Attribute, AttributeModifier> decreasedModifiers;
+	public static final ResourceLocation BASE_ENTITY_INTERACTION_RANGE_ID = ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "base_entity_interaction_range_id");
+
+	private final ItemAttributeModifiers defaultModifiers;
+	private final ItemAttributeModifiers decreasedModifiers;
 
 	public final WeaponType type;
 	protected final float attackDamage;
-	protected final float attackSpeed;
-	private final float decreasedAttackDamage;
-	private final float decreasedAttackSpeed;
 	private boolean isSilver = false;
 	private float silverAttackDamage = 0.0f;
 	private boolean blockingPriority = false;
 
 	public MedievalWeaponItem(Properties properties, ModItemTier material, WeaponType type)
 	{
-		super(material, (int) CombatHelper.getBaseAttackDamage(material, type), CombatHelper.getBaseAttackSpeed(material, type), properties.durability(type.getDurability(material)));
+		super(material, properties.stacksTo(1).durability(type.getDurability(material)).attributes(createDefaultAttributeModifiersBuilder(material, type).build()));
 		this.type = type;
 		this.attackDamage = CombatHelper.getBaseAttackDamage(material, type);
-		this.attackSpeed = CombatHelper.getBaseAttackSpeed(material, type);
-		this.decreasedAttackDamage = CombatHelper.getDecreasedAttackDamage(this.attackDamage, type);
-		this.decreasedAttackSpeed = CombatHelper.getDecreasedAttackSpeed(this.attackSpeed, type);
-		
+
 		if (material.equals(ModItemTier.SILVER))
 		{
 			this.isSilver = true;
 			this.silverAttackDamage = CombatHelper.getSilverAttackDamage(material, type);
 		}
 
-		this.defaultModifiers = this.getDefaultAttributeModifiersBuilder().build();
-		this.decreasedModifiers = this.getDecreasedAttributeModifiersBuilder().build();
-	}
-	
-	public Builder<Attribute, AttributeModifier> getDefaultAttributeModifiersBuilder() 
-	{
-		Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", this.attackDamage, Operation.ADDITION));
-		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", this.attackSpeed, Operation.ADDITION));
-		return builder;
+		this.defaultModifiers = createDefaultAttributeModifiersBuilder(material, type).build();
+		this.decreasedModifiers = createDecreasedAttributeModifiersBuilder(material, type).build();
 	}
 
-	public Builder<Attribute, AttributeModifier> getDecreasedAttributeModifiersBuilder()
+	public static ItemAttributeModifiers.Builder createDefaultAttributeModifiersBuilder(ModItemTier material, WeaponType type) {
+		return createAttributeModifiersBuilder(CombatHelper.getBaseAttackDamage(material, type), CombatHelper.getBaseAttackSpeed(material, type), type.getBonusAttackReach());
+	}
+
+	public static ItemAttributeModifiers.Builder createDecreasedAttributeModifiersBuilder(ModItemTier material, WeaponType type) {
+		return createAttributeModifiersBuilder(CombatHelper.getDecreasedAttackDamage(material, type), CombatHelper.getDecreasedAttackSpeed(material, type), type.getBonusAttackReach());
+	}
+
+	public static ItemAttributeModifiers.Builder createAttributeModifiersBuilder(float damage, float speed, float reach) 
 	{
-		Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", this.decreasedAttackDamage, Operation.ADDITION));
-		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", this.decreasedAttackSpeed, Operation.ADDITION));
+		ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
+		builder.add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, damage, Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
+		builder.add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, speed, Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
+		builder.add(Attributes.ENTITY_INTERACTION_RANGE, new AttributeModifier(BASE_ENTITY_INTERACTION_RANGE_ID, reach, Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
 		return builder;
 	}
 
 	public boolean onAttackClickEntity(ItemStack stack, Player player, Entity entity)
 	{
-		if (!this.isLong())
-			return true;
-		
-		if (entity != player && entity != player.getVehicle())
-			PacketLongReachAttack.sendToServer(entity.getId());
-		
-		player.resetAttackStrengthTicker();
-
-		return false;
+		return true;
 	}
 	
-	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(ItemStack stack, @NotNull EquipmentSlot slot)
+	public ItemAttributeModifiers getAttributeModifiers(ItemStack stack)
 	{
-		return this.getAttributeModifiers(this.hasTwoHandedPenalty(stack), slot);
-	}
-
-	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(boolean decreased, @NotNull EquipmentSlot slot)
-	{
-		return slot == EquipmentSlot.MAINHAND && decreased ? this.decreasedModifiers : this.getDefaultAttributeModifiers(slot);
-	}
-
-	@Override
-	public @NotNull Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot)
-	{
-		return slot == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(slot);
+		return this.hasTwoHandedPenalty(stack) ? this.decreasedModifiers : this.defaultModifiers;
 	}
 
 	@Override
@@ -121,9 +94,12 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 	{
 		if (entity instanceof LivingEntity livingentity)
 		{
-			boolean flag = type.getTwoHanded() > 0 && !livingentity.getOffhandItem().getItem().equals(Items.AIR);
-			if (this.hasTwoHandedPenalty(stack) != flag)
-				this.setTwoHandedPenalty(stack, flag);
+			boolean penalty = this.type.getTwoHanded() > 0 && !livingentity.getOffhandItem().getItem().equals(Items.AIR);
+			if (this.hasTwoHandedPenalty(stack) != penalty)
+			{
+				stack.set(ModDataComponents.TWO_HANDED_PENALTY.get(), penalty ? this.type.getTwoHanded() : 0);
+				stack.set(DataComponents.ATTRIBUTE_MODIFIERS, this.getAttributeModifiers(stack));
+			}
 			
 			if (this.canBlock()) 
 				this.blockingPriority = !(livingentity.getMainHandItem().getItem() instanceof ShieldItem) && !(livingentity.getOffhandItem().getItem() instanceof ShieldItem);
@@ -150,11 +126,12 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 		if (type.isFlamebladed())
 			LacerationEffect.apply(source, victim, damage * attackscale);
 
+		postHurtEnemy(attacker.getWeaponItem(), attacker, victim);
 		return flag;
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag)
+	public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, List<Component> tooltip, TooltipFlag flag)
 	{
 		if (this.isSilver)
 			tooltip.add(Component.translatable("silvertools.hurt", this.silverAttackDamage).withStyle(ChatFormatting.GREEN));
@@ -178,42 +155,18 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 			tooltip.add(Component.translatable("twohandedpenalty_1").withStyle(ChatFormatting.RED));
 			tooltip.add(Component.translatable("twohandedpenalty_2").withStyle(ChatFormatting.RED));
 		}
-		super.appendHoverText(stack, level, tooltip, flag);
-	}
-
-	public void setTwoHandedPenalty(ItemStack stack, boolean b)
-	{
-		CompoundTag nbt = stack.getOrCreateTag();
-		nbt.putInt("twoHandedPenalty", b ? this.type.getTwoHanded() : 0);
-		stack.setTag(nbt);
+		super.appendHoverText(stack, tooltipContext, tooltip, flag);
 	}
 
 	public boolean hasTwoHandedPenalty(ItemStack stack)
 	{
-		if (stack.hasTag())
-		{
-			CompoundTag nbt = stack.getTag();
-			if (nbt.contains("twoHandedPenalty"))
-				return nbt.getInt("twoHandedPenalty") > 0;
-		}
-
-		return false;
+		Integer value = stack.get(ModDataComponents.TWO_HANDED_PENALTY.get());
+		return value != null && value > 0;
 	}
 
 	public float getAttackDamage(ItemStack stack)
 	{
-		return hasTwoHandedPenalty(stack) ? this.attackDamage : this.decreasedAttackDamage;
-	}
-
-	public float getAttackSpeed(ItemStack stack)
-	{
-		return hasTwoHandedPenalty(stack) ? this.attackSpeed : this.decreasedAttackSpeed;
-	}
-	
-	@Override
-	public float getDamage()
-	{
-		return this.attackDamage;
+		return (float) this.getAttributeModifiers(stack).modifiers().stream().filter(m -> m.modifier().id().equals(BASE_ATTACK_DAMAGE_ID)).findFirst().orElseThrow().modifier().amount();
 	}
 
 	public float getAttackReach(float baseReach)
@@ -264,7 +217,7 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 
 	boolean haveBlocked(RandomSource rand, DamageSource source)
 	{
-		return !source.isIndirect() && rand.nextInt(18) > this.getWeight();
+		return source.isDirect() && rand.nextInt(18) > this.getWeight();
 	}
 
 	@Override
@@ -281,7 +234,8 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 		return super.use(level, player, hand);
 	}
 
-	public int getUseDuration(ItemStack stack)
+	@Override
+	public int getUseDuration(ItemStack stack, LivingEntity entity)
 	{
 		return this.canBlock() ? (int) (500 / this.getWeight()) : 0;
 	}
@@ -315,12 +269,12 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 			victim.hurt(ModDamageSources.additional(), damage1);
 		}
 
-		stack.hurtAndBreak((int) (f * damage), victim, entity -> entity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+		stack.hurtAndBreak((int) (f * damage), victim, EquipmentSlot.MAINHAND);
 	}
 
 	public boolean dealSilverDamage(DamageSource source, LivingEntity attacker, LivingEntity victim, float damage, float attackscale)
 	{
-		if (victim.getMobType().equals(MobType.UNDEAD))
+		if (victim.getType().is(EntityTypeTags.UNDEAD))
 		{
 			victim.hurt(ModDamageSources.silverAttack(attacker), CombatHelper.getDamageAfterAbsorb(source, victim, this.silverAttackDamage) * attackscale + damage);
 			return true;
@@ -343,7 +297,7 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 	{
 		if (this.canBlock())
 		{
-			ItemPropertiesRegistry.register(this, new ResourceLocation("blocking"), (stack, level, entity, i) ->
+			ItemPropertiesRegistry.register(this, ResourceLocation.withDefaultNamespace("blocking"), (stack, level, entity, i) ->
 					entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
 		}
 	}

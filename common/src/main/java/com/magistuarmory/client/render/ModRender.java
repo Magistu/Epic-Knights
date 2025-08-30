@@ -1,11 +1,9 @@
 package com.magistuarmory.client.render;
 
 import com.magistuarmory.api.item.ModItemsProvider;
-import com.magistuarmory.block.ModBlockEntityTypes;
 import com.magistuarmory.client.render.tileentity.HeraldryItemStackRenderer;
 import com.magistuarmory.client.render.tileentity.PaviseBlockRenderer;
-import com.magistuarmory.item.IHasModelProperty;
-import com.magistuarmory.item.MedievalShieldItem;
+import com.magistuarmory.item.*;
 import com.magistuarmory.item.armor.MedievalArmorItem;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
@@ -15,7 +13,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.Item;
 
 import java.util.function.Supplier;
@@ -26,13 +23,23 @@ public class ModRender
 {
 	public static void setup(ModItemsProvider content)
 	{
-		for (RegistrySupplier<? extends Item> supplier : content.dyeableItems)
-			ColorHandlerRegistry.registerItemColors((stack, i) -> i > 0 ? -1 : ((DyeableLeatherItem) stack.getItem()).getColor(stack), supplier.get());
-
+		for (RegistrySupplier<? extends DyeableItemLike> supplier : content.dyeableItems)
+		{
+			ColorHandlerRegistry.registerItemColors((stack, i) -> i > 0 ? 0xFFFFFFFF : ((DyeableItemLike) stack.getItem()).getColor(stack), supplier.get());
+		}
+		
 		for (RegistrySupplier<? extends Item> supplier : content.items)
 			if (supplier.get() instanceof IHasModelProperty havingproperty)
 				havingproperty.registerModelProperty();
 
+		ModItems.NOBLE_SWORD.get().registerModelProperty();
+
+		content.shieldItems.stream()
+				.filter(s -> s.get() instanceof PaviseItem)
+				.map(s -> (PaviseItem) s.get())
+				.forEach(p -> BlockEntityRendererRegistry.register(p.getBlock().getEntityType(), 
+						context -> new PaviseBlockRenderer(context, p.getId(), p.getLocation())));
+		
 		setupPlatform(content);
 	}
 
@@ -50,7 +57,6 @@ public class ModRender
 
 	public static void registerRenderers()
 	{
-		BlockEntityRendererRegistry.register(ModBlockEntityTypes.PAVISE.get(), PaviseBlockRenderer::new);
 	}
 
 	public static void loadModels(ModItemsProvider content, EntityRendererProvider.Context context)

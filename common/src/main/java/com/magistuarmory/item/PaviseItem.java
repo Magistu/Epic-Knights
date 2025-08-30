@@ -1,12 +1,15 @@
 package com.magistuarmory.item;
 
 import com.magistuarmory.block.ModBlocks;
+import com.magistuarmory.block.PaviseBlock;
+import com.magistuarmory.block.PaviseBlockEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -18,6 +21,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -28,98 +33,40 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
-import java.util.Objects;
+import java.util.function.Supplier;
 
 
 public class PaviseItem extends MedievalShieldItem
 {
 	private final Direction attachmentDirection = Direction.DOWN;
+	private final Supplier<PaviseBlock> block;
 	
-	public PaviseItem(String id, ResourceLocation location, Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type)
+	public PaviseItem(String id, ResourceLocation location, Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Supplier<PaviseBlock> block)
 	{
 		super(id, location, properties, material, paintable, is3d, type);
-	}
-
-	private static <T extends Comparable<T>> BlockState updateState(BlockState blockstate, Property<T> property, String string)
-	{
-		return property.getValue(string).map((comparable) -> blockstate.setValue(property, comparable)).orElse(blockstate);
-	}
-
-	public static boolean updateCustomBlockEntityTag(Level level, @Nullable Player player, BlockPos blockpos, ItemStack stack)
-	{
-		MinecraftServer server = level.getServer();
-        if (server != null)
-        {
-            CompoundTag blockentitytag = getBlockEntityData(stack);
-            BlockEntity blockentity = level.getBlockEntity(blockpos);
-            if (blockentity != null)
-            {
-                if (!level.isClientSide && blockentity.onlyOpCanSetNbt() && (player == null || !player.canUseGameMasterBlocks()))
-                    return false;
-
-                CompoundTag tag2 = blockentity.saveWithoutMetadata();
-                CompoundTag tag3 = tag2.copy();
-	            if (stack.getTag() != null)
-		            tag2.put("ItemStack", stack.getTag());
-	            tag2.putBoolean("Enchanted", stack.isEnchanted());
-	            tag2.putString("ShieldId", ((PaviseItem) stack.getItem()).getId());
-				if (blockentitytag != null)
-				{
-					blockentitytag.putInt("Base", PaviseItem.getColor(stack).getId());
-					tag2.merge(blockentitytag);
-				}
-                if (!tag2.equals(tag3))
-                {
-                    blockentity.load(tag2);
-                    blockentity.setChanged();
-                    return true;
-                }
-            }
-
-        }
-        return false;
-    }
-
-	@Nullable
-	public static CompoundTag getBlockEntityData(ItemStack stack)
-	{
-		return stack.getTagElement("BlockEntityTag");
-	}
-
-	public static ListTag getEnchantmentData(ItemStack stack)
-	{
-		return stack.getEnchantmentTags();
-	}
-
-	public static void setBlockEntityData(ItemStack stack, BlockEntityType<?> type, CompoundTag tag)
-	{
-		if (tag.isEmpty())
-			stack.removeTagKey("BlockEntityTag");
-		
-		BlockEntity.addEntityType(tag, type);
-		stack.addTagElement("BlockEntityTag", tag);
+		this.block = block;
 	}
 
 	@Override
-	public InteractionResult useOn(UseOnContext context)
+	public @NotNull InteractionResult useOn(UseOnContext context)
 	{
-		InteractionResult result = super.useOn(context);
-		if (result.consumesAction() || (context.getPlayer() != null && !context.getPlayer().isShiftKeyDown()))
-			return result;
-		
-		result = this.place(new BlockPlaceContext(context));
-		if (!result.consumesAction() && this.isEdible())
+		InteractionResult interactionResult = this.place(new BlockPlaceContext(context));
+		if (!interactionResult.consumesAction() && context.getItemInHand().has(DataComponents.FOOD)) 
 		{
-			InteractionResult result2 = this.use(context.getLevel(), context.getPlayer(), context.getHand()).getResult();
-			return result2 == InteractionResult.CONSUME ? InteractionResult.CONSUME_PARTIAL : result2;
+			InteractionResult interactionResult2 = super.use(context.getLevel(), context.getPlayer(), context.getHand()).getResult();
+			return interactionResult2 == InteractionResult.CONSUME ? InteractionResult.CONSUME_PARTIAL : interactionResult2;
+		} 
+		else 
+		{
+			return interactionResult;
 		}
-		return result;
 	}
 
 	public InteractionResult place(BlockPlaceContext context)
@@ -149,7 +96,9 @@ public class PaviseItem extends MedievalShieldItem
 		if (blockstate2.is(blockstate.getBlock()))
 		{
 			blockstate2 = this.updateBlockStateFromTag(blockpos, level, stack, blockstate2);
-			this.updateCustomBlockEntityTag(blockpos, level, player, stack, blockstate2);
+			BlockEntity blockentity = level.getBlockEntity(blockpos);
+			if (blockentity instanceof PaviseBlockEntity paviseblockentity)
+				paviseblockentity.fromItem(stack);
 			blockstate2.getBlock().setPlacedBy(level, blockpos, blockstate2, player, stack);
 			if (player instanceof ServerPlayer)
 				CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer) player, blockpos, stack);
@@ -175,35 +124,22 @@ public class PaviseItem extends MedievalShieldItem
 		return context;
 	}
 
-	protected boolean updateCustomBlockEntityTag(BlockPos blockpos, Level level, @Nullable Player player, ItemStack stack, BlockState blockstate)
-	{
-		return updateCustomBlockEntityTag(level, player, blockpos, stack);
-	}
-
 	private BlockState updateBlockStateFromTag(BlockPos blockpos, Level level, ItemStack stack, BlockState blockstate)
 	{
-		BlockState blockstate2 = blockstate;
-		CompoundTag tag = stack.getTag();
-		if (tag != null)
+		BlockItemStateProperties blockItemStateProperties = stack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY);
+		if (blockItemStateProperties.isEmpty()) 
 		{
-			CompoundTag tag2 = tag.getCompound("BlockStateTag");
-			StateDefinition<Block, BlockState> statedefinition = blockstate.getBlock().getStateDefinition();
+			return blockstate;
+		} 
+		else 
+		{
+			BlockState blockstate2 = blockItemStateProperties.apply(blockstate);
+			if (blockstate2 != blockstate) {
+				level.setBlock(blockpos, blockstate2, 2);
+			}
 
-            for (String string : tag2.getAllKeys())
-            {
-                Property<?> property = statedefinition.getProperty(string);
-                if (property != null)
-                {
-                    String string2 = Objects.requireNonNull(tag2.get(string)).getAsString();
-                    blockstate2 = updateState(blockstate2, property, string2);
-                }
-            }
+			return blockstate2;
 		}
-
-		if (blockstate2 != blockstate)
-			level.setBlock(blockpos, blockstate2, 2);
-
-		return blockstate2;
 	}
 
 	protected boolean placeBlock(BlockPlaceContext context, BlockState blockstate)
@@ -224,18 +160,19 @@ public class PaviseItem extends MedievalShieldItem
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag tooltipflag)
+	public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipflag)
 	{
-		super.appendHoverText(stack, level, list, tooltipflag);
+		super.appendHoverText(stack, tooltipContext, list, tooltipflag);
 		list.add(Component.translatable("canbeplacedonground").withStyle(ChatFormatting.BLUE));
 	}
 
-	public Block getBlock()
+	public PaviseBlock getBlock()
 	{
-		return ModBlocks.PAVISE.get();
+		return this.block.get();
 	}
 
-	public FeatureFlagSet requiredFeatures()
+	@Override
+	public @NotNull FeatureFlagSet requiredFeatures()
 	{
 		return this.getBlock().requiredFeatures();
 	}

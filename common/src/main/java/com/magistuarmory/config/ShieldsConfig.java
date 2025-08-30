@@ -4,9 +4,9 @@
 
 package com.magistuarmory.config;
 
-import me.shedaniel.autoconfig.annotation.ConfigEntry;
-import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.ConfigData;
+import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 @Config(name = "shields")
 public class ShieldsConfig implements ConfigData

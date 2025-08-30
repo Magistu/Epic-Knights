@@ -24,17 +24,17 @@ public class MobEquipment
     public static final MobEquipmentConfig MOBS_EQUIPMENT_CONFIG = EpicKnights.CONFIG.mobEquipments;
     static Map<DualKey<EntityType<? extends LivingEntity>, ResourceKey<Level>>, List<MobEquipment>> EQUIPMENTS = new HashMap<>();
 
-    public List<EntityType<? extends LivingEntity>> entities = new ArrayList<>();
+    public final List<EntityType<? extends LivingEntity>> entities = new ArrayList<>();
     
-    public List<ResourceKey<Level>> dimensions;
+    public final List<ResourceKey<Level>> dimensions;
     
-    public List<ArmorItem> helmets = new ArrayList<>();
-    public List<ArmorItem> chestplates = new ArrayList<>();
-    public List<ArmorItem> leggings = new ArrayList<>();
-    public List<ArmorItem> boots = new ArrayList<>();
+    public final List<ArmorItem> helmets = new ArrayList<>();
+    public final List<ArmorItem> chestplates = new ArrayList<>();
+    public final List<ArmorItem> leggings = new ArrayList<>();
+    public final List<ArmorItem> boots = new ArrayList<>();
     
-    public List<Item> weapons = new ArrayList<>();
-    public List<ShieldItem> shields = new ArrayList<>();
+    public final List<Item> weapons = new ArrayList<>();
+    public final List<ShieldItem> shields = new ArrayList<>();
     
     public double chance;
 
@@ -46,7 +46,7 @@ public class MobEquipment
         
         for (String id : ids)
         {
-            ResourceLocation resloc = new ResourceLocation(id);
+            ResourceLocation resloc = ResourceLocation.parse(id);
 
             Optional<EntityType<?>> entityoptional = BuiltInRegistries.ENTITY_TYPE.getOptional(resloc);
             if (entityoptional.isPresent())

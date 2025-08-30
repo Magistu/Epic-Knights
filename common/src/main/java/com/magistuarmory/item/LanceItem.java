@@ -1,22 +1,20 @@
 package com.magistuarmory.item;
 
 import com.magistuarmory.EpicKnights;
-import com.magistuarmory.client.ClientHelper;
+import com.magistuarmory.client.HitResultHelper;
+import com.magistuarmory.component.ModDataComponents;
 import com.magistuarmory.network.PacketLanceCollision;
 import com.magistuarmory.util.CombatHelper;
 import com.magistuarmory.util.ModDamageSources;
-import dev.architectury.platform.Platform;
 import dev.architectury.registry.item.ItemPropertiesRegistry;
+import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -30,13 +28,12 @@ import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,7 +112,7 @@ public class LanceItem extends MedievalWeaponItem
 					speed >= ((Horse)player.getRootVehicle()).getAttribute(Attributes.MOVEMENT_SPEED).getValue())
 					|| (!(player.getRootVehicle() instanceof Horse) && speed >= 0.233))
 			{
-				PacketLanceCollision.sendToServer(victim.getId(), speed);
+				PacketLanceCollision.sendToServer(player, victim);
 				player.resetAttackStrengthTicker();
 			}
 		}
@@ -154,8 +151,10 @@ public class LanceItem extends MedievalWeaponItem
 
 			if (stack.getDamageValue() >= stack.getMaxDamage() - 1)
 				this.onBroken(player);
+			if (stack.getDamageValue() >= stack.getMaxDamage() - 1)
+				this.onBroken(player);
 			else if (!player.isCreative()) {
-				if (victim.getArmorValue() >= 9 * (this.material.getLevel() + 1) || victim.isBlocking())
+				if (victim.getArmorValue() >= 9 * (this.material.getAttackDamageBonus() + 1) || victim.isBlocking())
 					stack.setDamageValue(stack.getDamageValue() + (int) ((0.6 + bonusdamage / 20) * victim.level().getRandom().nextDouble() * stack.getMaxDamage()));
 				else
 					stack.setDamageValue(stack.getDamageValue() + 1);
@@ -164,7 +163,7 @@ public class LanceItem extends MedievalWeaponItem
 			for (ItemStack stack0 : player.getInventory().items)
 			{
 				this.setRaised(player, true);
-				player.getCooldowns().addCooldown(stack0.getItem(), (int) (40 / (4 + this.getAttackSpeed(stack))));
+				player.getCooldowns().addCooldown(stack0.getItem(), (int) player.getCurrentItemAttackStrengthDelay());
 			}
 
 			if (stack.getDamageValue() >= stack.getMaxDamage())
@@ -219,7 +218,7 @@ public class LanceItem extends MedievalWeaponItem
 		{
 			if (level.isClientSide && player.getMainHandItem().getItem() instanceof LanceItem)
 			{
-				HitResult hit = ClientHelper.getMouseOver(Minecraft.getInstance(), CombatHelper.getAttackReach(player, this));
+				HitResult hit = HitResultHelper.getMouseOver(Minecraft.getInstance(), CombatHelper.getAttackReach(player, this));
 				if (hit instanceof EntityHitResult entityhit)
 				{
 					Entity victim = entityhit.getEntity();
@@ -250,17 +249,17 @@ public class LanceItem extends MedievalWeaponItem
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag)
+	public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, List<Component> tooltip, TooltipFlag flag)
 	{
 		tooltip.add(Component.translatable("lance.rideronly").withStyle(ChatFormatting.BLUE));
 		tooltip.add(Component.translatable("lance.leftclick").withStyle(ChatFormatting.BLUE));
 		tooltip.add(Component.translatable("lance.bonusdamage").withStyle(ChatFormatting.BLUE));
 
-		super.appendHoverText(stack, level, tooltip, flag);
+		super.appendHoverText(stack, tooltipContext, tooltip, flag);
 	}
 
 
-	float getVelocityProjection(Entity entity)
+	public float getVelocityProjection(Entity entity)
 	{
 		Vec3 velocity;
 		if (entity.isPassenger())
@@ -300,13 +299,14 @@ public class LanceItem extends MedievalWeaponItem
 		float mass = 0.0f;
 
 		AABB box = entity.getBoundingBox();
-		if (box != null)
-			mass += (box.getXsize()) * (box.getYsize()) * (box.getZsize());
+		mass += (box.getXsize()) * (box.getYsize()) * (box.getZsize());
 
-		for (ItemStack armorpiece : entity.getArmorSlots())
-		{
-			if (!armorpiece.isEmpty() && armorpiece.getItem() instanceof ArmorItem)
-				mass += (((ArmorItem)armorpiece.getItem()).getDefense() + ((ArmorItem)armorpiece.getItem()).getToughness()) / 20.0;
+		if (entity instanceof LivingEntity livingentity) {
+			for (ItemStack armorpiece : livingentity.getArmorSlots())
+			{
+				if (!armorpiece.isEmpty() && armorpiece.getItem() instanceof ArmorItem)
+					mass += (((ArmorItem) armorpiece.getItem()).getDefense() + ((ArmorItem) armorpiece.getItem()).getToughness()) / 20.0;
+			}
 		}
 
 		return mass;
@@ -314,7 +314,7 @@ public class LanceItem extends MedievalWeaponItem
 
 	public void onBroken(Player player)
 	{
-		if (player.getMainHandItem() != null && player.getMainHandItem().getItem() == this)
+		if (player.getMainHandItem().getItem() == this)
 		{
 			for (ItemStack stack : this.dropItems)
 				player.drop(stack, true);
@@ -322,71 +322,49 @@ public class LanceItem extends MedievalWeaponItem
 		}
 	}
 
+	@SuppressWarnings("ConstantConditions")
 	public boolean isRaised(@Nullable LivingEntity entity)
 	{
 		if (entity == null)
 			return false;
-
+		
 		ItemStack stack = entity.getMainHandItem();
-		if (stack.hasTag())
-		{
-			CompoundTag nbt = stack.getTag();
-			return nbt.contains("raised") && nbt.getInt("raised") == 1;
-		}
-
-		return false;
+		Integer raised = stack.get(ModDataComponents.RAISED.get());
+		return raised != null && raised == 1;
 	}
 
 	public void setRaised(LivingEntity entity, boolean raised)
 	{
 		ItemStack stack = entity.getMainHandItem();
-		CompoundTag nbt = stack.hasTag() ? stack.getTag() : new CompoundTag();
-		nbt.putInt("raised", raised ? 1 : 0);
-		stack.setTag(nbt);
+		stack.set(ModDataComponents.RAISED.get(), raised ? 1 : 0);
 	}
 
 	public boolean getDismount(ItemStack stack)
 	{
-		if (stack.hasTag())
-		{
-			CompoundTag nbt = stack.getTag();
-			if (nbt.contains("dismount"))
-				return nbt.getBoolean("dismount");
-		}
-
-		return false;
+		Boolean dismount = stack.get(ModDataComponents.DISMOUNT.get());
+		return dismount != null ? dismount : false;
 	}
 
 	public void setDismount(ItemStack stack, boolean dismount)
 	{
-		CompoundTag nbt = stack.getOrCreateTag();
-		nbt.putBoolean("dismount", dismount);
-		stack.setTag(nbt);
+		stack.set(ModDataComponents.DISMOUNT.get(), dismount);
 	}
 
 	public float getRideSpeed(ItemStack stack)
 	{
-		if (stack.hasTag())
-		{
-			CompoundTag nbt = stack.getTag();
-			if (nbt.contains("rideSpeed"))
-				return nbt.getFloat("rideSpeed");
-		}
-
-		return 0.0f;
+		Float speed = stack.get(ModDataComponents.RIDE_SPEED.get());
+		return speed != null ? speed : 0.0f;
 	}
 
 	public void setRideSpeed(ItemStack stack, float speed)
 	{
-		CompoundTag nbt = stack.getOrCreateTag();
-		nbt.putFloat("rideSpeed", speed);
-		stack.setTag(nbt);
+		stack.set(ModDataComponents.RIDE_SPEED.get(), speed);
 	}
 
 	@Override
 	@Environment(EnvType.CLIENT)
 	public void registerModelProperty()
 	{
-		ItemPropertiesRegistry.register(this, new ResourceLocation(EpicKnights.ID, "raised"), (stack, level, entity, i) -> this.isRaised(entity) ? 1 : 0);
+		ItemPropertiesRegistry.register(this, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "raised"), (stack, level, entity, i) -> this.isRaised(entity) ? 1 : 0);
 	}
 }

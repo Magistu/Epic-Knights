@@ -1,13 +1,15 @@
 package com.magistuarmory.item;
 
 import dev.architectury.platform.Platform;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
@@ -16,7 +18,6 @@ public class ModItemTier implements Tier
 	private final String name;
 	private final float attackDamageBonus;
 	private final int enchantmentValue;
-	private final int level;
 	private final Supplier<Ingredient> repairIngredient;
 	private final float speed;
 	private final int uses;
@@ -29,16 +30,17 @@ public class ModItemTier implements Tier
 	public static ModItemTier GOLD = new ModItemTier("gold", Tiers.GOLD, 4);
 	public static ModItemTier NETHERITE = new ModItemTier("netherite", Tiers.NETHERITE, 5);
 
-	public static ModItemTier COPPER = new ModItemTier("copper", 1, 150, 0.7F, 0.0F, 10, Platform.isForge() ? "forge:ingots/copper" : "c:copper_ingots", 1);
-	public static ModItemTier SILVER = new ModItemTier("silver", 2, 230, 5.5F, 1.0F, 18, Platform.isForge() ? "forge:ingots/silver" : "c:silver_ingots", 2);
-	public static ModItemTier STEEL = new ModItemTier("steel", 2, 400, 6.0F, 2.5F, 14, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots", 2);
-	public static ModItemTier TIN = new ModItemTier("tin", 2, 130, 6.0F, 0.0F, 20, Platform.isForge() ? "forge:ingots/tin" : "c:tin_ingots", 2);
-	public static ModItemTier BRONZE = new ModItemTier("bronze", 2, 200, 6.0F, 2.0F, 15, Platform.isForge() ? "forge:ingots/bronze" : "c:bronze_ingots", 2);
+	public static ModItemTier COPPER = new ModItemTier("copper", BlockTags.INCORRECT_FOR_STONE_TOOL, 150, 0.7F, 0.0F, 10, Platform.isNeoForge() ? "neoforge:ingots/copper" : "c:copper_ingots", 1);
+	public static ModItemTier SILVER = new ModItemTier("silver", BlockTags.INCORRECT_FOR_STONE_TOOL, 230, 5.5F, 1.0F, 18, Platform.isNeoForge() ? "neoforge:ingots/silver" : "c:silver_ingots", 2);
+	public static ModItemTier STEEL = new ModItemTier("steel", BlockTags.INCORRECT_FOR_IRON_TOOL, 400, 6.0F, 2.5F, 14, Platform.isNeoForge() ? "neoforge:ingots/steel" : "c:steel_ingots", 2);
+	public static ModItemTier TIN = new ModItemTier("tin", BlockTags.INCORRECT_FOR_STONE_TOOL, 130, 6.0F, 0.0F, 20, Platform.isNeoForge() ? "neoforge:ingots/tin" : "c:tin_ingots", 2);
+	public static ModItemTier BRONZE = new ModItemTier("bronze", BlockTags.INCORRECT_FOR_IRON_TOOL, 200, 6.0F, 2.0F, 15, Platform.isNeoForge() ? "neoforge:ingots/bronze" : "c:bronze_ingots", 2);
+	private final TagKey<Block> incorrectBlocks;
 
 	public ModItemTier(String name, Tier tier, float density)
 	{
 		this.name = name;
-		this.level = tier.getLevel();
+		this.incorrectBlocks = tier.getIncorrectBlocksForDrops();
 		this.uses = tier.getUses();
 		this.speed = tier.getSpeed();
 		this.attackDamageBonus = tier.getAttackDamageBonus();
@@ -47,15 +49,15 @@ public class ModItemTier implements Tier
 		this.density = density;
 	}
 
-	public ModItemTier(String name, int level, int uses, float speed, float attack, int enchantment, String repairitemtag, float density)
+	public ModItemTier(String name, TagKey<Block> incorrectBlocks, int uses, float speed, float attack, int enchantment, String repairitemtag, float density)
 	{
 		this.name = name;
-		this.level = level;
+		this.incorrectBlocks = incorrectBlocks;
 		this.uses = uses;
 		this.speed = speed;
 		this.attackDamageBonus = attack;
 		this.enchantmentValue = enchantment;
-		this.repairIngredient = () -> Ingredient.of(TagKey.create(Registries.ITEM, new ResourceLocation(repairitemtag)));
+		this.repairIngredient = () -> Ingredient.of(TagKey.create(Registries.ITEM, ResourceLocation.parse(repairitemtag)));
 		this.density = density;
 	}
 
@@ -66,15 +68,15 @@ public class ModItemTier implements Tier
 	}
 
 	@Override
-	public int getEnchantmentValue()
+	public @NotNull TagKey<Block> getIncorrectBlocksForDrops()
 	{
-		return enchantmentValue;
+		return this.incorrectBlocks;
 	}
 
 	@Override
-	public int getLevel()
+	public int getEnchantmentValue()
 	{
-		return level;
+		return enchantmentValue;
 	}
 
 	@Override

@@ -2,8 +2,8 @@ package com.magistuarmory.util;
 
 import com.magistuarmory.item.MedievalWeaponItem;
 import com.magistuarmory.item.ModItemTier;
-import com.magistuarmory.item.ShieldType;
 import com.magistuarmory.item.WeaponType;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.DamageTypeTags;
@@ -15,7 +15,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.level.gameevent.GameEvent;
 
 public class CombatHelper
 {
@@ -37,6 +36,16 @@ public class CombatHelper
 	public static float getBaseAttackSpeed(ModItemTier material, WeaponType type)
 	{
 		return type.getAttackSpeed(material) - 4;
+	}
+
+	public static float getDecreasedAttackDamage(ModItemTier material, WeaponType type)
+	{
+		return getDecreasedAttackDamage(getBaseAttackDamage(material, type), type);
+	}
+
+	public static float getDecreasedAttackSpeed(ModItemTier material, WeaponType type)
+	{
+		return getDecreasedAttackSpeed(getBaseAttackSpeed(material, type), type);
 	}
 
 	public static float getDecreasedAttackDamage(float baseattackdamage, WeaponType type)
@@ -71,7 +80,7 @@ public class CombatHelper
 	public static float getDamageAfterArmorAbsorb(DamageSource source, LivingEntity victim, float damage) 
 	{
 		if (!source.is(DamageTypeTags.BYPASSES_ARMOR))
-			damage = CombatRules.getDamageAfterAbsorb(damage, (float) victim.getArmorValue(), (float) victim.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
+			damage = CombatRules.getDamageAfterAbsorb(victim, damage, source, (float) victim.getArmorValue(), (float) victim.getAttributeValue(Attributes.ARMOR_TOUGHNESS));
 
 		return damage;
 	}
@@ -84,12 +93,12 @@ public class CombatHelper
 		} 
 		else 
 		{
-			int k;
+			float k;
 			if (victim.hasEffect(MobEffects.DAMAGE_RESISTANCE) && !source.is(DamageTypeTags.BYPASSES_RESISTANCE)) 
 			{
-				k = (victim.getEffect(MobEffects.DAMAGE_RESISTANCE).getAmplifier() + 1) * 5;
-				int j = 25 - k;
-				float f = damage * (float)j;
+				k = (victim.getEffect(MobEffects.DAMAGE_RESISTANCE).getAmplifier() + 1.0f) * 5.0f;
+				float j = 25 - k;
+				float f = damage * j;
 				float f1 = damage;
 				damage = Math.max(f / 25.0F, 0.0F);
 				float f2 = f1 - damage;
@@ -116,9 +125,9 @@ public class CombatHelper
 			} 
 			else 
 			{
-				k = EnchantmentHelper.getDamageProtection(victim.getArmorSlots(), source);
+				k = EnchantmentHelper.getDamageProtection((ServerLevel) victim.level(), victim, source);
 				if (k > 0)
-					damage = CombatRules.getDamageAfterMagicAbsorb(damage, (float)k);
+					damage = CombatRules.getDamageAfterMagicAbsorb(damage, k);
 
 				return damage;
 			}
@@ -138,10 +147,9 @@ public class CombatHelper
 		if (f > 0.0f && f < 3.4028235E37f) 
 		{
 			Entity entity = source.getEntity();
-			if (entity instanceof ServerPlayer) 
+			if (entity instanceof ServerPlayer serverplayer)
 			{
-				ServerPlayer serverplayer = (ServerPlayer)entity;
-				serverplayer.awardStat(Stats.DAMAGE_DEALT_ABSORBED, Math.round(f * 10.0f));
+                serverplayer.awardStat(Stats.DAMAGE_DEALT_ABSORBED, Math.round(f * 10.0f));
 			}
 		}
 

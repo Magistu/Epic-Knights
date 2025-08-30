@@ -1,6 +1,8 @@
 package com.magistuarmory.item;
 
+import com.magistuarmory.component.ModDataComponents;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
@@ -8,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,19 +20,19 @@ public interface ArmorDecoration extends ItemLike
 	
 	CompoundTag getCompoundTag(ItemStack stack);
 	
-	ArmorItem.Type getArmorType();
+	ArmorItem.Type getType();
 	
 	boolean isApplicableForDecoration(ItemStack stack);
 
 	default void decorate(ItemStack armorstack, ItemStack decorationstack)
 	{
-		CompoundTag compoundtag = armorstack.getTagElement("ArmorDecoration");
+		CustomData data = armorstack.get(ModDataComponents.ARMOR_DECORATION.get());
 		ListTag listtag = ArmorDecorationItem.getDecorationTags(armorstack);
 
-		if (compoundtag == null || listtag.isEmpty())
-			armorstack.setHoverName(Component.translatable("magistuarmory.decorated", armorstack.getHoverName().getString()));
+		if (data == null || listtag.isEmpty())
+			armorstack.set(DataComponents.CUSTOM_NAME, Component.translatable("magistuarmory.decorated", Component.translatable(armorstack.getHoverName().getString())));
 
-		CompoundTag compoundtag1 = compoundtag != null ? compoundtag.copy() : new CompoundTag();
+		CompoundTag compoundtag1 = data != null ? data.copyTag() : new CompoundTag();
 
 		CompoundTag decorationdata = this.getCompoundTag(decorationstack);
 		String name = decorationdata.getString("name");
@@ -51,7 +54,7 @@ public interface ArmorDecoration extends ItemLike
 
 		compoundtag1.put("Items", listtag);
 
-		armorstack.addTagElement("ArmorDecoration", compoundtag1);
+		armorstack.set(ModDataComponents.ARMOR_DECORATION.get(), CustomData.of(compoundtag1));
 	}
 	
 	ModelLayerLocation createModelLocation();

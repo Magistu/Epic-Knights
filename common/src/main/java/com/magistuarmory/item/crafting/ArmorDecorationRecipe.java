@@ -2,14 +2,12 @@ package com.magistuarmory.item.crafting;
 
 import com.magistuarmory.item.ArmorDecoration;
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
-import net.minecraft.world.item.crafting.CustomRecipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,13 +22,14 @@ public class ArmorDecorationRecipe extends CustomRecipe
     }
 
     @Override
-    public boolean matches(CraftingContainer container, Level level)
+    public boolean matches(CraftingInput container, Level level)
     {
         ItemStack armorstack = ItemStack.EMPTY;
         ItemStack decorationstack = ItemStack.EMPTY;
-        
-        for(ItemStack stack : container.getItems())
+
+        for(int i = 0; i < container.size(); ++i)
         {
+            ItemStack stack = container.getItem(i);
             if (stack.isEmpty())
                 continue;
             
@@ -61,13 +60,14 @@ public class ArmorDecorationRecipe extends CustomRecipe
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer container, @NotNull RegistryAccess access)
+    public @NotNull ItemStack assemble(CraftingInput container, @NotNull HolderLookup.Provider access)
     {
         ItemStack armorstack = ItemStack.EMPTY;
         ItemStack decorationstack = ItemStack.EMPTY;
 
-        for(ItemStack stack : container.getItems())
+        for(int i = 0; i < container.size(); ++i)
         {
+            ItemStack stack = container.getItem(i);
             if (stack.isEmpty())
                 continue;
             if (stack.getItem() instanceof ArmorDecoration)

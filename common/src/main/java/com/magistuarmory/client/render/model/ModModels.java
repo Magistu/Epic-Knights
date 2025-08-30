@@ -35,6 +35,7 @@ public class ModModels extends ModModelsProvider
 	public static final LayerDefinition TOP_DECORATION_2 = TopDecoration2Model.createLayer();
 	public static final LayerDefinition SURCOAT = SurcoatModel.createLayer();
 	public static final LayerDefinition CAPARISON = CaparisonModel.createLayer();
+	public static final LayerDefinition CAT_EARS = CatEarsModel.createLayer();
 	
 	public static final ModelLayerLocation TORSE_AND_MANTLE_LOCATION = INSTANCE.addDecorationModel("torse_and_mantle", () -> TORSE_AND_MANTLE);
 	public static final ModelLayerLocation CROWN_LOCATION = INSTANCE.addDecorationModel("crown", () -> CROWN);
@@ -66,6 +67,7 @@ public class ModModels extends ModModelsProvider
 	public static final ModelLayerLocation HORSE_LOCATION = INSTANCE.addDecorationModel("horse", () -> TOP_DECORATION);
 	public static final ModelLayerLocation SURCOAT_LOCATION = INSTANCE.addDecorationModel("surcoat", () -> SURCOAT);
 	public static final ModelLayerLocation CAPARISON_LOCATION = INSTANCE.addDecorationModel("caparison", () -> CAPARISON);
+	public static final ModelLayerLocation CAT_EARS_LOCATION = INSTANCE.addDecorationModel("cat_ears", () -> CAT_EARS);
 
 	// Armor
 	public static final ModelLayerLocation CROWN_ARMOR_LOCATION = INSTANCE.addArmorModel("crown", CrownArmorModel::createLayer);

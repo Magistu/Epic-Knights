@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class DualKey<K1, K2>
 {
-    public K1 key1;
-    public K2 key2;
+    private final K1 key1;
+    private final K2 key2;
 
     public DualKey(K1 key1, K2 key2)
     {

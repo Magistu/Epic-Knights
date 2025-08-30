@@ -3,22 +3,19 @@ package com.magistuarmory.item.armor;
 import com.magistuarmory.api.client.render.model.ModModelsProvider;
 import com.magistuarmory.item.ArmorDecoration;
 import com.magistuarmory.item.ArmorDecorationItem;
-import com.magistuarmory.item.armor.DyeableMedievalArmorItem;
-import com.magistuarmory.item.armor.MedievalArmorItem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class WearableArmorDecorationItem extends MedievalArmorItem implements ArmorDecoration
 {
-	public WearableArmorDecorationItem(ArmorMaterial material, Type type, Properties properties)
+	public WearableArmorDecorationItem(ArmorType material, Type type, Properties properties)
 	{
 		super(material, type, properties);
 	}
@@ -26,7 +23,7 @@ public class WearableArmorDecorationItem extends MedievalArmorItem implements Ar
 	@Override
 	public ResourceLocation getResourceLocation()
 	{
-		return new ResourceLocation(this.getMaterial().getName());
+		return this.getArmorType().getLocation();
 	}
 
 	@Override
@@ -42,9 +39,9 @@ public class WearableArmorDecorationItem extends MedievalArmorItem implements Ar
 	}
 
 	@Override
-	public Type getArmorType()
+	public @NotNull Type getType()
 	{
-		return this.getType();
+		return this.type;
 	}
 
 	@Override
@@ -53,7 +50,7 @@ public class WearableArmorDecorationItem extends MedievalArmorItem implements Ar
 		return stack.getItem() != this &&
 				ArmorDecorationItem.getDecorationTags(stack).size() < 8 &&
 				stack.getItem() instanceof ArmorItem armor &&
-				this.getArmorType() == armor.getType();
+				this.getType() == armor.getType();
 	}
 
 	@Override

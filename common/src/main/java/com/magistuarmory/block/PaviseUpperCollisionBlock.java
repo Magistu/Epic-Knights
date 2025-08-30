@@ -7,6 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BannerBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -21,15 +22,17 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 import org.joml.Vector3d;
 
+import java.util.function.Supplier;
+
 
 public class PaviseUpperCollisionBlock extends Block
 {
 //	static final VoxelShape SHAPE = Block.box(4.0, 0.0, 4.0, 12.0, 16.0, 12.0);
 	
-	static final AABB COLLISION_AABB = new AABB(0.0 / 16.0, 0.0, 7.5 / 16.0, 1.0, 8.0 / 16.0, 8.5 / 16.0);
-	static final Vector3d CENTER = new Vector3d(0.5, 0.5, 0.5);
-	static final Vector3d BOXMIN = new Vector3d(0.0, 0.0, 0.0);
-	static final Vector3d BOXMAX = new Vector3d(1.0, 1.0, 1.0);
+	private static final AABB COLLISION_AABB = new AABB(0.0 / 16.0, 0.0, 7.5 / 16.0, 1.0, 8.0 / 16.0, 8.5 / 16.0);
+	private static final Vector3d CENTER = new Vector3d(0.5, 0.5, 0.5);
+	private static final Vector3d BOXMIN = new Vector3d(0.0, 0.0, 0.0);
+	private static final Vector3d BOXMAX = new Vector3d(1.0, 1.0, 1.0);
 	
 	public PaviseUpperCollisionBlock()
 	{
@@ -43,10 +46,10 @@ public class PaviseUpperCollisionBlock extends Block
 	}
 	
 	@Override
-	public @NotNull ItemStack getCloneItemStack(BlockGetter blockgetter, BlockPos blockpos, BlockState blockstate) 
+	public @NotNull ItemStack getCloneItemStack(LevelReader reader, BlockPos blockpos, BlockState blockstate) 
 	{
-		if (blockgetter.getBlockEntity(blockpos.below()) instanceof PaviseBlockEntity pavise)
-			return pavise.getItem();
+		if (reader.getBlockEntity(blockpos.below()) instanceof PaviseBlockEntity pavise)
+			return pavise.getStack();
 		
 		return ItemStack.EMPTY;
 	}
@@ -66,7 +69,7 @@ public class PaviseUpperCollisionBlock extends Block
 		return Shapes.create(aabb);
 	}
 
-	public static AABB rotateAABB(AABB axisAlignedBB, Quaternionf quaternion)
+	private static AABB rotateAABB(AABB axisAlignedBB, Quaternionf quaternion)
 	{
 		// Extract the minimum and maximum coordinates of the AABB into vectors
 		final Vector3d mincoords = new Vector3d(axisAlignedBB.minX, axisAlignedBB.minY, axisAlignedBB.minZ);
@@ -91,9 +94,9 @@ public class PaviseUpperCollisionBlock extends Block
 	{
 		BlockEntity blockentity = accessor.getBlockEntity(blockpos.below());
 		if (blockentity instanceof PaviseBlockEntity pavise && pavise.getLevel() != null)
-			accessor.addFreshEntity(new ItemEntity(pavise.getLevel(), blockpos.getX() + 0.5, blockpos.getY() - 0.5, blockpos.getZ() + 0.5, pavise.getItem()));
+			accessor.addFreshEntity(new ItemEntity(pavise.getLevel(), blockpos.getX() + 0.5, blockpos.getY() - 0.5, blockpos.getZ() + 0.5, pavise.getStack()));
 
-		if (accessor.getBlockState(blockpos.below()).getBlock() == ModBlocks.PAVISE.get())
+		if (accessor.getBlockState(blockpos.below()).getBlock() instanceof PaviseBlock)
 			accessor.destroyBlock(blockpos.below(), false);
 		super.destroy(accessor, blockpos, blockstate);
 	}

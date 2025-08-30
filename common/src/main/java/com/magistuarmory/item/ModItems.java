@@ -2,26 +2,31 @@ package com.magistuarmory.item;
 
 import com.magistuarmory.EpicKnights;
 import com.magistuarmory.api.item.ModItemsProvider;
+import com.magistuarmory.block.ModBlocks;
+import com.magistuarmory.block.PaviseBlock;
 import com.magistuarmory.item.armor.*;
 import com.magistuarmory.misc.ModBannerPatternTags;
 import dev.architectury.platform.Platform;
 import dev.architectury.registry.registries.RegistrySupplier;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
 
 import java.util.List;
 import java.util.function.BiFunction;
+import java.util.function.Supplier;
 
 public class ModItems extends ModItemsProvider
 {
 	public static ModItems INSTANCE = new ModItems();
 
 	//Armor
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> ARMET = INSTANCE.addKnightItem("armet", ArmorTypes.ARMET, ArmorItem.Type.HELMET, new Properties());
+	public static final @Nullable RegistrySupplier<KnightItem> ARMET = INSTANCE.addKnightItem("armet", ArmorTypes.ARMET, ArmorItem.Type.HELMET, new Properties());
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> KNIGHT_CHESTPLATE = INSTANCE.addMedievalArmorItem("knight_chestplate", ArmorTypes.KNIGHT, ArmorItem.Type.CHESTPLATE, new Properties());
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> KNIGHT_LEGGINGS = INSTANCE.addMedievalArmorItem("knight_leggings", ArmorTypes.KNIGHT, ArmorItem.Type.LEGGINGS, new Properties());
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> KNIGHT_BOOTS = INSTANCE.addMedievalArmorItem("knight_boots", ArmorTypes.KNIGHT, ArmorItem.Type.BOOTS, new Properties());
@@ -55,20 +60,20 @@ public class ModItems extends ModItemsProvider
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> HALFARMOR_CHESTPLATE = INSTANCE.addMedievalArmorItem("halfarmor_chestplate", ArmorTypes.HALFARMOR, ArmorItem.Type.CHESTPLATE, new Properties());
 
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> GREATHELM = INSTANCE.addMedievalArmorItem("greathelm", ArmorTypes.CRUSADER, ArmorItem.Type.HELMET, new Properties());
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> CRUSADER_CHESTPLATE = INSTANCE.addDyeableMedievalArmorItem("crusader_chestplate", ArmorTypes.CRUSADER, ArmorItem.Type.CHESTPLATE, new Properties(), -3227226);
+	public static final @Nullable RegistrySupplier<DyeableMedievalArmorItem> CRUSADER_CHESTPLATE = INSTANCE.addDyeableMedievalArmorItem("crusader_chestplate", ArmorTypes.CRUSADER, ArmorItem.Type.CHESTPLATE, new Properties(), -3227226);
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> CRUSADER_LEGGINGS = INSTANCE.addMedievalArmorItem("crusader_leggings", ArmorTypes.CRUSADER, ArmorItem.Type.LEGGINGS, new Properties());
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> CRUSADER_BOOTS = INSTANCE.addDyeableMedievalArmorItem("crusader_boots", ArmorTypes.CRUSADER, ArmorItem.Type.BOOTS, new Properties(), -3227226);
+	public static final @Nullable RegistrySupplier<DyeableMedievalArmorItem> CRUSADER_BOOTS = INSTANCE.addDyeableMedievalArmorItem("crusader_boots", ArmorTypes.CRUSADER, ArmorItem.Type.BOOTS, new Properties(), -3227226);
 
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> CEREMONIAL_ARMET = INSTANCE.addKnightItem("ceremonialarmet", ArmorTypes.CEREMONIAL_ARMET, ArmorItem.Type.HELMET, new Properties());
+	public static final @Nullable RegistrySupplier<KnightItem> CEREMONIAL_ARMET = INSTANCE.addKnightItem("ceremonialarmet", ArmorTypes.CEREMONIAL_ARMET, ArmorItem.Type.HELMET, new Properties());
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> CEREMONIAL_CHESTPLATE = INSTANCE.addMedievalArmorItem("ceremonial_chestplate", ArmorTypes.CEREMONIAL, ArmorItem.Type.CHESTPLATE, new Properties());
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> CEREMONIAL_BOOTS = INSTANCE.addMedievalArmorItem("ceremonial_boots", ArmorTypes.CEREMONIAL, ArmorItem.Type.BOOTS, new Properties());
 
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> COIF = INSTANCE.addDyeableMedievalArmorItem("coif", ArmorTypes.GAMBESON, ArmorItem.Type.HELMET, new Properties(), -4280691);
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> GAMBESON = INSTANCE.addDyeableMedievalArmorItem("gambeson_chestplate", ArmorTypes.GAMBESON, ArmorItem.Type.CHESTPLATE, new Properties(), -4280691);
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> PANTYHOSE = INSTANCE.addDyeableMedievalArmorItem("pantyhose", ArmorTypes.GAMBESON, ArmorItem.Type.LEGGINGS, new Properties(), -14531028);
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> GAMBESON_BOOTS = INSTANCE.addDyeableMedievalArmorItem("gambeson_boots", ArmorTypes.GAMBESON, ArmorItem.Type.BOOTS, new Properties(), -4280691);
+	public static final @Nullable RegistrySupplier<DyeableMedievalArmorItem> COIF = INSTANCE.addDyeableMedievalArmorItem("coif", ArmorTypes.GAMBESON, ArmorItem.Type.HELMET, new Properties(), -4280691);
+	public static final @Nullable RegistrySupplier<DyeableMedievalArmorItem> GAMBESON = INSTANCE.addDyeableMedievalArmorItem("gambeson_chestplate", ArmorTypes.GAMBESON, ArmorItem.Type.CHESTPLATE, new Properties(), -4280691);
+	public static final @Nullable RegistrySupplier<DyeableMedievalArmorItem> PANTYHOSE = INSTANCE.addDyeableMedievalArmorItem("pantyhose", ArmorTypes.GAMBESON, ArmorItem.Type.LEGGINGS, new Properties(), 0x22462C);
+	public static final @Nullable RegistrySupplier<DyeableMedievalArmorItem> GAMBESON_BOOTS = INSTANCE.addDyeableMedievalArmorItem("gambeson_boots", ArmorTypes.GAMBESON, ArmorItem.Type.BOOTS, new Properties(), -4280691);
 
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> BRIGANDINE = INSTANCE.addDyeableMedievalArmorItem("brigandine_chestplate", ArmorTypes.BRIGANDINE, ArmorItem.Type.CHESTPLATE, new Properties(), 10511680);
+	public static final @Nullable RegistrySupplier<DyeableMedievalArmorItem> BRIGANDINE = INSTANCE.addDyeableMedievalArmorItem("brigandine_chestplate", ArmorTypes.BRIGANDINE, ArmorItem.Type.CHESTPLATE, new Properties(), 10511680);
 
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> NORMAN_HELMET = INSTANCE.addMedievalArmorItem("norman_helmet", ArmorTypes.NORMAN, ArmorItem.Type.HELMET, new Properties());
 
@@ -98,8 +103,8 @@ public class ModItems extends ModItemsProvider
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> WINGED_HUSSAR_CHESTPLATE = INSTANCE.addMedievalArmorItem("wingedhussar_chestplate", ArmorTypes.WINGED_HUSSAR_CHESTPLATE, ArmorItem.Type.CHESTPLATE, new Properties());
 
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> BURGONET = INSTANCE.addMedievalArmorItem("cuirassier_helmet", ArmorTypes.CUIRASSIER, ArmorItem.Type.HELMET, new Properties());
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> CUIRASSIER_CHESTPLATE = INSTANCE.addDyeableMedievalArmorItem("cuirassier_chestplate", ArmorTypes.CUIRASSIER, ArmorItem.Type.CHESTPLATE, new Properties(), -5465480);
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> CUIRASSIER_LEGGINGS = INSTANCE.addDyeableMedievalArmorItem("cuirassier_leggings", ArmorTypes.CUIRASSIER, ArmorItem.Type.LEGGINGS, new Properties(), -5465480);
+	public static final @Nullable RegistrySupplier<DyeableMedievalArmorItem> CUIRASSIER_CHESTPLATE = INSTANCE.addDyeableMedievalArmorItem("cuirassier_chestplate", ArmorTypes.CUIRASSIER, ArmorItem.Type.CHESTPLATE, new Properties(), -5465480);
+	public static final @Nullable RegistrySupplier<DyeableMedievalArmorItem> CUIRASSIER_LEGGINGS = INSTANCE.addDyeableMedievalArmorItem("cuirassier_leggings", ArmorTypes.CUIRASSIER, ArmorItem.Type.LEGGINGS, new Properties(), -5465480);
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> CUIRASSIER_BOOTS = INSTANCE.addMedievalArmorItem("cuirassier_boots", ArmorTypes.CUIRASSIER, ArmorItem.Type.BOOTS, new Properties());
 
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> GRAND_BASCINET = INSTANCE.addMedievalArmorItem("grand_bascinet", ArmorTypes.GRAND_BASCINET, ArmorItem.Type.HELMET, new Properties());
@@ -111,8 +116,8 @@ public class ModItems extends ModItemsProvider
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> LAMELLAR_CHESTPLATE = INSTANCE.addMedievalArmorItem("lamellar_chestplate", ArmorTypes.LAMELLAR, ArmorItem.Type.CHESTPLATE, new Properties());
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> LAMELLAR_BOOTS = INSTANCE.addMedievalArmorItem("lamellar_boots", ArmorTypes.LAMELLAR, ArmorItem.Type.BOOTS, new Properties());
 
-	public static final RegistrySupplier<MedievalHorseArmorItem> BARDING = INSTANCE.items.register("barding", () -> new MedievalHorseArmorItem(12, new ResourceLocation(EpicKnights.ID, "textures/entity/horse/armor/barding.png"), new Properties().stacksTo(1)));
-	public static final RegistrySupplier<MedievalHorseArmorItem> CHAINMAIL_HORSE_ARMOR = INSTANCE.items.register("chainmail_horse_armor", () -> new MedievalHorseArmorItem(6, new ResourceLocation(EpicKnights.ID, "textures/entity/horse/armor/horse_armor_chainmail.png"), new Properties().stacksTo(1)));
+	public static final RegistrySupplier<MedievalHorseArmorItem> BARDING = INSTANCE.items.register("barding", () -> new MedievalHorseArmorItem(ArmorMaterials.DIAMOND, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "textures/entity/horse/armor/barding.png"), false, new Properties().stacksTo(1)));
+	public static final RegistrySupplier<MedievalHorseArmorItem> CHAINMAIL_HORSE_ARMOR = INSTANCE.items.register("chainmail_horse_armor", () -> new MedievalHorseArmorItem(ArmorMaterials.IRON, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "textures/entity/horse/armor/horse_armor_chainmail.png"), false, new Properties().stacksTo(1)));
 
 	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> HEATER_SHIELD_SUPPLY = (material, prop) -> INSTANCE.addMedievalShieldItem(material.getMaterialName() + "_heatershield", "heatershield", prop, material, true, true, ShieldTypes.HEATER_SHIELD);
 	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> TARGET_SUPPLY = (material, prop) -> INSTANCE.addMedievalShieldItem(material.getMaterialName() + "_target", "target", prop, material, false, true, ShieldTypes.TARGET);
@@ -121,7 +126,7 @@ public class ModItems extends ModItemsProvider
 	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> TARTSCHE_SUPPLY = (material, prop) -> INSTANCE.addMedievalShieldItem(material.getMaterialName() + "_tartsche", "tartsche", prop, material, true, true, ShieldTypes.TARTSCHE);
 	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> ELLIPTICAL_SHIELD_SUPPLY = (material, prop) -> INSTANCE.addMedievalShieldItem(material.getMaterialName() + "_ellipticalshield", "ellipticalshield", prop, material, true, true, ShieldTypes.ELLIPTICAL_SHIELD);
 	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> ROUND_SHIELD_SUPPLY = (material, prop) -> INSTANCE.addMedievalShieldItem(material.getMaterialName() + "_roundshield", "roundshield", prop, material, true, true, ShieldTypes.ROUND_SHIELD);
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> PAVISE_SUPPLY = (material, prop) -> INSTANCE.addPaviseItem(material.getMaterialName() + "_pavese", "pavese", prop, material, true, true, ShieldTypes.PAVISE);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> PAVISE_SUPPLY = (material, prop) -> INSTANCE.addPaviseItem(material.getMaterialName() + "_pavese", "pavese", prop, material, true, true, ShieldTypes.PAVISE, ModBlocks.getPaviseByMaterialName(material));
 	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> KITE_SHIELD_SUPPLY = (material, prop) -> INSTANCE.addMedievalShieldItem(material.getMaterialName() + "_kiteshield", "kiteshield", prop, material, true, true, ShieldTypes.KITE_SHIELD);
 
 	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> STILETTO_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_stylet", prop, material, WeaponTypes.STILETTO);
@@ -210,7 +215,7 @@ public class ModItems extends ModItemsProvider
 	public static final RegistrySupplier<Item> SWORDS_PATTERN = INSTANCE.addIngredientItem("swords_pattern", () -> new BannerPatternItem(ModBannerPatternTags.SWORDS_PATTERN, new Properties().stacksTo(1)));
 	public static final RegistrySupplier<Item> TOWER_PATTERN = INSTANCE.addIngredientItem("tower_pattern", () -> new BannerPatternItem(ModBannerPatternTags.TOWER_PATTERN, new Properties().stacksTo(1)));
 	public static final RegistrySupplier<Item> TREE_PATTERN = INSTANCE.addIngredientItem("tree_pattern", () -> new BannerPatternItem(ModBannerPatternTags.TREE_PATTERN, new Properties().stacksTo(1)));
-	public static final RegistrySupplier<Item> TWOHEADED_EAGLE_PATTERN = INSTANCE.addIngredientItem("two-headed_eagle_pattern", () -> new BannerPatternItem(ModBannerPatternTags.TWOHEADED_EAGLE_PATTERN, new Properties().stacksTo(1)));
+	public static final RegistrySupplier<Item> TWOHEADED_EAGLE_PATTERN = INSTANCE.addIngredientItem("two_headed_eagle_pattern", () -> new BannerPatternItem(ModBannerPatternTags.TWOHEADED_EAGLE_PATTERN, new Properties().stacksTo(1)));
 
 	//Materials
 	public static final RegistrySupplier<Item> STEEL_INGOT = INSTANCE.addIngredientItem("steel_ingot", () -> new Item(new Properties()));
@@ -243,34 +248,35 @@ public class ModItems extends ModItemsProvider
 			List.of()));
 	
 	//Decorations
-	public static final RegistrySupplier<DyeableArmorDecorationItem> TORSE_AND_MANTLE_DECORATION = INSTANCE.addDyeableArmorDecorationItem("torse_and_mantle_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "torse_and_mantle"), new Properties(), ArmorItem.Type.HELMET));
-	public static final RegistrySupplier<ArmorDecorationItem> GAZELLE_HORNS_DECORATION = INSTANCE.addArmorDecorationItem("gazelle_horns_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "gazelle_horns"), new Properties(), ArmorItem.Type.HELMET));
-	public static final RegistrySupplier<ArmorDecorationItem> DUCK_DECORATION = INSTANCE.addArmorDecorationItem("duck_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "duck"), new Properties(), ArmorItem.Type.HELMET));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> SPIKE_DECORATION = INSTANCE.addDyeableArmorDecorationItem("spike_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "spike"), new Properties(), ArmorItem.Type.HELMET));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> HORSE_DECORATION = INSTANCE.addDyeableArmorDecorationItem("horse_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "horse"), new Properties(), ArmorItem.Type.HELMET, MapColor.TERRACOTTA_ORANGE.col));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> TORSE_AND_MANTLE_DECORATION = INSTANCE.addDyeableArmorDecorationItem("torse_and_mantle_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "torse_and_mantle"), new Properties(), ArmorItem.Type.HELMET));
+	public static final RegistrySupplier<ArmorDecorationItem> GAZELLE_HORNS_DECORATION = INSTANCE.addArmorDecorationItem("gazelle_horns_decoration", () -> new ArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "gazelle_horns"), new Properties(), ArmorItem.Type.HELMET));
+	public static final RegistrySupplier<ArmorDecorationItem> DUCK_DECORATION = INSTANCE.addArmorDecorationItem("duck_decoration", () -> new ArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "duck"), new Properties(), ArmorItem.Type.HELMET));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> SPIKE_DECORATION = INSTANCE.addDyeableArmorDecorationItem("spike_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "spike"), new Properties(), ArmorItem.Type.HELMET));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> HORSE_DECORATION = INSTANCE.addDyeableArmorDecorationItem("horse_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "horse"), new Properties(), ArmorItem.Type.HELMET, MapColor.TERRACOTTA_ORANGE.col));
 	public static final RegistrySupplier<DyeableWearableArmorDecorationItem> CROWN_DECORATION = INSTANCE.addDyeableWearableArmorDecorationItem("crown_decoration", ArmorTypes.CROWN, ArmorItem.Type.HELMET, new Properties(), MapColor.COLOR_CYAN.col);
 	public static final RegistrySupplier<DyeableWearableArmorDecorationItem> FLOWERCROWN_DECORATION = INSTANCE.addDyeableWearableArmorDecorationItem("flowercrown_decoration", ArmorTypes.FLOWERCROWN, ArmorItem.Type.HELMET, new Properties(), DyeColor.WHITE.getMapColor().col);
-	public static final RegistrySupplier<DyeableArmorDecorationItem> UNICORN_DECORATION = INSTANCE.addDyeableArmorDecorationItem("unicorn_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "unicorn"), new Properties(), ArmorItem.Type.HELMET));
-	public static final RegistrySupplier<ArmorDecorationItem> BULLHORNS_DECORATION = INSTANCE.addArmorDecorationItem("bullhorns_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "bullhorns"), new Properties(), ArmorItem.Type.HELMET));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> DRAGON_DECORATION = INSTANCE.addDyeableArmorDecorationItem("dragon_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "dragon"), new Properties(), ArmorItem.Type.HELMET, MapColor.COLOR_GRAY.col));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> UNICORN_DECORATION = INSTANCE.addDyeableArmorDecorationItem("unicorn_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "unicorn"), new Properties(), ArmorItem.Type.HELMET));
+	public static final RegistrySupplier<ArmorDecorationItem> BULLHORNS_DECORATION = INSTANCE.addArmorDecorationItem("bullhorns_decoration", () -> new ArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "bullhorns"), new Properties(), ArmorItem.Type.HELMET));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> DRAGON_DECORATION = INSTANCE.addDyeableArmorDecorationItem("dragon_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "dragon"), new Properties(), ArmorItem.Type.HELMET, MapColor.COLOR_GRAY.col));
 	public static final RegistrySupplier<WearableArmorDecorationItem> MINICROWN_DECORATION = INSTANCE.addWearableArmorDecorationItem("minicrown_decoration", ArmorTypes.MINICROWN, ArmorItem.Type.HELMET, new Properties());
-	public static final RegistrySupplier<DyeableArmorDecorationItem> TORSE_DECORATION = INSTANCE.addDyeableArmorDecorationItem("torse_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "torse"), new Properties(), ArmorItem.Type.HELMET));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> TWO_PLUMES_DECORATION = INSTANCE.addDyeableArmorDecorationItem("two_plumes_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "two_plumes"), new Properties(), ArmorItem.Type.HELMET));
-	public static final RegistrySupplier<ArmorDecorationItem> ANTLERS_DECORATION = INSTANCE.addArmorDecorationItem("antlers_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "antlers"), new Properties(), ArmorItem.Type.HELMET));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> BIG_PLUME_DECORATION = INSTANCE.addDyeableArmorDecorationItem("big_plume_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "big_plume"), new Properties(), ArmorItem.Type.HELMET, -10092544));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> PLUME_LEFT_DECORATION = INSTANCE.addDyeableArmorDecorationItem("plume_left_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "plume_left"), new Properties(), ArmorItem.Type.HELMET));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> PLUME_MIDDLE_DECORATION = INSTANCE.addDyeableArmorDecorationItem("plume_middle_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "plume_middle"), new Properties(), ArmorItem.Type.HELMET));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> PLUME_RIGHT_DECORATION = INSTANCE.addDyeableArmorDecorationItem("plume_right_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "plume_right"), new Properties(), ArmorItem.Type.HELMET));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> BEAR_DECORATION = INSTANCE.addDyeableArmorDecorationItem("bear_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "bear"), new Properties(), ArmorItem.Type.HELMET, MapColor.COLOR_BROWN.col));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> LILY_DECORATION = INSTANCE.addDyeableArmorDecorationItem("lily_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "lily"), new Properties(), ArmorItem.Type.HELMET, MapColor.GOLD.col));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> LION_DECORATION = INSTANCE.addDyeableArmorDecorationItem("lion_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "lion"), new Properties(), ArmorItem.Type.HELMET, 0xFBC237));
-	public static final RegistrySupplier<ArmorDecorationItem> DEMON_HORNS_DECORATION = INSTANCE.addArmorDecorationItem("demon_horns_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "demon_horns"), new Properties(), ArmorItem.Type.HELMET));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> FEATHERS_DECORATION = INSTANCE.addDyeableArmorDecorationItem("feathers_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "feathers"), new Properties(), ArmorItem.Type.HELMET));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> VIKING_HORNS_DECORATION = INSTANCE.addDyeableArmorDecorationItem("viking_horns_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "viking_horns"), new Properties(), ArmorItem.Type.HELMET));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> GRIFFIN_DECORATION = INSTANCE.addDyeableArmorDecorationItem("griffin_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "griffin"), new Properties(), ArmorItem.Type.HELMET, 0xFBC237));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> HOOD_DECORATION = INSTANCE.addDyeableArmorDecorationItem("hood_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "hood"), new Properties(), ArmorItem.Type.CHESTPLATE));
-	public static final RegistrySupplier<ArmorDecorationItem> ECRANCHE_DECORATION = INSTANCE.addArmorDecorationItem("ecranche_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "ecranche"), new Properties(), ArmorItem.Type.CHESTPLATE));
-	public static final RegistrySupplier<ArmorDecorationItem> RONDEL_DECORATION = INSTANCE.addArmorDecorationItem("rondel_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnights.ID, "rondel"), new Properties(), ArmorItem.Type.CHESTPLATE));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> TORSE_DECORATION = INSTANCE.addDyeableArmorDecorationItem("torse_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "torse"), new Properties(), ArmorItem.Type.HELMET));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> TWO_PLUMES_DECORATION = INSTANCE.addDyeableArmorDecorationItem("two_plumes_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "two_plumes"), new Properties(), ArmorItem.Type.HELMET));
+	public static final RegistrySupplier<ArmorDecorationItem> ANTLERS_DECORATION = INSTANCE.addArmorDecorationItem("antlers_decoration", () -> new ArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "antlers"), new Properties(), ArmorItem.Type.HELMET));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> BIG_PLUME_DECORATION = INSTANCE.addDyeableArmorDecorationItem("big_plume_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "big_plume"), new Properties(), ArmorItem.Type.HELMET, -10092544));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> PLUME_LEFT_DECORATION = INSTANCE.addDyeableArmorDecorationItem("plume_left_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "plume_left"), new Properties(), ArmorItem.Type.HELMET));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> PLUME_MIDDLE_DECORATION = INSTANCE.addDyeableArmorDecorationItem("plume_middle_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "plume_middle"), new Properties(), ArmorItem.Type.HELMET));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> PLUME_RIGHT_DECORATION = INSTANCE.addDyeableArmorDecorationItem("plume_right_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "plume_right"), new Properties(), ArmorItem.Type.HELMET));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> BEAR_DECORATION = INSTANCE.addDyeableArmorDecorationItem("bear_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "bear"), new Properties(), ArmorItem.Type.HELMET, MapColor.COLOR_BROWN.col));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> LILY_DECORATION = INSTANCE.addDyeableArmorDecorationItem("lily_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "lily"), new Properties(), ArmorItem.Type.HELMET, MapColor.GOLD.col));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> LION_DECORATION = INSTANCE.addDyeableArmorDecorationItem("lion_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "lion"), new Properties(), ArmorItem.Type.HELMET, 0xFBC237));
+	public static final RegistrySupplier<ArmorDecorationItem> DEMON_HORNS_DECORATION = INSTANCE.addArmorDecorationItem("demon_horns_decoration", () -> new ArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "demon_horns"), new Properties(), ArmorItem.Type.HELMET));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> FEATHERS_DECORATION = INSTANCE.addDyeableArmorDecorationItem("feathers_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "feathers"), new Properties(), ArmorItem.Type.HELMET));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> VIKING_HORNS_DECORATION = INSTANCE.addDyeableArmorDecorationItem("viking_horns_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "viking_horns"), new Properties(), ArmorItem.Type.HELMET));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> GRIFFIN_DECORATION = INSTANCE.addDyeableArmorDecorationItem("griffin_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "griffin"), new Properties(), ArmorItem.Type.HELMET, 0xFBC237));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> HOOD_DECORATION = INSTANCE.addDyeableArmorDecorationItem("hood_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "hood"), new Properties(), ArmorItem.Type.CHESTPLATE));
+	public static final RegistrySupplier<ArmorDecorationItem> ECRANCHE_DECORATION = INSTANCE.addArmorDecorationItem("ecranche_decoration", () -> new ArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "ecranche"), new Properties(), ArmorItem.Type.CHESTPLATE));
+	public static final RegistrySupplier<ArmorDecorationItem> RONDEL_DECORATION = INSTANCE.addArmorDecorationItem("rondel_decoration", () -> new ArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "rondel"), new Properties(), ArmorItem.Type.CHESTPLATE));
+	public static final RegistrySupplier<ArmorDecorationItem> CAT_EARS_DECORATION = INSTANCE.addArmorDecorationItem("cat_ears_decoration", () -> new ArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "cat_ears"), new Properties(), ArmorItem.Type.HELMET));
 
 	public static final RegistrySupplier<MedievalBagItem> MEDIEVAL_BAG = INSTANCE.items.register("medieval_bag", MedievalBagItem::new);
 	

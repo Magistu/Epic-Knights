@@ -3,53 +3,74 @@ package com.magistuarmory.network;
 import com.magistuarmory.EpicKnights;
 import com.magistuarmory.item.LanceItem;
 import dev.architectury.networking.NetworkManager;
-import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 
-public class PacketLanceCollision
+public class PacketLanceCollision implements CustomPacketPayload
 {
-	public static final ResourceLocation ID = new ResourceLocation(EpicKnights.ID, "packet_lance_collision");
+	public static final CustomPacketPayload.Type<PacketLanceCollision> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "packet_lance_collision"));
+	public static final StreamCodec<RegistryFriendlyByteBuf, PacketLanceCollision> STREAM_CODEC = StreamCodec.composite(
+			ByteBufCodecs.INT, p -> p.attackerid,
+			ByteBufCodecs.INT, p -> p.victimid,
+			PacketLanceCollision::new);
 
-	public static void sendToServer(int entityid, float damage)
+	public int attackerid;
+	public int victimid;
+
+	public PacketLanceCollision(Entity attacker, Entity victim)
 	{
-		NetworkManager.sendToServer(ID, PacketLanceCollision.encode(entityid, damage));
+		this(attacker.getId(), victim.getId());
 	}
 
-	static FriendlyByteBuf encode(int entityid, float speed)
+	public PacketLanceCollision(int attackerid, int victimid) 
 	{
-		FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
-		buf.writeInt(entityid);
-		buf.writeFloat(speed);
-		return buf;
+		this.attackerid = attackerid;
+		this.victimid = victimid;
+	}
+	
+	public static void sendToServer(Entity attacker, Entity victim)
+	{
+		NetworkManager.sendToServer(new PacketLanceCollision(attacker, victim));
 	}
 
-	public static void apply(FriendlyByteBuf buf, NetworkManager.PacketContext context)
+	public static void apply(PacketLanceCollision packet, NetworkManager.PacketContext context)
 	{
 		if (!(context.getPlayer() instanceof ServerPlayer player))
 			return;
-		Entity victim = player.level().getEntity(buf.readInt());
-		if (victim == null)
+		Entity attacker = player.level().getEntity(packet.attackerid);
+		Entity victim = player.level().getEntity(packet.victimid);
+		if (attacker == null || victim == null)
 			return;
-		float speed = buf.readFloat();
-		context.queue(() -> execute(victim, speed, player));
+		context.queue(() -> execute(attacker, victim, player));
 	}
 
-	static void execute(Entity victim, float speed, ServerPlayer player)
+	static void execute(Entity attacker, Entity victim, ServerPlayer player)
 	{
 		ItemStack stack = player.getMainHandItem();
 
-		if (stack.getItem() instanceof LanceItem lance)
+		if (attacker == player && stack.getItem() instanceof LanceItem lance)
 		{
+			float speed = lance.getVelocityProjection(player);
 			boolean dismount = victim.level().getRandom().nextDouble() > (1.0 - lance.getClickedScale());
 			lance.setRideSpeed(stack, speed);
 			lance.setDismount(stack, dismount);
 			player.attack(victim);
 			player.resetAttackStrengthTicker();
 		}
+	}
+
+	@Override
+	public @NotNull Type<? extends CustomPacketPayload> type()
+	{
+		return TYPE;
 	}
 }

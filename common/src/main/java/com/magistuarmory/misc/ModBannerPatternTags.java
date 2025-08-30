@@ -25,10 +25,10 @@ public class ModBannerPatternTags
     public static final TagKey<BannerPattern> SWORDS_PATTERN = create("swords");
     public static final TagKey<BannerPattern> TOWER_PATTERN = create("tower");
     public static final TagKey<BannerPattern> TREE_PATTERN = create("tree");
-    public static final TagKey<BannerPattern> TWOHEADED_EAGLE_PATTERN = create("two-headed_eagle");
+    public static final TagKey<BannerPattern> TWOHEADED_EAGLE_PATTERN = create("two_headed_eagle");
 
     private static TagKey<BannerPattern> create(String name) 
     {
-        return TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(EpicKnights.ID, "pattern_item/" + name));
+        return TagKey.create(Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "pattern_item/" + name));
     }
 }

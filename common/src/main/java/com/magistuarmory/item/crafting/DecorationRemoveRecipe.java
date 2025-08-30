@@ -1,20 +1,24 @@
 package com.magistuarmory.item.crafting;
 
-import com.magistuarmory.item.*;
+import com.magistuarmory.component.ModDataComponents;
+import com.magistuarmory.item.ArmorDecoration;
+import com.magistuarmory.item.DyeableArmorDecorationItem;
+import com.magistuarmory.item.MedievalBagItem;
+import com.magistuarmory.item.ModItems;
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
-import net.minecraft.world.item.crafting.CustomRecipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BannerBlock;
+import net.minecraft.world.level.block.entity.BannerPatternLayers;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -32,11 +36,11 @@ public class DecorationRemoveRecipe extends CustomRecipe
     }
 
     @Override
-    public boolean matches(CraftingContainer container, Level level)
+    public boolean matches(CraftingInput container, Level level)
     {
         ItemStack stack = ItemStack.EMPTY;
 
-        for(int i = 0; i < container.getContainerSize(); ++i)
+        for(int i = 0; i < container.size(); ++i)
         {
             ItemStack stack2 = container.getItem(i);
             if (stack2.isEmpty())
@@ -58,11 +62,11 @@ public class DecorationRemoveRecipe extends CustomRecipe
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer container, @NotNull RegistryAccess access)
+    public @NotNull ItemStack assemble(CraftingInput container, @NotNull HolderLookup.Provider access)
     {
         ItemStack stack = ItemStack.EMPTY;
 
-        for(int i = 0; i < container.getContainerSize(); ++i)
+        for(int i = 0; i < container.size(); ++i)
         {
             ItemStack stack2 = container.getItem(i);
             if (stack2.isEmpty())
@@ -108,62 +112,69 @@ public class DecorationRemoveRecipe extends CustomRecipe
     
     static boolean mightBeDecorated(Item item)
     {
-        return item instanceof ArmorItem || item instanceof ShieldItem || item instanceof HorseArmorItem;
+        return item instanceof ArmorItem || item instanceof ShieldItem;
     }
 
     static boolean isDecorated(ItemStack stack)
     {
         if (!mightBeDecorated(stack.getItem()))
             return false;
-        
-        CompoundTag blockcompound = BlockItem.getBlockEntityData(stack);
-        if (blockcompound != null && blockcompound.contains("Base"))
-            return true;
-        
-        CompoundTag decorationdata = stack.getTagElement("ArmorDecoration");
-        return decorationdata != null && !decorationdata.getList("Items", 10).isEmpty();
+
+        CustomData decorationdata = stack.get(ModDataComponents.ARMOR_DECORATION.get());
+        if (decorationdata != null)
+        {
+            CompoundTag compoundtag = decorationdata.copyTag();
+            ListTag listtag = compoundtag.getList("Items", 10);
+            if (!listtag.isEmpty())
+            {
+                return true;
+            }
+        }
+        return stack.get(DataComponents.BANNER_PATTERNS) != null;
     }
     
     static List<ItemStack> takeApart(ItemStack stack)
     {
         List<ItemStack> stacks = new ArrayList<>();
         ItemStack newstack = stack.copy();
-        CompoundTag blockcompound = BlockItem.getBlockEntityData(newstack);
-        if (blockcompound != null)
-        {
-            if (blockcompound.contains("Base"))
-            {
-                BannerItem banner = (BannerItem) BannerBlock.byColor(DyeColor.byId(blockcompound.getInt("Base"))).asItem();
-                ItemStack bannerstack = new ItemStack(banner);
-                bannerstack.addTagElement("BlockEntityTag", blockcompound.copy());
+        
+        DyeColor basecolor = newstack.get(DataComponents.BASE_COLOR);
+        if (basecolor != null) {
+            BannerItem banner = (BannerItem) BannerBlock.byColor(basecolor).asItem();
+            ItemStack bannerstack = new ItemStack(banner);
 
-                newstack.removeTagKey("BlockEntityTag");
-                
-                stacks.add(bannerstack);
+            BannerPatternLayers patterns = newstack.get(DataComponents.BANNER_PATTERNS);
+            if (patterns != null && !patterns.layers().isEmpty()) {
+                bannerstack.set(DataComponents.BANNER_PATTERNS, patterns);
             }
+            stacks.add(bannerstack);
         }
-        CompoundTag decorationdata = newstack.getTagElement("ArmorDecoration");
+        
+        CustomData decorationdata = newstack.get(ModDataComponents.ARMOR_DECORATION.get());
         if (decorationdata != null)
         {
-            ListTag listtag = decorationdata.getList("Items", 10);
+            CompoundTag compoundtag = decorationdata.copyTag();
+            ListTag listtag = compoundtag.getList("Items", 10);
             while (!listtag.isEmpty())
             {
                 CompoundTag tag = listtag.getCompound(listtag.size() - 1);
                 String name = tag.getString("name");
                 int color = tag.getInt("color");
-                ArmorDecoration decoration = (ArmorDecoration) BuiltInRegistries.ITEM.get(new ResourceLocation(name + "_decoration"));
+                ArmorDecoration decoration = (ArmorDecoration) BuiltInRegistries.ITEM.get(ResourceLocation.parse(name + "_decoration"));
                 ItemStack decorationstack = new ItemStack(decoration);
-                if (decoration instanceof DyeableArmorDecorationItem dyeabedecoration)
+                if (decoration instanceof DyeableArmorDecorationItem dyeabedecoration && dyeabedecoration.getColor(decorationstack) != color)
                     dyeabedecoration.setColor(decorationstack, color);
 
                 listtag.remove(listtag.size() - 1);
-                decorationdata.put("Items", listtag);
-                newstack.addTagElement("ArmorDecoration", decorationdata);
+                compoundtag.put("Items", listtag);
                 
                 stacks.add(decorationstack);
             }
         }
-        newstack.resetHoverName();
+        newstack.remove(ModDataComponents.ARMOR_DECORATION.get());
+        newstack.remove(DataComponents.BANNER_PATTERNS);
+        newstack.remove(DataComponents.BASE_COLOR);
+        newstack.remove(DataComponents.CUSTOM_NAME);
         stacks.add(newstack);
         return stacks;
     }

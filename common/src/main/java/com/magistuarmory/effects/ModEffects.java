@@ -10,7 +10,7 @@ public class ModEffects
 {
 	public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(EpicKnights.ID, Registries.MOB_EFFECT);
 
-	public static final RegistrySupplier<LacerationEffect> LACERATION = EFFECTS.register("laceration", () -> LacerationEffect.INSTANCE);
+	public static final RegistrySupplier<MobEffect> LACERATION = EFFECTS.register("laceration", LacerationEffect::new);
 
 	public static void init()
 	{

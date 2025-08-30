@@ -66,7 +66,25 @@ public class HeraldryRegistry
             "triangle_top",
             "troll",
             "unicorn",
-            "weezer"));
+            "weezer",
+            "apostolic_cross",
+            "bowl",
+            "bull",
+            "chess",
+            "crusader_cross",
+            "dragon",
+            "eagle",
+            "horse",
+            "lily",
+            "lion1",
+            "lion2",
+            "orthodox_cross",
+            "snake",
+            "sun",
+            "swords",
+            "tower",
+            "tree",
+            "two_headed_eagle"));
     
     public static void register(String name) {
         HERALDRY.add(name);

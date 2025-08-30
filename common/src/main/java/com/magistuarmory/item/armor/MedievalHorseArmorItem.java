@@ -1,25 +1,22 @@
 package com.magistuarmory.item.armor;
 
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.HorseArmorItem;
+import net.minecraft.world.item.AnimalArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 
-public class MedievalHorseArmorItem extends HorseArmorItem
+public class MedievalHorseArmorItem extends AnimalArmorItem
 {
-	private final int protection;
 	private final ResourceLocation texture;
 
-	public MedievalHorseArmorItem(int i, ResourceLocation texture, Properties properties) {
-		super(i, "", properties);
-		this.protection = i;
+	public MedievalHorseArmorItem(Holder<ArmorMaterial> material, ResourceLocation texture, boolean dyeable, Item.Properties properties) {
+		super(material, AnimalArmorItem.BodyType.EQUESTRIAN, dyeable, properties.stacksTo(1));
 		this.texture = texture;
 	}
 
+	@Override
 	public ResourceLocation getTexture() {
 		return texture;
-	}
-
-	public int getProtection() {
-		return this.protection;
 	}
 }

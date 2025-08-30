@@ -33,8 +33,9 @@ public class MedievalShieldModel extends Model
 		return this.handle;
 	}
 
-	public void renderToBuffer(PoseStack pose, VertexConsumer vertexconsumer, int i, int j, float f, float g, float h, float k)
+	@Override
+	public void renderToBuffer(PoseStack pose, VertexConsumer vertexconsumer, int i, int j, int color)
 	{
-		this.root.render(pose, vertexconsumer, i, j, f, g, h, k);
+		this.root.render(pose, vertexconsumer, i, j, color);
 	}
 }

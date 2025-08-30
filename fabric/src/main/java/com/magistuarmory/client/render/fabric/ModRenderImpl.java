@@ -1,16 +1,20 @@
 package com.magistuarmory.client.render.fabric;
 
 import com.magistuarmory.EpicKnights;
+import com.magistuarmory.api.item.ModItemsProvider;
+import com.magistuarmory.block.ModBlockEntityTypes;
 import com.magistuarmory.client.render.ModRender;
 import com.magistuarmory.client.render.entity.layer.ArmorDecorationLayer;
 import com.magistuarmory.client.render.entity.layer.HorseArmorDecorationLayer;
 import com.magistuarmory.client.render.model.decoration.ArmorDecorationModelSet;
 import com.magistuarmory.client.render.tileentity.HeraldryItemStackRenderer;
+import com.magistuarmory.client.render.tileentity.PaviseBlockRenderer;
 import com.magistuarmory.fabric.client.render.entity.layer.MedievalArmorLayer;
 import com.magistuarmory.fabric.client.render.tileentity.HeraldryItemStackRendererFabric;
 import com.magistuarmory.item.MedievalShieldItem;
-import com.magistuarmory.api.item.ModItemsProvider;
 import com.magistuarmory.item.ModItems;
+import com.magistuarmory.item.PaviseItem;
+import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -30,27 +34,31 @@ import net.minecraft.world.item.Item;
 @Environment(EnvType.CLIENT)
 public class ModRenderImpl
 {
-	static void addLayers(ModItemsProvider content, EntityType<? extends LivingEntity> entitytype, LivingEntityRenderer<?, ?> renderer, LivingEntityFeatureRendererRegistrationCallback.RegistrationHelper helper, EntityRendererProvider.Context context)
+	private static void addLayers(ModItemsProvider content, EntityType<? extends LivingEntity> entitytype, LivingEntityRenderer<?, ?> renderer, LivingEntityFeatureRendererRegistrationCallback.RegistrationHelper helper, EntityRendererProvider.Context context)
 	{
 		if (content.armorDecorationItems.isEmpty())
 			return;
 		if (renderer.getModel() instanceof HumanoidModel)
-			helper.register(new ArmorDecorationLayer(new ArmorDecorationModelSet<>(content.armorDecorationItems, context), renderer, context, new ResourceLocation(EpicKnights.ID, "surcoat")));
+			helper.register(new ArmorDecorationLayer(new ArmorDecorationModelSet<>(content.armorDecorationItems, context), renderer, context, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "surcoat")));
 		else if (renderer instanceof PlayerRenderer renderer0)
-			helper.register(new ArmorDecorationLayer(new ArmorDecorationModelSet<>(content.armorDecorationItems, context), renderer0, context, new ResourceLocation(EpicKnights.ID, "surcoat")));
+			helper.register(new ArmorDecorationLayer(new ArmorDecorationModelSet<>(content.armorDecorationItems, context), renderer0, context, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "surcoat")));
 		if (renderer instanceof HorseRenderer renderer0 && content instanceof ModItems)
-			helper.register(new HorseArmorDecorationLayer(renderer0, context, new ResourceLocation(content.modId, "textures/entity/horse/armor/caparison.png"), "caparison"));
+			helper.register(new HorseArmorDecorationLayer(renderer0, context, ResourceLocation.fromNamespaceAndPath(content.modId, "textures/entity/horse/armor/caparison.png"), "caparison"));
 
 	}
-	
+
 	public static void setupPlatform(ModItemsProvider content)
 	{
+		MedievalArmorLayer layer = new MedievalArmorLayer();
 		for (RegistrySupplier<? extends Item> supplier : content.armorItems)
-			ArmorRenderer.register(new MedievalArmorLayer(), supplier.get());
+			ArmorRenderer.register(layer, supplier.get());
 
 		for (RegistrySupplier<? extends MedievalShieldItem> supplier : content.shieldItems)
+		{
+			MedievalShieldItem shield = supplier.get();
 			if (supplier.get().is3d())
-				BuiltinItemRendererRegistry.INSTANCE.register(supplier.get(), (BuiltinItemRendererRegistry.DynamicItemRenderer) supplier.get().getRenderer());
+				BuiltinItemRendererRegistry.INSTANCE.register(supplier.get(), (BuiltinItemRendererRegistry.DynamicItemRenderer) shield.getRenderer());
+		}
 	}
 
 	public static void registerModelsLoadListener(ModItemsProvider content)

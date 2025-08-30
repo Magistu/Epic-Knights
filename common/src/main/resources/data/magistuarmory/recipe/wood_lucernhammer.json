@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mm ",
+    " sm",
+    " h "
+  ],
+  "key": {
+    "s": {
+      "tag": "c:rods/wooden"
+    },
+    "m": {
+      "tag": "minecraft:planks"
+    },
+    "h": {
+      "tag": "magistuarmory:hilts"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:wood_lucernhammer",
+    "count": 1
+  }
+}

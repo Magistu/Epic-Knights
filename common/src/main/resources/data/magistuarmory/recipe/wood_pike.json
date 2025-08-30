@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  m",
+    " s ",
+    "p  "
+  ],
+  "key": {
+    "s": {
+      "tag": "c:rods/wooden"
+    },
+    "m": {
+      "tag": "minecraft:planks"
+    },
+    "p": {
+      "tag": "magistuarmory:poles"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:wood_pike",
+    "count": 1
+  }
+}

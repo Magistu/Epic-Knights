@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " mm",
+    " m ",
+    "p  "
+  ],
+  "key": {
+    "m": {
+      "tag": "c:gems/diamond"
+    },
+    "p": {
+      "tag": "magistuarmory:poles"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:diamond_lochaberaxe",
+    "count": 1
+  }
+}

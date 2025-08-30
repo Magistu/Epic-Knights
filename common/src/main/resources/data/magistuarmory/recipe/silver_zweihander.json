@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  m",
+    "mt ",
+    "hm "
+  ],
+  "key": {
+    "t": {
+      "item": "magistuarmory:silver_shortsword"
+    },
+    "m": {
+      "tag": "c:ingots/silver"
+    },
+    "h": {
+      "tag": "magistuarmory:hilts"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:silver_zweihander",
+    "count": 1
+  }
+}

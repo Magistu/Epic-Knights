@@ -1,0 +1,6 @@
+{
+    "parent": "magistuarmory:item/heavy_crossbow",
+    "textures": {
+        "layer0": "magistuarmory:item/heavy_crossbow_firework"
+    }
+}

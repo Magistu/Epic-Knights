@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mt",
+    "p "
+  ],
+  "key": {
+    "m": {
+      "tag": "c:ingots/iron"
+    },
+    "t": {
+      "item": "magistuarmory:iron_shortsword"
+    },
+    "p": {
+      "tag": "magistuarmory:poles"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:iron_guisarme",
+    "count": 1
+  }
+}

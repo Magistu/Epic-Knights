@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mm ",
+    "msm",
+    " p "
+  ],
+  "key": {
+    "s": {
+      "tag": "c:rods/wooden"
+    },
+    "m": {
+      "tag": "c:ingots/bronze"
+    },
+    "p": {
+      "tag": "magistuarmory:poles"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:bronze_concavehalberd",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mm ",
+    "msm",
+    " h "
+  ],
+  "key": {
+    "s": {
+      "tag": "c:rods/wooden"
+    },
+    "m": {
+      "tag": "c:ingots/bronze"
+    },
+    "h": {
+      "tag": "magistuarmory:hilts"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:bronze_heavywarhammer",
+    "count": 1
+  }
+}

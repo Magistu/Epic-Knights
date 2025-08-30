@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "p p",
+    "php",
+    "sps"
+  ],
+  "key": {
+    "s": {
+      "tag": "magistuarmory:small_plates/steel"
+    },
+    "h": {
+      "item": "magistuarmory:halfarmor_chestplate"
+    },
+    "p": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:kastenbrust_chestplate",
+    "count": 1
+  }
+}

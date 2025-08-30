@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " b ",
+    "ppp"
+  ],
+  "key": {
+    "b": {
+      "item": "magistuarmory:barbute"
+    },
+    "p": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:sallet",
+    "count": 1
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "p"
+  ],
+  "key": {
+    "p": {
+      "item": "magistuarmory:plume_right_decoration"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:plume_left_decoration",
+    "count": 1
+  }
+}

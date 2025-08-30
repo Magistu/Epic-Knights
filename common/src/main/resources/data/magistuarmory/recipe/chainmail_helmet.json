@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ccc",
+    "c c"
+  ],
+  "key": {
+    "c": {
+      "tag": "magistuarmory:chainmails/steel"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:chainmail_helmet",
+    "count": 1
+  }
+}

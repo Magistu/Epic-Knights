@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sl"
+  ],
+  "key": {
+    "s": {
+      "tag": "c:rods/wooden"
+    },
+    "l": {
+      "tag": "magistuarmory:leather_strips"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:hilt",
+    "count": 1
+  }
+}

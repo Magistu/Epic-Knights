@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": {
+    "item": "magistuarmory:tin_zweihander"
+  },
+  "addition": {
+    "item": "minecraft:blaze_powder"
+  },
+  "result": {
+    "id":  "magistuarmory:tin_flamebladedsword",
+    "count": 1
+  },
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  }
+}

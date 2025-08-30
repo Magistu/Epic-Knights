@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " mm",
+    " m ",
+    "p  "
+  ],
+  "key": {
+    "m": {
+      "tag": "c:ingots/bronze"
+    },
+    "p": {
+      "tag": "magistuarmory:poles"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:bronze_lochaberaxe",
+    "count": 1
+  }
+}

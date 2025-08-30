@@ -1,0 +1,28 @@
+﻿{
+  "replace": false,
+  "values": [
+    "magistuarmory:armet",
+    "magistuarmory:stechhelm",
+    "magistuarmory:sallet",
+    "magistuarmory:maximilian_helmet",
+    "magistuarmory:chainmail_helmet",
+    "magistuarmory:kettlehat",
+    "magistuarmory:barbute",
+    "magistuarmory:greathelm",
+    "magistuarmory:ceremonialarmet",
+    "magistuarmory:coif",
+    "magistuarmory:norman_helmet",
+    "magistuarmory:shishak",
+    "magistuarmory:rustedbarbute",
+    "magistuarmory:rustedgreathelm",
+    "magistuarmory:rustedchainmail_helmet",
+    "magistuarmory:rustedkettlehat",
+    "magistuarmory:bascinet",
+    "magistuarmory:cuirassier_helmet",
+    "magistuarmory:grand_bascinet",
+    "magistuarmory:face_helmet",
+    "magistuarmory:crown_decoration",
+    "magistuarmory:flowercrown_decoration",
+    "magistuarmory:minicrown_decoration"
+  ]
+}

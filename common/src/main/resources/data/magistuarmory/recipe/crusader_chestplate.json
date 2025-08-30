@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "w w",
+    "wcw",
+    "www"
+  ],
+  "key": {
+    "c": {
+      "item": "magistuarmory:platemail_chestplate"
+    },
+    "w": {
+      "tag": "magistuarmory:woolen_fabrics"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:crusader_chestplate",
+    "count": 1
+  }
+}

@@ -1,0 +1,27 @@
+﻿{
+  "replace": false,
+  "values": [
+    "magistuarmory:knight_chestplate",
+    "magistuarmory:jousting_chestplate",
+    "magistuarmory:gothic_chestplate",
+    "magistuarmory:maximilian_chestplate",
+    "magistuarmory:chainmail_chestplate",
+    "magistuarmory:platemail_chestplate",
+    "magistuarmory:halfarmor_chestplate",
+    "magistuarmory:crusader_chestplate",
+    "magistuarmory:ceremonial_chestplate",
+    "magistuarmory:gambeson_chestplate",
+    "magistuarmory:brigandine_chestplate",
+    "magistuarmory:rustedhalfarmor_chestplate",
+    "magistuarmory:rustedcrusader_chestplate",
+    "magistuarmory:rustedchainmail_chestplate",
+    "magistuarmory:xivcenturyknight_chestplate",
+    "magistuarmory:wingedhussar_chestplate",
+    "magistuarmory:cuirassier_chestplate",
+    "magistuarmory:kastenbrust_chestplate",
+    "magistuarmory:lamellar_chestplate",
+    "magistuarmory:hood_decoration",
+    "magistuarmory:ecranche_decoration",
+    "magistuarmory:rondel_decoration"
+  ]
+}

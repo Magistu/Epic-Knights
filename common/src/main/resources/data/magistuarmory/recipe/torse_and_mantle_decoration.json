@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " t ",
+    " f ",
+    "fff"
+  ],
+  "key": {
+    "t": {
+      "item": "magistuarmory:torse_decoration"
+    },
+    "f": {
+      "tag": "magistuarmory:woolen_fabrics"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:torse_and_mantle_decoration",
+    "count": 1
+  }
+}

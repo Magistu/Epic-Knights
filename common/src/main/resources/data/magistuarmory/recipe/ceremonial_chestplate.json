@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": {
+    "item": "magistuarmory:knight_chestplate"
+  },
+  "addition": {
+    "tag": "c:ingots/gold"
+  },
+  "result": {
+    "id": "magistuarmory:ceremonial_chestplate",
+    "count": 1
+  },
+  "template": {
+    "item": "magistuarmory:gilding_template"
+  }
+}

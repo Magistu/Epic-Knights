@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mmh",
+    "mm "
+  ],
+  "key": {
+    "m": {
+      "tag": "c:ingots/gold"
+    },
+    "h": {
+      "tag": "c:ingots/steel"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:gold_buckler",
+    "count": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  m",
+    "   ",
+    "h  "
+  ],
+  "key": {
+    "m": {
+      "tag": "c:ingots/bronze"
+    },
+    "h": {
+      "tag": "magistuarmory:hilts"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:bronze_stylet",
+    "count": 1
+  }
+}

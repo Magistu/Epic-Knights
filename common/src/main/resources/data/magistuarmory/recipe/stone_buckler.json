@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mmh",
+    "mm "
+  ],
+  "key": {
+    "m": {
+      "tag": "c:cobblestones"
+    },
+    "h": {
+      "tag": "c:ingots/steel"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:stone_buckler",
+    "count": 1
+  }
+}

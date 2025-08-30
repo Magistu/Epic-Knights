@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "h h"
+  ],
+  "key": {
+    "h": {
+      "item": "minecraft:goat_horn"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:viking_horns_decoration",
+    "count": 1
+  }
+}

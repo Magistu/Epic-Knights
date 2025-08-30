@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  m",
+    "   ",
+    "h  "
+  ],
+  "key": {
+    "m": {
+      "tag": "c:cobblestones"
+    },
+    "h": {
+      "tag": "magistuarmory:hilts"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:stone_stylet",
+    "count": 1
+  }
+}

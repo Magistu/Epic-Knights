@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "nn",
+    "nn",
+    "nn"
+  ],
+  "key": {
+    "n": {
+      "tag": "c:nuggets/steel"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:small_steel_plate",
+    "count": 8
+  }
+}

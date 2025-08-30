@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mm ",
+    "mmh"
+  ],
+  "key": {
+    "m": {
+      "tag": "c:ingots/silver"
+    },
+    "h": {
+      "tag": "c:ingots/steel"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:silver_target",
+    "count": 1
+  }
+}

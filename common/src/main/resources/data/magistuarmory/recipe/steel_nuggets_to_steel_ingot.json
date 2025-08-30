@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "nnn",
+    "nnn",
+    "nnn"
+  ],
+  "key": {
+    "n": {
+      "tag": "c:nuggets/steel"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:steel_ingot",
+    "count": 1
+  }
+}

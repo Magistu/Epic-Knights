@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "minecraft:iron_ingot"
+  },
+  "result": {
+    "id": "magistuarmory:steel_ingot"
+  },
+  "experience": 0.5,
+  "cookingtime": 40
+}

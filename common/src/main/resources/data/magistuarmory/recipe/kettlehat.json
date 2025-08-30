@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iii",
+    "p p",
+    "ccc"
+  ],
+  "key": {
+    "c": {
+      "tag": "magistuarmory:chainmails/steel"
+    },
+    "i": {
+      "tag": "c:ingots/steel"
+    },
+    "p": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:kettlehat",
+    "count": 1
+  }
+}

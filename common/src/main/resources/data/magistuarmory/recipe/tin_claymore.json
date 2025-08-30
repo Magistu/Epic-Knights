@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mt"
+  ],
+  "key": {
+    "t": {
+      "item": "magistuarmory:tin_shortsword"
+    },
+    "m": {
+      "tag": "c:ingots/tin"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:tin_claymore",
+    "count": 1
+  }
+}

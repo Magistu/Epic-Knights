@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "www",
+    "w w"
+  ],
+  "key": {
+    "w": {
+      "tag": "magistuarmory:woolen_fabrics"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:coif",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "r r",
+    "s s",
+    "l l"
+  ],
+  "key": {
+    "s": {
+      "tag": "magistuarmory:leather_strips"
+    },
+    "l": {
+      "item": "minecraft:leather"
+    },
+    "r": {
+      "tag": "magistuarmory:lamellar_rows/steel"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:lamellar_boots",
+    "count": 1
+  }
+}

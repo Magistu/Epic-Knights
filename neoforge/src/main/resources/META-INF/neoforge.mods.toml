@@ -1,0 +1,47 @@
+modLoader = "javafml"
+loaderVersion = "${loader_version_range}"
+license = "${mod_license}"
+issueTrackerURL = "${mod_issues_url}"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+license = "${mod_license}"
+updateJSONURL = "${mod_update_json}"
+displayName = "${mod_name}"
+displayURL = "${mod_home_url}"
+logoFile = "bwm_logo.png"
+authors = "${mod_authors}"
+credits = "${mod_credits}"
+description = '''${mod_description}'''
+
+[[dependencies.${mod_id}]]
+modId = "neoforge"
+type = "required"
+versionRange = "${neoforge_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "minecraft"
+type = "required"
+versionRange = "${minecraft_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "architectury"
+type = "required"
+versionRange = "[${architectury_version},)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "cloth_config"
+type = "required"
+versionRange = "[${cloth_config_version},)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[mixins]]
+config = "magistuarmory.mixins.json"

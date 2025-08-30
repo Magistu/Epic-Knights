@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+     "pnp",
+     "ppp"
+   ],
+   "key": {
+     "p": {
+       "tag": "c:plates/steel"
+     },
+     "n": {
+       "item": "magistuarmory:norman_helmet"
+     }
+   },
+   "result": {
+     "id": "magistuarmory:grand_bascinet",
+     "count": 1
+   }
+}

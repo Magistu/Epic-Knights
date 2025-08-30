@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "p p",
+    "l l"
+  ],
+  "key": {
+    "l": {
+      "tag": "magistuarmory:leather_strips"
+    },
+    "p": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:rondel_decoration",
+    "count": 1
+  }
+}

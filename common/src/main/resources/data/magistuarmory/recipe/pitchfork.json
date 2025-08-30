@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "bab",
+    " a ",
+    " a "
+  ],
+  "key": {
+    "a": {
+      "tag": "c:rods/wooden"
+    },
+    "b": {
+      "tag": "c:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "magistuarmory:pitchfork",
+    "count": 1
+  }
+}

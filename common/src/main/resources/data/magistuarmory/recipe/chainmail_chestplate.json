@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "c c",
+    "ccc",
+    "ccc"
+  ],
+  "key": {
+    "c": {
+      "tag": "magistuarmory:chainmails/steel"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:chainmail_chestplate",
+    "count": 1
+  }
+}

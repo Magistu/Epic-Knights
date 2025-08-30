@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " d ",
+    " t ",
+    "   "
+  ],
+  "key": {
+    "d": {
+      "item": "minecraft:black_dye"
+    },
+    "t": {
+      "item": "magistuarmory:darkening_template"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:darkening_template",
+    "count": 2
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "i i",
+    "s s",
+    "l l"
+  ],
+  "key": {
+    "s": {
+      "tag": "magistuarmory:leather_strips"
+    },
+    "l": {
+      "item": "minecraft:leather"
+    },
+    "i": {
+      "tag": "c:ingots/steel"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:platemail_boots",
+    "count": 1
+  }
+}

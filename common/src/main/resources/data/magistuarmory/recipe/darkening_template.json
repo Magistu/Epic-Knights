@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " d ",
+    " p ",
+    "   "
+  ],
+  "key": {
+    "d": {
+      "item": "minecraft:black_dye"
+    },
+    "p": {
+      "tag": "magistuarmory:small_plates/steel"
+    }
+  },
+  "result": {
+    "id": "magistuarmory:darkening_template",
+    "count": 1
+  }
+}

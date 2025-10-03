@@ -409,6 +409,7 @@
   "bonusattackreach": "+リーチ距離",
   "slowmovementspeed": "移動速度が低下する",
   "effect.laceration": "裂傷",
+  "effect.magistuarmory_laceration": "裂傷",
   "lance.rideronly": "騎乗時のみ使用可能",
   "lance.leftclick": "攻撃する前に左クリックするとターゲットが外れる",
   "medieval_bag.rightclick": "右クリックで中身を表示",

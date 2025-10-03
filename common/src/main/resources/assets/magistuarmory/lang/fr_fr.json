@@ -409,6 +409,7 @@
   "bonusattackreach": "+%1$f Distance d'atteinte",
   "slowmovementspeed": "Vitesse de déplacement lente",
   "effect.laceration": "Lacération",
+  "effect.magistuarmory_laceration": "Lacération",
   "lance.rideronly": "Utilisé uniquement sur monture",
   "lance.leftclick": "Clic gauche avant de frapper pour désarçonner la cible",
   "medieval_bag.rightclick": "Clic avec le bouton droit de la souris pour obtenir le contenu",

@@ -32,8 +32,6 @@ public class ModRender
 			if (supplier.get() instanceof IHasModelProperty havingproperty)
 				havingproperty.registerModelProperty();
 
-		ModItems.NOBLE_SWORD.get().registerModelProperty();
-
 		content.shieldItems.stream()
 				.filter(s -> s.get() instanceof PaviseItem)
 				.map(s -> (PaviseItem) s.get())

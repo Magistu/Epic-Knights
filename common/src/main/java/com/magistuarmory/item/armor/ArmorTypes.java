@@ -2,15 +2,12 @@ package com.magistuarmory.item.armor;
 
 import com.magistuarmory.EpicKnights;
 import com.magistuarmory.config.ArmorConfig;
-import com.magistuarmory.item.armor.ArmorType;
-import dev.architectury.platform.Platform;
 import dev.architectury.registry.registries.DeferredRegister;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 
 public class ArmorTypes

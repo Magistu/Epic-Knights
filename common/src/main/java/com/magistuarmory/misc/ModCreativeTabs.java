@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,11 +46,11 @@ public class ModCreativeTabs
 	public static final ResourceKey<CreativeModeTab> ARMOR_DECORATIONS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "armor_decorations"));
 	public static final ResourceKey<CreativeModeTab> INGRIDIENTS_RESOURCE_KEY = CreativeModeTabs.INGREDIENTS;
 
-	public static RegistrySupplier<CreativeModeTab> createTab(String name, RegistrySupplier<? extends Item> supplier)
+	public static RegistrySupplier<CreativeModeTab> createTab(String name, @Nullable RegistrySupplier<? extends Item> supplier)
 	{
 		return TABS.register(name, () -> CreativeTabRegistry.create(
 				Component.translatable("itemGroup." + EpicKnights.ID + "." + name),
-				() -> new ItemStack(getIconItem(supplier))));
+				() -> supplier == null ? ItemStack.EMPTY : new ItemStack(getIconItem(supplier))));
 	}
 
 	public static Item getIconItem(RegistrySupplier<? extends Item> supplier)

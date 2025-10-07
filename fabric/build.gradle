@@ -130,10 +130,12 @@ publisher {
     setArtifact(tasks.remapJar)
 
     modrinthDepends {
-        required("epic-knights-shields-armor-and-weapons")
+        required("cloth-config")
+        required("architectury-api")
     }
 
     curseDepends {
-        required("epic-knights-armor-and-weapons")
+        required("cloth-config")
+        required("architectury-api")
     }
 }

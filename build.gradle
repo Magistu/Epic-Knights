@@ -22,11 +22,6 @@ subprojects {
     apply plugin: 'architectury-plugin'
     apply plugin: 'maven-publish'
 
-    base {
-        // Set up a suffixed format for the mod jar names, e.g. `example-fabric`.
-        archivesName = "$archives_base_name"
-    }
-
     repositories {
         // Add repositories to retrieve artifacts from in here.
         // You should only use this when depending on other mods because
@@ -80,3 +75,47 @@ subprojects {
         }
     }
 }
+
+
+ext.minecraftGameVersions = {
+    def parse = { String v ->
+        def parts = v.tokenize('.')
+
+        if (parts.size() < 2)
+            throw new IllegalArgumentException("Version '${v}' must have at least major.minor")
+
+        [
+                major: parts[0].toInteger(),
+                minor: parts[1].toInteger(),
+                patch: (parts.size() >= 3 ? parts[2].toInteger() : 0)
+        ]
+    }
+
+    try {
+        def min = parse(rootProject.minecraft_min_version.toString())
+        def max = parse(rootProject.minecraft_max_version.toString())
+
+        if (min.major != max.major || min.minor != max.minor) {
+            logger.lifecycle("Different minor/major in range (${min.major}.${min.minor} .. ${max.major}.${max.minor}), falling back to current '${rootProject.minecraft_version}'")
+
+            return [rootProject.minecraft_version]
+        }
+
+        if (min.patch > max.patch) {
+            logger.lifecycle("Min patch ${min.patch} > max patch ${max.patch}, falling back to current '${rootProject.minecraft_version}'")
+
+            return [rootProject.minecraft_version]
+        }
+
+        def result = []
+
+        for (int p = min.patch; p < max.patch; p++)
+            result << (p == 0 ? "${min.major}.${min.minor}" : "${min.major}.${min.minor}.${p}")
+
+        return result.unique()
+    } catch (Exception e) {
+        logger.lifecycle("Failed to compute range: ${e.message}; falling back to current '${rootProject.minecraft_version}'")
+
+        return [rootProject.minecraft_version]
+    }
+}()

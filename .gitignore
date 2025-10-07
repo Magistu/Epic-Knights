@@ -23,3 +23,5 @@ forge/server
 fabric/run/**
 fabric/run2
 fabric/server
+
+CHANGELOG.md

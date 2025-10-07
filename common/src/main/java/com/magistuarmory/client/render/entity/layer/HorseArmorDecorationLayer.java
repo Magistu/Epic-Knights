@@ -3,6 +3,7 @@ package com.magistuarmory.client.render.entity.layer;
 import com.magistuarmory.EpicKnights;
 import com.magistuarmory.client.render.model.ModModels;
 import com.magistuarmory.client.render.model.decoration.HorseArmorDecorationModel;
+import com.magistuarmory.component.ModDataComponents;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.EnvType;
@@ -49,14 +50,14 @@ public class HorseArmorDecorationLayer extends RenderLayer<Horse, HorseModel<Hor
    public void render(PoseStack pose, MultiBufferSource buffer, int p, Horse entity, float f, float f2, float f3, float f4, float f5, float f6)
    {
       ItemStack stack = entity.getItemBySlot(EquipmentSlot.BODY);
-      if (stack.getItem() instanceof AnimalArmorItem)
+      BannerPatternLayers patterns = stack.get(DataComponents.BANNER_PATTERNS);
+      if (stack.getItem() instanceof AnimalArmorItem && patterns != null)
       {
          DyeColor basecolor = stack.get(DataComponents.BASE_COLOR);
-         BannerPatternLayers patterns = stack.get(DataComponents.BANNER_PATTERNS);
          this.getParentModel().copyPropertiesTo(this.model);
          this.model.prepareMobModel(entity, f, f2, f3);
          this.model.setupAnim(entity, f, f2, f4, f5, f6);
-         List<Pair<Holder<BannerPattern>, DyeColor>> list = patterns == null ? new ArrayList<>() : patterns.layers().stream().map(l -> Pair.of(l.pattern(), l.color())).collect(Collectors.toList());
+         List<Pair<Holder<BannerPattern>, DyeColor>> list = patterns.layers().stream().map(l -> Pair.of(l.pattern(), l.color())).collect(Collectors.toList());
          this.renderPatterns(pose, buffer, p, OverlayTexture.NO_OVERLAY, list, false, this.model.parts(), basecolor);
       }
    }

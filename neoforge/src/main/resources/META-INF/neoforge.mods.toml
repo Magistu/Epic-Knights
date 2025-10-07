@@ -1,42 +1,40 @@
 modLoader = "javafml"
-loaderVersion = "${loader_version_range}"
 license = "${mod_license}"
+loaderVersion = "${neoforge_loader_version_range}"
+displayURL = "${mod_page_url}"
 issueTrackerURL = "${mod_issues_url}"
+logoFile = "icon.png"
 
 [[mods]]
 modId = "${mod_id}"
 version = "${mod_version}"
-license = "${mod_license}"
-updateJSONURL = "${mod_update_json}"
 displayName = "${mod_name}"
-displayURL = "${mod_home_url}"
-logoFile = "bwm_logo.png"
 authors = "${mod_authors}"
-credits = "${mod_credits}"
-description = '''${mod_description}'''
+credits = "${mod_contributors}"
+description = "${mod_description}"
 
-[[dependencies.${mod_id}]]
+[[dependencies."${mod_id}"]]
 modId = "neoforge"
 type = "required"
 versionRange = "${neoforge_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies."${mod_id}"]]
 modId = "minecraft"
 type = "required"
-versionRange = "${minecraft_version_range}"
+versionRange = "[${minecraft_min_version},${minecraft_max_version})"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies."${mod_id}"]]
 modId = "architectury"
 type = "required"
-versionRange = "[${architectury_version},)"
+versionRange = "[${architectury_api_version},)"
 ordering = "AFTER"
 side = "BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies."${mod_id}"]]
 modId = "cloth_config"
 type = "required"
 versionRange = "[${cloth_config_version},)"

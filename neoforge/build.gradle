@@ -92,7 +92,7 @@ def display_minecraft_version = rootProject.findProperty("display_minecraft_vers
 def mod_version = rootProject.findProperty("mod_version")
 
 tasks.named("remapJar") { t ->
-    t.archiveFileName.set("[${display_minecraft_version}-neoforge]-Epic-Knights-Addon-${mod_version}.jar")
+    t.archiveFileName.set("epic-knights-${display_minecraft_version}-neoforge-${mod_version}.jar")
 }
 
 publisher {

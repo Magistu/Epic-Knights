@@ -49,7 +49,7 @@ public class PaviseBlock extends AbstractBannerBlock
 
 	public PaviseBlock()
 	{
-		super(DyeColor.WHITE, Properties.of().dynamicShape().noTerrainParticles().sound(SoundType.WOOD).ignitedByLava());
+		super(DyeColor.WHITE, Properties.of().dynamicShape().noParticlesOnBreak().sound(SoundType.WOOD).ignitedByLava());
 	}
 
 	@Override

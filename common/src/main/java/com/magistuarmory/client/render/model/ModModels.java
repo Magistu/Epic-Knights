@@ -35,7 +35,7 @@ public class ModModels extends ModModelsProvider
 	public static final LayerDefinition TOP_DECORATION_2 = TopDecoration2Model.createLayer();
 	public static final LayerDefinition SURCOAT = SurcoatModel.createLayer();
 	public static final LayerDefinition CAPARISON = CaparisonModel.createLayer();
-	
+
 	public static final ModelLayerLocation TORSE_AND_MANTLE_LOCATION = INSTANCE.addDecorationModel("torse_and_mantle", () -> TORSE_AND_MANTLE);
 	public static final ModelLayerLocation CROWN_LOCATION = INSTANCE.addDecorationModel("crown", () -> CROWN);
 	public static final ModelLayerLocation FLOWERCROWN_LOCATION = INSTANCE.addDecorationModel("flowercrown", () -> FLOWERCROWN);

@@ -1,9 +1,12 @@
+import groovy.json.JsonOutput
+
 plugins {
-    id "com.github.johnrengelman.shadow" version "7.1.2"
-    id "com.matthewprenger.cursegradle"
+    id "com.github.johnrengelman.shadow" version "7.0.0"
+    id "com.hypherionmc.modutils.modpublisher" version "2.1.7"
 }
 
 version = rootProject.mod_version
+archivesBaseName = "epic-knights-${rootProject.display_minecraft_version}-fabric"
 
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
@@ -25,36 +28,58 @@ configurations {
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
     modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
-    // Remove the next line if you don't want to depend on the API
-    modApi "dev.architectury:architectury-fabric:${rootProject.architectury_version}"
-
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${rootProject.cloth_config_version}") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
-
-    //Modmenu
-    modImplementation("com.terraformersmc:modmenu:${rootProject.modmenu_version}") {
-        exclude group: "net.fabricmc.fabric-api" }
-
+    modApi "dev.architectury:architectury-fabric:${rootProject.architectury_api_version}"
+    modImplementation "me.shedaniel.cloth:cloth-config-fabric:${rootProject.cloth_config_version}"
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+    modImplementation "maven.modrinth:modmenu:${rootProject.modmenu_version}-fabric"
+}
+
+repositories {
+    maven { url "https://maven.terraformersmc.com/releases/" }
 }
 
 processResources {
-    inputs.property "version", project.version
-    inputs.property "mc_version", project.minecraft_version
-    inputs.property "loader_version", project.fabric_loader_version
+    def rawAuthors      = project.mod_authors.toString()
+    def rawContributors = project.mod_contributors.toString()
 
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version,
-                "mc_version": project.minecraft_version,
-                "loader_version": project.fabric_loader_version
+    def authorsList      = rawAuthors.split(",")*.trim().findAll { it }
+    def contributorsList = rawContributors.split(",")*.trim().findAll { it }
+
+    def authorsArray      = JsonOutput.toJson(authorsList)
+    def contributorsArray = JsonOutput.toJson(contributorsList)
+
+    def expandProps = [
+            "mod_id"                    : project.mod_id,
+            "mod_name"                  : project.mod_display_name,
+            "mod_version"               : project.mod_version,
+            "mod_description"           : project.mod_description,
+            "mod_authors"               : authorsArray,
+            "mod_contributors"          : contributorsArray,
+            "mod_license"               : project.mod_license,
+            "mod_discord_url"           : project.mod_discord_url,
+            "mod_git_url"               : project.mod_git_url,
+            "mod_issues_url"            : project.mod_issues_url,
+            "mod_page_url"              : project.mod_page_url,
+            "minecraft_min_version"     : project.minecraft_min_version,
+            "minecraft_max_version"     : project.minecraft_max_version,
+            "fabric_loader_version"     : project.fabric_loader_version,
+            "min_fabric_loader_version" : project.min_fabric_loader_version,
+            "architectury_api_version"  : project.architectury_api_version,
+            "cloth_config_version"      : project.cloth_config_version,
+            "epic_knights_version"      : project.epic_knights_version,
+    ]
+
+    inputs.properties(expandProps)
+
+    filesMatching('fabric.mod.json') {
+        expand(expandProps)
     }
 }
 
 shadowJar {
     exclude "architectury.common.json"
-    
+
     configurations = [project.configurations.shadowCommon]
     archiveClassifier.set("dev-shadow")
 }
@@ -75,19 +100,49 @@ sourcesJar {
     from commonSources.archiveFile.map { zipTree(it) }
 }
 
-//task copy(type: Copy) {
-//    from "${project.buildDir}/libs"
-//    into "${rootProject.buildDir}/libs"
-//    dependsOn remapJar
-//}
-//
-//build.finalizedBy(copy)
-
 components.java {
     withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
         skip()
     }
 }
 
-rootProject.tasks.getByName("curseforge").dependsOn tasks.getByName("curseforge")
+publisher {
+    def mcVersionsNeo = (rootProject.ext.minecraftGameVersions as List).collect { it.toString() } as String[]
+    def changelogFile = rootProject.file("fabric/CHANGELOG.md")
+    def changelogText = changelogFile.exists() ? changelogFile.getText("UTF-8") : ""
 
+    apiKeys {
+        modrinth System.getenv("MODRINTH_TOKEN")
+        curseforge System.getenv("CURSEFORGE_TOKEN")
+    }
+
+    setCurseID((rootProject.findProperty("mod_curseforge_id") ?: "").toString())
+
+    setModrinthID((rootProject.findProperty("mod_modrinth_id") ?: "").toString())
+
+    setVersionType((rootProject.findProperty("release_channel") ?: "release").toString())
+
+    setChangelog(changelogText)
+
+    setVersion(rootProject.mod_version)
+
+    setDisplayName("[${rootProject.display_minecraft_version}-fabric]-${rootProject.mod_display_name}-${rootProject.mod_version}")
+
+    setGameVersions(*mcVersionsNeo)
+
+    setLoaders("fabric")
+
+    setCurseEnvironment("both")
+
+    setArtifact(tasks.remapJar)
+
+    modrinthDepends {
+        required("cloth-config")
+        required("architectury-api")
+    }
+
+    curseDepends {
+        required("cloth-config")
+        required("architectury-api")
+    }
+}

@@ -25,10 +25,9 @@ public class DecorationRemoveRecipe extends CustomRecipe
 {
     public static RecipeSerializer<DecorationRemoveRecipe> SERIALIZER = new SimpleCraftingRecipeSerializer<>(DecorationRemoveRecipe::new);
 
-    public DecorationRemoveRecipe(CraftingBookCategory category)
+    public DecorationRemoveRecipe(ResourceLocation location, CraftingBookCategory category)
     {
-        super(category);
-        //super(location, CraftingBookCategory.MISC);
+        super(location, CraftingBookCategory.MISC);
     }
 
     @Override
@@ -41,16 +40,16 @@ public class DecorationRemoveRecipe extends CustomRecipe
             ItemStack stack2 = container.getItem(i);
             if (stack2.isEmpty())
                 continue;
-            
+
             if (isDecorated(stack2))
             {
                 if (!stack.isEmpty())
                     return false;
-                
+
                 stack = stack2;
                 continue;
             }
-            
+
             return false;
         }
 
@@ -74,7 +73,7 @@ public class DecorationRemoveRecipe extends CustomRecipe
                 break;
             }
         }
-        
+
         if (!stack.isEmpty())
         {
             ItemStack bagstack = new ItemStack(ModItems.MEDIEVAL_BAG.get());
@@ -84,7 +83,7 @@ public class DecorationRemoveRecipe extends CustomRecipe
             MedievalBagItem.setContents(bagstack, stacks);
             return bagstack;
         }
-        
+
         return ItemStack.EMPTY;
     }
 
@@ -105,7 +104,7 @@ public class DecorationRemoveRecipe extends CustomRecipe
     {
         throw new AssertionError();
     }
-    
+
     static boolean mightBeDecorated(Item item)
     {
         return item instanceof ArmorItem || item instanceof ShieldItem || item instanceof HorseArmorItem;
@@ -115,15 +114,15 @@ public class DecorationRemoveRecipe extends CustomRecipe
     {
         if (!mightBeDecorated(stack.getItem()))
             return false;
-        
+
         CompoundTag blockcompound = BlockItem.getBlockEntityData(stack);
         if (blockcompound != null && blockcompound.contains("Base"))
             return true;
-        
+
         CompoundTag decorationdata = stack.getTagElement("ArmorDecoration");
         return decorationdata != null && !decorationdata.getList("Items", 10).isEmpty();
     }
-    
+
     static List<ItemStack> takeApart(ItemStack stack)
     {
         List<ItemStack> stacks = new ArrayList<>();
@@ -138,7 +137,7 @@ public class DecorationRemoveRecipe extends CustomRecipe
                 bannerstack.addTagElement("BlockEntityTag", blockcompound.copy());
 
                 newstack.removeTagKey("BlockEntityTag");
-                
+
                 stacks.add(bannerstack);
             }
         }
@@ -159,7 +158,7 @@ public class DecorationRemoveRecipe extends CustomRecipe
                 listtag.remove(listtag.size() - 1);
                 decorationdata.put("Items", listtag);
                 newstack.addTagElement("ArmorDecoration", decorationdata);
-                
+
                 stacks.add(decorationstack);
             }
         }

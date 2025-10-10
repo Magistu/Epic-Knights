@@ -24,10 +24,9 @@ public class HeraldryRecipe extends CustomRecipe
 {
     public static RecipeSerializer<HeraldryRecipe> SERIALIZER = new SimpleCraftingRecipeSerializer<>(HeraldryRecipe::new);
 
-    public HeraldryRecipe(CraftingBookCategory category)
+    public HeraldryRecipe(ResourceLocation location, CraftingBookCategory category)
     {
-        super(category);
-        //super(location, CraftingBookCategory.MISC);
+        super(location, CraftingBookCategory.MISC);
     }
 
     @Override

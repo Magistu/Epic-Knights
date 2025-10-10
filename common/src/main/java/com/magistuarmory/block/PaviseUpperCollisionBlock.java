@@ -33,7 +33,7 @@ public class PaviseUpperCollisionBlock extends Block
 	
 	public PaviseUpperCollisionBlock()
 	{
-		super(Properties.of().dynamicShape().noTerrainParticles().sound(SoundType.EMPTY));
+		super(Properties.of().dynamicShape().noParticlesOnBreak().sound(SoundType.EMPTY));
 	}
 	
 	@Override

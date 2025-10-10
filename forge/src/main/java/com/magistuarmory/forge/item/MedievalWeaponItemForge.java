@@ -2,18 +2,13 @@ package com.magistuarmory.forge.item;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import com.magistuarmory.item.IHasModelProperty;
 import com.magistuarmory.item.MedievalWeaponItem;
 import com.magistuarmory.item.ModItemTier;
 import com.magistuarmory.item.WeaponType;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeMod;
@@ -59,7 +54,8 @@ public class MedievalWeaponItemForge extends MedievalWeaponItem
     }
 
     @Override
-    public boolean onAttackClickEntity(ItemStack stack, Player player, Entity entity) {
+    public boolean onAttackClickEntity(ItemStack stack, Player player, Entity entity)
+    {
         return true;
     }
 }

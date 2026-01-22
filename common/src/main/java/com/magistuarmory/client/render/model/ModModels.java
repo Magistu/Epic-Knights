@@ -70,6 +70,9 @@ public class ModModels extends ModModelsProvider
 	public static final ModelLayerLocation CAT_EARS_LOCATION = INSTANCE.addDecorationModel("cat_ears", () -> CAT_EARS);
 
 	// Armor
+	public static final ModelLayerLocation DEFAULT_ARMOR_LOCATION = INSTANCE.addArmorModel("default", DefaultArmorModel::createLayer);
+	public static final ModelLayerLocation DEFAULT_LEGGINGS_LOCATION = INSTANCE.addArmorModel("default_leggings", DefaultLeggingsModel::createLayer);
+	public static final ModelLayerLocation CONIC_HELMET_LOCATION = INSTANCE.addArmorModel("conic_helmet", ConicHelmetModel::createLayer);
 	public static final ModelLayerLocation CROWN_ARMOR_LOCATION = INSTANCE.addArmorModel("crown", CrownArmorModel::createLayer);
 	public static final ModelLayerLocation FLOWERCROWN_ARMOR_LOCATION = INSTANCE.addArmorModel("flowercrown", () -> FLOWERCROWN);
 	public static final ModelLayerLocation MINICROWN_ARMOR_LOCATION = INSTANCE.addArmorModel("minicrown", () -> MINICROWN);

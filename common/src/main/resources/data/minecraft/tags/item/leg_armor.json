@@ -1,17 +1,17 @@
 ﻿{
   "replace": false,
   "values": [
-    "magistuarmory:knight_leggings",
-    "magistuarmory:jousting_leggings",
-    "magistuarmory:gothic_leggings",
-    "magistuarmory:maximilian_leggings",
-    "magistuarmory:chainmail_leggings",
-    "magistuarmory:platemail_leggings",
-    "magistuarmory:crusader_leggings",
-    "magistuarmory:pantyhose",
-    "magistuarmory:rustedchainmail_leggings",
-    "magistuarmory:xivcenturyknight_leggings",
-    "magistuarmory:cuirassier_leggings",
-    "magistuarmory:kastenbrust_leggings"
+    { "id": "magistuarmory:knight_leggings", "required": false },
+    { "id": "magistuarmory:jousting_leggings", "required": false },
+    { "id": "magistuarmory:gothic_leggings", "required": false },
+    { "id": "magistuarmory:maximilian_leggings", "required": false },
+    { "id": "magistuarmory:chainmail_leggings", "required": false },
+    { "id": "magistuarmory:platemail_leggings", "required": false },
+    { "id": "magistuarmory:crusader_leggings", "required": false },
+    { "id": "magistuarmory:pantyhose", "required": false },
+    { "id": "magistuarmory:rustedchainmail_leggings", "required": false },
+    { "id": "magistuarmory:xivcenturyknight_leggings", "required": false },
+    { "id": "magistuarmory:cuirassier_leggings", "required": false },
+    { "id": "magistuarmory:kastenbrust_leggings", "required": false }
   ]
 }

@@ -6,10 +6,12 @@ import com.magistuarmory.client.render.model.decoration.ArmorDecorationModel;
 import com.magistuarmory.client.render.model.decoration.ArmorDecorationModelSet;
 import com.magistuarmory.client.render.model.decoration.SurcoatModel;
 import com.magistuarmory.component.ModDataComponents;
+import com.magistuarmory.item.ArmorDecoration;
 import com.magistuarmory.item.ArmorDecorationItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.datafixers.util.Pair;
+import dev.architectury.registry.registries.RegistrySupplier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.HumanoidModel;
@@ -23,19 +25,13 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.entity.BannerBlockEntity;
 import net.minecraft.world.level.block.entity.BannerPattern;
 import net.minecraft.world.level.block.entity.BannerPatternLayers;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,18 +43,6 @@ import static com.magistuarmory.item.ArmorDecorationItem.getDecorationTags;
 @Environment(EnvType.CLIENT)
 public class ArmorDecorationLayer<T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> implements ArmorPatternLayer
 {
-   private static final int[] CAT_COLORS = new int[] {
-           0x000000,
-           0xFFFFFF,
-           0x808080,
-           0xFFA500,
-           0x8B4513,
-           0xFFE4B5,
-           0x6699CC,
-           0x964B00,
-           0xC8A2C8,
-           0xFFD700
-   };
 
    private static final String ARMOR_DIR_PREFIX = "textures/models/armor/";
    private final ArmorDecorationModel<T> coatModel;
@@ -95,32 +79,10 @@ public class ArmorDecorationLayer<T extends LivingEntity, M extends HumanoidMode
    @Override
    public void render(PoseStack pose, MultiBufferSource buffer, int p, T entity, float f, float f2, float f3, float f4, float f5, float f6)
    {
-      LocalDate today = LocalDate.now();
-      if (today.getDayOfMonth() == 1 && today.getMonth() == Month.APRIL) {
-         this.renderCat(pose, buffer, p, entity);
-      }
       this.renderPiece(pose, buffer, entity, EquipmentSlot.CHEST, p);
       this.renderPiece(pose, buffer, entity, EquipmentSlot.LEGS, p);
       this.renderPiece(pose, buffer, entity, EquipmentSlot.FEET, p);
       this.renderPiece(pose, buffer, entity, EquipmentSlot.HEAD, p);
-   }
-
-   private void renderCat(PoseStack pose, MultiBufferSource buffer, int p, T entity) {
-      ResourceLocation koshkodevochkaLocation = ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "cat_ears");
-      ArmorDecorationModel<T> kittycatModel = decorationModels.get(koshkodevochkaLocation);
-      this.getParentModel().copyPropertiesTo(kittycatModel);
-      int n = 0;
-      if (entity instanceof Player player) {
-         String nickname = player.getDisplayName().getString();
-         for (int i = 0; i < nickname.length(); i++) {
-            n += nickname.charAt(i);
-         }
-      } else {
-         n = entity.getId();
-      }
-      boolean hasfoil = (n + LocalDateTime.now().getHour()) % 4 == 0;
-      renderDecoration(pose, buffer, p, OverlayTexture.NO_OVERLAY, CAT_COLORS[n % CAT_COLORS.length], hasfoil, kittycatModel.parts(), getTexture(koshkodevochkaLocation));
-      renderDecoration(pose, buffer, p, OverlayTexture.NO_OVERLAY, hasfoil, kittycatModel.parts(), getTexture(koshkodevochkaLocation, true));
    }
 
    private void renderPiece(PoseStack pose, MultiBufferSource buffer, T entity, EquipmentSlot slot, int p)
@@ -161,6 +123,10 @@ public class ArmorDecorationLayer<T extends LivingEntity, M extends HumanoidMode
       }
    }
 
+   public ArmorDecorationModel<T> getCoatModel() {
+      return this.coatModel;
+   }
+
    public ArmorDecorationModel<T> getArmorDecorationModel(ResourceLocation location)
    {
       return this.decorationModels.get(location);
@@ -185,6 +151,11 @@ public class ArmorDecorationLayer<T extends LivingEntity, M extends HumanoidMode
       return this.coatTexture;
    }
 
+   public ResourceLocation getBaseTexture()
+   {
+      return this.coatTexture;
+   }
+
    @Override
    public ResourceLocation getBasePatternTexture()
    {
@@ -195,5 +166,9 @@ public class ArmorDecorationLayer<T extends LivingEntity, M extends HumanoidMode
    public ResourceLocation getPatternTexture(ResourceLocation patternlocation)
    {
       return ResourceLocation.fromNamespaceAndPath(this.coatTexture.getNamespace(), this.coatDirPrefix + patternlocation.getPath() + ".png");
+   }
+
+   public void registerDecorations(List<RegistrySupplier<? extends ArmorDecoration>> armorDecorationItems, EntityRendererProvider.Context context) {
+      this.decorationModels.registerDecorations(armorDecorationItems, context);
    }
 }

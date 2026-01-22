@@ -8,6 +8,10 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 public class WeaponsConfig implements ConfigData
 {
     @ConfigEntry.Gui.CollapsibleObject
+    public LongbowConfig longbow;
+    @ConfigEntry.Gui.CollapsibleObject
+    public HeavyCrossbowConfig heavyCrossbow;
+    @ConfigEntry.Gui.CollapsibleObject
     public BarbedClubConfig barbedClub;
     @ConfigEntry.Gui.CollapsibleObject
     public BlacksmithHammerConfig blacksmithHammer;
@@ -65,6 +69,8 @@ public class WeaponsConfig implements ConfigData
     public ShortSwordConfig shortSword;
 
     public WeaponsConfig() {
+        this.longbow = new LongbowConfig();
+        this.heavyCrossbow = new HeavyCrossbowConfig();
         this.barbedClub = new BarbedClubConfig();
         this.blacksmithHammer = new BlacksmithHammerConfig();
         this.club = new ClubConfig();
@@ -95,6 +101,42 @@ public class WeaponsConfig implements ConfigData
         this.shortSword = new ShortSwordConfig();
     }
 
+    public static class LongbowConfig
+    {
+        @ConfigEntry.Gui.RequiresRestart
+        public boolean enabled;
+        @ConfigEntry.Gui.RequiresRestart
+        public int durability;
+        @ConfigEntry.Gui.RequiresRestart
+        public float projectileSpeed;
+        @ConfigEntry.Gui.RequiresRestart
+        public int pullTime;
+
+        public LongbowConfig() {
+            this.enabled = true;
+            this.durability = 420;
+            this.projectileSpeed = 4.2f;
+            this.pullTime = 36;
+        }
+    }
+    public static class HeavyCrossbowConfig
+    {
+        @ConfigEntry.Gui.RequiresRestart
+        public boolean enabled;
+        @ConfigEntry.Gui.RequiresRestart
+        public int durability;
+        @ConfigEntry.Gui.RequiresRestart
+        public float projectileSpeed;
+        @ConfigEntry.Gui.RequiresRestart
+        public int pullTime;
+
+        public HeavyCrossbowConfig() {
+            this.enabled = true;
+            this.durability = 500;
+            this.projectileSpeed = 4.3f;
+            this.pullTime = 50;
+        }
+    }
     public static class BarbedClubConfig
     {
         @ConfigEntry.Gui.RequiresRestart

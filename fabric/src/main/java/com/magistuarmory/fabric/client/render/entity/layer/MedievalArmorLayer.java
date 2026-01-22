@@ -1,5 +1,6 @@
 package com.magistuarmory.fabric.client.render.entity.layer;
 
+import com.magistuarmory.client.render.ModRender;
 import com.magistuarmory.item.DyeableItemLike;
 import com.magistuarmory.item.armor.MedievalArmorItem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -20,16 +21,12 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.DyedItemColor;
 
 import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class MedievalArmorLayer implements ArmorRenderer
 {
-   public static final HumanoidModel<LivingEntity> OUTER_ARMOR = new HumanoidModel<>(LayerDefinition.create(HumanoidModel.createMesh(new CubeDeformation(1.0F), 0.0F), 64, 32).bakeRoot());
-   public static final HumanoidModel<LivingEntity> INNER_ARMOR = new HumanoidModel<>(LayerDefinition.create(HumanoidModel.createMesh(new CubeDeformation(0.5F), 0.0F), 64, 32).bakeRoot());
-   
    @Override
    public void render(PoseStack pose, MultiBufferSource buffer, ItemStack stack, LivingEntity entity, EquipmentSlot slot, int i, HumanoidModel<LivingEntity> contextmodel)
    {
@@ -85,7 +82,7 @@ public class MedievalArmorLayer implements ArmorRenderer
 
    private HumanoidModel<? extends LivingEntity> getVanillaArmorModel(EquipmentSlot slot)
    {
-      return usesInnerModel(slot) ? INNER_ARMOR : OUTER_ARMOR;
+      return usesInnerModel(slot) ? ModRender.INNER_ARMOR : ModRender.OUTER_ARMOR;
    }
 
    private boolean usesInnerModel(EquipmentSlot slot) {

@@ -59,7 +59,7 @@ public class ModItems extends ModItemsProvider
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> BARBUTE = INSTANCE.addMedievalArmorItem("barbute", ArmorTypes.BARBUTE, ArmorItem.Type.HELMET, new Properties());
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> HALFARMOR_CHESTPLATE = INSTANCE.addMedievalArmorItem("halfarmor_chestplate", ArmorTypes.HALFARMOR, ArmorItem.Type.CHESTPLATE, new Properties());
 
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> GREATHELM = INSTANCE.addMedievalArmorItem("greathelm", ArmorTypes.CRUSADER, ArmorItem.Type.HELMET, new Properties());
+	public static final @Nullable RegistrySupplier<DyeableMedievalArmorItem> GREATHELM = INSTANCE.addDyeableMedievalArmorItem("greathelm", ArmorTypes.CRUSADER, ArmorItem.Type.HELMET, new Properties(), 0xd3d3d3);
 	public static final @Nullable RegistrySupplier<DyeableMedievalArmorItem> CRUSADER_CHESTPLATE = INSTANCE.addDyeableMedievalArmorItem("crusader_chestplate", ArmorTypes.CRUSADER, ArmorItem.Type.CHESTPLATE, new Properties(), -3227226);
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> CRUSADER_LEGGINGS = INSTANCE.addMedievalArmorItem("crusader_leggings", ArmorTypes.CRUSADER, ArmorItem.Type.LEGGINGS, new Properties());
 	public static final @Nullable RegistrySupplier<DyeableMedievalArmorItem> CRUSADER_BOOTS = INSTANCE.addDyeableMedievalArmorItem("crusader_boots", ArmorTypes.CRUSADER, ArmorItem.Type.BOOTS, new Properties(), -3227226);
@@ -75,7 +75,7 @@ public class ModItems extends ModItemsProvider
 
 	public static final @Nullable RegistrySupplier<DyeableMedievalArmorItem> BRIGANDINE = INSTANCE.addDyeableMedievalArmorItem("brigandine_chestplate", ArmorTypes.BRIGANDINE, ArmorItem.Type.CHESTPLATE, new Properties(), 10511680);
 
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> NORMAN_HELMET = INSTANCE.addMedievalArmorItem("norman_helmet", ArmorTypes.NORMAN, ArmorItem.Type.HELMET, new Properties());
+	public static final @Nullable RegistrySupplier<DyeableMedievalArmorItem> NORMAN_HELMET = INSTANCE.addDyeableMedievalArmorItem("norman_helmet", ArmorTypes.NORMAN, ArmorItem.Type.HELMET, new Properties(), 0xF1F1F1);
 
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> SHISHAK = INSTANCE.addMedievalArmorItem("shishak", ArmorTypes.SHISHAK, ArmorItem.Type.HELMET, new Properties());
 
@@ -181,8 +181,8 @@ public class ModItems extends ModItemsProvider
 	public static final @Nullable RegistrySupplier<MedievalWeaponItem> CLUB = INSTANCE.addMedievalWeaponItem("club", new Properties(), ModItemTier.WOOD, WeaponTypes.CLUB);
 	public static final @Nullable RegistrySupplier<MedievalWeaponItem> MESSER_SWORD = INSTANCE.addMedievalWeaponItem("messer_sword", new Properties(), ModItemTier.IRON, WeaponTypes.MESSER_SWORD);
 
-	public static final RegistrySupplier<Item> LONGBOW = INSTANCE.addMedievalBowItem("longbow", 420, 4.2f, 26.0f);
-	public static final RegistrySupplier<Item> HEAVY_CROSSBOW = INSTANCE.addMedievalCrossbowItem("heavy_crossbow", 500, 4.3f, 50);
+	public static final @Nullable RegistrySupplier<Item> LONGBOW = INSTANCE.addMedievalBowItem("longbow", WeaponTypes.LONGBOW);
+	public static final @Nullable RegistrySupplier<Item> HEAVY_CROSSBOW = INSTANCE.addMedievalCrossbowItem("heavy_crossbow", WeaponTypes.HEAVY_CROSSBOW);
 
 	//Shields
 	public static final ShieldsSupply HEATER_SHIELDS = INSTANCE.addShieldsSupply(HEATER_SHIELD_SUPPLY, "heatershield");
@@ -274,7 +274,7 @@ public class ModItems extends ModItemsProvider
 	public static final RegistrySupplier<DyeableArmorDecorationItem> VIKING_HORNS_DECORATION = INSTANCE.addDyeableArmorDecorationItem("viking_horns_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "viking_horns"), new Properties(), ArmorItem.Type.HELMET));
 	public static final RegistrySupplier<DyeableArmorDecorationItem> GRIFFIN_DECORATION = INSTANCE.addDyeableArmorDecorationItem("griffin_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "griffin"), new Properties(), ArmorItem.Type.HELMET, 0xFBC237));
 	public static final RegistrySupplier<DyeableArmorDecorationItem> HOOD_DECORATION = INSTANCE.addDyeableArmorDecorationItem("hood_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "hood"), new Properties(), ArmorItem.Type.CHESTPLATE));
-	public static final RegistrySupplier<ArmorDecorationItem> ECRANCHE_DECORATION = INSTANCE.addArmorDecorationItem("ecranche_decoration", () -> new ArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "ecranche"), new Properties(), ArmorItem.Type.CHESTPLATE));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> ECRANCHE_DECORATION = INSTANCE.addDyeableArmorDecorationItem("ecranche_decoration", () -> new DyeableArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "ecranche"), new Properties(), ArmorItem.Type.CHESTPLATE, 0xDFDFDF));
 	public static final RegistrySupplier<ArmorDecorationItem> RONDEL_DECORATION = INSTANCE.addArmorDecorationItem("rondel_decoration", () -> new ArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "rondel"), new Properties(), ArmorItem.Type.CHESTPLATE));
 	public static final RegistrySupplier<ArmorDecorationItem> CAT_EARS_DECORATION = INSTANCE.addArmorDecorationItem("cat_ears_decoration", () -> new ArmorDecorationItem(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "cat_ears"), new Properties(), ArmorItem.Type.HELMET));
 

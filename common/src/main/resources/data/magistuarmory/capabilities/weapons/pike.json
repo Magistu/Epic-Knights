@@ -1,0 +1,74 @@
+{
+  "collider": {
+    "number": 3,
+    "size": [
+      0.6,
+      0.6,
+      1.6
+    ],
+    "center": [
+      0.0,
+      0.0,
+      -1.0
+    ]
+  },
+  "hit_particle": "epicfight:cut",
+  "hit_sound": "epicfight:entity.hit.blade",
+  "livingmotion_modifier": {
+    "one_hand": {
+      "creative_fly": "epicfight:biped/living/creative_fly",
+      "idle": "epicfight:biped/living/hold_spear",
+      "run": "epicfight:biped/living/run_spear",
+      "float": "epicfight:biped/living/float",
+      "fly": "epicfight:biped/living/fly",
+      "creative_idle": "epicfight:biped/living/creative_idle",
+      "fall": "epicfight:biped/living/fall",
+      "block": "epicfight:biped/living/shield",
+      "sneak": "epicfight:biped/living/sneak",
+      "walk": "epicfight:biped/living/walk_spear",
+      "swim": "epicfight:biped/living/swim",
+      "kneel": "epicfight:biped/living/kneel",
+      "sit": "epicfight:biped/living/sit"
+    },
+    "mount": {
+      "sit": "epicfight:biped/living/mount"
+    }
+  },
+  "offhand_item_compatible_predicate": [
+    {
+      "predicate": "epicfight:offhand_item_category",
+      "category": "not_weapon"
+    }
+  ],
+  "swing_sound": "epicfight:entity.weapon.whoosh",
+  "combos": {
+    "one_hand": [
+      "epicfight:biped/combat/spear_onehand_auto",
+      "epicfight:biped/combat/spear_onehand_auto",
+      "epicfight:biped/combat/spear_onehand_auto",
+      "epicfight:biped/combat/spear_dash",
+      "epicfight:biped/combat/spear_onehand_airslash"
+    ],
+    "mount": [
+      "epicfight:biped/combat/spear_mount_attack"
+    ]
+  },
+  "styles": {
+    "default": "one_hand",
+    "cases": [
+      {
+        "style": "one_hand",
+        "conditions": [
+          {
+            "predicate": "epicfight:offhand_item_category",
+            "category": "not_weapon"
+          }
+        ]
+      }
+    ]
+  },
+  "category": "spear",
+  "innate_skills": {
+    "one_hand": "epicfight:heartpiercer"
+  }
+}

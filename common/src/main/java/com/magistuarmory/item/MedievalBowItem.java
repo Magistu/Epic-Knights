@@ -18,13 +18,13 @@ import java.util.List;
 
 public class MedievalBowItem extends BowItem implements IHasModelProperty
 {
-    private final float pullTime;
-    private final float arrowSpeed;
+    private final int pullTime;
+    private final float projectileSpeed;
 
-    public MedievalBowItem(Properties properties, float arrowSpeed, float pullTime)
+    public MedievalBowItem(Properties properties, float projectileSpeed, int pullTime)
     {
         super(properties.stacksTo(1));
-        this.arrowSpeed = arrowSpeed;
+        this.projectileSpeed = projectileSpeed;
         this.pullTime = pullTime;
     }
 
@@ -38,7 +38,7 @@ public class MedievalBowItem extends BowItem implements IHasModelProperty
                 if (!((double)f < 0.1)) {
                     List<ItemStack> list = draw(itemStack, itemStack2, player);
                     if (level instanceof ServerLevel serverLevel) {
-                        this.shoot(serverLevel, player, player.getUsedItemHand(), itemStack, list, f * this.arrowSpeed, 1.0F, f == 1.0F, null);
+                        this.shoot(serverLevel, player, player.getUsedItemHand(), itemStack, list, f * this.projectileSpeed, 1.0F, f == 1.0F, null);
                     }
 
                     level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (level.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
@@ -69,7 +69,7 @@ public class MedievalBowItem extends BowItem implements IHasModelProperty
             if (entity == null) 
                 return 0.0F;
             else 
-                return entity.getUseItem() != stack ? 0.0F : (float)(stack.getUseDuration(entity) - entity.getUseItemRemainingTicks()) / 20.0F;
+                return entity.getUseItem() != stack ? 0.0F : (float)(stack.getUseDuration(entity) - entity.getUseItemRemainingTicks()) / this.pullTime;
         });
     }
 }

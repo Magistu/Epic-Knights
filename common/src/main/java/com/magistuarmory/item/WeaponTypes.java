@@ -6,7 +6,9 @@ import com.magistuarmory.config.WeaponsConfig;
 public final class WeaponTypes
 {
     public static final WeaponsConfig WEAPONS_CONFIG = EpicKnights.CONFIG.weapons;
-    
+
+    public static final RangedWeaponType LONGBOW = new RangedWeaponType(WEAPONS_CONFIG.longbow.durability, WEAPONS_CONFIG.longbow.pullTime, WEAPONS_CONFIG.heavyCrossbow.projectileSpeed, WEAPONS_CONFIG.longbow.enabled);
+    public static final RangedWeaponType HEAVY_CROSSBOW = new RangedWeaponType(WEAPONS_CONFIG.heavyCrossbow.durability, WEAPONS_CONFIG.heavyCrossbow.pullTime, WEAPONS_CONFIG.heavyCrossbow.projectileSpeed, WEAPONS_CONFIG.longbow.enabled);
     public static final WeaponType STILETTO = new WeaponType(WEAPONS_CONFIG.stiletto.baseAttackDamage, WEAPONS_CONFIG.stiletto.baseAttackSpeed, WEAPONS_CONFIG.stiletto.bonusAttackReach, 0.0f, 0.6f, 15, WEAPONS_CONFIG.stiletto.enabled);
     public static final WeaponType SHORT_SWORD = new WeaponType(WEAPONS_CONFIG.shortSword.baseAttackDamage, WEAPONS_CONFIG.shortSword.baseAttackSpeed, WEAPONS_CONFIG.shortSword.bonusAttackReach, 0.0f, 0.9f, 0, WEAPONS_CONFIG.shortSword.enabled);
     public static final WeaponType KATZBALGER = new WeaponType(WEAPONS_CONFIG.katzbalger.baseAttackDamage, WEAPONS_CONFIG.katzbalger.baseAttackSpeed, WEAPONS_CONFIG.katzbalger.bonusAttackReach, 0.0f, 1.1f, 0, WEAPONS_CONFIG.katzbalger.enabled);

@@ -1,5 +1,6 @@
 package com.magistuarmory.item.armor;
 
+import com.magistuarmory.client.render.ModRender;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -34,13 +35,23 @@ public class MedievalArmorItem extends ArmorItem implements ISurcoat
 	@Environment(EnvType.CLIENT)
 	public void loadModel(EntityRendererProvider.Context context)
 	{
+		if (getEquipmentSlot() == EquipmentSlot.LEGS) {
+			this.model = ModRender.INNER_ARMOR;
+		}
 		Optional<ModelLayerLocation> location = this.armortype.getModelLocation();
-		location.ifPresent(loc -> this.model = new HumanoidModel<>(context.bakeLayer(loc)));
+		if (location.isPresent()) {
+			this.model = new HumanoidModel<>(context.bakeLayer(location.get()));
+		} else {
+			this.model = ModRender.OUTER_ARMOR;
+		}
 	}
 
 	@Environment(EnvType.CLIENT)
 	public HumanoidModel<? extends LivingEntity> getArmorModel(EquipmentSlot slot, HumanoidModel<? extends LivingEntity> _default)
 	{
-		return slot == this.type.getSlot() && this.model != null ? this.model : _default;
+		if (slot != EquipmentSlot.LEGS && slot == this.type.getSlot() && this.model != null) {
+			return this.model;
+		}
+		return _default;
 	}
 }

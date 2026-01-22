@@ -1,1 +1,15 @@
-{"type": "epicfight:spear", "attributes": {"common": {"impact": 2.75, "armor_negation": 1.58, "max_strikes": 1}}}
+{
+  "attributes": {
+    "common": {
+      "impact": 2.75,
+      "max_strikes": 1
+    },
+    "one_hand": {
+      "speed_bonus": 0.4
+    },
+    "two_hand": {
+      "speed_bonus": -0.4
+    }
+  },
+  "type": "magistuarmory:pike"
+}

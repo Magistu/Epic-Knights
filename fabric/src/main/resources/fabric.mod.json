@@ -18,6 +18,9 @@
   "entrypoints": {
     "main": [
       "com.magistuarmory.fabric.EpicKnightsFabric"
+    ],
+    "modmenu": [
+      "com.magistuarmory.fabric.config.ModMenuFabric"
     ]
   },
   "depends": {

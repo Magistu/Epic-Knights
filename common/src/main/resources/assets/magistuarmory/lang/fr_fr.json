@@ -421,6 +421,12 @@
   "twohandedpenalty_1": "Vitesse d'attaque et dégâts réduits grâce à ",
   "twohandedpenalty_2": "Utilisation à une main d'une arme à deux mains",
   "canbeplacedonground": "Appuyer sur Maj+Clic droit pour le placer sur le sol",
+  "magistuarmory.dyeable_armor.description": "Peut être teint de n'importe quelle couleur",
+  "magistuarmory.armor_decoration.helmet.description": "Utilisé pour être attaché à un casque",
+  "magistuarmory.armor_decoration.chestplate.description": "Utilisé pour être attaché à un plastron",
+  "magistuarmory.armor_decoration.leggings.description": "Utilisé pour être attaché à des jambières",
+  "magistuarmory.armor_decoration.boots.description": "Utilisé pour être attaché à des bottes",
+  "magistuarmory.armor_decoration.body.description": "Utilisé pour être attaché à une armure pour animaux",
 
 
 

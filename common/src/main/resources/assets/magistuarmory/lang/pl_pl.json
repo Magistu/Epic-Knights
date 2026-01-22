@@ -421,6 +421,12 @@
   "twohandedpenalty_1": "Prędkość ataku i obrażenia zmniejszone z ",
   "twohandedpenalty_2": "powodu używania broni dwuręcznej jedną ręką",
   "canbeplacedonground": "Naciśnij Shift+kliknięcie prawym przyciskiem myszy, aby umieścić na ziemi",
+  "magistuarmory.dyeable_armor.description": "Może być barwiony na dowolny kolor",
+  "magistuarmory.armor_decoration.helmet.description": "Służy do mocowania do hełmu",
+  "magistuarmory.armor_decoration.chestplate.description": "Służy do mocowania do napierśnika",
+  "magistuarmory.armor_decoration.leggings.description": "Służy do mocowania do nogawic",
+  "magistuarmory.armor_decoration.boots.description": "Służy do mocowania do butów",
+  "magistuarmory.armor_decoration.body.description": "Służy do mocowania do zbroi dla zwierząt",
 
 
 

@@ -8,6 +8,7 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.DyedItemColor;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 import java.util.function.Consumer;
@@ -20,6 +21,11 @@ public class DyeableWearableArmorDecorationItemNeoForge extends DyeableWearableA
 	}
 
 	@Override
+	public int getDefaultColor() {
+		return super.getDefaultColor();
+	}
+
+	@Override
 	public void initializeClient(Consumer<IClientItemExtensions> consumer)
 	{
 		consumer.accept(new IClientItemExtensions()
@@ -28,6 +34,11 @@ public class DyeableWearableArmorDecorationItemNeoForge extends DyeableWearableA
 			public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> _default)
 			{
 				return Platform.getEnvironment() == Env.CLIENT ? DyeableWearableArmorDecorationItemNeoForge.this.getArmorModel(slot, _default) : null;
+			}
+
+			@Override
+			public int getDefaultDyeColor(ItemStack stack) {
+				return getColor(stack);
 			}
 		});
 	}

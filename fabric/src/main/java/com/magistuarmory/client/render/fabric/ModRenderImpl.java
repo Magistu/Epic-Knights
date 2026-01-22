@@ -31,20 +31,50 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Environment(EnvType.CLIENT)
 public class ModRenderImpl
 {
-	private static void addLayers(ModItemsProvider content, EntityType<? extends LivingEntity> entitytype, LivingEntityRenderer<?, ?> renderer, LivingEntityFeatureRendererRegistrationCallback.RegistrationHelper helper, EntityRendererProvider.Context context)
+	private static final Map<LivingEntityRenderer<?, ?>, ArmorDecorationLayer<?, ?>> ARMOR_DECORATION_LAYERS = new HashMap<>();
+	private static final Map<LivingEntityRenderer<?, ?>, HorseArmorDecorationLayer> HORSE_ARMOR_DECORATION_LAYERS = new HashMap<>();
+
+	static <T extends LivingEntity, M extends HumanoidModel<T>> void addLayers(ModItemsProvider content, EntityType<? extends LivingEntity> entitytype, LivingEntityRenderer<?, ?> renderer, LivingEntityFeatureRendererRegistrationCallback.RegistrationHelper helper, EntityRendererProvider.Context context)
 	{
 		if (content.armorDecorationItems.isEmpty())
 			return;
-		if (renderer.getModel() instanceof HumanoidModel)
-			helper.register(new ArmorDecorationLayer(new ArmorDecorationModelSet<>(content.armorDecorationItems, context), renderer, context, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "surcoat")));
-		else if (renderer instanceof PlayerRenderer renderer0)
-			helper.register(new ArmorDecorationLayer(new ArmorDecorationModelSet<>(content.armorDecorationItems, context), renderer0, context, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "surcoat")));
-		if (renderer instanceof HorseRenderer renderer0 && content instanceof ModItems)
-			helper.register(new HorseArmorDecorationLayer(renderer0, context, ResourceLocation.fromNamespaceAndPath(content.modId, "textures/entity/horse/armor/caparison.png"), "caparison"));
 
+		if (renderer.getModel() instanceof HumanoidModel) {
+			LivingEntityRenderer<T, M> renderer0 = (LivingEntityRenderer<T, M>) renderer;
+			addArmorDecorationLayer(renderer0, content, context, helper);
+		} else if (renderer instanceof PlayerRenderer renderer0) {
+			addArmorDecorationLayer(renderer0, content, context, helper);
+		}
+
+		if (renderer instanceof HorseRenderer renderer0 && content instanceof ModItems)
+			addHorseArmorDecorationLayer(renderer0, content, context, helper);
+	}
+
+	public static <T extends LivingEntity, M extends HumanoidModel<T>> void addArmorDecorationLayer(LivingEntityRenderer<T, M> renderer, ModItemsProvider content, EntityRendererProvider.Context context, LivingEntityFeatureRendererRegistrationCallback.RegistrationHelper helper) {
+		ArmorDecorationLayer<T, M> decorationLayer;
+		if (!ARMOR_DECORATION_LAYERS.containsKey(renderer)) {
+			decorationLayer = new ArmorDecorationLayer<>(new ArmorDecorationModelSet<>(), renderer, context, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "surcoat"));
+			helper.register(decorationLayer);
+			ARMOR_DECORATION_LAYERS.put(renderer, decorationLayer);
+		} else {
+			decorationLayer = (ArmorDecorationLayer<T, M>) ARMOR_DECORATION_LAYERS.get(renderer);
+		}
+		decorationLayer.registerDecorations(content.armorDecorationItems, context);
+	}
+
+	public static void addHorseArmorDecorationLayer(HorseRenderer renderer, ModItemsProvider content, EntityRendererProvider.Context context, LivingEntityFeatureRendererRegistrationCallback.RegistrationHelper helper) {
+		HorseArmorDecorationLayer decorationLayer;
+		if (!HORSE_ARMOR_DECORATION_LAYERS.containsKey(renderer)) {
+			decorationLayer = new HorseArmorDecorationLayer(renderer, context, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "textures/entity/horse/armor/caparison.png"), "caparison");
+			helper.register(decorationLayer);
+			HORSE_ARMOR_DECORATION_LAYERS.put(renderer, decorationLayer);
+		}
 	}
 
 	public static void setupPlatform(ModItemsProvider content)

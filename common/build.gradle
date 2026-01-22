@@ -1,9 +1,12 @@
+plugins {
+    id "java-library"
+}
+
 architectury {
     common rootProject.enabled_platforms.split(',')
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/magistuarmory.accesswidener")
 }
 
 dependencies {

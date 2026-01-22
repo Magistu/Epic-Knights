@@ -421,6 +421,12 @@
   "twohandedpenalty_1": "Angriffsgeschwindigkeit und Schaden durch einhändige ",
   "twohandedpenalty_2": "AVerwendung von Zweihandwaffen verringert",
   "canbeplacedonground": "Shift Rechtsklick um auf dem Boden zu platzieren",
+  "magistuarmory.dyeable_armor.description": "Kann mit jeder Farbe gefärbt werden",
+  "magistuarmory.armor_decoration.helmet.description": "Kann an Helmen angebracht werden",
+  "magistuarmory.armor_decoration.chestplate.description": "Kann an Brustplatten angebracht werden",
+  "magistuarmory.armor_decoration.leggings.description": "Kann an Hosen angebracht werden",
+  "magistuarmory.armor_decoration.boots.description": "Kann an Stiefeln angebracht werden",
+  "magistuarmory.armor_decoration.body.description": "Kann an Tierrüstung angebracht werden",
 
 
 

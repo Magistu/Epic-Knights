@@ -29,6 +29,11 @@ public class JoustingItemNeoForge extends JoustingItem
 			{
 				return Platform.getEnvironment() == Env.CLIENT ? JoustingItemNeoForge.this.getArmorModel(slot, _default) : null;
 			}
+
+			@Override
+			public int getDefaultDyeColor(ItemStack stack) {
+				return getColor(stack);
+			}
 		});
 	}
 }

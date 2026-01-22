@@ -29,7 +29,7 @@ public abstract class ModItemsProvider
 
 	public final List<RegistrySupplier<? extends MedievalShieldItem>> shieldItems = new ArrayList<>();
 	public final List<RegistrySupplier<? extends MedievalWeaponItem>> weaponItems = new ArrayList<>();
-	public final List<RegistrySupplier<? extends DyeableItemLike>> dyeableItems = new ArrayList<>();
+	public final List<RegistrySupplier<? extends Item>> dyeableItems = new ArrayList<>();
 	public final List<RegistrySupplier<? extends MedievalArmorItem>> armorItems = new ArrayList<>();
 	public final List<RegistrySupplier<? extends Item>> ingredientItems = new ArrayList<>();
 	public final List<RegistrySupplier<? extends ArmorDecoration>> armorDecorationItems = new ArrayList<>();
@@ -67,6 +67,9 @@ public abstract class ModItemsProvider
 			return null;
 		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerJoustingItem(this.items, id, type, slot, properties);
 		this.armorItems.add(armor);
+		if (slot == ArmorItem.Type.HELMET) {
+			this.dyeableItems.add(armor);
+		}
 		return armor;
 	}
 
@@ -164,16 +167,34 @@ public abstract class ModItemsProvider
 		return shield;
 	}
 
-	public @Nullable RegistrySupplier<Item> addMedievalBowItem(String id, int durability, float arrowSpeed, float pullTime)
+	public @Nullable RegistrySupplier<Item> addMedievalBowItem(String id, RangedWeaponType type)
 	{
-		RegistrySupplier<Item> bow = this.items.register(id, () -> new MedievalBowItem(new Item.Properties().stacksTo(1).durability(durability), arrowSpeed, pullTime));
+		if (type.isDisabled())
+			return null;
+		RegistrySupplier<Item> bow = this.items.register(id, () -> new MedievalBowItem(new Item.Properties().stacksTo(1).durability(type.getDurability()), type.getProjectileSpeed(), type.getPullTime()));
 		this.rangedWeaponItems.add(bow);
 		return bow;
 	}
 
-	public @Nullable RegistrySupplier<Item> addMedievalCrossbowItem(String id, int durability, float arrowSpeed, int pullTime)
+	public @Nullable RegistrySupplier<Item> addMedievalCrossbowItem(String id, RangedWeaponType type)
 	{
-		RegistrySupplier<Item> crossbow = this.items.register(id, () -> new MedievalCrossbowItem(new Item.Properties().stacksTo(1).durability(durability), arrowSpeed, pullTime));
+		if (type.isDisabled())
+			return null;
+		RegistrySupplier<Item> crossbow = this.items.register(id, () -> new MedievalCrossbowItem(new Item.Properties().stacksTo(1).durability(type.getDurability()), type.getProjectileSpeed(), type.getPullTime()));
+		this.rangedWeaponItems.add(crossbow);
+		return crossbow;
+	}
+
+	public @Nullable RegistrySupplier<Item> addMedievalBowItem(String id, int durability, float projectileSpeed, int pullTime)
+	{
+		RegistrySupplier<Item> bow = this.items.register(id, () -> new MedievalBowItem(new Item.Properties().stacksTo(1).durability(durability), projectileSpeed, pullTime));
+		this.rangedWeaponItems.add(bow);
+		return bow;
+	}
+
+	public @Nullable RegistrySupplier<Item> addMedievalCrossbowItem(String id, int durability, float projectileSpeed, int pullTime)
+	{
+		RegistrySupplier<Item> crossbow = this.items.register(id, () -> new MedievalCrossbowItem(new Item.Properties().stacksTo(1).durability(durability), projectileSpeed, pullTime));
 		this.rangedWeaponItems.add(crossbow);
 		return crossbow;
 	}

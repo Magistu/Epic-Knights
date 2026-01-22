@@ -20,6 +20,11 @@ public class DyeableMedievalArmorItemNeoForge extends DyeableMedievalArmorItem
     }
 
     @Override
+    public int getDefaultColor() {
+        return super.getDefaultColor();
+    }
+
+    @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer)
     {
         consumer.accept(new IClientItemExtensions()
@@ -28,6 +33,11 @@ public class DyeableMedievalArmorItemNeoForge extends DyeableMedievalArmorItem
             public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> _default)
             {
                 return Platform.getEnvironment() == Env.CLIENT ? DyeableMedievalArmorItemNeoForge.this.getArmorModel(slot, _default) : null;
+            }
+
+            @Override
+            public int getDefaultDyeColor(ItemStack stack) {
+                return getColor(stack);
             }
         });
     }

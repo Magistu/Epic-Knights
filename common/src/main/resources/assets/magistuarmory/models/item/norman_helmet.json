@@ -1,6 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "magistuarmory:item/norman_helmet"
+    "layer0": "magistuarmory:item/norman_helmet",
+    "layer1": "magistuarmory:item/norman_helmet_overlay"
   }
 }

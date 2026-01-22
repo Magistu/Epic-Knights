@@ -1,6 +1,7 @@
 package com.magistuarmory.client.render;
 
 import com.magistuarmory.api.item.ModItemsProvider;
+import com.magistuarmory.client.render.model.ModModels;
 import com.magistuarmory.client.render.tileentity.HeraldryItemStackRenderer;
 import com.magistuarmory.client.render.tileentity.PaviseBlockRenderer;
 import com.magistuarmory.item.*;
@@ -11,8 +12,10 @@ import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 
 import java.util.function.Supplier;
@@ -21,9 +24,12 @@ import java.util.function.Supplier;
 @Environment(EnvType.CLIENT)
 public class ModRender
 {
+	public static HumanoidModel<LivingEntity> INNER_ARMOR = null;
+	public static HumanoidModel<LivingEntity> OUTER_ARMOR = null;
+
 	public static void setup(ModItemsProvider content)
 	{
-		for (RegistrySupplier<? extends DyeableItemLike> supplier : content.dyeableItems)
+		for (RegistrySupplier<? extends Item> supplier : content.dyeableItems)
 		{
 			ColorHandlerRegistry.registerItemColors((stack, i) -> i > 0 ? 0xFFFFFFFF : ((DyeableItemLike) stack.getItem()).getColor(stack), supplier.get());
 		}
@@ -59,6 +65,9 @@ public class ModRender
 
 	public static void loadModels(ModItemsProvider content, EntityRendererProvider.Context context)
 	{
+		OUTER_ARMOR = new HumanoidModel<>(context.bakeLayer(ModModels.DEFAULT_ARMOR_LOCATION));
+		INNER_ARMOR = new HumanoidModel<>(context.bakeLayer(ModModels.DEFAULT_LEGGINGS_LOCATION));
+
 		for (Supplier<? extends MedievalShieldItem> supplier : content.shieldItems)
 			supplier.get().loadModel(context);
 

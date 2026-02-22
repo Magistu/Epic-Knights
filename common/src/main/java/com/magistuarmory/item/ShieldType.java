@@ -1,16 +1,42 @@
 package com.magistuarmory.item;
 
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import net.minecraft.world.item.Tier;
 
-public final class ShieldType
-{
-    private final int baseDurability;
-    private final float materialFactor;
-    private final float weight;
-    private final float maxBlockDamage;
-    private boolean repairable = false;
-    public final boolean enabled;
+public class ShieldType {
 
+    @ConfigEntry.Gui.RequiresRestart
+    private int baseDurability;
+    @ConfigEntry.Gui.RequiresRestart
+    private float materialFactor;
+    @ConfigEntry.Gui.RequiresRestart
+    private float weight;
+    @ConfigEntry.Gui.RequiresRestart
+    private float maxBlockDamage;
+    @ConfigEntry.Gui.RequiresRestart
+    private boolean repairable = false;
+    @ConfigEntry.Gui.CollapsibleObject
+    private boolean enabled = true;
+
+    public ShieldType() {}
+
+    public static ShieldType of(int baseDurability, float materialFactor, float weight, float maxBlockDamage, boolean enabled, boolean repairable) {
+        ShieldType shield = new ShieldType();
+        shield.baseDurability = baseDurability;
+        shield.materialFactor = materialFactor;
+        shield.weight = weight;
+        shield.maxBlockDamage = maxBlockDamage;
+        shield.enabled = enabled;
+        shield.repairable = repairable;
+        return shield;
+    }
+
+    public static ShieldType of(int baseDurability, float materialFactor, float weight, float maxBlockDamage) {
+        return of(baseDurability, materialFactor, weight, maxBlockDamage, true, false);
+    }
+
+    // use ShieldType.of
+    @Deprecated(forRemoval = true)
     public ShieldType(int baseDurability, float materialFactor, float weight, float maxBlockDamage, boolean enabled)
     {
         this.baseDurability = baseDurability;
@@ -19,45 +45,39 @@ public final class ShieldType
         this.maxBlockDamage = maxBlockDamage;
         this.enabled = enabled;
     }
-    
-    public ShieldType setRepairable()
-    {
+
+    // use ShieldType.of
+    @Deprecated(forRemoval = true)
+    public ShieldType setRepairable() {
         this.repairable = true;
         return this;
     }
 
-    public int getDurability(Tier material)
-    {
+    public int getDurability(Tier material) {
         return (int) (this.baseDurability + this.materialFactor * material.getUses());
     }
 
-    public int getBaseDurability()
-    {
+    public int getBaseDurability() {
         return this.baseDurability;
     }
 
-    public float getMaterialFactor()
-    {
+    public float getMaterialFactor() {
         return this.materialFactor;
     }
 
-    public float getWeight()
-    {
+    public float getWeight() {
         return this.weight;
     }
 
-    public float getMaxBlockDamage()
-    {
+    public float getMaxBlockDamage() {
         return this.maxBlockDamage;
     }
 
-    public boolean isRepairable()
-    {
+    public boolean isRepairable() {
         return this.repairable;
     }
 
-    public boolean isDisabled()
-    {
+    public boolean isDisabled() {
         return !this.enabled;
     }
 }

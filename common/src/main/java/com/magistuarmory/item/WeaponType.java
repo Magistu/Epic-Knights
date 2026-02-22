@@ -1,24 +1,60 @@
 package com.magistuarmory.item;
 
 import com.magistuarmory.EpicKnights;
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
-public class WeaponType
-{
-    private final float baseAttackDamage;
-    private final float baseAttackSpeed;
-    private final float bonusAttackReach;
-    private final float sizeFactor;
-    private final float weight;
-    private final int armorPiercing;
-    private int twoHanded = 0;
-    private float maxBlockDamage = 0;
-    private boolean canBlock = false;
-    private boolean isFlamebladed = false;
-    private boolean isHalberd = false;
-    private final boolean enabled;
+public class WeaponType {
+    @ConfigEntry.Gui.RequiresRestart
+    private float baseAttackDamage;
+    @ConfigEntry.Gui.RequiresRestart
+    private float baseAttackSpeed;
+    @ConfigEntry.Gui.RequiresRestart
+    private float bonusAttackReach;
+    @ConfigEntry.Gui.RequiresRestart
+    private float sizeFactor;
+    @ConfigEntry.Gui.RequiresRestart
+    private float weight;
+    @ConfigEntry.Gui.RequiresRestart
+    private int armorPiercing;
+    @ConfigEntry.Gui.RequiresRestart
+    private int twoHanded;
+    @ConfigEntry.Gui.RequiresRestart
+    private float maxBlockDamage;
+    @ConfigEntry.Gui.RequiresRestart
+    private boolean canBlock;
+    @ConfigEntry.Gui.RequiresRestart
+    private boolean isFlamebladed;
+    @ConfigEntry.Gui.RequiresRestart
+    private boolean isHalberd;
+    @ConfigEntry.Gui.CollapsibleObject
+    private boolean enabled;
 
-    public WeaponType(float baseAttackDamage, float baseAttackSpeed, float bonusAttackReach, float sizeFactor, float weight, int armorPiercing, boolean enabled)
-    {
+    public WeaponType() {}
+
+    public static WeaponType of(float baseAttackDamage, float baseAttackSpeed, float bonusAttackReach, float sizeFactor, float weight, int armorPiercing, boolean enabled, int twoHanded, float maxBlockDamage, boolean canBlock, boolean isFlamebladed, boolean isHalberd) {
+        WeaponType type = new WeaponType();
+        type.baseAttackDamage = baseAttackDamage;
+        type.baseAttackSpeed = baseAttackSpeed;
+        type.bonusAttackReach = bonusAttackReach;
+        type.sizeFactor = sizeFactor;
+        type.weight = weight;
+        type.armorPiercing = armorPiercing;
+        type.enabled = enabled;
+        type.twoHanded = twoHanded;
+        type.maxBlockDamage = maxBlockDamage;
+        type.canBlock = canBlock;
+        type.isFlamebladed = isFlamebladed;
+        type.isHalberd = isHalberd;
+        return type;
+    }
+
+    public static WeaponType of(float baseAttackDamage, float baseAttackSpeed, float bonusAttackReach, float sizeFactor, float weight, int armorPiercing, boolean enabled) {
+        return of(baseAttackDamage, baseAttackSpeed, bonusAttackReach, sizeFactor, weight, armorPiercing, enabled, 0, 0.0f, false, false, false);
+    }
+
+    // use WeaponType.of
+    @Deprecated(forRemoval = true)
+    public WeaponType(float baseAttackDamage, float baseAttackSpeed, float bonusAttackReach, float sizeFactor, float weight, int armorPiercing, boolean enabled) {
         this.baseAttackDamage = baseAttackDamage;
         this.baseAttackSpeed = baseAttackSpeed;
         this.bonusAttackReach = bonusAttackReach;
@@ -26,100 +62,95 @@ public class WeaponType
         this.weight = weight;
         this.armorPiercing = armorPiercing;
         this.enabled = enabled;
+        this.twoHanded = 0;
+        this.maxBlockDamage = 0;
+        this.canBlock = false;
+        this.isFlamebladed = false;
+        this.isHalberd = false;
     }
 
-    public WeaponType setFlamebladed()
-    {
+    // use WeaponType.of
+    @Deprecated(forRemoval = true)
+    public WeaponType setFlamebladed() {
         this.isFlamebladed = true;
         return this;
     }
 
-    public WeaponType setTwoHanded(int level)
-    {
+    // use WeaponType.of
+    @Deprecated(forRemoval = true)
+    public WeaponType setTwoHanded(int level) {
         this.twoHanded = level;
         return this;
     }
 
-    public WeaponType setMaxBlockDamage(float maxBlockDamage)
-    {
+    // use WeaponType.of
+    @Deprecated(forRemoval = true)
+    public WeaponType setMaxBlockDamage(float maxBlockDamage) {
         this.maxBlockDamage = maxBlockDamage;
         this.canBlock = true;
         return this;
     }
 
-    public WeaponType setHalberd()
-    {
+    // use WeaponType.of
+    @Deprecated(forRemoval = true)
+    public WeaponType setHalberd() {
         this.isHalberd = true;
         return this;
     }
 
-    public float getAttackSpeed(ModItemTier material)
-    {
+    public float getAttackSpeed(ModItemTier material) {
         return -material.getDensity() * this.getSizeFactor() + this.getBaseAttackSpeed();
     }
 
-    public float getBaseAttackDamage()
-    {
+    public float getBaseAttackDamage() {
         return this.baseAttackDamage;
     }
 
-    public float getBaseAttackSpeed()
-    {
+    public float getBaseAttackSpeed() {
         return this.baseAttackSpeed;
     }
 
-    public float getSizeFactor()
-    {
+    public float getSizeFactor() {
         return this.sizeFactor;
     }
 
-    public float getWeight()
-    {
+    public float getWeight() {
         return this.weight;
     }
 
-    public int getArmorPiercing()
-    {
+    public int getArmorPiercing() {
         return !EpicKnights.GENERAL_CONFIG.disableArmorPiercing ? this.armorPiercing : 0;
     }
 
-    public float getBonusAttackReach()
-    {
+    public float getBonusAttackReach() {
         return !EpicKnights.GENERAL_CONFIG.disableAttackReach ? this.bonusAttackReach : 0.0f;
     }
 
-    public int getTwoHanded()
-    {
+    public int getTwoHanded() {
         return !EpicKnights.GENERAL_CONFIG.disableTwoHanded ? this.twoHanded : 0;
     }
 
-    public float getMaxBlockDamage()
-    {
+    public float getMaxBlockDamage() {
         return !EpicKnights.GENERAL_CONFIG.disableWeaponBlocking ? this.maxBlockDamage : 0.0f;
     }
 
-    public boolean canBlock()
-    {
+    public boolean canBlock() {
         return !EpicKnights.GENERAL_CONFIG.disableWeaponBlocking && this.canBlock;
     }
 
-    public boolean isFlamebladed()
-    {
+    public boolean isFlamebladed() {
         return !EpicKnights.GENERAL_CONFIG.disableLaceration && this.isFlamebladed;
     }
 
-    public boolean isHalberd()
-    {
+    public boolean isHalberd() {
         return this.isHalberd;
     }
 
-    public boolean isDisabled()
-    {
+    public boolean isDisabled() {
         return !this.enabled;
     }
 
-    public int getDurability(ModItemTier material)
-    {
+    public int getDurability(ModItemTier material) {
         return (int) (material.getUses() * (1.0f + this.getSizeFactor() * 5.0f));
     }
 }

@@ -170,4 +170,8 @@ public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
 	{
 		return this.is3d;
 	}
+
+	public ResourceLocation getLocation() {
+		return this.location;
+	}
 }

@@ -1,47 +1,31 @@
-// 
-// Decompiled by Procyon v0.5.36
-// 
-
 package com.magistuarmory.config;
 
+import com.magistuarmory.item.ShieldType;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.ConfigData;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 @Config(name = "shields")
 public class ShieldsConfig implements ConfigData
 {
-    @ConfigEntry.Gui.RequiresRestart
-    public boolean enableHeaterShield;
-    @ConfigEntry.Gui.RequiresRestart
-    public boolean enableTarget;
-    @ConfigEntry.Gui.RequiresRestart
-    public boolean enableBuckler;
-    @ConfigEntry.Gui.RequiresRestart
-    public boolean enableRondache;
-    @ConfigEntry.Gui.RequiresRestart
-    public boolean enableTartsche;
-    @ConfigEntry.Gui.RequiresRestart
-    public boolean enableEllipticalShield;
-    @ConfigEntry.Gui.RequiresRestart
-    public boolean enableRoundShield;
-    @ConfigEntry.Gui.RequiresRestart
-    public boolean enablePavese;
-    @ConfigEntry.Gui.RequiresRestart
-    public boolean enableKiteShield;
-    @ConfigEntry.Gui.RequiresRestart
-    public boolean enableCorruptedRoundShield;
-    
-    public ShieldsConfig() {
-        this.enableHeaterShield = true;
-        this.enableTarget = true;
-        this.enableBuckler = true;
-        this.enableRondache = true;
-        this.enableTartsche = true;
-        this.enableEllipticalShield = true;
-        this.enableRoundShield = true;
-        this.enablePavese = true;
-        this.enableKiteShield = true;
-        this.enableCorruptedRoundShield = true;
+    @ConfigEntry.Gui.CollapsibleObject
+    public Map<String, ShieldType> shields = new LinkedHashMap<>() {{
+        put("heaterShield", ShieldType.of(350, 0.8f, 4, 10, true, true));
+        put("target", ShieldType.of(350, 0.8f, 1, 6, true, true));
+        put("buckler", ShieldType.of(350, 0.8f, 1, 6, true, true));
+        put("rondache", ShieldType.of(420, 1.2f, 6, 13, true, true));
+        put("tartsche", ShieldType.of(350, 0.8f, 4, 10, true, true));
+        put("ellipticalShield", ShieldType.of(370, 0.8f, 5, 10, true, true));
+        put("roundShield", ShieldType.of(350, 0.8f, 3, 7, true, true));
+        put("pavise", ShieldType.of(450, 0.7f, 10, 17, true, true));
+        put("kiteShield", ShieldType.of(370, 0.8f, 5, 10, true, true));
+        put("corruptedRoundShield", ShieldType.of(100, 0.8f, 2, 4, true, true));
+    }};
+
+    public ShieldType get(String name) {
+        return this.shields.get(name);
     }
 }

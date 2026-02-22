@@ -1,0 +1,6 @@
+﻿{
+  "replace": false,
+  "values": [
+    { "id": "magistuarmory:heavy_crossbow", "required": false }
+  ]
+}

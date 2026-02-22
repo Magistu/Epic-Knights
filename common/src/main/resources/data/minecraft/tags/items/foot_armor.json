@@ -1,0 +1,20 @@
+﻿{
+  "replace": false,
+  "values": [
+    { "id": "magistuarmory:knight_boots", "required": false },
+    { "id": "magistuarmory:jousting_boots", "required": false },
+    { "id": "magistuarmory:gothic_boots", "required": false },
+    { "id": "magistuarmory:maximilian_boots", "required": false },
+    { "id": "magistuarmory:chainmail_boots", "required": false },
+    { "id": "magistuarmory:platemail_boots", "required": false },
+    { "id": "magistuarmory:crusader_boots", "required": false },
+    { "id": "magistuarmory:ceremonial_boots", "required": false },
+    { "id": "magistuarmory:gambeson_boots", "required": false },
+    { "id": "magistuarmory:rustedcrusader_boots", "required": false },
+    { "id": "magistuarmory:rustedchainmail_boots", "required": false },
+    { "id": "magistuarmory:xivcenturyknight_boots", "required": false },
+    { "id": "magistuarmory:cuirassier_boots", "required": false },
+    { "id": "magistuarmory:kastenbrust_boots", "required": false },
+    { "id": "magistuarmory:lamellar_boots", "required": false }
+  ]
+}

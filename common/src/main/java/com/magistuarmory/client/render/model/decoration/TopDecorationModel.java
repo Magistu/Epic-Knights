@@ -24,8 +24,8 @@ public class TopDecorationModel<T extends LivingEntity> extends ArmorDecorationM
 	    PartDefinition partdefinition = meshdefinition.getRoot();
 	    partdefinition.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.ZERO);
 	    partdefinition.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
-	    partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(39, 37).addBox(-12.5F, -25.0F, 0.0F, 25.0F, 24.0F, 0.0F, new CubeDeformation(0.0F))
-			    .texOffs(35, -14).addBox(0.0F, -25.0F, -13.0F, 0.0F, 24.0F, 24.0F, new CubeDeformation(0.0F)), PartPose.ZERO);
+		PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(35, -14).addBox(0.0F, -24.05F, -13.0F, 0.0F, 24.0F, 24.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition decoration_r2_r1 = head.addOrReplaceChild("decoration_r2_r1", CubeListBuilder.create().texOffs(39, 37).addBox(-12.5F, -24.55F, 0.0F, 25.0F, 24.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.5F, 0.0F, 0.0F, 0.0F, 0.0F));
 	    partdefinition.addOrReplaceChild("right_arm", CubeListBuilder.create(), PartPose.ZERO);
 	    partdefinition.addOrReplaceChild("left_arm", CubeListBuilder.create(), PartPose.ZERO);
 	    partdefinition.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.ZERO);

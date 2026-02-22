@@ -421,6 +421,12 @@
   "twohandedpenalty_1": "Attack speed or/and damage reduced due to ",
   "twohandedpenalty_2": "single-handed use of two-handed weapon",
   "canbeplacedonground": "Press Shift+Right-click to place on the ground",
+  "magistuarmory.dyeable_armor.description": "Can be dyed in any color",
+  "magistuarmory.armor_decoration.helmet.description": "Used for attaching to a helmet",
+  "magistuarmory.armor_decoration.chestplate.description": "Used for attaching to a chestplate",
+  "magistuarmory.armor_decoration.leggings.description": "Used for attaching to leggings",
+  "magistuarmory.armor_decoration.boots.description": "Used for attaching to boots",
+  "magistuarmory.armor_decoration.body.description": "Used for attaching to animal armor",
 
 
 

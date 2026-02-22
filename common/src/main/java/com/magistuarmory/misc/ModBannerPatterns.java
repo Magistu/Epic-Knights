@@ -31,7 +31,6 @@ public class ModBannerPatterns
 	public static final RegistrySupplier<BannerPattern> TWOHEADED_EAGLE_PATTERN = add("two-headed_eagle");
 
 	public static RegistrySupplier<BannerPattern> add(String name) {
-		HeraldryRegistry.register(name);
 		return PATTERNS.register(name, () -> new BannerPattern(name));
 	}
 

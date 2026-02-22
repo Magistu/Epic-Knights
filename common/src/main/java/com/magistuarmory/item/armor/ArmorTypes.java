@@ -2,89 +2,120 @@ package com.magistuarmory.item.armor;
 
 import com.magistuarmory.EpicKnights;
 import com.magistuarmory.config.ArmorConfig;
-import com.magistuarmory.item.armor.ArmorType;
 import dev.architectury.platform.Platform;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+
+import java.util.function.Supplier;
 
 public class ArmorTypes
 {
 	public static final ArmorConfig ARMOR_CONFIG = EpicKnights.CONFIG.armor;
 
-	public static final ArmorType MINICROWN = new ArmorType(new ResourceLocation("magistuarmory", "minicrown"), new ResourceLocation("magistuarmory:minicrown"), ARMOR_CONFIG.minicrown.toughness, 0.0f, new Integer[] { 0, 0, 0, ARMOR_CONFIG.minicrown.helmetDurability }, new Integer[] { 0, 0, 0, ARMOR_CONFIG.minicrown.helmetDefense }, 25, SoundEvents.ARMOR_EQUIP_GOLD, ARMOR_CONFIG.minicrown.enabled, Platform.isForge() ? "forge:ingots/gold" : "c:gold_ingots");
+	public static final ArmorType MINICROWN;
+	public static final ArmorType CROWN;
+	public static final ArmorType FLOWERCROWN;
+	public static final ArmorType KNIGHT;
+	public static final ArmorType ARMET;
+	public static final ArmorType STECHHELM;
+	public static final ArmorType JOUSTING;
+	public static final ArmorType SALLET;
+	public static final ArmorType GOTHIC;
+	public static final ArmorType MAXIMILIAN_HELMET;
+	public static final ArmorType MAXIMILIAN;
+	public static final ArmorType CHAINMAIL;
+	public static final ArmorType KETTLEHAT;
+	public static final ArmorType PLATEMAIL;
+	public static final ArmorType BARBUTE;
+	public static final ArmorType HALFARMOR;
+	public static final ArmorType GREATHELM;
+	public static final ArmorType CRUSADER;
+	public static final ArmorType BRIGANDINE;
+	public static final ArmorType GAMBESON;
+	public static final ArmorType CEREMONIAL_ARMET;
+	public static final ArmorType CEREMONIAL;
+	public static final ArmorType SHISHAK;
+	public static final ArmorType NORMAN;
+	public static final ArmorType RUSTED_BARBUTE;
+	public static final ArmorType RUSTED_HALFARMOR;
+	public static final ArmorType RUSTED_CHAINMAIL;
+	public static final ArmorType RUSTED_KETTLEHAT;
+	public static final ArmorType RUSTED_NORMAN;
+	public static final ArmorType RUSTED_GREATHELM;
+	public static final ArmorType RUSTED_CRUSADER;
+	public static final ArmorType BASCINET;
+	public static final ArmorType XIV_CENTURY_KNIGHT;
+	public static final ArmorType WINGED_HUSSAR_CHESTPLATE;
+	public static final ArmorType CUIRASSIER;
+	public static final ArmorType KASTENBRUST;
+	public static final ArmorType GRAND_BASCINET;
+	public static final ArmorType LAMELLAR;
 
-	public static final ArmorType CROWN = new ArmorType(new ResourceLocation("magistuarmory", "crown"), new ResourceLocation("magistuarmory:crown"), ARMOR_CONFIG.crown.toughness, 0.0f, new Integer[] { 0, 0, 0, ARMOR_CONFIG.crown.helmetDurability }, new Integer[] { 0, 0, 0, ARMOR_CONFIG.crown.helmetDefense }, 25, SoundEvents.ARMOR_EQUIP_GOLD, ARMOR_CONFIG.crown.enabled, Platform.isForge() ? "forge:ingots/gold" : "c:gold_ingots");
+	static {
+		MINICROWN = create(new ResourceLocation("magistuarmory", "minicrown"), new ResourceLocation("magistuarmory:minicrown"), ARMOR_CONFIG.get("minicrown"), SoundEvents.ARMOR_EQUIP_GOLD, Platform.isForge() ? "forge:ingots/gold" : "c:gold_ingots");
+		CROWN = create(new ResourceLocation("magistuarmory", "crown"), new ResourceLocation("magistuarmory:crown"), ARMOR_CONFIG.get("crown"), SoundEvents.ARMOR_EQUIP_GOLD, Platform.isForge() ? "forge:ingots/gold" : "c:gold_ingots");
+		FLOWERCROWN = create(new ResourceLocation("magistuarmory", "flowercrown"), new ResourceLocation("magistuarmory:flowercrown"), ARMOR_CONFIG.get("flowercrown"), SoundEvents.ARMOR_EQUIP_LEATHER);
+		KNIGHT = create(new ResourceLocation("magistuarmory", "knight"), new ResourceLocation("default"), ARMOR_CONFIG.get("knight"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		ARMET = create(new ResourceLocation("magistuarmory", "armet"), new ResourceLocation("magistuarmory:armet"), ARMOR_CONFIG.get("armet"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		STECHHELM = create(new ResourceLocation("magistuarmory", "stechhelm"), new ResourceLocation("magistuarmory:stechhelm"), ARMOR_CONFIG.get("stechhelm"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		JOUSTING = create(new ResourceLocation("magistuarmory", "jousting"), new ResourceLocation("default"), ARMOR_CONFIG.get("jousting"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		SALLET = create(new ResourceLocation("magistuarmory", "sallet"), new ResourceLocation("magistuarmory:sallet"), ARMOR_CONFIG.get("sallet"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		GOTHIC = create(new ResourceLocation("magistuarmory", "gothic"), new ResourceLocation("default"), ARMOR_CONFIG.get("gothic"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		MAXIMILIAN_HELMET = create(new ResourceLocation("magistuarmory", "maximilian_helmet"), new ResourceLocation("magistuarmory:maximilian_helmet"), ARMOR_CONFIG.get("maximilianHelmet"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		MAXIMILIAN = create(new ResourceLocation("magistuarmory", "maximilian"), new ResourceLocation("default"), ARMOR_CONFIG.get("maximilian"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		CHAINMAIL = create(new ResourceLocation("magistuarmory", "chainmail"), new ResourceLocation("default"), ARMOR_CONFIG.get("chainmail"), SoundEvents.ARMOR_EQUIP_CHAIN, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		KETTLEHAT = create(new ResourceLocation("magistuarmory", "kettlehat"), new ResourceLocation("magistuarmory:kettlehat"), ARMOR_CONFIG.get("kettlehat"), SoundEvents.ARMOR_EQUIP_CHAIN, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		PLATEMAIL = create(new ResourceLocation("magistuarmory", "platemail"), new ResourceLocation("default"), ARMOR_CONFIG.get("platemail"), SoundEvents.ARMOR_EQUIP_CHAIN, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		BARBUTE = create(new ResourceLocation("magistuarmory", "barbute"), new ResourceLocation("magistuarmory:barbute"), ARMOR_CONFIG.get("barbute"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		HALFARMOR = create(new ResourceLocation("magistuarmory", "halfarmor"), new ResourceLocation("default"), ARMOR_CONFIG.get("halfarmor"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		GREATHELM = create(new ResourceLocation("magistuarmory", "greathelm"), new ResourceLocation("magistuarmory:crusader"), ARMOR_CONFIG.get("greathelm"), SoundEvents.ARMOR_EQUIP_CHAIN, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		CRUSADER = create(new ResourceLocation("magistuarmory", "crusader"), new ResourceLocation("default"), ARMOR_CONFIG.get("crusader"), SoundEvents.ARMOR_EQUIP_CHAIN, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		BRIGANDINE = create(new ResourceLocation("magistuarmory", "brigandine"), new ResourceLocation("default"), ARMOR_CONFIG.get("brigandine"), SoundEvents.ARMOR_EQUIP_LEATHER, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		GAMBESON = create(new ResourceLocation("magistuarmory", "gambeson"), new ResourceLocation("default"), ARMOR_CONFIG.get("gambeson"), SoundEvents.ARMOR_EQUIP_LEATHER, () -> Ingredient.of(TagKey.create(Registries.ITEM, new ResourceLocation("magistuarmory:woolen_fabric"))));
+		CEREMONIAL_ARMET = create(new ResourceLocation("magistuarmory", "ceremonialarmet"), new ResourceLocation("magistuarmory:armet"), ARMOR_CONFIG.get("ceremonialArmet"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		CEREMONIAL = create(new ResourceLocation("magistuarmory", "ceremonial"), new ResourceLocation("default"), ARMOR_CONFIG.get("ceremonial"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		SHISHAK = create(new ResourceLocation("magistuarmory", "shishak"), new ResourceLocation("magistuarmory:conic_helmet"), ARMOR_CONFIG.get("shishak"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		NORMAN = create(new ResourceLocation("magistuarmory", "norman"), new ResourceLocation("magistuarmory:conic_helmet"), ARMOR_CONFIG.get("norman"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		RUSTED_BARBUTE = create(new ResourceLocation("magistuarmory", "rustedbarbute"), new ResourceLocation("magistuarmory:barbute"), ARMOR_CONFIG.get("rustedBarbute"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		RUSTED_HALFARMOR = create(new ResourceLocation("magistuarmory", "rustedhalfarmor"), new ResourceLocation("default"), ARMOR_CONFIG.get("rustedHalfarmor"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		RUSTED_CHAINMAIL = create(new ResourceLocation("magistuarmory", "rustedchainmail"), new ResourceLocation("default"), ARMOR_CONFIG.get("rustedChainmail"), SoundEvents.ARMOR_EQUIP_CHAIN, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		RUSTED_KETTLEHAT = create(new ResourceLocation("magistuarmory", "rustedkettlehat"), new ResourceLocation("magistuarmory:kettlehat"), ARMOR_CONFIG.get("rustedKettlehat"), SoundEvents.ARMOR_EQUIP_CHAIN, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		RUSTED_NORMAN = create(new ResourceLocation("magistuarmory", "rustednorman"), new ResourceLocation("magistuarmory:conic_helmet"), ARMOR_CONFIG.get("rustedNorman"), SoundEvents.ARMOR_EQUIP_CHAIN, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		RUSTED_GREATHELM = create(new ResourceLocation("magistuarmory", "rustedgreathelm"), new ResourceLocation("magistuarmory:crusader"), ARMOR_CONFIG.get("rustedGreathelm"), SoundEvents.ARMOR_EQUIP_CHAIN, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		RUSTED_CRUSADER = create(new ResourceLocation("magistuarmory", "rustedcrusader"), new ResourceLocation("default"), ARMOR_CONFIG.get("rustedCrusader"), SoundEvents.ARMOR_EQUIP_CHAIN, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		BASCINET = create(new ResourceLocation("magistuarmory", "bascinet"), new ResourceLocation("magistuarmory:bascinet"), ARMOR_CONFIG.get("bascinet"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		XIV_CENTURY_KNIGHT = create(new ResourceLocation("magistuarmory", "xivcenturyknight"), new ResourceLocation("default"), ARMOR_CONFIG.get("xivCenturyKnight"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		WINGED_HUSSAR_CHESTPLATE = create(new ResourceLocation("magistuarmory", "wingedhussarchestplate"), new ResourceLocation("magistuarmory:wingedhussarchestplate"), ARMOR_CONFIG.get("wingedHussarChestplate"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		CUIRASSIER = create(new ResourceLocation("magistuarmory", "cuirassier"), new ResourceLocation("default"), ARMOR_CONFIG.get("cuirassier"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		KASTENBRUST = create(new ResourceLocation("magistuarmory", "kastenbrust"), new ResourceLocation("default"), ARMOR_CONFIG.get("kastenbrust"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		GRAND_BASCINET = create(new ResourceLocation("magistuarmory", "grand_bascinet"), new ResourceLocation("magistuarmory:grand_bascinet"), ARMOR_CONFIG.get("grandBascinet"), SoundEvents.ARMOR_EQUIP_IRON, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+		LAMELLAR = create(new ResourceLocation("magistuarmory", "lamellar"), new ResourceLocation("default"), ARMOR_CONFIG.get("lamellar"), SoundEvents.ARMOR_EQUIP_CHAIN, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+	}
 
-	public static final ArmorType FLOWERCROWN = new ArmorType(new ResourceLocation("magistuarmory", "flowercrown"), new ResourceLocation("magistuarmory:flowercrown"), ARMOR_CONFIG.flowercrown.toughness, 0.0f, new Integer[] { 0, 0, 0, ARMOR_CONFIG.flowercrown.helmetDurability }, new Integer[] { 0, 0, 0, ARMOR_CONFIG.flowercrown.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_LEATHER, ARMOR_CONFIG.flowercrown.enabled);
+	private static ArmorType create(ResourceLocation location,
+									ResourceLocation modelLocation,
+									ArmorConfig.ArmorTypeConfig config,
+									SoundEvent equipSound,
+									String repairItemTag) {
+		return new ArmorType(location, modelLocation, config.toughness, config.knockbackResistance, new Integer[] {config.bootsDurability, config.leggingsDurability, config.chestplateDurability, config.helmetDurability}, new Integer[] {config.bootsDefense, config.leggingsDefense, config.chestplateDefense, config.helmetDefense}, config.enchantmentValue, equipSound, config.enabled, repairItemTag);
+	}
 
-	public static final ArmorType KNIGHT = new ArmorType(new ResourceLocation("magistuarmory", "knight"), new ResourceLocation("default"), ARMOR_CONFIG.knight.toughness, 0.5f, new Integer[] { ARMOR_CONFIG.knight.bootsDurability, ARMOR_CONFIG.knight.leggingsDurability, ARMOR_CONFIG.knight.chestplateDurability, 0 }, new Integer[] { ARMOR_CONFIG.knight.bootsDefense, ARMOR_CONFIG.knight.leggingsDefense, ARMOR_CONFIG.knight.chestplateDefense, 0 }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.knight.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
+	private static ArmorType create(ResourceLocation location,
+									ResourceLocation modelLocation,
+									ArmorConfig.ArmorTypeConfig config,
+									SoundEvent equipSound,
+									Supplier<Ingredient> ingredientSupplier) {
+		return new ArmorType(location, modelLocation, config.toughness, config.knockbackResistance, new Integer[] {config.bootsDurability, config.leggingsDurability, config.chestplateDurability, config.helmetDurability}, new Integer[] {config.bootsDefense, config.leggingsDefense, config.chestplateDefense, config.helmetDefense}, config.enchantmentValue, equipSound, config.enabled, ingredientSupplier);
+	}
 
-	public static final ArmorType ARMET = new ArmorType(new ResourceLocation("magistuarmory", "armet"), new ResourceLocation("magistuarmory:armet"), ARMOR_CONFIG.armet.toughness, 0.5f, new Integer[] { 0, 0, 0, ARMOR_CONFIG.armet.helmetDurability }, new Integer[] { 0, 0, 0, ARMOR_CONFIG.armet.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.armet.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType STECHHELM = new ArmorType(new ResourceLocation("magistuarmory", "stechhelm"), new ResourceLocation("magistuarmory:stechhelm"), ARMOR_CONFIG.stechhelm.toughness, 1.5f, new Integer[] { 0, 0, 0, ARMOR_CONFIG.stechhelm.helmetDurability }, new Integer[] { 0, 0, 0, ARMOR_CONFIG.stechhelm.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.stechhelm.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType JOUSTING = new ArmorType(new ResourceLocation("magistuarmory", "jousting"), new ResourceLocation("default"), ARMOR_CONFIG.jousting.toughness, 1.5f, new Integer[] { ARMOR_CONFIG.jousting.bootsDurability, ARMOR_CONFIG.jousting.leggingsDurability, ARMOR_CONFIG.jousting.chestplateDurability, 0 }, new Integer[] { ARMOR_CONFIG.jousting.bootsDefense, ARMOR_CONFIG.jousting.leggingsDefense, ARMOR_CONFIG.jousting.chestplateDefense, 0 }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.jousting.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType SALLET = new ArmorType(new ResourceLocation("magistuarmory", "sallet"), new ResourceLocation("magistuarmory:sallet"), ARMOR_CONFIG.sallet.toughness, 0.5f, new Integer[] { 0, 0, 0, ARMOR_CONFIG.sallet.helmetDurability }, new Integer[] { 0, 0, 0, ARMOR_CONFIG.sallet.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.sallet.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType GOTHIC = new ArmorType(new ResourceLocation("magistuarmory", "gothic"), new ResourceLocation("default"), ARMOR_CONFIG.gothic.toughness, 0.5f, new Integer[] { ARMOR_CONFIG.gothic.bootsDurability, ARMOR_CONFIG.gothic.leggingsDurability, ARMOR_CONFIG.gothic.chestplateDurability, 0 }, new Integer[] { ARMOR_CONFIG.gothic.bootsDefense, ARMOR_CONFIG.gothic.leggingsDefense, ARMOR_CONFIG.gothic.chestplateDefense, 0 }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.gothic.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType MAXIMILIAN_HELMET = new ArmorType(new ResourceLocation("magistuarmory", "maximilian_helmet"), new ResourceLocation("magistuarmory:maximilian_helmet"), ARMOR_CONFIG.maximilianHelmet.toughness, 0.5f, new Integer[] { 0, 0, 0, ARMOR_CONFIG.maximilianHelmet.helmetDurability }, new Integer[] { 0, 0, 0, ARMOR_CONFIG.maximilianHelmet.helmetDefense }, 12, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.maximilianHelmet.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType MAXIMILIAN = new ArmorType(new ResourceLocation("magistuarmory", "maximilian"), new ResourceLocation("default"), ARMOR_CONFIG.maximilian.toughness, 0.5f, new Integer[] { ARMOR_CONFIG.maximilian.bootsDurability, ARMOR_CONFIG.maximilian.leggingsDurability, ARMOR_CONFIG.maximilian.chestplateDurability, 0 }, new Integer[] { ARMOR_CONFIG.maximilian.bootsDefense, ARMOR_CONFIG.maximilian.leggingsDefense, ARMOR_CONFIG.maximilian.chestplateDefense, 0 }, 12, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.maximilian.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType CHAINMAIL = new ArmorType(new ResourceLocation("magistuarmory", "chainmail"), new ResourceLocation("default"), ARMOR_CONFIG.chainmail.toughness, 0.0f, new Integer[] { ARMOR_CONFIG.chainmail.bootsDurability, ARMOR_CONFIG.chainmail.leggingsDurability, ARMOR_CONFIG.chainmail.chestplateDurability, ARMOR_CONFIG.chainmail.helmetDurability }, new Integer[] { ARMOR_CONFIG.chainmail.bootsDefense, ARMOR_CONFIG.chainmail.leggingsDefense, ARMOR_CONFIG.chainmail.chestplateDefense, ARMOR_CONFIG.chainmail.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_CHAIN, ARMOR_CONFIG.chainmail.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType KETTLEHAT = new ArmorType(new ResourceLocation("magistuarmory", "kettlehat"), new ResourceLocation("magistuarmory:kettlehat"), ARMOR_CONFIG.kettlehat.toughness, 0.0f, new Integer[] { 0, 0, 0, ARMOR_CONFIG.kettlehat.helmetDurability }, new Integer[] { 0, 0, 0, ARMOR_CONFIG.kettlehat.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_CHAIN, ARMOR_CONFIG.kettlehat.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType PLATEMAIL = new ArmorType(new ResourceLocation("magistuarmory", "platemail"), new ResourceLocation("default"), ARMOR_CONFIG.platemail.toughness, 0.0f, new Integer[] { ARMOR_CONFIG.platemail.bootsDurability, ARMOR_CONFIG.platemail.leggingsDurability, ARMOR_CONFIG.platemail.chestplateDurability, 0 }, new Integer[] { ARMOR_CONFIG.platemail.bootsDefense, ARMOR_CONFIG.platemail.leggingsDefense, ARMOR_CONFIG.platemail.chestplateDefense, 0 }, 9, SoundEvents.ARMOR_EQUIP_CHAIN, ARMOR_CONFIG.platemail.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType BARBUTE = new ArmorType(new ResourceLocation("magistuarmory", "barbute"), new ResourceLocation("magistuarmory:barbute"), ARMOR_CONFIG.barbute.toughness, 0.0f, new Integer[] { 0, 0, 0, ARMOR_CONFIG.barbute.helmetDurability }, new Integer[] { 0, 0, 0, ARMOR_CONFIG.barbute.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.barbute.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType HALFARMOR = new ArmorType(new ResourceLocation("magistuarmory", "halfarmor"), new ResourceLocation("default"), ARMOR_CONFIG.halfarmor.toughness, 0.0f, new Integer[] { 0, 0, ARMOR_CONFIG.halfarmor.chestplateDurability, 0 }, new Integer[] { 0, 0, ARMOR_CONFIG.halfarmor.chestplateDefense, 0 }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.halfarmor.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType CRUSADER = new ArmorType(new ResourceLocation("magistuarmory", "crusader"), new ResourceLocation("magistuarmory:crusader"), ARMOR_CONFIG.crusader.toughness, 0.0f, new Integer[] { ARMOR_CONFIG.crusader.bootsDurability, ARMOR_CONFIG.crusader.leggingsDurability, ARMOR_CONFIG.crusader.chestplateDurability, ARMOR_CONFIG.crusader.helmetDurability }, new Integer[] { ARMOR_CONFIG.crusader.bootsDefense, ARMOR_CONFIG.crusader.leggingsDefense, ARMOR_CONFIG.crusader.chestplateDefense, ARMOR_CONFIG.crusader.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_CHAIN, ARMOR_CONFIG.crusader.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType BRIGANDINE = new ArmorType(new ResourceLocation("magistuarmory", "brigandine"), new ResourceLocation("default"), ARMOR_CONFIG.brigandine.toughness, 0.0f, new Integer[] { 0, 0, ARMOR_CONFIG.brigandine.chestplateDurability, 0 }, new Integer[] { 0, 0, ARMOR_CONFIG.brigandine.chestplateDefense, 0 }, 9, SoundEvents.ARMOR_EQUIP_LEATHER, ARMOR_CONFIG.brigandine.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType GAMBESON = new ArmorType(new ResourceLocation("magistuarmory", "gambeson"), new ResourceLocation("default"), ARMOR_CONFIG.gambeson.toughness, 0.0f, new Integer[] { ARMOR_CONFIG.gambeson.bootsDurability, ARMOR_CONFIG.gambeson.leggingsDurability, ARMOR_CONFIG.gambeson.chestplateDurability, ARMOR_CONFIG.gambeson.helmetDurability }, new Integer[] { ARMOR_CONFIG.gambeson.bootsDefense, ARMOR_CONFIG.gambeson.leggingsDefense, ARMOR_CONFIG.gambeson.chestplateDefense, ARMOR_CONFIG.gambeson.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_LEATHER, ARMOR_CONFIG.gambeson.enabled, () -> Ingredient.of(TagKey.create(Registries.ITEM, new ResourceLocation("magistuarmory:woolen_fabric"))));
-
-	public static final ArmorType CEREMONIAL_ARMET = new ArmorType(new ResourceLocation("magistuarmory", "ceremonialarmet"), new ResourceLocation("magistuarmory:armet"), ARMOR_CONFIG.ceremonialArmet.toughness, 0.5f, new Integer[] { 0, 0, 0, ARMOR_CONFIG.ceremonialArmet.helmetDurability }, new Integer[] { 0, 0, 0, ARMOR_CONFIG.ceremonialArmet.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.ceremonialArmet.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType CEREMONIAL = new ArmorType(new ResourceLocation("magistuarmory", "ceremonial"), new ResourceLocation("default"), ARMOR_CONFIG.ceremonial.toughness, 0.5f, new Integer[] { ARMOR_CONFIG.ceremonial.bootsDurability, 0, ARMOR_CONFIG.ceremonial.chestplateDurability, 0 }, new Integer[] { ARMOR_CONFIG.ceremonial.bootsDefense, 0, ARMOR_CONFIG.ceremonial.chestplateDefense, 0 }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.ceremonial.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType SHISHAK = new ArmorType(new ResourceLocation("magistuarmory", "shishak"), new ResourceLocation("default"), ARMOR_CONFIG.shishak.toughness, 0.0f, new Integer[] { 0, 0, 0, ARMOR_CONFIG.shishak.helmetDurability }, new Integer[] { 0, 0, 0, ARMOR_CONFIG.shishak.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.shishak.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType NORMAN = new ArmorType(new ResourceLocation("magistuarmory", "norman"), new ResourceLocation("default"), ARMOR_CONFIG.norman.toughness, 0.0f, new Integer[] { 0, 0, 0, ARMOR_CONFIG.norman.helmetDurability }, new Integer[] { 0, 0, 0, ARMOR_CONFIG.norman.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.norman.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType RUSTED_BARBUTE = new ArmorType(new ResourceLocation("magistuarmory", "rustedbarbute"), new ResourceLocation("magistuarmory:barbute"), ARMOR_CONFIG.rustedBarbute.toughness, 0.0f, new Integer[] { 0, 0, 0, ARMOR_CONFIG.rustedBarbute.helmetDurability }, new Integer[] { 0, 0, 0, ARMOR_CONFIG.rustedBarbute.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.rustedBarbute.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType RUSTED_HALFARMOR = new ArmorType(new ResourceLocation("magistuarmory", "rustedhalfarmor"), new ResourceLocation("default"), ARMOR_CONFIG.rustedHalfarmor.toughness, 0.0f, new Integer[] { 0, 0, ARMOR_CONFIG.rustedHalfarmor.chestplateDurability, 0 }, new Integer[] { 0, 0, ARMOR_CONFIG.rustedHalfarmor.chestplateDefense, 0 }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.rustedHalfarmor.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType RUSTED_CHAINMAIL = new ArmorType(new ResourceLocation("magistuarmory", "rustedchainmail"), new ResourceLocation("default"), ARMOR_CONFIG.rustedChainmail.toughness, 0.0f, new Integer[] { ARMOR_CONFIG.rustedChainmail.bootsDurability, ARMOR_CONFIG.rustedChainmail.leggingsDurability, ARMOR_CONFIG.rustedChainmail.chestplateDurability, ARMOR_CONFIG.rustedChainmail.helmetDurability }, new Integer[] { ARMOR_CONFIG.rustedChainmail.bootsDefense, ARMOR_CONFIG.rustedChainmail.leggingsDefense, ARMOR_CONFIG.rustedChainmail.chestplateDefense, ARMOR_CONFIG.rustedChainmail.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_CHAIN, ARMOR_CONFIG.rustedChainmail.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType RUSTED_KETTLEHAT = new ArmorType(new ResourceLocation("magistuarmory", "rustedkettlehat"), new ResourceLocation("magistuarmory:kettlehat"), ARMOR_CONFIG.rustedKettlehat.toughness, 0.0f, new Integer[] { 0, 0, 0, ARMOR_CONFIG.rustedKettlehat.helmetDurability }, new Integer[] { 0, 0, 0, ARMOR_CONFIG.rustedKettlehat.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_CHAIN, ARMOR_CONFIG.rustedKettlehat.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType RUSTED_NORMAN = new ArmorType(new ResourceLocation("magistuarmory", "rustednorman"), new ResourceLocation("default"), ARMOR_CONFIG.rustedNorman.toughness, 0.0f, new Integer[] { 0, 0, 0, ARMOR_CONFIG.rustedNorman.helmetDurability }, new Integer[] { 0, 0, 0, ARMOR_CONFIG.rustedNorman.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_CHAIN, ARMOR_CONFIG.rustedNorman.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType RUSTED_CRUSADER = new ArmorType(new ResourceLocation("magistuarmory", "rustedcrusader"), new ResourceLocation("magistuarmory:crusader"), ARMOR_CONFIG.rustedCrusader.toughness, 0.0f, new Integer[] { ARMOR_CONFIG.rustedCrusader.bootsDurability, 0, ARMOR_CONFIG.rustedCrusader.chestplateDurability, ARMOR_CONFIG.rustedCrusader.helmetDurability }, new Integer[] { ARMOR_CONFIG.rustedCrusader.bootsDefense, 0, ARMOR_CONFIG.rustedCrusader.chestplateDefense, ARMOR_CONFIG.rustedCrusader.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_CHAIN, ARMOR_CONFIG.rustedCrusader.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType BASCINET = new ArmorType(new ResourceLocation("magistuarmory", "bascinet"), new ResourceLocation("magistuarmory:bascinet"), ARMOR_CONFIG.bascinet.toughness, 0.0f, new Integer[] { 0, 0, 0, ARMOR_CONFIG.bascinet.helmetDurability }, new Integer[] { 0, 0, 0, ARMOR_CONFIG.bascinet.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.bascinet.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType XIV_CENTURY_KNIGHT = new ArmorType(new ResourceLocation("magistuarmory", "xivcenturyknight"), new ResourceLocation("default"), ARMOR_CONFIG.xivCenturyKnight.toughness, 0.0f, new Integer[] { ARMOR_CONFIG.xivCenturyKnight.bootsDurability, ARMOR_CONFIG.xivCenturyKnight.leggingsDurability, ARMOR_CONFIG.xivCenturyKnight.chestplateDurability, 0 }, new Integer[] { ARMOR_CONFIG.xivCenturyKnight.bootsDefense, ARMOR_CONFIG.xivCenturyKnight.leggingsDefense, ARMOR_CONFIG.xivCenturyKnight.chestplateDefense, 0 }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.xivCenturyKnight.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType WINGED_HUSSAR_CHESTPLATE = new ArmorType(new ResourceLocation("magistuarmory", "wingedhussarchestplate"), new ResourceLocation("magistuarmory:wingedhussarchestplate"), ARMOR_CONFIG.wingedHussarChestplate.toughness, 0.0f, new Integer[] { 0, 0, ARMOR_CONFIG.wingedHussarChestplate.chestplateDurability, 0 }, new Integer[] { 0, 0, ARMOR_CONFIG.wingedHussarChestplate.chestplateDefense, 0 }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.wingedHussarChestplate.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType CUIRASSIER = new ArmorType(new ResourceLocation("magistuarmory", "cuirassier"), new ResourceLocation("default"), ARMOR_CONFIG.cuirassier.toughness, 0.0f, new Integer[] { ARMOR_CONFIG.cuirassier.bootsDurability, ARMOR_CONFIG.cuirassier.leggingsDurability, ARMOR_CONFIG.cuirassier.chestplateDurability, ARMOR_CONFIG.cuirassier.helmetDurability }, new Integer[] { ARMOR_CONFIG.cuirassier.bootsDefense, ARMOR_CONFIG.cuirassier.leggingsDefense, ARMOR_CONFIG.cuirassier.chestplateDefense, ARMOR_CONFIG.cuirassier.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.cuirassier.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType KASTENBRUST = new ArmorType(new ResourceLocation("magistuarmory", "kastenbrust"), new ResourceLocation("default"), ARMOR_CONFIG.kastenbrust.toughness, 0.5f, new Integer[] { ARMOR_CONFIG.kastenbrust.bootsDurability, ARMOR_CONFIG.kastenbrust.leggingsDurability, ARMOR_CONFIG.kastenbrust.chestplateDurability, 0 }, new Integer[] { ARMOR_CONFIG.kastenbrust.bootsDefense, ARMOR_CONFIG.kastenbrust.leggingsDefense, ARMOR_CONFIG.kastenbrust.chestplateDefense, 0 }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.kastenbrust.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType GRAND_BASCINET = new ArmorType(new ResourceLocation("magistuarmory", "grand_bascinet"), new ResourceLocation("magistuarmory:grand_bascinet"), ARMOR_CONFIG.grandBascinet.toughness, 0.5f, new Integer[] { 0, 0, 0, ARMOR_CONFIG.grandBascinet.helmetDurability }, new Integer[] { 0, 0, 0, ARMOR_CONFIG.grandBascinet.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_IRON, ARMOR_CONFIG.grandBascinet.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
-	public static final ArmorType LAMELLAR = new ArmorType(new ResourceLocation("magistuarmory", "lamellar"), new ResourceLocation("default"), ARMOR_CONFIG.lamellar.toughness, 0.0f, new Integer[] { ARMOR_CONFIG.lamellar.bootsDurability, 0, ARMOR_CONFIG.lamellar.chestplateDurability, ARMOR_CONFIG.lamellar.helmetDurability }, new Integer[] { ARMOR_CONFIG.lamellar.bootsDefense, 0, ARMOR_CONFIG.lamellar.chestplateDefense, ARMOR_CONFIG.lamellar.helmetDefense }, 9, SoundEvents.ARMOR_EQUIP_CHAIN, ARMOR_CONFIG.lamellar.enabled, Platform.isForge() ? "forge:ingots/steel" : "c:steel_ingots");
-
+	private static ArmorType create(ResourceLocation location,
+									ResourceLocation modelLocation,
+									ArmorConfig.ArmorTypeConfig config,
+									SoundEvent equipSound) {
+		return new ArmorType(location, modelLocation, config.toughness, config.knockbackResistance, new Integer[] {config.bootsDurability, config.leggingsDurability, config.chestplateDurability, config.helmetDurability}, new Integer[] {config.bootsDefense, config.leggingsDefense, config.chestplateDefense, config.helmetDefense}, config.enchantmentValue, equipSound, config.enabled);
+	}
 }

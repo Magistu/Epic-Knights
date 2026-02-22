@@ -22,13 +22,20 @@ public class RondelModel<T extends LivingEntity> extends ArmorDecorationModel<T>
 	{
 		MeshDefinition meshdefinition = new MeshDefinition();
 	    PartDefinition partdefinition = meshdefinition.getRoot();
-	    partdefinition.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.ZERO);
-	    partdefinition.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
-	    partdefinition.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.ZERO);
-	    partdefinition.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-7.5F, -7.0F, -3.4F, 16.0F, 16.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.ZERO);
-	    partdefinition.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(0, 0).addBox(-8.5F, -7.0F, -3.4F, 16.0F, 16.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.ZERO);
-	    partdefinition.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.ZERO);
-	    partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.ZERO);
+
+		PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+		PartDefinition hat = partdefinition.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+		PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		PartDefinition left_arm = partdefinition.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(0, 0).addBox(-8.5F, -7.0F, -3.4F, 16.0F, 16.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(5.0F, 2.0F, 0.0F));
+
+		PartDefinition right_arm = partdefinition.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-7.5F, -7.0F, -3.4F, 16.0F, 16.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-5.0F, 2.0F, 0.0F));
+
+		PartDefinition left_leg = partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+		PartDefinition right_leg = partdefinition.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}

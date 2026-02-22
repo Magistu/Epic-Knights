@@ -8,7 +8,6 @@ import com.magistuarmory.effects.LacerationEffect;
 import com.magistuarmory.network.PacketLongReachAttack;
 import com.magistuarmory.util.CombatHelper;
 import com.magistuarmory.util.ModDamageSources;
-import dev.architectury.platform.Platform;
 import dev.architectury.registry.item.ItemPropertiesRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -19,7 +18,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.damagesource.CombatRules;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
@@ -34,7 +32,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import java.util.List;
 
 
@@ -154,7 +151,7 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag)
+	public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flag)
 	{
 		if (this.isSilver)
 			tooltip.add(Component.translatable("silvertools.hurt", this.silverAttackDamage).withStyle(ChatFormatting.GREEN));

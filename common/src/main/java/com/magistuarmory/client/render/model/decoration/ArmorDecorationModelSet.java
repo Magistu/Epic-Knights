@@ -20,8 +20,7 @@ public class ArmorDecorationModelSet<T extends LivingEntity>
 {
     final Map<ModelLayerLocation, ArmorDecorationModel<T>> map = new HashMap<>();
 
-    public ArmorDecorationModelSet(List<RegistrySupplier<? extends ArmorDecoration>> decorations, EntityRendererProvider.Context context)
-    {
+    public void registerDecorations(List<RegistrySupplier<? extends ArmorDecoration>> decorations, EntityRendererProvider.Context context) {
         for (Supplier<? extends ArmorDecoration> supplier : decorations)
         {
             ModelLayerLocation location = supplier.get().createModelLocation();

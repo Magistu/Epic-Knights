@@ -421,6 +421,12 @@
   "twohandedpenalty_1": "由于单手使用双手武器，",
   "twohandedpenalty_2": "攻击速度和伤害降低",
   "canbeplacedonground": "按住右键+Shift放置到地上",
+  "magistuarmory.dyeable_armor.description": "可以染成任意颜色",
+  "magistuarmory.armor_decoration.helmet.description": "用于附加到头盔上",
+  "magistuarmory.armor_decoration.chestplate.description": "用于附加到胸甲上",
+  "magistuarmory.armor_decoration.leggings.description": "用于附加到护腿上",
+  "magistuarmory.armor_decoration.boots.description": "用于附加到靴子上",
+  "magistuarmory.armor_decoration.body.description": "用于附加到动物护甲上",
 
 
 

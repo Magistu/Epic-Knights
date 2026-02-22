@@ -1,0 +1,27 @@
+﻿{
+  "replace": false,
+  "values": [
+    { "id": "magistuarmory:knight_chestplate", "required": false },
+    { "id": "magistuarmory:jousting_chestplate", "required": false },
+    { "id": "magistuarmory:gothic_chestplate", "required": false },
+    { "id": "magistuarmory:maximilian_chestplate", "required": false },
+    { "id": "magistuarmory:chainmail_chestplate", "required": false },
+    { "id": "magistuarmory:platemail_chestplate", "required": false },
+    { "id": "magistuarmory:halfarmor_chestplate", "required": false },
+    { "id": "magistuarmory:crusader_chestplate", "required": false },
+    { "id": "magistuarmory:ceremonial_chestplate", "required": false },
+    { "id": "magistuarmory:gambeson_chestplate", "required": false },
+    { "id": "magistuarmory:brigandine_chestplate", "required": false },
+    { "id": "magistuarmory:rustedhalfarmor_chestplate", "required": false },
+    { "id": "magistuarmory:rustedcrusader_chestplate", "required": false },
+    { "id": "magistuarmory:rustedchainmail_chestplate", "required": false },
+    { "id": "magistuarmory:xivcenturyknight_chestplate", "required": false },
+    { "id": "magistuarmory:wingedhussar_chestplate", "required": false },
+    { "id": "magistuarmory:cuirassier_chestplate", "required": false },
+    { "id": "magistuarmory:kastenbrust_chestplate", "required": false },
+    { "id": "magistuarmory:lamellar_chestplate", "required": false },
+    { "id": "magistuarmory:hood_decoration", "required": false },
+    { "id": "magistuarmory:ecranche_decoration", "required": false },
+    { "id": "magistuarmory:rondel_decoration", "required": false }
+  ]
+}

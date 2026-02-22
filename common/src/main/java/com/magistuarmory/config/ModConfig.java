@@ -1,7 +1,3 @@
-// 
-// Decompiled by Procyon v0.5.36
-// 
-
 package com.magistuarmory.config;
 
 import me.shedaniel.autoconfig.annotation.ConfigEntry;

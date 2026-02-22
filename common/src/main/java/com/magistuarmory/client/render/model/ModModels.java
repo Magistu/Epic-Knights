@@ -16,7 +16,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 public class ModModels extends ModModelsProvider
 {
 	public static final ModModels INSTANCE = new ModModels(EpicKnights.ID);
-	
+
 	// Decorations
 	public static final LayerDefinition BULLHORNS = HornsModel.createLayer();
 	public static final LayerDefinition TORSE_AND_MANTLE = TorseAndMantleModel.createLayer();
@@ -35,6 +35,7 @@ public class ModModels extends ModModelsProvider
 	public static final LayerDefinition TOP_DECORATION_2 = TopDecoration2Model.createLayer();
 	public static final LayerDefinition SURCOAT = SurcoatModel.createLayer();
 	public static final LayerDefinition CAPARISON = CaparisonModel.createLayer();
+	public static final LayerDefinition CAT_EARS = CatEarsModel.createLayer();
 
 	public static final ModelLayerLocation TORSE_AND_MANTLE_LOCATION = INSTANCE.addDecorationModel("torse_and_mantle", () -> TORSE_AND_MANTLE);
 	public static final ModelLayerLocation CROWN_LOCATION = INSTANCE.addDecorationModel("crown", () -> CROWN);
@@ -66,8 +67,12 @@ public class ModModels extends ModModelsProvider
 	public static final ModelLayerLocation HORSE_LOCATION = INSTANCE.addDecorationModel("horse", () -> TOP_DECORATION);
 	public static final ModelLayerLocation SURCOAT_LOCATION = INSTANCE.addDecorationModel("surcoat", () -> SURCOAT);
 	public static final ModelLayerLocation CAPARISON_LOCATION = INSTANCE.addDecorationModel("caparison", () -> CAPARISON);
+	public static final ModelLayerLocation CAT_EARS_LOCATION = INSTANCE.addDecorationModel("cat_ears", () -> CAT_EARS);
 
 	// Armor
+	public static final ModelLayerLocation DEFAULT_ARMOR_LOCATION = INSTANCE.addArmorModel("default", DefaultArmorModel::createLayer);
+	public static final ModelLayerLocation DEFAULT_LEGGINGS_LOCATION = INSTANCE.addArmorModel("default_leggings", DefaultLeggingsModel::createLayer);
+	public static final ModelLayerLocation CONIC_HELMET_LOCATION = INSTANCE.addArmorModel("conic_helmet", ConicHelmetModel::createLayer);
 	public static final ModelLayerLocation CROWN_ARMOR_LOCATION = INSTANCE.addArmorModel("crown", CrownArmorModel::createLayer);
 	public static final ModelLayerLocation FLOWERCROWN_ARMOR_LOCATION = INSTANCE.addArmorModel("flowercrown", () -> FLOWERCROWN);
 	public static final ModelLayerLocation MINICROWN_ARMOR_LOCATION = INSTANCE.addArmorModel("minicrown", () -> MINICROWN);
@@ -93,7 +98,7 @@ public class ModModels extends ModModelsProvider
 	public static final ModelLayerLocation BUCKLER = INSTANCE.addModel("buckler", BucklerModel::createLayer);
 	public static final ModelLayerLocation TARGET = INSTANCE.addModel("target", TargeModel::createLayer);
 	public static final ModelLayerLocation CORRUPTED_ROUND_SHIELD = INSTANCE.addModel("corruptedroundshield", CorruptedRoundShieldModel::createLayer);
-	
+
 	// Blocks
 	public static final ModelLayerLocation PAVISE_BLOCK_LOCATION = INSTANCE.addModel("pavise_block", PaviseBlockModel::createLayer);
 

@@ -9,12 +9,10 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.Model;
-import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.Material;
@@ -44,9 +42,13 @@ public class HeraldryItemStackRenderer extends BlockEntityWithoutLevelRenderer i
 		this.patternsDirectory = "entity/" + location.getPath() + "/";
 	}
 
-	public void loadModel(EntityRendererProvider.Context context)
-	{
+	@Deprecated(forRemoval = true)
+	public void loadModel(EntityRendererProvider.Context context) {
 		this.model = new MedievalShieldModel(context.bakeLayer(ModModels.createLocation(this.location)));
+	}
+
+	public void setModel(Model model) {
+		this.model = model;
 	}
 
 	@Override

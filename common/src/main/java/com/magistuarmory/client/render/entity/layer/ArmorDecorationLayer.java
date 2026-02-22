@@ -4,10 +4,12 @@ import com.magistuarmory.client.render.model.ModModels;
 import com.magistuarmory.client.render.model.decoration.ArmorDecorationModel;
 import com.magistuarmory.client.render.model.decoration.ArmorDecorationModelSet;
 import com.magistuarmory.client.render.model.decoration.SurcoatModel;
+import com.magistuarmory.item.ArmorDecoration;
 import com.magistuarmory.item.ArmorDecorationItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.datafixers.util.Pair;
+import dev.architectury.registry.registries.RegistrySupplier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.HumanoidModel;
@@ -116,6 +118,10 @@ public class ArmorDecorationLayer<T extends LivingEntity, M extends HumanoidMode
       }
    }
 
+   public ArmorDecorationModel<T> getCoatModel() {
+      return this.coatModel;
+   }
+
    public ArmorDecorationModel<T> getArmorDecorationModel(ResourceLocation location)
    {
       return this.decorationModels.get(location);
@@ -149,5 +155,9 @@ public class ArmorDecorationLayer<T extends LivingEntity, M extends HumanoidMode
    public ResourceLocation getPatternTexture(ResourceLocation patternlocation)
    {
       return new ResourceLocation(this.coatTexture.getNamespace(), this.coatDirPrefix + patternlocation.getPath() + ".png");
+   }
+
+   public void registerDecorations(List<RegistrySupplier<? extends ArmorDecoration>> armorDecorationItems, EntityRendererProvider.Context context) {
+      this.decorationModels.registerDecorations(armorDecorationItems, context);
    }
 }

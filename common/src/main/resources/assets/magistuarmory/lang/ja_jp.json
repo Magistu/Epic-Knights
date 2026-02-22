@@ -421,6 +421,12 @@
   "twohandedpenalty_1": "両手武器を片手で使用すると",
   "twohandedpenalty_2": "攻撃速度と攻撃力が減少する",
   "canbeplacedonground": "Shift+右クリックで地面に設置する",
+  "magistuarmory.dyeable_armor.description": "任意の色に染色できます",
+  "magistuarmory.armor_decoration.helmet.description": "ヘルメットに取り付けるために使用されます",
+  "magistuarmory.armor_decoration.chestplate.description": "チェストプレートに取り付けるために使用されます",
+  "magistuarmory.armor_decoration.leggings.description": "レギンスに取り付けるために使用されます",
+  "magistuarmory.armor_decoration.boots.description": "ブーツに取り付けるために使用されます",
+  "magistuarmory.armor_decoration.body.description": "動物用防具に取り付けるために使用されます",
 
 
 

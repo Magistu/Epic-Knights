@@ -126,7 +126,7 @@ public class MedievalBowItem extends BowItem implements IHasModelProperty
             if (entity == null) 
                 return 0.0F;
             else 
-                return entity.getUseItem() != stack ? 0.0F : (float)(stack.getUseDuration() - entity.getUseItemRemainingTicks()) / 20.0F;
+                return entity.getUseItem() != stack ? 0.0F : (float)(stack.getUseDuration() - entity.getUseItemRemainingTicks()) / this.pullTime;
         });
     }
 }

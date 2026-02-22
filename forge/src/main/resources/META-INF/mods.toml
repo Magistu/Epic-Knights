@@ -6,12 +6,27 @@ issueTrackerURL = "${mod_issues_url}"
 logoFile = "icon.png"
 
 [[mods]]
+modId = "magistuarmoryconfig"
+version = "${mod_version}"
+displayName = "${mod_name}"
+authors = "${mod_authors}"
+credits = "${mod_contributors}"
+description = "${mod_description}"
+
+[[mods]]
 modId = "${mod_id}"
 version = "${mod_version}"
 displayName = "${mod_name}"
 authors = "${mod_authors}"
 credits = "${mod_contributors}"
 description = "${mod_description}"
+
+[[dependencies."${mod_id}"]]
+modId = "magistuarmoryconfig"
+mandatory = true
+versionRange = "[0,)"
+ordering = "AFTER"
+side = "BOTH"
 
 [[dependencies."${mod_id}"]]
 modId = "forge"
@@ -31,12 +46,5 @@ side = "BOTH"
 modId = "architectury"
 mandatory = true
 versionRange = "[${architectury_api_version},)"
-ordering = "AFTER"
-side = "BOTH"
-
-[[dependencies."${mod_id}"]]
-modId = "cloth_config"
-mandatory = true
-versionRange = "[${cloth_config_version},)"
 ordering = "AFTER"
 side = "BOTH"

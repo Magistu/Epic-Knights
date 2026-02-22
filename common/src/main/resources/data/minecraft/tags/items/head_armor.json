@@ -1,0 +1,28 @@
+﻿{
+  "replace": false,
+  "values": [
+    { "id": "magistuarmory:armet", "required": false },
+    { "id": "magistuarmory:stechhelm", "required": false },
+    { "id": "magistuarmory:sallet", "required": false },
+    { "id": "magistuarmory:maximilian_helmet", "required": false },
+    { "id": "magistuarmory:chainmail_helmet", "required": false },
+    { "id": "magistuarmory:kettlehat", "required": false },
+    { "id": "magistuarmory:barbute", "required": false },
+    { "id": "magistuarmory:greathelm", "required": false },
+    { "id": "magistuarmory:ceremonialarmet", "required": false },
+    { "id": "magistuarmory:coif", "required": false },
+    { "id": "magistuarmory:norman_helmet", "required": false },
+    { "id": "magistuarmory:shishak", "required": false },
+    { "id": "magistuarmory:rustedbarbute", "required": false },
+    { "id": "magistuarmory:rustedgreathelm", "required": false },
+    { "id": "magistuarmory:rustedchainmail_helmet", "required": false },
+    { "id": "magistuarmory:rustedkettlehat", "required": false },
+    { "id": "magistuarmory:bascinet", "required": false },
+    { "id": "magistuarmory:cuirassier_helmet", "required": false },
+    { "id": "magistuarmory:grand_bascinet", "required": false },
+    { "id": "magistuarmory:face_helmet", "required": false },
+    { "id": "magistuarmory:crown_decoration", "required": false },
+    { "id": "magistuarmory:flowercrown_decoration", "required": false },
+    { "id": "magistuarmory:minicrown_decoration", "required": false }
+  ]
+}

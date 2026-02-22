@@ -1,1 +1,24 @@
-{"type": "epicfight:spear", "attributes": {"common": {"impact": 1.1, "armor_negation": 0.0, "max_strikes": 1}}}
+{
+  "collider": {
+    "number": 3,
+    "size": [
+      0.6,
+      0.6,
+      1.6
+    ],
+    "center": [
+      0.0,
+      0.0,
+      -1.0
+    ]
+  },
+  "attributes": {
+    "one_hand": {
+      "speed_bonus": 0.4
+    },
+    "two_hand": {
+      "speed_bonus": -0.4
+    }
+  },
+  "type": "magistuarmory:pike"
+}

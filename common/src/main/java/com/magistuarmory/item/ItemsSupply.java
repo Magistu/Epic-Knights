@@ -1,7 +1,7 @@
 package com.magistuarmory.item;
 
 import dev.architectury.registry.registries.RegistrySupplier;
-import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import net.minecraft.world.item.Item;
 import java.util.ArrayList;
 import java.util.function.BiFunction;
@@ -9,18 +9,18 @@ import java.util.function.BiFunction;
 
 public class ItemsSupply<T extends Item>
 {
-	public @Nullable RegistrySupplier<T> wood;
-	public @Nullable RegistrySupplier<T> stone;
-	public @Nullable RegistrySupplier<T> iron;
-	public @Nullable RegistrySupplier<T> gold;
-	public @Nullable RegistrySupplier<T> diamond;
+	public RegistrySupplier<T> wood;
+	public RegistrySupplier<T> stone;
+	public RegistrySupplier<T> iron;
+	public RegistrySupplier<T> gold;
+	public RegistrySupplier<T> diamond;
 
-	public @Nullable RegistrySupplier<T> copper;
-	public @Nullable RegistrySupplier<T> steel;
-	public @Nullable RegistrySupplier<T> silver;
-	public @Nullable RegistrySupplier<T> netherite;
-	public @Nullable RegistrySupplier<T> tin;
-	public @Nullable RegistrySupplier<T> bronze;
+	public RegistrySupplier<T> copper;
+	public RegistrySupplier<T> steel;
+	public RegistrySupplier<T> silver;
+	public RegistrySupplier<T> netherite;
+	public RegistrySupplier<T> tin;
+	public RegistrySupplier<T> bronze;
 
 	public ItemsSupply(BiFunction<ModItemTier, Item.Properties, RegistrySupplier<T>> workshop, Item.Properties prop)
 	{

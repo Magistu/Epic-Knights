@@ -1,14 +1,13 @@
 package com.magistuarmory.item.crafting;
 
 import com.magistuarmory.EpicKnights;
-import com.magistuarmory.item.ArmorDecorationItem;
+import com.magistuarmory.config.GeneralConfig;
 import com.magistuarmory.item.MedievalShieldItem;
 import com.magistuarmory.item.armor.ISurcoat;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.inventory.CraftingContainer;
@@ -135,7 +134,7 @@ public class HeraldryRecipe extends CustomRecipe
 
     static boolean wornWithSurcoat(Item item)
     {
-        return item instanceof ArmorItem && (EpicKnights.GENERAL_CONFIG.enableSurcoatRecipeForAllArmor || item instanceof ISurcoat) && ((ArmorItem) item).getType().getSlot().equals(EquipmentSlot.CHEST);
+        return item instanceof ArmorItem && (GeneralConfig.ENABLE_SURCOAT_RECIPE_FOR_ALL_ARMOR.get() || item instanceof ISurcoat) && ((ArmorItem) item).getType().getSlot().equals(EquipmentSlot.CHEST);
     }
 
     static boolean isApplicableForBanner(Item item)

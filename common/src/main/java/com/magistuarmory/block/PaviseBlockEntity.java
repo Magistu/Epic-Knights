@@ -3,7 +3,7 @@ package com.magistuarmory.block;
 import com.google.common.collect.Lists;
 import com.magistuarmory.EpicKnights;
 import com.mojang.datafixers.util.Pair;
-import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;

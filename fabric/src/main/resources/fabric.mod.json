@@ -18,9 +18,6 @@
   "entrypoints": {
     "main": [
       "com.magistuarmory.fabric.EpicKnightsFabric"
-    ],
-    "modmenu": [
-      "com.magistuarmory.fabric.config.ModMenuFabric"
     ]
   },
   "depends": {
@@ -29,7 +26,7 @@
     "minecraft": ">=${minecraft_min_version} <${minecraft_max_version}",
     "architectury": ">=${architectury_api_version}",
     "magistuarmory": ">=${epic_knights_version}",
-    "cloth-config2": ">=${cloth_config_version}"
+    "forgeconfigapiport": ">=8.0.3"
   },
   "custom": {
     "modmenu": {

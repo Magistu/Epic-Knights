@@ -1,9 +1,11 @@
 package com.magistuarmory.item;
 
+import org.jetbrains.annotations.Nullable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -13,7 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class MedievalBagItem extends Item
 	}
 	
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
+	public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
 	{
 		InteractionResultHolder<ItemStack> result = super.use(level, player, hand);
 		if (level.isClientSide() || result.getResult().consumesAction())
@@ -43,11 +45,12 @@ public class MedievalBagItem extends Item
 		
 		return new InteractionResultHolder<>(InteractionResult.SUCCESS, bagstack);
 	}
-	
+
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag tooltipflag)
+	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag)
 	{
-		list.add(Component.translatable("medieval_bag.rightclick").withStyle(ChatFormatting.BLUE));
+		super.appendHoverText(stack, level, tooltip, flag);
+		tooltip.add(Component.translatable("medieval_bag.rightclick").withStyle(Style.EMPTY.withColor(ChatFormatting.BLUE).withItalic(true)));
 	}
 		
 	public static void setContents(ItemStack bagstack, List<ItemStack> stacks)

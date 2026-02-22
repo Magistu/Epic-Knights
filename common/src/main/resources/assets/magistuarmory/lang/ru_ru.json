@@ -421,6 +421,12 @@
   "twohandedpenalty_1": "Скорость атаки и урон уменьшены из-за ",
   "twohandedpenalty_2": "использования двуручного оружия одной рукой",
   "canbeplacedonground": "Shift+ПКМ чтобы поставить на землю",
+  "magistuarmory.dyeable_armor.description": "Можно окрасить в любой цвет",
+  "magistuarmory.armor_decoration.helmet.description": "Используется для крепления к шлему",
+  "magistuarmory.armor_decoration.chestplate.description": "Используется для крепления к нагруднику",
+  "magistuarmory.armor_decoration.leggings.description": "Используется для крепления к поножам",
+  "magistuarmory.armor_decoration.boots.description": "Используется для крепления к ботинкам",
+  "magistuarmory.armor_decoration.body.description": "Используется для крепления к броне для животных",
 
 
 

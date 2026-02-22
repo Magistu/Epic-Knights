@@ -5,14 +5,18 @@ import com.magistuarmory.EpicKnights;
 import com.magistuarmory.client.render.model.ModModels;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -94,6 +98,13 @@ public class ArmorDecorationItem extends Item implements ArmorDecoration
 			return new ListTag();
 
 		return compoundtag.getList("Items", 10);
+	}
+
+	@Override
+	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag)
+	{
+		super.appendHoverText(stack, level, tooltip, flag);
+		tooltip.add((Component.translatable(EpicKnights.ID + ".armor_decoration." + this.getArmorType().getName() + ".description")).withStyle(Style.EMPTY.withColor(ChatFormatting.BLUE).withItalic(true)));
 	}
 
 	@Override

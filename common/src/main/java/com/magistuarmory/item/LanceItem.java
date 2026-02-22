@@ -2,21 +2,19 @@ package com.magistuarmory.item;
 
 import com.magistuarmory.EpicKnights;
 import com.magistuarmory.client.ClientHelper;
+import com.magistuarmory.config.GeneralConfig;
 import com.magistuarmory.network.PacketLanceCollision;
 import com.magistuarmory.util.CombatHelper;
 import com.magistuarmory.util.ModDamageSources;
-import dev.architectury.platform.Platform;
 import dev.architectury.registry.item.ItemPropertiesRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -30,13 +28,11 @@ import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,7 +88,7 @@ public class LanceItem extends MedievalWeaponItem
 	@Override
 	public boolean onAttackClickEntity(ItemStack stack, Player player, Entity entity)
 	{
-		if (EpicKnights.GENERAL_CONFIG.disableLanceCollision)
+		if (GeneralConfig.DISABLE_LANCE_COLLISION.get())
 			return super.onAttackClickEntity(stack, player, entity);
 
 		if (player.isPassenger() && !this.isRaised(player) && !player.getCooldowns().isOnCooldown(this))
@@ -124,7 +120,7 @@ public class LanceItem extends MedievalWeaponItem
 	@Override
 	public boolean onHurtEntity(DamageSource source, LivingEntity victim, float damage)
 	{
-		if (EpicKnights.GENERAL_CONFIG.disableLanceCollision)
+		if (GeneralConfig.DISABLE_LANCE_COLLISION.get())
 			return super.onHurtEntity(source, victim, damage);
 
 		if (victim.level().isClientSide() || ModDamageSources.isAdditional(source) || !(source.getEntity() instanceof LivingEntity attacker))
@@ -209,7 +205,7 @@ public class LanceItem extends MedievalWeaponItem
 	@Override
 	public void inventoryTick(ItemStack stack, Level level, Entity entity, int i, boolean selected)
 	{
-		if (EpicKnights.GENERAL_CONFIG.disableLanceCollision)
+		if (GeneralConfig.DISABLE_LANCE_COLLISION.get())
 		{
 			super.inventoryTick(stack, level, entity, i, selected);
 			return;
@@ -250,7 +246,7 @@ public class LanceItem extends MedievalWeaponItem
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag)
+	public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flag)
 	{
 		tooltip.add(Component.translatable("lance.rideronly").withStyle(ChatFormatting.BLUE));
 		tooltip.add(Component.translatable("lance.leftclick").withStyle(ChatFormatting.BLUE));
@@ -322,7 +318,7 @@ public class LanceItem extends MedievalWeaponItem
 		}
 	}
 
-	public boolean isRaised(@Nullable LivingEntity entity)
+	public boolean isRaised(LivingEntity entity)
 	{
 		if (entity == null)
 			return false;

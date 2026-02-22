@@ -1,6 +1,6 @@
 package com.magistuarmory.util;
 
-import com.magistuarmory.EpicKnights;
+import com.magistuarmory.config.GeneralConfig;
 import com.magistuarmory.config.MobEquipmentConfig;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -21,7 +21,6 @@ import java.util.*;
 
 public class MobEquipment
 {
-    public static final MobEquipmentConfig MOBS_EQUIPMENT_CONFIG = EpicKnights.CONFIG.mobEquipments;
     static Map<DualKey<EntityType<? extends LivingEntity>, ResourceKey<Level>>, List<MobEquipment>> EQUIPMENTS = new HashMap<>();
 
     public List<EntityType<? extends LivingEntity>> entities = new ArrayList<>();
@@ -42,7 +41,7 @@ public class MobEquipment
     MobEquipment(MinecraftServer server, String[] ids)
     {
         List<ResourceKey<Level>> dimensions = new ArrayList<>();
-        this.chance = EpicKnights.GENERAL_CONFIG.equipChance;
+        this.chance = GeneralConfig.EQUIP_CHANCE.get();
         
         for (String id : ids)
         {
@@ -117,7 +116,7 @@ public class MobEquipment
     
     public static void setup(MinecraftServer server)
     {
-        for (String ids : MOBS_EQUIPMENT_CONFIG.equipments)
+        for (String ids : MobEquipmentConfig.EQUIPMENTS.get())
         {
             MobEquipment equipment = new MobEquipment(server, ids.split(" "));
             equipment.entities.forEach(type -> equipment.dimensions.forEach(dimension -> {

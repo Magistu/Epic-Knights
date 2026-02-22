@@ -14,11 +14,6 @@ version = rootProject.mod_version
 archivesBaseName = "epic-knights-${rootProject.display_minecraft_version}-forge"
 
 loom {
-    accessWidenerPath = project(":common").loom.accessWidenerPath
-
-    forge {
-        convertAccessWideners.set(true)
-    }
 }
 
 configurations {
@@ -32,7 +27,8 @@ configurations {
 dependencies {
     forge "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
     modApi "dev.architectury:architectury-forge:${rootProject.architectury_api_version}"
-    modApi "me.shedaniel.cloth:cloth-config-forge:${rootProject.cloth_config_version}"
+    modImplementation "maven.modrinth:epic-fight:${rootProject.epic_fight_version}-${rootProject.minecraft_version}-forge"
+//    modImplementation "maven.modrinth:epic-knights-addon:2.5-forge"
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 }
@@ -58,7 +54,7 @@ processResources {
             "forge_version_range"           : project.forge_version_range,
             "forge_loader_version_range"    : project.forge_loader_version_range,
             "architectury_api_version"      : project.architectury_api_version,
-            "cloth_config_version"          : project.cloth_config_version,
+            "forge_config_api_version"      : project.forge_config_api_version,
             "epic_knights_version"          : project.epic_knights_version,
     ]
 

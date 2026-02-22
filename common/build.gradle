@@ -11,9 +11,8 @@ dependencies {
     // Remove the next line if you don't want to depend on the API
     modApi "dev.architectury:architectury:${rootProject.architectury_api_version}"
 
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${rootProject.cloth_config_version}") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
+    compileOnly "fuzs.forgeconfigapiport:forgeconfigapiport-common:$forge_config_api_version"
+    implementation 'com.moandjiezana.toml:toml4j:0.7.2'
 }
 
 architectury {

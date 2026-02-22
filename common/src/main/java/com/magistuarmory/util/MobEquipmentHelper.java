@@ -1,6 +1,6 @@
 package com.magistuarmory.util;
 
-import com.magistuarmory.EpicKnights;
+import com.magistuarmory.config.GeneralConfig;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,7 +13,7 @@ public class MobEquipmentHelper
 {
     public static void equip(LivingEntity entity)
     {
-        if (!entity.level().isClientSide() && EpicKnights.GENERAL_CONFIG.equipMonsters && (!EpicKnights.GENERAL_CONFIG.equipMonstersOnlyIfHard || entity.level().getDifficulty().equals(Difficulty.HARD)))
+        if (!entity.level().isClientSide() && GeneralConfig.EQUIP_MONSTERS.get() && (!GeneralConfig.EQUIP_MONSTERS_ONLY_IF_HARD.get() || entity.level().getDifficulty().equals(Difficulty.HARD)))
         {
             RandomSource rand = entity.level().getRandom();
             List<MobEquipment> equipments = MobEquipment.get(entity);
@@ -26,7 +26,7 @@ public class MobEquipmentHelper
     {
         if (items.size() == 0)
         {
-            if (EpicKnights.GENERAL_CONFIG.overrideEquipment)
+            if (GeneralConfig.OVERRIDE_EQUIPMENT.get())
                 entity.setItemSlot(slot, new ItemStack(Items.AIR));
             return;
         }
@@ -36,7 +36,7 @@ public class MobEquipmentHelper
         if (id < items.size())
             entity.setItemSlot(slot, new ItemStack(items.get(id)));
         
-        else if (EpicKnights.GENERAL_CONFIG.overrideEquipment)
+        else if (GeneralConfig.OVERRIDE_EQUIPMENT.get())
             entity.setItemSlot(slot, new ItemStack(Items.AIR));
     }
 }

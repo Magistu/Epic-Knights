@@ -2,7 +2,6 @@ package com.magistuarmory.item;
 
 import com.magistuarmory.EpicKnights;
 import com.magistuarmory.api.item.ModItemsProvider;
-import com.magistuarmory.config.ArmorConfig;
 import com.magistuarmory.config.ShieldsConfig;
 import com.magistuarmory.config.WeaponsConfig;
 import com.magistuarmory.item.armor.*;
@@ -21,8 +20,8 @@ import java.util.function.BiFunction;
 
 public class ModItems extends ModItemsProvider
 {
-	public static final WeaponsConfig WEAPONS_CONFIG = EpicKnights.CONFIG.weapons;
-	public static final ShieldsConfig SHIELDS_CONFIG = EpicKnights.CONFIG.shields;
+	private static final WeaponsConfig WEAPONS_CONFIG = EpicKnights.CONFIG.weapons;
+	private static final ShieldsConfig SHIELDS_CONFIG = EpicKnights.CONFIG.shields;
 
 	public static ModItems INSTANCE = new ModItems();
 

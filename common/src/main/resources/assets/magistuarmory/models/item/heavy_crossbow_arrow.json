@@ -1,7 +1,0 @@
-{
-	"credit": "Made with Blockbench",
-	"parent": "magistuarmory:item/heavy_crossbow",
-	"textures": {
-		"layer0": "magistuarmory:item/heavy_crossbow_arrow"
-	}
-}

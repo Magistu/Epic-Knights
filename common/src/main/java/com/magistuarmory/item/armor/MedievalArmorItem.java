@@ -32,24 +32,25 @@ public class MedievalArmorItem extends ArmorItem implements ISurcoat
 		return this.armortype;
 	}
 
+	@Deprecated(forRemoval = true)
 	@Environment(EnvType.CLIENT)
 	public void loadModel(EntityRendererProvider.Context context)
 	{
-		if (getEquipmentSlot() == EquipmentSlot.LEGS) {
-			this.model = ModRender.INNER_ARMOR;
-		}
 		Optional<ModelLayerLocation> location = this.armortype.getModelLocation();
-		if (location.isPresent()) {
-			this.model = new HumanoidModel<>(context.bakeLayer(location.get()));
-		} else {
-			this.model = ModRender.OUTER_ARMOR;
-		}
+        this.model = location.map(
+				l -> new HumanoidModel<>(context.bakeLayer(l))).orElseGet(
+						() -> getType() == Type.LEGGINGS ? ModRender.INNER_ARMOR : ModRender.OUTER_ARMOR);
+	}
+
+	@Environment(EnvType.CLIENT)
+	public void setModel(HumanoidModel<LivingEntity> model) {
+		this.model = model;
 	}
 
 	@Environment(EnvType.CLIENT)
 	public HumanoidModel<? extends LivingEntity> getArmorModel(EquipmentSlot slot, HumanoidModel<? extends LivingEntity> _default)
 	{
-		if (slot != EquipmentSlot.LEGS && slot == this.type.getSlot() && this.model != null) {
+		if (slot == this.type.getSlot() && this.model != null) {
 			return this.model;
 		}
 		return _default;

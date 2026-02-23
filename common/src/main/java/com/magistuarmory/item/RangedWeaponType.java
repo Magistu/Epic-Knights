@@ -2,17 +2,21 @@ package com.magistuarmory.item;
 
 public class RangedWeaponType
 {
-    private final int durability;
-    private final int pullTime;
-    private final float projectileSpeed;
-    private final boolean enabled;
+    private int durability;
+    private int pullTime;
+    private float projectileSpeed;
+    private boolean enabled;
 
-    public RangedWeaponType(int durability, int pullTime, float projectileSpeed, boolean enabled)
+    public RangedWeaponType() {}
+
+    public static RangedWeaponType of(int durability, int pullTime, float projectileSpeed, boolean enabled)
     {
-        this.durability = durability;
-        this.pullTime = pullTime;
-        this.projectileSpeed = projectileSpeed;
-        this.enabled = enabled;
+        RangedWeaponType type = new RangedWeaponType();
+        type.durability = durability;
+        type.pullTime = pullTime;
+        type.projectileSpeed = projectileSpeed;
+        type.enabled = enabled;
+        return type;
     }
 
     public int getDurability()

@@ -13,6 +13,7 @@ import com.magistuarmory.item.ModItems;
 import com.magistuarmory.item.armor.ArmorTypes;
 import com.magistuarmory.item.crafting.ModRecipes;
 import com.magistuarmory.misc.ModCreativeTabs;
+import com.magistuarmory.misc.ModReloadListenerRegistry;
 import com.magistuarmory.network.ModPackets;
 import dev.architectury.platform.Platform;
 import me.shedaniel.autoconfig.AutoConfig;
@@ -53,6 +54,7 @@ public class EpicKnights
         ModItems.INSTANCE.init();
         ModRecipes.init();
         ModCreativeTabs.init();
+        ModReloadListenerRegistry.init();
     }
     
     public static void checkBetterCombatOrEpicFightInstalled()

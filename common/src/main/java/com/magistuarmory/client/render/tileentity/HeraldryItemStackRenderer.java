@@ -41,8 +41,13 @@ public class HeraldryItemStackRenderer extends BlockEntityWithoutLevelRenderer i
         this.materialContainer = new MaterialContainer(id, location, "entity/" + location.getPath() + "/");
     }
 
+    @Deprecated(forRemoval = true)
     public void loadModel(EntityRendererProvider.Context context) {
         this.model = new MedievalShieldModel(context.bakeLayer(ModModels.createLocation(this.location)));
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
     }
 
     @Override

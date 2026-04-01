@@ -75,8 +75,9 @@ public abstract class ModItemsProvider
 
 	public @Nullable RegistrySupplier<MedievalArmorItem> addMedievalArmorItem(String id, ArmorType type, ArmorItem.Type slot, Item.Properties properties)
 	{
-		if (type.isDisabled())
+		if (type.isDisabled()) {
 			return null;
+		}
 		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerMedievalArmorItem(this.items, id, type, slot, properties);
 		this.armorItems.add(armor);
 		return armor;

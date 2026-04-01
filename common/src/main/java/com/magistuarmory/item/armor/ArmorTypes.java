@@ -107,7 +107,7 @@ public class ArmorTypes
 									Holder<SoundEvent> equipSound,
 									boolean dyeable,
 									String repairItemTag) {
-		return new ArmorType(armorMaterial, location, modelLocation, config.toughness, config.knockbackResistance, new Integer[] {config.bootsDurability, config.leggingsDurability, config.chestplateDurability, config.helmetDurability}, new Integer[] {config.bootsDefense, config.leggingsDefense, config.chestplateDefense, config.helmetDefense}, config.enchantmentValue, equipSound, dyeable, config.enabled, repairItemTag);
+		return new ArmorType(armorMaterial, location, modelLocation, config.toughness, config.knockbackResistance, new Integer[] {config.bootsDurability, config.leggingsDurability, config.chestplateDurability, config.helmetDurability}, new Integer[] {config.bootsDefense, config.leggingsDefense, config.chestplateDefense, config.helmetDefense}, config.enchantmentValue, equipSound, config.enabled, dyeable, repairItemTag);
 	}
 
 	private static ArmorType create(DeferredRegister<ArmorMaterial> armorMaterial,
@@ -117,7 +117,7 @@ public class ArmorTypes
 									Holder<SoundEvent> equipSound,
 									boolean dyeable,
 									Supplier<Ingredient> ingredientSupplier) {
-		return new ArmorType(armorMaterial, location, modelLocation, config.toughness, config.knockbackResistance, new Integer[] {config.bootsDurability, config.leggingsDurability, config.chestplateDurability, config.helmetDurability}, new Integer[] {config.bootsDefense, config.leggingsDefense, config.chestplateDefense, config.helmetDefense}, config.enchantmentValue, equipSound, dyeable, config.enabled, ingredientSupplier);
+		return new ArmorType(armorMaterial, location, modelLocation, config.toughness, config.knockbackResistance, new Integer[] {config.bootsDurability, config.leggingsDurability, config.chestplateDurability, config.helmetDurability}, new Integer[] {config.bootsDefense, config.leggingsDefense, config.chestplateDefense, config.helmetDefense}, config.enchantmentValue, equipSound, config.enabled, dyeable, ingredientSupplier);
 	}
 
 	private static ArmorType create(DeferredRegister<ArmorMaterial> armorMaterial,

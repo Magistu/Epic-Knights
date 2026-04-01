@@ -3,7 +3,6 @@ package com.magistuarmory.item;
 import com.magistuarmory.EpicKnights;
 import com.magistuarmory.api.item.ModItemsProvider;
 import com.magistuarmory.config.ShieldsConfig;
-import com.magistuarmory.config.WeaponsConfig;
 import com.magistuarmory.item.armor.*;
 import com.magistuarmory.misc.ModBannerPatternTags;
 import dev.architectury.platform.Platform;
@@ -20,7 +19,6 @@ import java.util.function.BiFunction;
 
 public class ModItems extends ModItemsProvider
 {
-	private static final WeaponsConfig WEAPONS_CONFIG = EpicKnights.CONFIG.weapons;
 	private static final ShieldsConfig SHIELDS_CONFIG = EpicKnights.CONFIG.shields;
 
 	public static ModItems INSTANCE = new ModItems();
@@ -60,9 +58,9 @@ public class ModItems extends ModItemsProvider
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> HALFARMOR_CHESTPLATE = INSTANCE.addMedievalArmorItem("halfarmor_chestplate", ArmorTypes.HALFARMOR, ArmorItem.Type.CHESTPLATE, new Properties());
 
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> GREATHELM = INSTANCE.addDyeableMedievalArmorItem("greathelm", ArmorTypes.GREATHELM, ArmorItem.Type.HELMET, new Properties(), 0xd3d3d3);
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> CRUSADER_CHESTPLATE = INSTANCE.addDyeableMedievalArmorItem("crusader_chestplate", ArmorTypes.CRUSADER, ArmorItem.Type.CHESTPLATE, new Properties(), -3227226);
+	public static final @Nullable RegistrySupplier<MedievalArmorItem> CRUSADER_CHESTPLATE = INSTANCE.addDyeableMedievalArmorItem("crusader_chestplate", ArmorTypes.CRUSADER, ArmorItem.Type.CHESTPLATE, new Properties(), 0xffffff);
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> CRUSADER_LEGGINGS = INSTANCE.addMedievalArmorItem("crusader_leggings", ArmorTypes.CRUSADER, ArmorItem.Type.LEGGINGS, new Properties());
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> CRUSADER_BOOTS = INSTANCE.addDyeableMedievalArmorItem("crusader_boots", ArmorTypes.CRUSADER, ArmorItem.Type.BOOTS, new Properties(), -3227226);
+	public static final @Nullable RegistrySupplier<MedievalArmorItem> CRUSADER_BOOTS = INSTANCE.addDyeableMedievalArmorItem("crusader_boots", ArmorTypes.CRUSADER, ArmorItem.Type.BOOTS, new Properties(), 0xffffff);
 
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> CEREMONIAL_ARMET = INSTANCE.addKnightItem("ceremonialarmet", ArmorTypes.CEREMONIAL_ARMET, ArmorItem.Type.HELMET, new Properties());
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> CEREMONIAL_CHESTPLATE = INSTANCE.addMedievalArmorItem("ceremonial_chestplate", ArmorTypes.CEREMONIAL, ArmorItem.Type.CHESTPLATE, new Properties());
@@ -129,26 +127,26 @@ public class ModItems extends ModItemsProvider
 	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> PAVISE_SUPPLY = (material, prop) -> INSTANCE.addPaviseItem(material.getMaterialName() + "_pavese", "pavese", prop, material, true, true, SHIELDS_CONFIG.get("pavise"));
 	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalShieldItem>> KITE_SHIELD_SUPPLY = (material, prop) -> INSTANCE.addMedievalShieldItem(material.getMaterialName() + "_kiteshield", "kiteshield", prop, material, true, true, SHIELDS_CONFIG.get("kiteShield"));
 
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> STILETTO_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_stylet", prop, material, WEAPONS_CONFIG.getMelee("stiletto"));
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> SHORT_SWORD_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_shortsword", prop, material, WEAPONS_CONFIG.getMelee("shortSword"));
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> KATZBALGER_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_katzbalger", prop, material, WEAPONS_CONFIG.getMelee("katzbalger"));
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> PIKE_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_pike", prop, material, WEAPONS_CONFIG.getMelee("pike"));
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> RANSEUR_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_ranseur", prop, material, WEAPONS_CONFIG.getMelee("ranseur"));
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> AHLSPIESS_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_ahlspiess", prop, material, WEAPONS_CONFIG.getMelee("ahlspiess"));
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> GIANT_LANCE_SUPPLY = (material, prop) -> INSTANCE.addLanceItem(material.getMaterialName() + "_chivalrylance", prop, material, WEAPONS_CONFIG.getMelee("giantLance"));
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> BASTARD_SWORD_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_bastardsword", prop, material, WEAPONS_CONFIG.getMelee("bastardSword"));
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> ESTOC_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_estoc", prop, material, WEAPONS_CONFIG.getMelee("estoc"));
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> CLAYMORE_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_claymore", prop, material, WEAPONS_CONFIG.getMelee("claymore"));
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> ZWEIHANDER_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_zweihander", prop, material, WEAPONS_CONFIG.getMelee("zweihander"));
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> FlAME_BLADED_SWORD_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_flamebladedsword", prop, material, WEAPONS_CONFIG.getMelee("flameBladedSword"));
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> LOCHABER_AXE_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_lochaberaxe", prop, material, WEAPONS_CONFIG.getMelee("lochaberAxe"));
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> CONCAVE_EDGED_HALBERD_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_concavehalberd", prop, material, WEAPONS_CONFIG.getMelee("concaveEdgedHalberd"));
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> HEAVY_MACE_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_heavymace", prop, material, WEAPONS_CONFIG.getMelee("heavyMace"));
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> HEAVY_WAR_HAMMER_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_heavywarhammer", prop, material, WEAPONS_CONFIG.getMelee("heavyWarHammer"));
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> LUCERNE_HAMMER_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_lucernhammer", prop, material, WEAPONS_CONFIG.getMelee("lucerneHammer"));
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> MORNINGSTAR_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_morgenstern", prop, material, WEAPONS_CONFIG.getMelee("morningstar"));
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> FLAIL_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_chainmorgenstern", prop, material, WEAPONS_CONFIG.getMelee("flail"));
-	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> GUISARME_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_guisarme", prop, material, WEAPONS_CONFIG.getMelee("guisarme"));
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> STILETTO_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_stylet", prop, material, WeaponTypes.STILETTO);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> SHORT_SWORD_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_shortsword", prop, material, WeaponTypes.SHORT_SWORD);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> KATZBALGER_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_katzbalger", prop, material, WeaponTypes.KATZBALGER);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> PIKE_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_pike", prop, material, WeaponTypes.PIKE);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> RANSEUR_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_ranseur", prop, material, WeaponTypes.RANSEUR);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> AHLSPIESS_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_ahlspiess", prop, material, WeaponTypes.AHLSPIESS);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> GIANT_LANCE_SUPPLY = (material, prop) -> INSTANCE.addLanceItem(material.getMaterialName() + "_chivalrylance", prop, material, WeaponTypes.GIANT_LANCE);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> BASTARD_SWORD_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_bastardsword", prop, material, WeaponTypes.BASTARD_SWORD);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> ESTOC_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_estoc", prop, material, WeaponTypes.ESTOC);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> CLAYMORE_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_claymore", prop, material, WeaponTypes.CLAYMORE);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> ZWEIHANDER_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_zweihander", prop, material, WeaponTypes.ZWEIHANDER);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> FlAME_BLADED_SWORD_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_flamebladedsword", prop, material, WeaponTypes.FLAME_BLADED_SWORD);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> LOCHABER_AXE_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_lochaberaxe", prop, material, WeaponTypes.LOCHABER_AXE);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> CONCAVE_EDGED_HALBERD_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_concavehalberd", prop, material, WeaponTypes.CONCAVE_EDGED_HALBERD);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> HEAVY_MACE_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_heavymace", prop, material, WeaponTypes.HEAVY_MACE);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> HEAVY_WAR_HAMMER_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_heavywarhammer", prop, material, WeaponTypes.HEAVY_WAR_HAMMER);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> LUCERNE_HAMMER_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_lucernhammer", prop, material, WeaponTypes.LUCERNE_HAMMER);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> MORNINGSTAR_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_morgenstern", prop, material, WeaponTypes.MORNINGSTAR);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> FLAIL_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_chainmorgenstern", prop, material, WeaponTypes.FLAIL);
+	public static final BiFunction<ModItemTier, Properties, RegistrySupplier<MedievalWeaponItem>> GUISARME_SUPPLY = (material, prop) -> INSTANCE.addMedievalWeaponItem(material.getMaterialName() + "_guisarme", prop, material, WeaponTypes.GUISARME);
 
 	//Weapons
 	public static final WeaponsSupply STILETTOS = INSTANCE.addWeaponsSupply(STILETTO_SUPPLY);
@@ -172,17 +170,17 @@ public class ModItems extends ModItemsProvider
 	public static final WeaponsSupply FLAILS = INSTANCE.addWeaponsSupply(FLAIL_SUPPLY);
 	public static final WeaponsSupply GUISARMES = INSTANCE.addWeaponsSupply(GUISARME_SUPPLY);
 
-	public static final @Nullable RegistrySupplier<MedievalWeaponItem> BLACKSMITH_HAMMER = INSTANCE.addMedievalWeaponItem("blacksmith_hammer", new Properties(), ModItemTier.STEEL, WEAPONS_CONFIG.getMelee("blacksmithHammer"));
-	public static final @Nullable RegistrySupplier<MedievalWeaponItem> BARBED_CLUB = INSTANCE.addMedievalWeaponItem("barbedclub", new Properties(), ModItemTier.IRON, WEAPONS_CONFIG.getMelee("barbedClub"));
-	public static final @Nullable RegistrySupplier<MedievalWeaponItem> PITCHFORK = INSTANCE.addMedievalWeaponItem("pitchfork", new Properties(), ModItemTier.IRON, WEAPONS_CONFIG.getMelee("pitchfork"));
-	public static final @Nullable RegistrySupplier<MedievalWeaponItem> NOBLE_SWORD = INSTANCE.addMedievalWeaponItem("noble_sword", new Properties(), ModItemTier.IRON, WEAPONS_CONFIG.getMelee("nobleSword"));
-	public static final @Nullable RegistrySupplier<MedievalWeaponItem> RUSTED_BASTARD_SWORD = INSTANCE.addMedievalWeaponItem("rusted_bastardsword", new Properties(), ModItemTier.IRON, WEAPONS_CONFIG.getMelee("rustedBastardSword"));
-	public static final @Nullable RegistrySupplier<MedievalWeaponItem> RUSTED_HEAVY_MACE = INSTANCE.addMedievalWeaponItem("rusted_heavymace", new Properties(), ModItemTier.IRON, WEAPONS_CONFIG.getMelee("rustedHeavyMace"));
-	public static final @Nullable RegistrySupplier<MedievalWeaponItem> CLUB = INSTANCE.addMedievalWeaponItem("club", new Properties(), ModItemTier.WOOD, WEAPONS_CONFIG.getMelee("club"));
-	public static final @Nullable RegistrySupplier<MedievalWeaponItem> MESSER_SWORD = INSTANCE.addMedievalWeaponItem("messer_sword", new Properties(), ModItemTier.IRON, WEAPONS_CONFIG.getMelee("messerSword"));
+	public static final @Nullable RegistrySupplier<MedievalWeaponItem> BLACKSMITH_HAMMER = INSTANCE.addMedievalWeaponItem("blacksmith_hammer", new Properties(), ModItemTier.STEEL, WeaponTypes.BLACKSMITH_HAMMER);
+	public static final @Nullable RegistrySupplier<MedievalWeaponItem> BARBED_CLUB = INSTANCE.addMedievalWeaponItem("barbedclub", new Properties(), ModItemTier.IRON, WeaponTypes.BARBED_CLUB);
+	public static final @Nullable RegistrySupplier<MedievalWeaponItem> PITCHFORK = INSTANCE.addMedievalWeaponItem("pitchfork", new Properties(), ModItemTier.IRON, WeaponTypes.PITCHFORK);
+	public static final @Nullable RegistrySupplier<MedievalWeaponItem> NOBLE_SWORD = INSTANCE.addMedievalWeaponItem("noble_sword", new Properties(), ModItemTier.IRON, WeaponTypes.NOBLE_SWORD);
+	public static final @Nullable RegistrySupplier<MedievalWeaponItem> RUSTED_BASTARD_SWORD = INSTANCE.addMedievalWeaponItem("rusted_bastardsword", new Properties(), ModItemTier.IRON, WeaponTypes.RUSTED_BASTARD_SWORD);
+	public static final @Nullable RegistrySupplier<MedievalWeaponItem> RUSTED_HEAVY_MACE = INSTANCE.addMedievalWeaponItem("rusted_heavymace", new Properties(), ModItemTier.IRON, WeaponTypes.RUSTED_HEAVY_MACE);
+	public static final @Nullable RegistrySupplier<MedievalWeaponItem> CLUB = INSTANCE.addMedievalWeaponItem("club", new Properties(), ModItemTier.WOOD, WeaponTypes.CLUB);
+	public static final @Nullable RegistrySupplier<MedievalWeaponItem> MESSER_SWORD = INSTANCE.addMedievalWeaponItem("messer_sword", new Properties(), ModItemTier.IRON, WeaponTypes.MESSER_SWORD);
 
-	public static final @Nullable RegistrySupplier<Item> LONGBOW = INSTANCE.addMedievalBowItem("longbow", WEAPONS_CONFIG.getRanged("longbow"));
-	public static final @Nullable RegistrySupplier<Item> HEAVY_CROSSBOW = INSTANCE.addMedievalCrossbowItem("heavy_crossbow", WEAPONS_CONFIG.getRanged("heavyCrossbow"));
+	public static final @Nullable RegistrySupplier<Item> LONGBOW = INSTANCE.addMedievalBowItem("longbow", WeaponTypes.LONGBOW);
+	public static final @Nullable RegistrySupplier<Item> HEAVY_CROSSBOW = INSTANCE.addMedievalCrossbowItem("heavy_crossbow", WeaponTypes.HEAVY_CROSSBOW);
 
 	//Shields
 	public static final ShieldsSupply HEATER_SHIELDS = INSTANCE.addShieldsSupply(HEATER_SHIELD_SUPPLY, "heatershield");

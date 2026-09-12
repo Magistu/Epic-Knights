@@ -6,12 +6,8 @@
     "pm "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/bronze"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    }
+    "m": "#c:ingots/bronze",
+    "p": "#magistuarmory:poles"
   },
   "result": {
     "id": "magistuarmory:bronze_ahlspiess",

@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "magistuarmory:item/netherite_kiteshield_blocking",
+    "model": {
+      "type": "magistuarmory:heraldry",
+      "id": "netherite_kiteshield",
+      "location": "magistuarmory:kiteshield"
+    }
+  }
+}

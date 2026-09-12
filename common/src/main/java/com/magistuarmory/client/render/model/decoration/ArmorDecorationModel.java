@@ -7,7 +7,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.LivingEntity;
 
 @Environment(EnvType.CLIENT)
-public class ArmorDecorationModel<T extends LivingEntity> extends HumanoidModel<T>
+public class ArmorDecorationModel<T extends net.minecraft.client.renderer.entity.state.HumanoidRenderState> extends HumanoidModel<T>
 {
     ModelPart[] parts;
     

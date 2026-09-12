@@ -11,7 +11,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.world.entity.LivingEntity;
 
 @Environment(EnvType.CLIENT)
-public class TorseAndMantleModel<T extends LivingEntity> extends ArmorDecorationModel<T>
+public class TorseAndMantleModel<T extends net.minecraft.client.renderer.entity.state.HumanoidRenderState> extends ArmorDecorationModel<T>
 {
 	public TorseAndMantleModel(ModelPart root)
 	{
@@ -28,8 +28,8 @@ public class TorseAndMantleModel<T extends LivingEntity> extends ArmorDecoration
 				.texOffs(32, 16).addBox(-4.0F, -7.5F, -3.0F, 8.0F, 7.0F, 7.0F, new CubeDeformation(1.4F))
 				.texOffs(1, 32).addBox(-4.0F, -7.5F, -3.0F, 8.0F, 7.0F, 7.0F, new CubeDeformation(1.6F))
 				.texOffs(1, 15).addBox(-4.0F, -7.5F, -3.0F, 8.0F, 7.0F, 7.0F, new CubeDeformation(1.8F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		partdefinition.getChild("head").addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		partdefinition.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.ZERO);
-		partdefinition.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		partdefinition.addOrReplaceChild("right_arm", CubeListBuilder.create(), PartPose.ZERO);
 		partdefinition.addOrReplaceChild("left_arm", CubeListBuilder.create(), PartPose.ZERO);
 		partdefinition.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.ZERO);

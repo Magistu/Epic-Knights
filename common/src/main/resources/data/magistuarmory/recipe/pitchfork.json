@@ -6,12 +6,8 @@
     " a "
   ],
   "key": {
-    "a": {
-      "tag": "c:rods/wooden"
-    },
-    "b": {
-      "tag": "c:ingots/steel"
-    }
+    "a": "#c:rods/wooden",
+    "b": "#c:ingots/steel"
   },
   "result": {
     "id": "magistuarmory:pitchfork",

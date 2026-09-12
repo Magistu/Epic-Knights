@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "magistuarmory:item/iron_target_blocking",
+    "model": {
+      "type": "magistuarmory:heraldry",
+      "id": "iron_target",
+      "location": "magistuarmory:target"
+    }
+  }
+}

@@ -6,12 +6,8 @@
     " ww"
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/steel"
-    },
-    "w": {
-      "tag": "minecraft:planks"
-    }
+    "m": "#c:ingots/steel",
+    "w": "#minecraft:planks"
   },
   "result": {
     "id": "magistuarmory:wood_ellipticalshield",

@@ -1,16 +1,10 @@
 {
   "type": "minecraft:smithing_transform",
-  "base": {
-    "item": "magistuarmory:iron_zweihander"
-  },
-  "addition": {
-    "item": "minecraft:blaze_powder"
-  },
+  "base": "magistuarmory:iron_zweihander",
+  "addition": "minecraft:blaze_powder",
   "result": {
-    "id":  "magistuarmory:iron_flamebladedsword",
+    "id": "magistuarmory:iron_flamebladedsword",
     "count": 1
   },
-  "template": {
-    "item": "minecraft:netherite_upgrade_smithing_template"
-  }
+  "template": "minecraft:netherite_upgrade_smithing_template"
 }

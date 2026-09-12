@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "magistuarmory:item/darkening_template",
+    "tints": [
+      {
+        "type": "magistuarmory:item_tint"
+      }
+    ]
+  }
+}

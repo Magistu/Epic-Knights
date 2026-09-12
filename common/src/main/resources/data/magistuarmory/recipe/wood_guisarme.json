@@ -5,15 +5,9 @@
     "p "
   ],
   "key": {
-    "m": {
-      "tag": "minecraft:planks"
-    },
-    "t": {
-      "item": "magistuarmory:wood_shortsword"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    }
+    "m": "#minecraft:planks",
+    "t": "magistuarmory:wood_shortsword",
+    "p": "#magistuarmory:poles"
   },
   "result": {
     "id": "magistuarmory:wood_guisarme",

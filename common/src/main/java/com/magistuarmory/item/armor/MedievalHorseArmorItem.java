@@ -1,22 +1,30 @@
 package com.magistuarmory.item.armor;
 
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.AnimalArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.resources.Identifier;
+
+import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.Item;
 
-public class MedievalHorseArmorItem extends AnimalArmorItem
+public class MedievalHorseArmorItem extends Item
 {
-	private final ResourceLocation texture;
+	private final Identifier texture;
 
-	public MedievalHorseArmorItem(Holder<ArmorMaterial> material, ResourceLocation texture, boolean dyeable, Item.Properties properties) {
-		super(material, AnimalArmorItem.BodyType.EQUESTRIAN, dyeable, properties.stacksTo(1));
+	public MedievalHorseArmorItem(ArmorMaterial material, Identifier texture, boolean dyeable, Item.Properties properties) {
+		super(properties.horseArmor(withAsset(material, texture)));
 		this.texture = texture;
 	}
 
-	@Override
-	public ResourceLocation getTexture() {
+    private static ArmorMaterial withAsset(ArmorMaterial material, Identifier texture) {
+        String name = texture.getPath().substring(texture.getPath().lastIndexOf('/') + 1).replace(".png", "");
+        if (name.equals("horse_armor_chainmail")) name = "chainmail_horse_armor";
+        return new ArmorMaterial(material.durability(), material.defense(), material.enchantmentValue(), material.equipSound(),
+                material.toughness(), material.knockbackResistance(), material.repairIngredient(),
+                net.minecraft.resources.ResourceKey.create(net.minecraft.world.item.equipment.EquipmentAssets.ROOT_ID,
+                        Identifier.fromNamespaceAndPath(texture.getNamespace(), name)));
+    }
+
+	public Identifier getTexture() {
 		return texture;
 	}
 }

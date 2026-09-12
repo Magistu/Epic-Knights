@@ -6,15 +6,9 @@
     " h "
   ],
   "key": {
-    "s": {
-      "tag": "c:rods/wooden"
-    },
-    "m": {
-      "tag": "c:gems/diamond"
-    },
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "s": "#c:rods/wooden",
+    "m": "#c:gems/diamond",
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:diamond_morgenstern",

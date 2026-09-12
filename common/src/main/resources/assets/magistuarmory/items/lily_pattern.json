@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "magistuarmory:item/lily_pattern",
+    "tints": [
+      {
+        "type": "magistuarmory:item_tint"
+      }
+    ]
+  }
+}

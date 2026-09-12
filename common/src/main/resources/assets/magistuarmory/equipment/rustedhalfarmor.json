@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "magistuarmory:rustedhalfarmor"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "magistuarmory:rustedhalfarmor"
+      }
+    ]
+  }
+}

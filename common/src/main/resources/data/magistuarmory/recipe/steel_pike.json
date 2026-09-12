@@ -6,15 +6,9 @@
     "p  "
   ],
   "key": {
-    "s": {
-      "tag": "c:rods/wooden"
-    },
-    "m": {
-      "tag": "c:ingots/steel"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    }
+    "s": "#c:rods/wooden",
+    "m": "#c:ingots/steel",
+    "p": "#magistuarmory:poles"
   },
   "result": {
     "id": "magistuarmory:steel_pike",

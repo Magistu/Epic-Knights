@@ -36,7 +36,7 @@ public class PaviseUpperCollisionBlock extends Block
 	
 	public PaviseUpperCollisionBlock()
 	{
-		super(Properties.of().dynamicShape().noTerrainParticles().sound(SoundType.EMPTY));
+		super(Properties.of().setId(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.BLOCK, net.minecraft.resources.Identifier.fromNamespaceAndPath(com.magistuarmory.EpicKnights.ID, "pavise_upper_collision"))).dynamicShape().noTerrainParticles().sound(SoundType.EMPTY));
 	}
 	
 	@Override
@@ -46,7 +46,7 @@ public class PaviseUpperCollisionBlock extends Block
 	}
 	
 	@Override
-	public @NotNull ItemStack getCloneItemStack(LevelReader reader, BlockPos blockpos, BlockState blockstate) 
+	public @NotNull ItemStack getCloneItemStack(LevelReader reader, BlockPos blockpos, BlockState blockstate, boolean includeData)
 	{
 		if (reader.getBlockEntity(blockpos.below()) instanceof PaviseBlockEntity pavise)
 			return pavise.getStack();

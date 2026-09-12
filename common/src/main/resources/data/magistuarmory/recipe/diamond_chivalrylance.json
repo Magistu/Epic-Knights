@@ -6,15 +6,9 @@
     "hm "
   ],
   "key": {
-    "m": {
-      "tag": "c:gems/diamond"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    },
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "m": "#c:gems/diamond",
+    "p": "#magistuarmory:poles",
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:diamond_chivalrylance",

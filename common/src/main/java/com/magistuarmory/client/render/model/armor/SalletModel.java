@@ -14,6 +14,7 @@ public class SalletModel {
 	    PartDefinition partdefinition = meshdefinition.getRoot();
 
 		PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(32, 0).addBox(-4.0F, -7.7F, -4.2F, 8.0F, 7.0F, 8.0F, new CubeDeformation(0.9F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition hat = partdefinition.getChild("head").addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
 		PartDefinition Helmet_r1 = head.addOrReplaceChild("Helmet_r1", CubeListBuilder.create().texOffs(52, 26).addBox(-4.7F, -2.6F, -4.7F, 3.0F, 3.0F, 3.0F, new CubeDeformation(-0.2F)), PartPose.offsetAndRotation(0.0F, -0.2F, 0.0F, 0.0F, -0.7854F, 0.0F));
 
@@ -33,7 +34,6 @@ public class SalletModel {
 
 		PartDefinition Helmet_r8 = bone.addOrReplaceChild("Helmet_r8", CubeListBuilder.create().texOffs(0, 22).addBox(-2.1034F, -6.4473F, -2.9879F, 1.0F, 4.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(4.0F, 0.0F, 3.0F, -1.1345F, 0.2618F, 1.5708F));
 
-		PartDefinition hat = partdefinition.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
 		PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 

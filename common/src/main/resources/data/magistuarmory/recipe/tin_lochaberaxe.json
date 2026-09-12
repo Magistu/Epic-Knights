@@ -6,12 +6,8 @@
     "p  "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/tin"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    }
+    "m": "#c:ingots/tin",
+    "p": "#magistuarmory:poles"
   },
   "result": {
     "id": "magistuarmory:tin_lochaberaxe",

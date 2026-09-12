@@ -5,12 +5,8 @@
     "l l"
   ],
   "key": {
-    "s": {
-      "tag": "magistuarmory:leather_strips"
-    },
-    "l": {
-      "item": "minecraft:leather"
-    }
+    "s": "#magistuarmory:leather_strips",
+    "l": "minecraft:leather"
   },
   "result": {
     "id": "magistuarmory:chainmail_boots",

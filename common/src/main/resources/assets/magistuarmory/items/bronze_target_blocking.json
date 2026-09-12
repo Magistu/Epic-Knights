@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "magistuarmory:item/bronze_target_blocking",
+    "model": {
+      "type": "magistuarmory:heraldry",
+      "id": "bronze_target",
+      "location": "magistuarmory:target"
+    }
+  }
+}

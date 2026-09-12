@@ -16,8 +16,8 @@ public class ModDamageSources
 	
 	public static void setup(RegistryAccess registryAccess)
 	{
-		DAMAGE_TYPES = registryAccess.registryOrThrow(Registries.DAMAGE_TYPE);
-		ADDITIONAL = new DamageSource(DAMAGE_TYPES.getHolderOrThrow(ModDamageTypes.ADDITIONAL));
+		DAMAGE_TYPES = registryAccess.lookupOrThrow(Registries.DAMAGE_TYPE);
+		ADDITIONAL = new DamageSource(DAMAGE_TYPES.getOrThrow(ModDamageTypes.ADDITIONAL));
 	}
 	
 	public static DamageSource additional()
@@ -27,17 +27,17 @@ public class ModDamageSources
 
 	public static DamageSource additional(Entity attacker)
 	{
-		return attacker == null ? additional() : new DamageSource(DAMAGE_TYPES.getHolderOrThrow(ModDamageTypes.ENTITY_ADDITIONAL), attacker);
+		return attacker == null ? additional() : new DamageSource(DAMAGE_TYPES.getOrThrow(ModDamageTypes.ENTITY_ADDITIONAL), attacker);
 	}
 
 	public static DamageSource silverAttack(Entity attacker)
 	{
-		return new DamageSource(DAMAGE_TYPES.getHolderOrThrow(ModDamageTypes.SILVER), attacker);
+		return new DamageSource(DAMAGE_TYPES.getOrThrow(ModDamageTypes.SILVER), attacker);
 	}
 
 	public static DamageSource armorPiercing(Entity attacker)
 	{
-		return new DamageSource(DAMAGE_TYPES.getHolderOrThrow(ModDamageTypes.ARMOR_PIERCING), attacker);
+		return new DamageSource(DAMAGE_TYPES.getOrThrow(ModDamageTypes.ARMOR_PIERCING), attacker);
 	}
 
 	public static boolean isAdditional(DamageSource source) throws NullPointerException

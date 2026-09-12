@@ -5,15 +5,9 @@
     "p "
   ],
   "key": {
-    "m": {
-      "tag": "c:cobblestones"
-    },
-    "t": {
-      "item": "magistuarmory:stone_shortsword"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    }
+    "m": "#c:cobblestones",
+    "t": "magistuarmory:stone_shortsword",
+    "p": "#magistuarmory:poles"
   },
   "result": {
     "id": "magistuarmory:stone_guisarme",

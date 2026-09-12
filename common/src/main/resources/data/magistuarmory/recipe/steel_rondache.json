@@ -6,12 +6,8 @@
     "mmm"
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/steel"
-    },
-    "s": {
-      "item": "magistuarmory:wood_roundshield"
-    }
+    "m": "#c:ingots/steel",
+    "s": "magistuarmory:wood_roundshield"
   },
   "result": {
     "id": "magistuarmory:steel_rondache",

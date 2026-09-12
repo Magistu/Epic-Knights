@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "magistuarmory:item/rusted_bastardsword_blocking",
+    "tints": [
+      {
+        "type": "magistuarmory:item_tint"
+      }
+    ]
+  }
+}

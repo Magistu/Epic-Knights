@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "magistuarmory:gothic"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "magistuarmory:gothic"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "magistuarmory:gothic"
+      }
+    ]
+  }
+}

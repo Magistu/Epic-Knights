@@ -6,15 +6,9 @@
     "rrs"
   ],
   "key": {
-    "s": {
-      "item": "minecraft:string"
-    },
-    "r": {
-      "tag": "c:rods/wooden"
-    },
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "s": "minecraft:string",
+    "r": "#c:rods/wooden",
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:longbow",

@@ -6,12 +6,8 @@
     "pm "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/iron"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    }
+    "m": "#c:ingots/iron",
+    "p": "#magistuarmory:poles"
   },
   "result": {
     "id": "magistuarmory:iron_ahlspiess",

@@ -5,12 +5,8 @@
     "mm "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/iron"
-    },
-    "h": {
-      "tag": "c:ingots/steel"
-    }
+    "m": "#c:ingots/iron",
+    "h": "#c:ingots/steel"
   },
   "result": {
     "id": "magistuarmory:iron_buckler",

@@ -1,0 +1,30 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "magistuarmory:property",
+    "name": "minecraft:blocking",
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "magistuarmory:item/copper_claymore",
+      "tints": [
+        {
+          "type": "magistuarmory:item_tint"
+        }
+      ]
+    },
+    "entries": [
+      {
+        "threshold": 1,
+        "model": {
+          "type": "minecraft:model",
+          "model": "magistuarmory:item/copper_claymore_blocking",
+          "tints": [
+            {
+              "type": "magistuarmory:item_tint"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

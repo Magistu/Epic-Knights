@@ -6,9 +6,7 @@
     "nn"
   ],
   "key": {
-    "n": {
-      "tag": "c:nuggets/steel"
-    }
+    "n": "#c:nuggets/steel"
   },
   "result": {
     "id": "magistuarmory:small_steel_plate",

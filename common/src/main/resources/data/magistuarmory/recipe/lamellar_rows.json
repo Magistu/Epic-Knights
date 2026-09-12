@@ -6,12 +6,8 @@
     "ppp"
   ],
   "key": {
-    "p": {
-      "tag": "magistuarmory:small_plates/steel"
-    },
-    "s": {
-      "tag": "magistuarmory:leather_strips"
-    }
+    "p": "#magistuarmory:small_plates/steel",
+    "s": "#magistuarmory:leather_strips"
   },
   "result": {
     "id": "magistuarmory:lamellar_rows",

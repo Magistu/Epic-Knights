@@ -6,15 +6,9 @@
     "hm "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/iron"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    },
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "m": "#c:ingots/iron",
+    "p": "#magistuarmory:poles",
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:iron_chivalrylance",

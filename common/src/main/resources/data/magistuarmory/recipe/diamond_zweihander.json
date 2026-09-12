@@ -6,15 +6,9 @@
     "hm "
   ],
   "key": {
-    "t": {
-      "item": "magistuarmory:diamond_shortsword"
-    },
-    "m": {
-      "tag": "c:gems/diamond"
-    },
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "t": "magistuarmory:diamond_shortsword",
+    "m": "#c:gems/diamond",
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:diamond_zweihander",

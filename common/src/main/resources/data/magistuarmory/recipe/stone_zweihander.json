@@ -6,15 +6,9 @@
     "hm "
   ],
   "key": {
-    "t": {
-      "item": "magistuarmory:stone_shortsword"
-    },
-    "m": {
-      "tag": "c:cobblestones"
-    },
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "t": "magistuarmory:stone_shortsword",
+    "m": "#c:cobblestones",
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:stone_zweihander",

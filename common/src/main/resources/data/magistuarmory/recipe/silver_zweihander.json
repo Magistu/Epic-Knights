@@ -6,15 +6,9 @@
     "hm "
   ],
   "key": {
-    "t": {
-      "item": "magistuarmory:silver_shortsword"
-    },
-    "m": {
-      "tag": "c:ingots/silver"
-    },
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "t": "magistuarmory:silver_shortsword",
+    "m": "#c:ingots/silver",
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:silver_zweihander",

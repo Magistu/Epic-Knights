@@ -5,12 +5,8 @@
     "p "
   ],
   "key": {
-    "t": {
-      "item": "magistuarmory:copper_shortsword"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    }
+    "t": "magistuarmory:copper_shortsword",
+    "p": "#magistuarmory:poles"
   },
   "result": {
     "id": "magistuarmory:copper_ranseur",

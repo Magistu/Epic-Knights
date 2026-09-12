@@ -9,15 +9,15 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.Model;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
+
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.resources.model.Material;
+
+import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -29,16 +29,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Environment(EnvType.CLIENT)
-public class HeraldryItemStackRenderer extends BlockEntityWithoutLevelRenderer implements ShieldPatternLayer {
+public class HeraldryItemStackRenderer implements net.minecraft.client.renderer.special.SpecialModelRenderer<net.minecraft.core.component.DataComponentMap>, ShieldPatternLayer {
     private Model model;
-    private final ResourceLocation location;
-    private final MaterialContainer materialContainer;
+    private final Identifier location;
+    private final SpriteIdContainer materialContainer;
 
 
-    public HeraldryItemStackRenderer(String id, ResourceLocation location) {
-        super(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
+    public HeraldryItemStackRenderer(String id, Identifier location) {
+
         this.location = location;
-        this.materialContainer = new MaterialContainer(id, location, "entity/" + location.getPath() + "/");
+        this.materialContainer = new SpriteIdContainer(id, location, "entity/" + location.getPath() + "/");
     }
 
     @Deprecated(forRemoval = true)
@@ -51,73 +51,99 @@ public class HeraldryItemStackRenderer extends BlockEntityWithoutLevelRenderer i
     }
 
     @Override
-    public void renderByItem(ItemStack stack, ItemDisplayContext transform, PoseStack pose, MultiBufferSource buffer, int p, int overlay) {
-        if (this.model instanceof MedievalShieldModel shieldmodel) {
-            pose.pushPose();
-            pose.scale(1.0F, -1.0F, -1.0F);
-            DyeColor baseColor = stack.get(DataComponents.BASE_COLOR);
-            VertexConsumer vertexconsumer = this.getBaseMaterial(baseColor != null).sprite().wrap(ItemRenderer.getFoilBufferDirect(buffer, this.model.renderType(this.getBaseMaterial(baseColor != null).atlasLocation()), true, stack.hasFoil()));
-            shieldmodel.handle().render(pose, vertexconsumer, p, overlay, 0xFFFFFF);
-            BannerPatternLayers patterns = stack.get(DataComponents.BANNER_PATTERNS);
-            List<Pair<Holder<BannerPattern>, DyeColor>> list = patterns == null ? new ArrayList<>() : patterns.layers().stream().map(l -> Pair.of(l.pattern(), l.color())).collect(Collectors.toList());
-            this.renderPatterns(pose, buffer, p, overlay, list, stack.hasFoil(), shieldmodel.plate(), baseColor);
+    public net.minecraft.client.resources.model.sprite.SpriteGetter sprites() { return Minecraft.getInstance().getAtlasManager(); }
 
-            pose.popPose();
+    @Override
+    public net.minecraft.core.component.DataComponentMap extractArgument(ItemStack stack) { return stack.immutableComponents(); }
+
+    @Override
+    public void getExtents(java.util.function.Consumer<org.joml.Vector3fc> output) {
+        if (model != null) {
+            PoseStack pose = new PoseStack();
+            pose.scale(1, -1, -1);
+            model.root().getExtentsForGui(pose, output);
         }
     }
 
+    @Override
+    public void submit(net.minecraft.core.component.DataComponentMap components, PoseStack pose, SubmitNodeCollector collector,
+            int light, int overlay, boolean foil, int outlineColor) {
+        if (!(model instanceof MedievalShieldModel shield)) return;
+        DyeColor base = components == null ? null : components.get(DataComponents.BASE_COLOR);
+        BannerPatternLayers patterns = components == null ? BannerPatternLayers.EMPTY : components.getOrDefault(DataComponents.BANNER_PATTERNS, BannerPatternLayers.EMPTY);
+        pose.pushPose();
+        pose.scale(1, -1, -1);
+        submitPatternPart(pose, collector, shield.handle(), light, overlay, -1, foil, base == null ? 0 : 1, null);
+        renderPatterns(pose, collector, light, overlay, patterns.layers().stream().map(l -> Pair.of(l.pattern(), l.color())).toList(), foil, shield.plate(), base);
+        pose.popPose();
+    }
+
 
     @Override
-    public Material getBaseMaterial(boolean withPattern) {
+    public SpriteId getBaseMaterial(boolean withPattern) {
         return withPattern ?
-                materialContainer.getBaseWithPatternMaterial() :
-                materialContainer.getBaseWithoutPatternMaterial();
+                materialContainer.getBaseWithPatternSpriteId() :
+                materialContainer.getBaseWithoutPatternSpriteId();
     }
 
     @Override
-    public Material getBasePatternMaterial() {
+    public SpriteId getBasePatternMaterial() {
         return materialContainer.getBasePatternMaterial();
     }
 
     @Override
-    public Material getPatternMaterial(ResourceLocation patternLocation) {
+    public SpriteId getPatternMaterial(Identifier patternLocation) {
         return materialContainer.getPatternMaterial(patternLocation);
     }
 
-    private static final class MaterialContainer {
-        private final String id;
-        private final ResourceLocation location;
-        private final String patternsDirectory;
-        private Material baseWithPatternMaterial = null;
-        private Material baseWithoutPatternMaterial = null;
-        private Material basePatternMaterial = null;
+    public record Unbaked(String id, Identifier location) implements net.minecraft.client.renderer.special.SpecialModelRenderer.Unbaked<net.minecraft.core.component.DataComponentMap> {
+        public static final com.mojang.serialization.MapCodec<Unbaked> CODEC = com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(instance -> instance.group(
+                com.mojang.serialization.Codec.STRING.fieldOf("id").forGetter(Unbaked::id),
+                Identifier.CODEC.fieldOf("location").forGetter(Unbaked::location)).apply(instance, Unbaked::new));
+        @Override
+        public com.mojang.serialization.MapCodec<Unbaked> type() { return CODEC; }
+        @Override
+        public HeraldryItemStackRenderer bake(net.minecraft.client.renderer.special.SpecialModelRenderer.BakingContext context) {
+            HeraldryItemStackRenderer renderer = new HeraldryItemStackRenderer(id, location);
+            renderer.setModel(new MedievalShieldModel(context.entityModelSet().bakeLayer(ModModels.createLocation(location))));
+            return renderer;
+        }
+    }
 
-        private MaterialContainer(String id, ResourceLocation location, String patternsDirectory) {
+    private static final class SpriteIdContainer {
+        private final String id;
+        private final Identifier location;
+        private final String patternsDirectory;
+        private SpriteId baseWithPatternSpriteId = null;
+        private SpriteId baseWithoutPatternSpriteId = null;
+        private SpriteId basePatternSpriteId = null;
+
+        private SpriteIdContainer(String id, Identifier location, String patternsDirectory) {
             this.id = id;
             this.location = location;
             this.patternsDirectory = patternsDirectory;
         }
 
-        public synchronized Material getBaseWithPatternMaterial() {
-            if (baseWithPatternMaterial == null)
-                baseWithPatternMaterial = new Material(Sheets.SHIELD_SHEET, ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "entity/" + id + "_pattern"));
-            return baseWithPatternMaterial;
+        public synchronized SpriteId getBaseWithPatternSpriteId() {
+            if (baseWithPatternSpriteId == null)
+                baseWithPatternSpriteId = new SpriteId(Sheets.SHIELD_SHEET, Identifier.fromNamespaceAndPath(location.getNamespace(), "entity/" + id + "_pattern"));
+            return baseWithPatternSpriteId;
         }
 
-        public synchronized Material getBaseWithoutPatternMaterial() {
-            if (baseWithoutPatternMaterial == null)
-                this.baseWithoutPatternMaterial = new Material(Sheets.SHIELD_SHEET, ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "entity/" + id + "_nopattern"));
-            return baseWithoutPatternMaterial;
+        public synchronized SpriteId getBaseWithoutPatternSpriteId() {
+            if (baseWithoutPatternSpriteId == null)
+                this.baseWithoutPatternSpriteId = new SpriteId(Sheets.SHIELD_SHEET, Identifier.fromNamespaceAndPath(location.getNamespace(), "entity/" + id + "_nopattern"));
+            return baseWithoutPatternSpriteId;
         }
 
-        public synchronized Material getBasePatternMaterial() {
-            if (basePatternMaterial == null)
-                basePatternMaterial = new Material(Sheets.SHIELD_SHEET, ResourceLocation.fromNamespaceAndPath(this.location.getNamespace(), this.patternsDirectory + "base"));
-            return basePatternMaterial;
+        public synchronized SpriteId getBasePatternMaterial() {
+            if (basePatternSpriteId == null)
+                basePatternSpriteId = new SpriteId(Sheets.SHIELD_SHEET, Identifier.fromNamespaceAndPath(this.location.getNamespace(), this.patternsDirectory + "base"));
+            return basePatternSpriteId;
         }
 
-        public Material getPatternMaterial(ResourceLocation patternLocation) {
-            return new Material(Sheets.SHIELD_SHEET, ResourceLocation.fromNamespaceAndPath(this.location.getNamespace(), this.patternsDirectory + patternLocation.getPath()));
+        public SpriteId getPatternMaterial(Identifier patternLocation) {
+            return new SpriteId(Sheets.SHIELD_SHEET, Identifier.fromNamespaceAndPath(this.location.getNamespace(), this.patternsDirectory + patternLocation.getPath()));
         }
     }
 }

@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "magistuarmory:item/netherite_ellipticalshield_blocking",
+    "model": {
+      "type": "magistuarmory:heraldry",
+      "id": "netherite_ellipticalshield",
+      "location": "magistuarmory:ellipticalshield"
+    }
+  }
+}

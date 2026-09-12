@@ -6,12 +6,8 @@
     "psp"
   ],
   "key": {
-    "s": {
-      "tag": "magistuarmory:small_plates/steel"
-    },
-    "p": {
-      "tag": "c:plates/steel"
-    }
+    "s": "#magistuarmory:small_plates/steel",
+    "p": "#c:plates/steel"
   },
   "result": {
     "id": "magistuarmory:kastenbrust_leggings",

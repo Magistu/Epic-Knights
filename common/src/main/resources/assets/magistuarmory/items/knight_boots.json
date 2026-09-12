@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "magistuarmory:item/knight_boots",
+    "tints": [
+      {
+        "type": "magistuarmory:item_tint"
+      }
+    ]
+  }
+}

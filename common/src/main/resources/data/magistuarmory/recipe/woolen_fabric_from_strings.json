@@ -5,9 +5,7 @@
     "sss"
   ],
   "key": {
-    "s": {
-      "item": "minecraft:string"
-    }
+    "s": "minecraft:string"
   },
   "result": {
     "id": "magistuarmory:woolen_fabric",

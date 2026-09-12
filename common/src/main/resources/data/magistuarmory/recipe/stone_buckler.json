@@ -5,12 +5,8 @@
     "mm "
   ],
   "key": {
-    "m": {
-      "tag": "c:cobblestones"
-    },
-    "h": {
-      "tag": "c:ingots/steel"
-    }
+    "m": "#c:cobblestones",
+    "h": "#c:ingots/steel"
   },
   "result": {
     "id": "magistuarmory:stone_buckler",

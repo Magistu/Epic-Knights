@@ -5,15 +5,9 @@
     "p "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/tin"
-    },
-    "t": {
-      "item": "magistuarmory:tin_shortsword"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    }
+    "m": "#c:ingots/tin",
+    "t": "magistuarmory:tin_shortsword",
+    "p": "#magistuarmory:poles"
   },
   "result": {
     "id": "magistuarmory:tin_guisarme",

@@ -6,12 +6,8 @@
     " m "
   ],
   "key": {
-    "m": {
-      "tag": "c:cobblestones"
-    },
-    "s": {
-      "item": "magistuarmory:wood_roundshield"
-    }
+    "m": "#c:cobblestones",
+    "s": "magistuarmory:wood_roundshield"
   },
   "result": {
     "id": "magistuarmory:stone_roundshield",

@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "magistuarmory:rustedkettlehat"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "magistuarmory:rustedkettlehat"
+      }
+    ]
+  }
+}

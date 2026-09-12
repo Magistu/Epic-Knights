@@ -6,12 +6,8 @@
     " m "
   ],
   "key": {
-    "m": {
-      "tag": "c:gems/diamond"
-    },
-    "s": {
-      "item": "magistuarmory:wood_pavese"
-    }
+    "m": "#c:gems/diamond",
+    "s": "magistuarmory:wood_pavese"
   },
   "result": {
     "id": "magistuarmory:diamond_pavese",

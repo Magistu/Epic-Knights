@@ -6,12 +6,8 @@
     "h  "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/silver"
-    },
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "m": "#c:ingots/silver",
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:silver_shortsword",

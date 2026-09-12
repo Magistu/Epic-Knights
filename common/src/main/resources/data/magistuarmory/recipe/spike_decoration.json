@@ -5,12 +5,8 @@
     "i "
   ],
   "key": {
-    "i": {
-      "tag": "c:ingots/steel"
-    },
-    "f": {
-      "tag": "magistuarmory:woolen_fabrics"
-    }
+    "i": "#c:ingots/steel",
+    "f": "#magistuarmory:woolen_fabrics"
   },
   "result": {
     "id": "magistuarmory:spike_decoration",

@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "magistuarmory:item/copper_kiteshield_blocking",
+    "model": {
+      "type": "magistuarmory:heraldry",
+      "id": "copper_kiteshield",
+      "location": "magistuarmory:kiteshield"
+    }
+  }
+}

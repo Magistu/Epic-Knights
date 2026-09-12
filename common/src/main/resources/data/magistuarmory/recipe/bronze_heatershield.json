@@ -6,12 +6,8 @@
     " m "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/bronze"
-    },
-    "s": {
-      "item": "magistuarmory:wood_heatershield"
-    }
+    "m": "#c:ingots/bronze",
+    "s": "magistuarmory:wood_heatershield"
   },
   "result": {
     "id": "magistuarmory:bronze_heatershield",

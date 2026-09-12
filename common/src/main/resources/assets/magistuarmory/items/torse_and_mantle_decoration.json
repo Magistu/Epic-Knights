@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "magistuarmory:item/torse_and_mantle_decoration",
+    "tints": [
+      {
+        "type": "magistuarmory:item_tint"
+      }
+    ]
+  }
+}

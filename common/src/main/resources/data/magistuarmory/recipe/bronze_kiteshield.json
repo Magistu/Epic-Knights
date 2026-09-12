@@ -1,20 +1,16 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        " m ",
-        "msm",
-        " m "
-    ],
-    "key": {
-        "m": {
-            "tag": "c:ingots/bronze"
-        },
-        "s": {
-            "item": "magistuarmory:wood_kiteshield"
-        }
-    },
-    "result": {
-        "id": "magistuarmory:bronze_kiteshield",
-        "count": 1
-    }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " m ",
+    "msm",
+    " m "
+  ],
+  "key": {
+    "m": "#c:ingots/bronze",
+    "s": "magistuarmory:wood_kiteshield"
+  },
+  "result": {
+    "id": "magistuarmory:bronze_kiteshield",
+    "count": 1
+  }
 }

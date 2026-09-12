@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "magistuarmory:item/netherite_tartsche_blocking",
+    "model": {
+      "type": "magistuarmory:heraldry",
+      "id": "netherite_tartsche",
+      "location": "magistuarmory:tartsche"
+    }
+  }
+}

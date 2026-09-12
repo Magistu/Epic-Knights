@@ -1,6 +1,7 @@
 {
-    "pack": {
-        "description": "${mod_id} resources",
-        "pack_format": 34
-    }
+  "pack": {
+    "description": "Epic Knights resources",
+    "min_format": 84,
+    "max_format": [101, 1]
+  }
 }

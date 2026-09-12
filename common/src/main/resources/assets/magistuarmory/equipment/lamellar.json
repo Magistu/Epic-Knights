@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "magistuarmory:lamellar"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "magistuarmory:lamellar"
+      }
+    ]
+  }
+}

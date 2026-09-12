@@ -6,12 +6,8 @@
     " m "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/copper"
-    },
-    "s": {
-      "item": "magistuarmory:wood_tartsche"
-    }
+    "m": "#c:ingots/copper",
+    "s": "magistuarmory:wood_tartsche"
   },
   "result": {
     "id": "magistuarmory:copper_tartsche",

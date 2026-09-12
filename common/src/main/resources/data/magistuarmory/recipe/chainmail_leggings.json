@@ -6,9 +6,7 @@
     "c c"
   ],
   "key": {
-    "c": {
-      "tag": "magistuarmory:chainmails/steel"
-    }
+    "c": "#magistuarmory:chainmails/steel"
   },
   "result": {
     "id": "magistuarmory:chainmail_leggings",

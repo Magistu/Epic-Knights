@@ -6,12 +6,8 @@
     "w w"
   ],
   "key": {
-    "w": {
-      "tag": "magistuarmory:woolen_fabrics"
-    },
-    "l": {
-      "item": "minecraft:leather"
-    }
+    "w": "#magistuarmory:woolen_fabrics",
+    "l": "minecraft:leather"
   },
   "result": {
     "id": "magistuarmory:cuirassier_leggings",

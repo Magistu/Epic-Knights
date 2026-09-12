@@ -6,15 +6,9 @@
     "hm "
   ],
   "key": {
-    "m": {
-      "tag": "minecraft:planks"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    },
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "m": "#minecraft:planks",
+    "p": "#magistuarmory:poles",
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:wood_chivalrylance",

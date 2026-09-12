@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "magistuarmory:maximilian_helmet"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "magistuarmory:maximilian_helmet"
+      }
+    ]
+  }
+}

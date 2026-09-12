@@ -4,17 +4,17 @@ package com.magistuarmory.misc;
 import com.magistuarmory.EpicKnights;
 import dev.architectury.event.events.common.LootEvent;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.DynamicLoot;
+import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 
 public class ModLoot
 {
     public static void modifyLootTable(ResourceKey<LootTable> key, LootEvent.LootTableModificationContext context, boolean builtin) 
     {
         String prefix = "minecraft:chests/";
-        String name = key.location().toString();
+        String name = key.identifier().toString();
 
         if (name.startsWith(prefix)) 
         {
@@ -29,7 +29,7 @@ public class ModLoot
 
     private static LootPool.Builder getPoolEntry(ResourceKey<LootTable> key) 
     {
-        ResourceLocation table = ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, key.location().getPath());
-        return LootPool.lootPool().add(DynamicLoot.dynamicEntry(table));
+        Identifier table = Identifier.fromNamespaceAndPath(EpicKnights.ID, key.identifier().getPath());
+        return LootPool.lootPool().add(NestedLootTable.lootTableReference(ResourceKey.create(net.minecraft.core.registries.Registries.LOOT_TABLE, table)));
     }
 }

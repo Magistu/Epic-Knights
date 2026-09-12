@@ -11,7 +11,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.world.entity.LivingEntity;
 
 @Environment(EnvType.CLIENT)
-public class CrownModel<T extends LivingEntity> extends ArmorDecorationModel<T>
+public class CrownModel<T extends net.minecraft.client.renderer.entity.state.HumanoidRenderState> extends ArmorDecorationModel<T>
 {
 	public CrownModel(ModelPart root)
 	{
@@ -23,8 +23,8 @@ public class CrownModel<T extends LivingEntity> extends ArmorDecorationModel<T>
 		MeshDefinition meshdefinition = new MeshDefinition();
 	    PartDefinition partdefinition = meshdefinition.getRoot();
 	    partdefinition.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.ZERO);
-	    partdefinition.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-5.0F, -9.0F, -5.0F, 10.0F, 4.0F, 10.0F, new CubeDeformation(0.2F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+	    partdefinition.getChild("head").addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 	    partdefinition.addOrReplaceChild("right_arm", CubeListBuilder.create(), PartPose.ZERO);
 	    partdefinition.addOrReplaceChild("left_arm", CubeListBuilder.create(), PartPose.ZERO);
 	    partdefinition.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.ZERO);

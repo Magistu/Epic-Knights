@@ -1,16 +1,10 @@
 {
   "type": "minecraft:smithing_transform",
-  "base": {
-    "item": "magistuarmory:armet"
-  },
-  "addition": {
-    "tag": "c:ingots/gold"
-  },
+  "base": "magistuarmory:armet",
+  "addition": "#c:ingots/gold",
   "result": {
     "id": "magistuarmory:ceremonialarmet",
     "count": 1
   },
-  "template": {
-    "item": "magistuarmory:gilding_template"
-  }
+  "template": "magistuarmory:gilding_template"
 }

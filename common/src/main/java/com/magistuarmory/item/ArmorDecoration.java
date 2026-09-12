@@ -6,8 +6,8 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.resources.Identifier;
+
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
@@ -16,11 +16,11 @@ import org.jetbrains.annotations.NotNull;
 
 public interface ArmorDecoration extends ItemLike
 {
-	ResourceLocation getResourceLocation();
+	Identifier getIdentifier();
 	
 	CompoundTag getCompoundTag(ItemStack stack);
 	
-	ArmorItem.Type getType();
+	net.minecraft.world.item.equipment.ArmorType getType();
 	
 	boolean isApplicableForDecoration(ItemStack stack);
 
@@ -35,12 +35,12 @@ public interface ArmorDecoration extends ItemLike
 		CompoundTag compoundtag1 = data != null ? data.copyTag() : new CompoundTag();
 
 		CompoundTag decorationdata = this.getCompoundTag(decorationstack);
-		String name = decorationdata.getString("name");
+		String name = decorationdata.getStringOr("name", "");
 
 		boolean set = false;
 		for (int i = 0; i < listtag.size(); ++i)
 		{
-			if (listtag.getCompound(i).getString("name").equals(name))
+			if (listtag.getCompoundOrEmpty(i).getStringOr("name", "").equals(name))
 			{
 				listtag.set(i, decorationdata);
 				set = true;

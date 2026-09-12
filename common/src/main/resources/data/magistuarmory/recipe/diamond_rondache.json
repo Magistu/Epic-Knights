@@ -6,12 +6,8 @@
     "mmm"
   ],
   "key": {
-    "m": {
-      "tag": "c:gems/diamond"
-    },
-    "s": {
-      "item": "magistuarmory:wood_roundshield"
-    }
+    "m": "#c:gems/diamond",
+    "s": "magistuarmory:wood_roundshield"
   },
   "result": {
     "id": "magistuarmory:diamond_rondache",

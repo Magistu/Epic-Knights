@@ -23,12 +23,12 @@ import java.util.function.Supplier;
 
 public class PaviseBlockEntity extends BlockEntity
 {
-    String shieldId;
+    String shieldId = "";
     @Nullable
     private DyeColor baseColor;
     private BannerPatternLayers patterns;
     private boolean enchanted = false;
-    private CompoundTag stackCompound;
+    private ItemStack storedStack = ItemStack.EMPTY;
 
     public PaviseBlockEntity(Supplier<BlockEntityType<PaviseBlockEntity>> type, BlockPos blockpos, BlockState blockstate)
     {
@@ -52,30 +52,21 @@ public class PaviseBlockEntity extends BlockEntity
         this.enchanted = enchantments != null && !enchantments.isEmpty();
         this.shieldId = paviseitem.getId();
         this.baseColor = stack.get(DataComponents.BASE_COLOR);
-        this.patterns = stack.get(DataComponents.BANNER_PATTERNS);
-        this.stackCompound = (CompoundTag) stack.save(this.getLevel().registryAccess());
+        this.patterns = stack.getOrDefault(DataComponents.BANNER_PATTERNS, BannerPatternLayers.EMPTY);
+        this.storedStack = stack.copyWithCount(1);
         this.setChanged();
     }
 
     @Override
-    protected void saveAdditional(CompoundTag compound, HolderLookup.Provider provider)
-    {
-        super.saveAdditional(compound, provider);
-
-        compound.putString("ShieldId", this.shieldId);
-
-        if (this.baseColor != null)
-            compound.putInt("Base", this.baseColor.getId());
-
-        compound.putBoolean("Enchanted", this.enchanted);
-
-        if (this.stackCompound != null)
-            compound.put("ItemStack", this.stackCompound);
-
-        if (this.patterns != null)
-            compound.put("patterns", BannerPatternLayers.CODEC.encodeStart(provider.createSerializationContext(NbtOps.INSTANCE), this.patterns).getOrThrow());
+    protected void saveAdditional(net.minecraft.world.level.storage.ValueOutput output) {
+        super.saveAdditional(output);
+        output.putString("ShieldId", shieldId);
+        if (baseColor != null) output.putInt("Base", baseColor.getId());
+        output.putBoolean("Enchanted", enchanted);
+        output.store("ItemStack", ItemStack.OPTIONAL_CODEC, storedStack);
+        output.store("patterns", BannerPatternLayers.CODEC, patterns);
     }
-    
+
     public boolean hasFoil()
     {
         return this.enchanted;
@@ -87,19 +78,13 @@ public class PaviseBlockEntity extends BlockEntity
     }
 
     @Override
-    public void loadAdditional(CompoundTag compound, HolderLookup.Provider provider)
-    {
-        super.loadAdditional(compound, provider);
-        this.shieldId = compound.getString("ShieldId");
-        if (compound.contains("Base"))
-            this.baseColor = DyeColor.byId(compound.getInt("Base"));
-        this.stackCompound = compound.getCompound("ItemStack");
-        this.enchanted = compound.getBoolean("Enchanted");
-
-        if (compound.contains("patterns")) {
-            BannerPatternLayers.CODEC.parse(provider.createSerializationContext(NbtOps.INSTANCE), compound.get("patterns")).resultOrPartial(string -> {
-            }).ifPresent(patterns -> this.patterns = patterns);
-        }
+    protected void loadAdditional(net.minecraft.world.level.storage.ValueInput input) {
+        super.loadAdditional(input);
+        shieldId = input.getStringOr("ShieldId", "");
+        baseColor = input.getInt("Base").map(DyeColor::byId).orElse(null);
+        enchanted = input.getBooleanOr("Enchanted", false);
+        storedStack = input.read("ItemStack", ItemStack.OPTIONAL_CODEC).orElse(ItemStack.EMPTY);
+        patterns = input.read("patterns", BannerPatternLayers.CODEC).orElse(BannerPatternLayers.EMPTY);
     }
 
     public ClientboundBlockEntityDataPacket getUpdatePacket()
@@ -117,7 +102,7 @@ public class PaviseBlockEntity extends BlockEntity
     {
         if (this.getLevel() == null)
             return ItemStack.EMPTY;
-        return ItemStack.parse(this.getLevel().registryAccess(), this.stackCompound).orElse(ItemStack.EMPTY);
+        return storedStack.copy();
     }
 
     public DyeColor getBaseColor()

@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "magistuarmory:item/silver_pavese_blocking",
+    "model": {
+      "type": "magistuarmory:heraldry",
+      "id": "silver_pavese",
+      "location": "magistuarmory:pavese"
+    }
+  }
+}

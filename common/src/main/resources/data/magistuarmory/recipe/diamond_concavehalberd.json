@@ -6,15 +6,9 @@
     " p "
   ],
   "key": {
-    "s": {
-      "tag": "c:rods/wooden"
-    },
-    "m": {
-      "tag": "c:gems/diamond"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    }
+    "s": "#c:rods/wooden",
+    "m": "#c:gems/diamond",
+    "p": "#magistuarmory:poles"
   },
   "result": {
     "id": "magistuarmory:diamond_concavehalberd",

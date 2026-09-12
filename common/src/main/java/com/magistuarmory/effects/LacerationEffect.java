@@ -2,7 +2,7 @@ package com.magistuarmory.effects;
 
 import com.magistuarmory.EpicKnights;
 import com.magistuarmory.util.CombatHelper;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -18,7 +18,7 @@ public class LacerationEffect extends MobEffect
 	public LacerationEffect()
 	{
 		super(MobEffectCategory.HARMFUL, -10092544);
-		addAttributeModifier(Attributes.MAX_HEALTH, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "laceration"), -2.0f, Operation.ADD_VALUE);
+		addAttributeModifier(Attributes.MAX_HEALTH, Identifier.fromNamespaceAndPath(EpicKnights.ID, "laceration"), -2.0f, Operation.ADD_VALUE);
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class LacerationEffect extends MobEffect
 	}
 
 	@Override
-	public boolean applyEffectTick(LivingEntity victim, int i) 
+	public boolean applyEffectTick(net.minecraft.server.level.ServerLevel level, LivingEntity victim, int i)
 	{
 		if (victim.getHealth() > victim.getMaxHealth())
 		{

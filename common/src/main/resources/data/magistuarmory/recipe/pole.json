@@ -5,9 +5,7 @@
     "h "
   ],
   "key": {
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:pole",

@@ -6,12 +6,8 @@
     "mmm"
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/tin"
-    },
-    "s": {
-      "item": "magistuarmory:wood_roundshield"
-    }
+    "m": "#c:ingots/tin",
+    "s": "magistuarmory:wood_roundshield"
   },
   "result": {
     "id": "magistuarmory:tin_rondache",

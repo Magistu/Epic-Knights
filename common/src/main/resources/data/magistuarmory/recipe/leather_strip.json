@@ -4,9 +4,7 @@
     "ll"
   ],
   "key": {
-    "l": {
-      "item": "minecraft:leather"
-    }
+    "l": "minecraft:leather"
   },
   "result": {
     "id": "magistuarmory:leather_strip",

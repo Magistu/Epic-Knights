@@ -6,9 +6,7 @@
     " n "
   ],
   "key": {
-    "n": {
-      "tag": "c:nuggets/steel"
-    }
+    "n": "#c:nuggets/steel"
   },
   "result": {
     "id": "magistuarmory:steel_ring",

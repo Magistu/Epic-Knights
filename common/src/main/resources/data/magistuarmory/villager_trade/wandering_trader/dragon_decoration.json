@@ -1,0 +1,12 @@
+{
+  "wants": {
+    "id": "minecraft:emerald",
+    "count": 1
+  },
+  "gives": {
+    "id": "magistuarmory:dragon_decoration"
+  },
+  "max_uses": 5,
+  "xp": 0,
+  "reputation_discount": 1.0
+}

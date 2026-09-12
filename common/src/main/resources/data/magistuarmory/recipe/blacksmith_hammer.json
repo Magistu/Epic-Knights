@@ -6,15 +6,9 @@
     " a "
   ],
   "key": {
-    "a": {
-      "tag": "magistuarmory:hilts"
-    },
-    "b": {
-      "tag": "c:rods/wooden"
-    },
-    "c": {
-      "tag": "c:ingots/steel"
-    }
+    "a": "#magistuarmory:hilts",
+    "b": "#c:rods/wooden",
+    "c": "#c:ingots/steel"
   },
   "result": {
     "id": "magistuarmory:blacksmith_hammer",

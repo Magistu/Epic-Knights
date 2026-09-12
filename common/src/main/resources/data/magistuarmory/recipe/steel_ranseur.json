@@ -5,12 +5,8 @@
     "p "
   ],
   "key": {
-    "t": {
-      "item": "magistuarmory:steel_shortsword"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    }
+    "t": "magistuarmory:steel_shortsword",
+    "p": "#magistuarmory:poles"
   },
   "result": {
     "id": "magistuarmory:steel_ranseur",

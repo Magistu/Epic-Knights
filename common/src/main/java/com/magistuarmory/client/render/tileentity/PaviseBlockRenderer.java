@@ -10,15 +10,15 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.math.Axis;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.BannerBlock;
 import net.minecraft.world.level.block.entity.BannerPattern;
@@ -31,23 +31,35 @@ import java.util.stream.Collectors;
 
 
 @Environment(EnvType.CLIENT)
-public class PaviseBlockRenderer implements BlockEntityRenderer<PaviseBlockEntity>, ShieldPatternLayer
+public class PaviseBlockRenderer implements BlockEntityRenderer<PaviseBlockEntity, PaviseBlockRenderer.State>, ShieldPatternLayer
 {
 	private final PaviseBlockModel model;
-	private final ResourceLocation location;
+    private final net.minecraft.client.resources.model.sprite.SpriteGetter sprites;
+    public net.minecraft.client.resources.model.sprite.SpriteGetter sprites() { return sprites; }
+    public static class State extends net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState {
+        public DyeColor base; public BannerPatternLayers patterns = BannerPatternLayers.EMPTY; public boolean foil; public float rotation;
+    }
+    public State createRenderState() { return new State(); }
+    public void extractRenderState(PaviseBlockEntity pavise, State state, float partialTicks, net.minecraft.world.phys.Vec3 camera, net.minecraft.client.renderer.feature.ModelFeatureRenderer.CrumblingOverlay breaking) {
+        BlockEntityRenderer.super.extractRenderState(pavise, state, partialTicks, camera, breaking);
+        state.base = pavise.getBaseColor(); state.patterns = pavise.getPatterns(); state.foil = pavise.hasFoil();
+        state.rotation = -pavise.getBlockState().getValue(BannerBlock.ROTATION) * 360.0F / 16;
+    }
+	private final Identifier location;
 	private final String patternsDirectory;
-	private final Material baseWithPatternMaterial;
-	private final Material baseWithoutPatternMaterial;
-	private final Material basePatternMaterial;
+	private final SpriteId baseWithPatternSpriteId;
+	private final SpriteId baseWithoutPatternSpriteId;
+	private final SpriteId basePatternSpriteId;
 
-	public PaviseBlockRenderer(BlockEntityRendererProvider.Context context, String id, ResourceLocation location)
+	public PaviseBlockRenderer(BlockEntityRendererProvider.Context context, String id, Identifier location)
 	{
+		this.sprites = context.sprites();
 		this.model = new PaviseBlockModel(context.bakeLayer(ModModels.PAVISE_BLOCK_LOCATION));
 		this.location = location;
 		this.patternsDirectory = "entity/" + location.getPath() + "/";
-		this.baseWithPatternMaterial = new Material(Sheets.SHIELD_SHEET, ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "entity/" + id + "_pattern"));
-		this.baseWithoutPatternMaterial = new Material(Sheets.SHIELD_SHEET, ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "entity/" + id + "_nopattern"));
-		this.basePatternMaterial = new Material(Sheets.SHIELD_SHEET, ResourceLocation.fromNamespaceAndPath(this.location.getNamespace(), this.patternsDirectory + "base"));
+		this.baseWithPatternSpriteId = new SpriteId(Sheets.SHIELD_SHEET, Identifier.fromNamespaceAndPath(location.getNamespace(), "entity/" + id + "_pattern"));
+		this.baseWithoutPatternSpriteId = new SpriteId(Sheets.SHIELD_SHEET, Identifier.fromNamespaceAndPath(location.getNamespace(), "entity/" + id + "_nopattern"));
+		this.basePatternSpriteId = new SpriteId(Sheets.SHIELD_SHEET, Identifier.fromNamespaceAndPath(this.location.getNamespace(), this.patternsDirectory + "base"));
 	}
 
 	@Override
@@ -56,50 +68,33 @@ public class PaviseBlockRenderer implements BlockEntityRenderer<PaviseBlockEntit
 		return 128;
 	}
 
+    @Override
+    public void submit(State state, PoseStack pose, SubmitNodeCollector collector, net.minecraft.client.renderer.state.level.CameraRenderState camera) {
+        pose.pushPose();
+        pose.translate(0.5F, 0.5F, 0.5F);
+        pose.mulPose(Axis.YP.rotationDegrees(state.rotation));
+        pose.scale(1, -1, -1);
+        submitPatternPart(pose, collector, model.handle(), state.lightCoords, OverlayTexture.NO_OVERLAY, -1, state.foil, state.base == null ? 0 : 1, null);
+        renderPatterns(pose, collector, state.lightCoords, OverlayTexture.NO_OVERLAY,
+                state.patterns.layers().stream().map(l -> Pair.of(l.pattern(), l.color())).toList(), state.foil, model.plate(), state.base);
+        pose.popPose();
+    }
+
 	@Override
-	public void render(PaviseBlockEntity pavise, float f, PoseStack pose, MultiBufferSource buffer, int p, int overlay)
+	public SpriteId getBaseMaterial(boolean withPattern)
 	{
-		pose.pushPose();
-		BlockState blockstate = pavise.getBlockState();
-		pose.translate(0.5F, 0.5F, 0.5F);
-		float yrot = (float)(-(Integer)blockstate.getValue(BannerBlock.ROTATION) * 360) / 16.0F;
-		pose.mulPose(Axis.YP.rotationDegrees(yrot));
-		renderPatterns(pavise, pose, buffer, p, OverlayTexture.NO_OVERLAY);
-		pose.popPose();
-	}
-
-	public void renderPatterns(PaviseBlockEntity pavise, PoseStack pose, MultiBufferSource buffer, int p, int overlay)
-	{
-		if (this.model instanceof MedievalShieldModel shieldmodel)
-		{
-			pose.pushPose();
-			pose.scale(1.0F, -1.0F, -1.0F);
-			DyeColor basecolor = pavise.getBaseColor();
-			VertexConsumer vertexconsumer = this.getBaseMaterial(basecolor != null).sprite().wrap(ItemRenderer.getFoilBufferDirect(buffer, this.model.renderType(this.getBaseMaterial(basecolor != null).atlasLocation()), true, pavise.hasFoil()));
-			shieldmodel.handle().render(pose, vertexconsumer, p, overlay, 0xFFFFFF);
-			BannerPatternLayers patterns = pavise.getPatterns();
-			List<Pair<Holder<BannerPattern>, DyeColor>> list = patterns == null ? new ArrayList<>() : patterns.layers().stream().map(l -> Pair.of(l.pattern(), l.color())).collect(Collectors.toList());
-			this.renderPatterns(pose, buffer, p, overlay, list, pavise.hasFoil(), shieldmodel.plate(), basecolor);
-
-			pose.popPose();
-		}
+		return withPattern ? this.baseWithPatternSpriteId : this.baseWithoutPatternSpriteId;
 	}
 
 	@Override
-	public Material getBaseMaterial(boolean withPattern)
+	public SpriteId getBasePatternMaterial()
 	{
-		return withPattern ? this.baseWithPatternMaterial : this.baseWithoutPatternMaterial;
+		return this.basePatternSpriteId;
 	}
 
 	@Override
-	public Material getBasePatternMaterial()
+	public SpriteId getPatternMaterial(Identifier patternlocation)
 	{
-		return this.basePatternMaterial;
-	}
-
-	@Override
-	public Material getPatternMaterial(ResourceLocation patternlocation)
-	{
-		return new Material(Sheets.SHIELD_SHEET, ResourceLocation.fromNamespaceAndPath(this.location.getNamespace(), this.patternsDirectory + patternlocation.getPath()));
+		return new SpriteId(Sheets.SHIELD_SHEET, Identifier.fromNamespaceAndPath(this.location.getNamespace(), this.patternsDirectory + patternlocation.getPath()));
 	}
 }

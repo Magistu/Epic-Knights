@@ -7,7 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,40 +49,40 @@ public abstract class ModModelsProvider
 
 	public ModelLayerLocation createDecorationLocation(String name)
 	{
-		return createDecorationLocation(ResourceLocation.fromNamespaceAndPath(this.modId, name));
+		return createDecorationLocation(Identifier.fromNamespaceAndPath(this.modId, name));
 	}
 
 	public ModelLayerLocation createArmorLocation(String name)
 	{
-		return createArmorLocation(ResourceLocation.fromNamespaceAndPath(this.modId, name));
+		return createArmorLocation(Identifier.fromNamespaceAndPath(this.modId, name));
 	}
 	
 	public ModelLayerLocation createLocation(String name)
 	{
-		return createLocation(ResourceLocation.fromNamespaceAndPath(this.modId, name));
+		return createLocation(Identifier.fromNamespaceAndPath(this.modId, name));
 	}
 
 	public ModelLayerLocation createLocation(String name, String layer)
 	{
-		return createLocation(ResourceLocation.fromNamespaceAndPath(this.modId, name), layer);
+		return createLocation(Identifier.fromNamespaceAndPath(this.modId, name), layer);
 	}
 
-	public static ModelLayerLocation createDecorationLocation(ResourceLocation location)
+	public static ModelLayerLocation createDecorationLocation(Identifier location)
 	{
 		return createLocation(location, "decorations");
 	}
 
-	public static ModelLayerLocation createArmorLocation(ResourceLocation location)
+	public static ModelLayerLocation createArmorLocation(Identifier location)
 	{
 		return createLocation(location, "armor");
 	}
 
-	public static ModelLayerLocation createLocation(ResourceLocation location)
+	public static ModelLayerLocation createLocation(Identifier location)
 	{
 		return createLocation(location, "main");
 	}
 
-	public static ModelLayerLocation createLocation(ResourceLocation location, String layer)
+	public static ModelLayerLocation createLocation(Identifier location, String layer)
 	{
 		return new ModelLayerLocation(location, layer);
 	}

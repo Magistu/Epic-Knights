@@ -5,12 +5,8 @@
     "mm "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/tin"
-    },
-    "h": {
-      "tag": "c:ingots/steel"
-    }
+    "m": "#c:ingots/tin",
+    "h": "#c:ingots/steel"
   },
   "result": {
     "id": "magistuarmory:tin_buckler",

@@ -11,7 +11,7 @@ import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -48,9 +48,9 @@ public class PaviseItem extends MedievalShieldItem
 	private final Direction attachmentDirection = Direction.DOWN;
 	private final Supplier<PaviseBlock> block;
 	
-	public PaviseItem(String id, ResourceLocation location, Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Supplier<PaviseBlock> block)
+	public PaviseItem(String id, Identifier location, Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Supplier<PaviseBlock> block)
 	{
-		super(id, location, properties, material, paintable, is3d, type);
+		super(id, location, properties.overrideDescription(block.get().getDescriptionId()), material, paintable, is3d, type);
 		this.block = block;
 	}
 
@@ -60,8 +60,8 @@ public class PaviseItem extends MedievalShieldItem
 		InteractionResult interactionResult = this.place(new BlockPlaceContext(context));
 		if (!interactionResult.consumesAction() && context.getItemInHand().has(DataComponents.FOOD)) 
 		{
-			InteractionResult interactionResult2 = super.use(context.getLevel(), context.getPlayer(), context.getHand()).getResult();
-			return interactionResult2 == InteractionResult.CONSUME ? InteractionResult.CONSUME_PARTIAL : interactionResult2;
+			InteractionResult interactionResult2 = super.use(context.getLevel(), context.getPlayer(), context.getHand());
+			return interactionResult2 == InteractionResult.CONSUME ? InteractionResult.CONSUME : interactionResult2;
 		} 
 		else 
 		{
@@ -110,7 +110,7 @@ public class PaviseItem extends MedievalShieldItem
 		if (player == null || !player.getAbilities().instabuild)
 			stack.shrink(1);
 
-		return InteractionResult.sidedSuccess(level.isClientSide);
+		return InteractionResult.SUCCESS;
 	}
 
 	protected SoundEvent getPlaceSound(BlockState blockstate)
@@ -154,16 +154,12 @@ public class PaviseItem extends MedievalShieldItem
 		return true;
 	}
 
-	public String getDescriptionId()
-	{
-		return this.getBlock().getDescriptionId();
-	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipflag)
+	public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag tooltipflag)
 	{
-		super.appendHoverText(stack, tooltipContext, list, tooltipflag);
-		list.add(Component.translatable("canbeplacedonground").withStyle(ChatFormatting.BLUE));
+		super.appendHoverText(stack, tooltipContext, display, list, tooltipflag);
+		list.accept(Component.translatable("canbeplacedonground").withStyle(ChatFormatting.BLUE));
 	}
 
 	public PaviseBlock getBlock()
@@ -171,11 +167,6 @@ public class PaviseItem extends MedievalShieldItem
 		return this.block.get();
 	}
 
-	@Override
-	public @NotNull FeatureFlagSet requiredFeatures()
-	{
-		return this.getBlock().requiredFeatures();
-	}
 
 	protected boolean canPlace(LevelReader levelreader, BlockState blockstate, BlockPos blockpos)
 	{

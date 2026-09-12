@@ -14,6 +14,7 @@ public class MaximilianHelmetModel {
 	    PartDefinition partdefinition = meshdefinition.getRoot();
 
 		PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition hat = partdefinition.getChild("head").addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
 		PartDefinition Helmet_r1 = head.addOrReplaceChild("Helmet_r1", CubeListBuilder.create().texOffs(0, 5).addBox(-3.6F, -7.2F, -3.75F, 7.0F, 5.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -0.1F, 0.2F, 0.552F, -0.4648F, 0.0F));
 
@@ -26,7 +27,6 @@ public class MaximilianHelmetModel {
 		PartDefinition Armet = head.addOrReplaceChild("Armet", CubeListBuilder.create().texOffs(32, 0).addBox(0.0F, 0.15F, 0.8F, 8.0F, 7.0F, 7.0F, new CubeDeformation(0.9F))
 				.texOffs(38, 6).addBox(0.0F, 0.15F, 0.3F, 8.0F, 7.0F, 1.0F, new CubeDeformation(0.87F)), PartPose.offset(-4.0F, -8.0F, -4.0F));
 
-		PartDefinition hat = partdefinition.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
 		PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 

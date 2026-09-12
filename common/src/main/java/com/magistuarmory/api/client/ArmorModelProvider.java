@@ -7,7 +7,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
@@ -36,7 +36,7 @@ public class ArmorModelProvider implements DataProvider {
         List<CompletableFuture<?>> futures = new ArrayList<>();
 
         for (DyeableMedievalArmorItem armor : armors) {
-            ResourceLocation id = BuiltInRegistries.ITEM.getKey(armor);
+            Identifier id = BuiltInRegistries.ITEM.getKey(armor);
 
             Path path = output.getOutputFolder()
                     .resolve("assets")

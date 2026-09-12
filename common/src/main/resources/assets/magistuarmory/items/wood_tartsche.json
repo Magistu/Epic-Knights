@@ -1,0 +1,30 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "magistuarmory:property",
+    "name": "minecraft:blocking",
+    "fallback": {
+      "type": "minecraft:special",
+      "base": "magistuarmory:item/wood_tartsche",
+      "model": {
+        "type": "magistuarmory:heraldry",
+        "id": "wood_tartsche",
+        "location": "magistuarmory:tartsche"
+      }
+    },
+    "entries": [
+      {
+        "threshold": 1,
+        "model": {
+          "type": "minecraft:special",
+          "base": "magistuarmory:item/wood_tartsche_blocking",
+          "model": {
+            "type": "magistuarmory:heraldry",
+            "id": "wood_tartsche",
+            "location": "magistuarmory:tartsche"
+          }
+        }
+      }
+    ]
+  }
+}

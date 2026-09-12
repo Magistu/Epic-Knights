@@ -6,12 +6,8 @@
     " m "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/tin"
-    },
-    "s": {
-      "item": "magistuarmory:wood_tartsche"
-    }
+    "m": "#c:ingots/tin",
+    "s": "magistuarmory:wood_tartsche"
   },
   "result": {
     "id": "magistuarmory:tin_tartsche",

@@ -4,12 +4,8 @@
     "pnp"
   ],
   "key": {
-    "p": {
-      "tag": "c:plates/steel"
-    },
-    "n": {
-      "item": "magistuarmory:norman_helmet"
-    }
+    "p": "#c:plates/steel",
+    "n": "magistuarmory:norman_helmet"
   },
   "result": {
     "id": "magistuarmory:bascinet",

@@ -5,15 +5,9 @@
     "p "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/copper"
-    },
-    "t": {
-      "item": "magistuarmory:copper_shortsword"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    }
+    "m": "#c:ingots/copper",
+    "t": "magistuarmory:copper_shortsword",
+    "p": "#magistuarmory:poles"
   },
   "result": {
     "id": "magistuarmory:copper_guisarme",

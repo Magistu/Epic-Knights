@@ -5,12 +5,8 @@
     "t "
   ],
   "key": {
-    "t": {
-      "item": "magistuarmory:copper_shortsword"
-    },
-    "m": {
-      "tag": "c:ingots/copper"
-    }
+    "t": "magistuarmory:copper_shortsword",
+    "m": "#c:ingots/copper"
   },
   "result": {
     "id": "magistuarmory:copper_estoc",

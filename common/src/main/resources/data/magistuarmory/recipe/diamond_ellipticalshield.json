@@ -6,12 +6,8 @@
     " m "
   ],
   "key": {
-    "m": {
-      "tag": "c:gems/diamond"
-    },
-    "s": {
-      "item": "magistuarmory:wood_ellipticalshield"
-    }
+    "m": "#c:gems/diamond",
+    "s": "magistuarmory:wood_ellipticalshield"
   },
   "result": {
     "id": "magistuarmory:diamond_ellipticalshield",

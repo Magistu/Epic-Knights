@@ -5,15 +5,9 @@
     "p "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/iron"
-    },
-    "t": {
-      "item": "magistuarmory:iron_shortsword"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    }
+    "m": "#c:ingots/iron",
+    "t": "magistuarmory:iron_shortsword",
+    "p": "#magistuarmory:poles"
   },
   "result": {
     "id": "magistuarmory:iron_guisarme",

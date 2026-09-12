@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "magistuarmory:item/bronze_rondache_blocking",
+    "model": {
+      "type": "magistuarmory:heraldry",
+      "id": "bronze_rondache",
+      "location": "magistuarmory:rondache"
+    }
+  }
+}

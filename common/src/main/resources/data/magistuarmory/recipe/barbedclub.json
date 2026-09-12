@@ -6,15 +6,9 @@
     "ba "
   ],
   "key": {
-    "a": {
-      "tag": "c:nuggets/steel"
-    },
-    "b": {
-      "tag": "c:rods/wooden"
-    },
-    "c": {
-      "tag": "c:ingots/steel"
-    }
+    "a": "#c:nuggets/steel",
+    "b": "#c:rods/wooden",
+    "c": "#c:ingots/steel"
   },
   "result": {
     "id": "magistuarmory:barbedclub",

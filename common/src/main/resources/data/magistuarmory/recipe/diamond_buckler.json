@@ -5,12 +5,8 @@
     "mm "
   ],
   "key": {
-    "m": {
-      "tag": "c:gems/diamond"
-    },
-    "h": {
-      "tag": "c:ingots/steel"
-    }
+    "m": "#c:gems/diamond",
+    "h": "#c:ingots/steel"
   },
   "result": {
     "id": "magistuarmory:diamond_buckler",

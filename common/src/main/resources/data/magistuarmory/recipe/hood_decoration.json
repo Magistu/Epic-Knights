@@ -6,9 +6,7 @@
     "fff"
   ],
   "key": {
-    "f": {
-      "tag": "magistuarmory:woolen_fabrics"
-    }
+    "f": "#magistuarmory:woolen_fabrics"
   },
   "result": {
     "id": "magistuarmory:hood_decoration",

@@ -6,12 +6,8 @@
     "ppp"
   ],
   "key": {
-    "k": {
-      "item": "magistuarmory:knight_chestplate"
-    },
-    "p": {
-      "tag": "c:plates/steel"
-    }
+    "k": "magistuarmory:knight_chestplate",
+    "p": "#c:plates/steel"
   },
   "result": {
     "id": "magistuarmory:jousting_chestplate",

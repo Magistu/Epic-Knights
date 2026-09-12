@@ -5,14 +5,14 @@ import com.magistuarmory.config.MobEquipmentConfig;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorItem;
+
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.level.Level;
@@ -28,10 +28,10 @@ public class MobEquipment
     
     public final List<ResourceKey<Level>> dimensions;
     
-    public final List<ArmorItem> helmets = new ArrayList<>();
-    public final List<ArmorItem> chestplates = new ArrayList<>();
-    public final List<ArmorItem> leggings = new ArrayList<>();
-    public final List<ArmorItem> boots = new ArrayList<>();
+    public final List<Item> helmets = new ArrayList<>();
+    public final List<Item> chestplates = new ArrayList<>();
+    public final List<Item> leggings = new ArrayList<>();
+    public final List<Item> boots = new ArrayList<>();
     
     public final List<Item> weapons = new ArrayList<>();
     public final List<ShieldItem> shields = new ArrayList<>();
@@ -46,7 +46,7 @@ public class MobEquipment
         
         for (String id : ids)
         {
-            ResourceLocation resloc = ResourceLocation.parse(id);
+            Identifier resloc = Identifier.parse(id);
 
             Optional<EntityType<?>> entityoptional = BuiltInRegistries.ENTITY_TYPE.getOptional(resloc);
             if (entityoptional.isPresent())
@@ -65,9 +65,10 @@ public class MobEquipment
             Optional<Item> itemoptional = BuiltInRegistries.ITEM.getOptional(resloc);
             if (itemoptional.isPresent())
             {
-                if (itemoptional.get() instanceof ArmorItem armor)
+                Item armor = itemoptional.get();
+                if (com.magistuarmory.item.armor.ArmorComponents.isArmor(armor))
                 {
-                    switch (armor.getType().getSlot())
+                    switch (com.magistuarmory.item.armor.ArmorComponents.slot(armor))
                     {
                         case HEAD -> this.helmets.add(armor);
                         case CHEST -> this.chestplates.add(armor);

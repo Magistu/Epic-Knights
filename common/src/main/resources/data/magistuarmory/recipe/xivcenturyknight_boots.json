@@ -5,12 +5,8 @@
     "l l"
   ],
   "key": {
-    "p": {
-      "tag": "c:plates/steel"
-    },
-    "l": {
-      "item": "minecraft:leather"
-    }
+    "p": "#c:plates/steel",
+    "l": "minecraft:leather"
   },
   "result": {
     "id": "magistuarmory:xivcenturyknight_boots",

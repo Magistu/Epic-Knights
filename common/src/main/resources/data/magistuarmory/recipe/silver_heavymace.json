@@ -6,15 +6,9 @@
     "h  "
   ],
   "key": {
-    "s": {
-      "tag": "c:rods/wooden"
-    },
-    "m": {
-      "tag": "c:ingots/silver"
-    },
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "s": "#c:rods/wooden",
+    "m": "#c:ingots/silver",
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:silver_heavymace",

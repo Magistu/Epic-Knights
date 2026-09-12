@@ -6,12 +6,8 @@
     "p p"
   ],
   "key": {
-    "c": {
-      "tag": "magistuarmory:chainmails/steel"
-    },
-    "p": {
-      "tag": "c:plates/steel"
-    }
+    "c": "#magistuarmory:chainmails/steel",
+    "p": "#c:plates/steel"
   },
   "result": {
     "id": "magistuarmory:xivcenturyknight_leggings",

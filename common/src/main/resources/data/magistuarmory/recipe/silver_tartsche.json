@@ -6,12 +6,8 @@
     " m "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/silver"
-    },
-    "s": {
-      "item": "magistuarmory:wood_tartsche"
-    }
+    "m": "#c:ingots/silver",
+    "s": "magistuarmory:wood_tartsche"
   },
   "result": {
     "id": "magistuarmory:silver_tartsche",

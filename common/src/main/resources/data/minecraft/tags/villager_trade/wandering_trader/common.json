@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "magistuarmory:wandering_trader/gazelle_horns_decoration",
+    "magistuarmory:wandering_trader/duck_decoration",
+    "magistuarmory:wandering_trader/horse_decoration",
+    "magistuarmory:wandering_trader/crown_decoration",
+    "magistuarmory:wandering_trader/unicorn_decoration",
+    "magistuarmory:wandering_trader/bullhorns_decoration",
+    "magistuarmory:wandering_trader/dragon_decoration",
+    "magistuarmory:wandering_trader/minicrown_decoration",
+    "magistuarmory:wandering_trader/antlers_decoration",
+    "magistuarmory:wandering_trader/bear_decoration",
+    "magistuarmory:wandering_trader/lily_decoration",
+    "magistuarmory:wandering_trader/lion_decoration",
+    "magistuarmory:wandering_trader/demon_horns_decoration",
+    "magistuarmory:wandering_trader/griffin_decoration"
+  ]
+}

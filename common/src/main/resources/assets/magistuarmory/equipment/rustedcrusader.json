@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "magistuarmory:rustedcrusader"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "magistuarmory:rustedcrusader"
+      }
+    ]
+  }
+}

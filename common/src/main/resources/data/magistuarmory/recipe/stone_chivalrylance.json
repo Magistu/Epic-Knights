@@ -6,15 +6,9 @@
     "hm "
   ],
   "key": {
-    "m": {
-      "tag": "c:cobblestones"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    },
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "m": "#c:cobblestones",
+    "p": "#magistuarmory:poles",
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:stone_chivalrylance",

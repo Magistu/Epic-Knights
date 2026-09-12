@@ -6,9 +6,7 @@
     " f "
   ],
   "key": {
-    "f": {
-      "tag": "c:flowers"
-    }
+    "f": "#c:flowers"
   },
   "result": {
     "id": "magistuarmory:flowercrown_decoration",

@@ -6,12 +6,8 @@
     "p  "
   ],
   "key": {
-    "m": {
-      "tag": "minecraft:planks"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    }
+    "m": "#minecraft:planks",
+    "p": "#magistuarmory:poles"
   },
   "result": {
     "id": "magistuarmory:wood_lochaberaxe",

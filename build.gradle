@@ -1,7 +1,8 @@
 plugins {
-    id 'net.fabricmc.fabric-loom' version '1.15.5' apply false
+    // Architectury IDE hooks and NeoForge require its Loom fork; 26.1 needs no remapping.
+    id 'dev.architectury.loom-no-remap' version '1.14.476' apply false
     id 'architectury-plugin' version '3.5.166'
-    id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
+    id 'com.gradleup.shadow' version '9.6.1' apply false
 }
 
 architectury {
@@ -18,7 +19,7 @@ allprojects {
 }
 
 subprojects {
-    apply plugin: 'net.fabricmc.fabric-loom'
+    apply plugin: 'dev.architectury.loom-no-remap'
     apply plugin: 'architectury-plugin'
     apply plugin: 'maven-publish'
 

@@ -6,12 +6,8 @@
     "l l"
   ],
   "key": {
-    "c": {
-      "tag": "magistuarmory:chainmails/steel"
-    },
-    "l": {
-      "item": "minecraft:leather"
-    }
+    "c": "#magistuarmory:chainmails/steel",
+    "l": "minecraft:leather"
   },
   "result": {
     "id": "magistuarmory:crusader_boots",

@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "magistuarmory:item/kiteshield",
+    "model": {
+      "type": "magistuarmory:heraldry",
+      "id": "kiteshield",
+      "location": "magistuarmory:kiteshield"
+    }
+  }
+}

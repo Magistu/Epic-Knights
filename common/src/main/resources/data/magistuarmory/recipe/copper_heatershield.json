@@ -6,12 +6,8 @@
     " m "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/copper"
-    },
-    "s": {
-      "item": "magistuarmory:wood_heatershield"
-    }
+    "m": "#c:ingots/copper",
+    "s": "magistuarmory:wood_heatershield"
   },
   "result": {
     "id": "magistuarmory:copper_heatershield",

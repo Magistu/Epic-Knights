@@ -5,15 +5,9 @@
     "t "
   ],
   "key": {
-    "n": {
-      "tag": "c:nuggets/iron"
-    },
-    "t": {
-      "item": "magistuarmory:iron_shortsword"
-    },
-    "m": {
-      "tag": "c:ingots/iron"
-    }
+    "n": "#c:nuggets/iron",
+    "t": "magistuarmory:iron_shortsword",
+    "m": "#c:ingots/iron"
   },
   "result": {
     "id": "magistuarmory:messer_sword",

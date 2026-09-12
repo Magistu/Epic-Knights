@@ -12,7 +12,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.*;
@@ -27,11 +27,11 @@ import java.util.List;
 
 public class DecorationRemoveRecipe extends CustomRecipe
 {
-    public static RecipeSerializer<DecorationRemoveRecipe> SERIALIZER = new SimpleCraftingRecipeSerializer<>(DecorationRemoveRecipe::new);
+    public static RecipeSerializer<DecorationRemoveRecipe> SERIALIZER = new RecipeSerializer<>(com.mojang.serialization.MapCodec.unit(() -> new DecorationRemoveRecipe(CraftingBookCategory.MISC)), net.minecraft.network.codec.StreamCodec.unit(new DecorationRemoveRecipe(CraftingBookCategory.MISC)));
 
     public DecorationRemoveRecipe(CraftingBookCategory category)
     {
-        super(category);
+        super();
         //super(location, CraftingBookCategory.MISC);
     }
 
@@ -62,7 +62,7 @@ public class DecorationRemoveRecipe extends CustomRecipe
     }
 
     @Override
-    public @NotNull ItemStack assemble(CraftingInput container, @NotNull HolderLookup.Provider access)
+    public @NotNull ItemStack assemble(CraftingInput container)
     {
         ItemStack stack = ItemStack.EMPTY;
 
@@ -92,14 +92,9 @@ public class DecorationRemoveRecipe extends CustomRecipe
         return ItemStack.EMPTY;
     }
 
-    @Override
-    public boolean canCraftInDimensions(int i, int j)
-    {
-        return i * j >= 1;
-    }
 
     @Override
-    public RecipeSerializer<?> getSerializer()
+    public RecipeSerializer<DecorationRemoveRecipe> getSerializer()
     {
         return getSerializerInstance();
     }
@@ -112,7 +107,7 @@ public class DecorationRemoveRecipe extends CustomRecipe
     
     static boolean mightBeDecorated(Item item)
     {
-        return item instanceof ArmorItem || item instanceof ShieldItem;
+        return com.magistuarmory.item.armor.ArmorComponents.isArmor(item) || item instanceof ShieldItem;
     }
 
     static boolean isDecorated(ItemStack stack)
@@ -124,7 +119,7 @@ public class DecorationRemoveRecipe extends CustomRecipe
         if (decorationdata != null)
         {
             CompoundTag compoundtag = decorationdata.copyTag();
-            ListTag listtag = compoundtag.getList("Items", 10);
+            ListTag listtag = compoundtag.getListOrEmpty("Items");
             if (!listtag.isEmpty())
             {
                 return true;
@@ -140,7 +135,7 @@ public class DecorationRemoveRecipe extends CustomRecipe
         
         DyeColor basecolor = newstack.get(DataComponents.BASE_COLOR);
         if (basecolor != null) {
-            BannerItem banner = (BannerItem) BannerBlock.byColor(basecolor).asItem();
+            BannerItem banner = (BannerItem) BuiltInRegistries.ITEM.getValue(net.minecraft.resources.Identifier.withDefaultNamespace(basecolor.getName() + "_banner"));
             ItemStack bannerstack = new ItemStack(banner);
 
             BannerPatternLayers patterns = newstack.get(DataComponents.BANNER_PATTERNS);
@@ -154,13 +149,13 @@ public class DecorationRemoveRecipe extends CustomRecipe
         if (decorationdata != null)
         {
             CompoundTag compoundtag = decorationdata.copyTag();
-            ListTag listtag = compoundtag.getList("Items", 10);
+            ListTag listtag = compoundtag.getListOrEmpty("Items");
             while (!listtag.isEmpty())
             {
-                CompoundTag tag = listtag.getCompound(listtag.size() - 1);
-                String name = tag.getString("name");
-                int color = tag.getInt("color");
-                ArmorDecoration decoration = (ArmorDecoration) BuiltInRegistries.ITEM.get(ResourceLocation.parse(name + "_decoration"));
+                CompoundTag tag = listtag.getCompoundOrEmpty(listtag.size() - 1);
+                String name = tag.getStringOr("name", "");
+                int color = tag.getIntOr("color", 0);
+                ArmorDecoration decoration = (ArmorDecoration) BuiltInRegistries.ITEM.getValue(Identifier.parse(name + "_decoration"));
                 ItemStack decorationstack = new ItemStack(decoration);
                 if (decoration instanceof DyeableArmorDecorationItem dyeabedecoration && dyeabedecoration.getColor(decorationstack) != color)
                     dyeabedecoration.setColor(decorationstack, color);

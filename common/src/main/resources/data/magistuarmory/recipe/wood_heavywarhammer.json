@@ -6,15 +6,9 @@
     " h "
   ],
   "key": {
-    "s": {
-      "tag": "c:rods/wooden"
-    },
-    "m": {
-      "tag": "minecraft:planks"
-    },
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "s": "#c:rods/wooden",
+    "m": "#minecraft:planks",
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:wood_heavywarhammer",

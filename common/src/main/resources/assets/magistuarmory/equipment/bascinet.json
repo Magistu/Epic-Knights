@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "magistuarmory:bascinet"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "magistuarmory:bascinet"
+      }
+    ]
+  }
+}

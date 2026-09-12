@@ -1,16 +1,10 @@
 {
-    "type": "minecraft:smithing_transform",
-    "base": {
-        "item": "magistuarmory:diamond_pavese"
-    },
-    "addition": {
-        "item": "minecraft:netherite_ingot"
-    },
-    "result": {
-        "id": "magistuarmory:netherite_pavese",
-        "count": 1
-    },
-    "template": {
-        "item": "minecraft:netherite_upgrade_smithing_template"
-    }
+  "type": "minecraft:smithing_transform",
+  "base": "magistuarmory:diamond_pavese",
+  "addition": "minecraft:netherite_ingot",
+  "result": {
+    "id": "magistuarmory:netherite_pavese",
+    "count": 1
+  },
+  "template": "minecraft:netherite_upgrade_smithing_template"
 }

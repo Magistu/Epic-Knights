@@ -5,12 +5,8 @@
     "t "
   ],
   "key": {
-    "t": {
-      "item": "magistuarmory:stone_shortsword"
-    },
-    "m": {
-      "tag": "c:cobblestones"
-    }
+    "t": "magistuarmory:stone_shortsword",
+    "m": "#c:cobblestones"
   },
   "result": {
     "id": "magistuarmory:stone_estoc",

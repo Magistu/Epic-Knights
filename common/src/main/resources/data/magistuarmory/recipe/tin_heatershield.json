@@ -6,12 +6,8 @@
     " m "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/tin"
-    },
-    "s": {
-      "item": "magistuarmory:wood_heatershield"
-    }
+    "m": "#c:ingots/tin",
+    "s": "magistuarmory:wood_heatershield"
   },
   "result": {
     "id": "magistuarmory:tin_heatershield",

@@ -4,12 +4,8 @@
     "sl"
   ],
   "key": {
-    "s": {
-      "tag": "c:rods/wooden"
-    },
-    "l": {
-      "tag": "magistuarmory:leather_strips"
-    }
+    "s": "#c:rods/wooden",
+    "l": "#magistuarmory:leather_strips"
   },
   "result": {
     "id": "magistuarmory:hilt",

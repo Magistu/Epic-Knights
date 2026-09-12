@@ -1,7 +1,7 @@
 package com.magistuarmory.item;
 
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
-import net.minecraft.world.item.Tier;
+
 
 public class ShieldType {
 
@@ -53,7 +53,7 @@ public class ShieldType {
         return this;
     }
 
-    public int getDurability(Tier material) {
+    public int getDurability(ModItemTier material) {
         return (int) (this.baseDurability + this.materialFactor * material.getUses());
     }
 

@@ -6,12 +6,8 @@
     "pm "
   ],
   "key": {
-    "m": {
-      "tag": "c:gems/diamond"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    }
+    "m": "#c:gems/diamond",
+    "p": "#magistuarmory:poles"
   },
   "result": {
     "id": "magistuarmory:diamond_ahlspiess",

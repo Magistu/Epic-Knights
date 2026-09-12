@@ -6,12 +6,8 @@
     " m "
   ],
   "key": {
-    "m": {
-      "tag": "c:cobblestones"
-    },
-    "s": {
-      "item": "magistuarmory:wood_ellipticalshield"
-    }
+    "m": "#c:cobblestones",
+    "s": "magistuarmory:wood_ellipticalshield"
   },
   "result": {
     "id": "magistuarmory:stone_ellipticalshield",

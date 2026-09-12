@@ -6,15 +6,9 @@
     "ccc"
   ],
   "key": {
-    "n": {
-      "tag": "c:nuggets/steel"
-    },
-    "c": {
-      "tag": "magistuarmory:chainmails/steel"
-    },
-    "i": {
-      "tag": "c:ingots/steel"
-    }
+    "n": "#c:nuggets/steel",
+    "c": "#magistuarmory:chainmails/steel",
+    "i": "#c:ingots/steel"
   },
   "result": {
     "id": "magistuarmory:shishak",

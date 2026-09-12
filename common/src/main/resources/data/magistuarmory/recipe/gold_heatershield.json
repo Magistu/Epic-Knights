@@ -6,12 +6,8 @@
     " m "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/gold"
-    },
-    "s": {
-      "item": "magistuarmory:wood_heatershield"
-    }
+    "m": "#c:ingots/gold",
+    "s": "magistuarmory:wood_heatershield"
   },
   "result": {
     "id": "magistuarmory:gold_heatershield",

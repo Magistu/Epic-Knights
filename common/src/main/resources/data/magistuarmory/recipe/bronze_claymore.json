@@ -4,12 +4,8 @@
     "mt"
   ],
   "key": {
-    "t": {
-      "item": "magistuarmory:bronze_shortsword"
-    },
-    "m": {
-      "tag": "c:ingots/bronze"
-    }
+    "t": "magistuarmory:bronze_shortsword",
+    "m": "#c:ingots/bronze"
   },
   "result": {
     "id": "magistuarmory:bronze_claymore",

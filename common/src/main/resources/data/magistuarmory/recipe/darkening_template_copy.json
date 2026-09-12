@@ -6,12 +6,8 @@
     "   "
   ],
   "key": {
-    "d": {
-      "item": "minecraft:black_dye"
-    },
-    "t": {
-      "item": "magistuarmory:darkening_template"
-    }
+    "d": "minecraft:black_dye",
+    "t": "magistuarmory:darkening_template"
   },
   "result": {
     "id": "magistuarmory:darkening_template",

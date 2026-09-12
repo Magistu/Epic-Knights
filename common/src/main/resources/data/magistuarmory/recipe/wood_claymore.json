@@ -4,12 +4,8 @@
     "mt"
   ],
   "key": {
-    "t": {
-      "item": "magistuarmory:wood_shortsword"
-    },
-    "m": {
-      "tag": "minecraft:planks"
-    }
+    "t": "magistuarmory:wood_shortsword",
+    "m": "#minecraft:planks"
   },
   "result": {
     "id": "magistuarmory:wood_claymore",

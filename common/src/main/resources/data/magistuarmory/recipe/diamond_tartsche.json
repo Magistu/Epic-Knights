@@ -6,12 +6,8 @@
     " m "
   ],
   "key": {
-    "m": {
-      "tag": "c:gems/diamond"
-    },
-    "s": {
-      "item": "magistuarmory:wood_tartsche"
-    }
+    "m": "#c:gems/diamond",
+    "s": "magistuarmory:wood_tartsche"
   },
   "result": {
     "id": "magistuarmory:diamond_tartsche",

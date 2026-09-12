@@ -12,8 +12,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.resources.Identifier;
+
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -24,10 +24,10 @@ import java.util.List;
 
 public class ArmorDecorationItem extends Item implements ArmorDecoration
 {
-	ResourceLocation location;
-	ArmorItem.Type armorType;
+	Identifier location;
+	net.minecraft.world.item.equipment.ArmorType armorType;
 
-	public ArmorDecorationItem(ResourceLocation location, Properties properties, ArmorItem.Type armorType)
+	public ArmorDecorationItem(Identifier location, Properties properties, net.minecraft.world.item.equipment.ArmorType armorType)
 	{
 		super(properties.stacksTo(1));
 		this.location = location;
@@ -35,23 +35,23 @@ public class ArmorDecorationItem extends Item implements ArmorDecoration
 	}
 	
 	@Override
-	public ResourceLocation getResourceLocation()
+	public Identifier getIdentifier()
 	{
 		return this.location;
 	}
 
 	@Override
-	public ArmorItem.Type getType()
+	public net.minecraft.world.item.equipment.ArmorType getType()
 	{
 		return this.armorType;
 	}
 
 	public record DecorationInfo(String name, boolean dyeable, int color) 
 	{
-		public ResourceLocation location()
+		public Identifier location()
 		{
-			ResourceLocation loc = ResourceLocation.parse(this.name);
-			return ResourceLocation.fromNamespaceAndPath(!loc.getNamespace().equals("minecraft") ? loc.getNamespace() : EpicKnights.ID, loc.getPath());
+			Identifier loc = Identifier.parse(this.name);
+			return Identifier.fromNamespaceAndPath(!loc.getNamespace().equals("minecraft") ? loc.getNamespace() : EpicKnights.ID, loc.getPath());
 		}
 	}
 
@@ -62,10 +62,10 @@ public class ArmorDecorationItem extends Item implements ArmorDecoration
 		{
 			for (int i = 0; i < listtag.size(); ++i)
 			{
-				CompoundTag tag = listtag.getCompound(i);
-				String name = tag.getString("name");
-				boolean dyeable = tag.getBoolean("dyeable");
-				int j = tag.getInt("color");
+				CompoundTag tag = listtag.getCompoundOrEmpty(i);
+				String name = tag.getStringOr("name", "");
+				boolean dyeable = tag.getBooleanOr("dyeable", false);
+				int j = tag.getIntOr("color", 0);
 				list.add(new DecorationInfo(name, dyeable, j));
 			}
 		}
@@ -88,21 +88,21 @@ public class ArmorDecorationItem extends Item implements ArmorDecoration
 	public boolean isApplicableForDecoration(ItemStack stack)
 	{
 		return getDecorationTags(stack).size() < 8 &&
-				stack.getItem() instanceof ArmorItem armor &&
-				this.getType() == armor.getType();
+				com.magistuarmory.item.armor.ArmorComponents.isArmor(stack) &&
+				this.getType().getSlot() == com.magistuarmory.item.armor.ArmorComponents.slot(stack.getItem());
 	}
 
 	public static ListTag getDecorationTags(ItemStack stack)
 	{
 		CustomData data = stack.get(ModDataComponents.ARMOR_DECORATION.get());
-		return data == null ? new ListTag() : data.copyTag().getList("Items", 10);
+		return data == null ? new ListTag() : data.copyTag().getListOrEmpty("Items");
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, List<Component> tooltip, TooltipFlag flag)
+	public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> tooltip, TooltipFlag flag)
 	{
-		super.appendHoverText(stack, tooltipContext, tooltip, flag);
-		tooltip.add((Component.translatable(EpicKnights.ID + ".armor_decoration." + this.getType().getName() + ".description")).withStyle(Style.EMPTY.withColor(ChatFormatting.BLUE).withItalic(true)));
+		super.appendHoverText(stack, tooltipContext, display, tooltip, flag);
+		tooltip.accept((Component.translatable(EpicKnights.ID + ".armor_decoration." + this.getType().getName() + ".description")).withStyle(Style.EMPTY.withColor(ChatFormatting.BLUE).withItalic(true)));
 	}
 
 	@Override

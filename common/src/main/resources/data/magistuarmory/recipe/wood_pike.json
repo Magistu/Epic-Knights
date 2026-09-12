@@ -6,15 +6,9 @@
     "p  "
   ],
   "key": {
-    "s": {
-      "tag": "c:rods/wooden"
-    },
-    "m": {
-      "tag": "minecraft:planks"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    }
+    "s": "#c:rods/wooden",
+    "m": "#minecraft:planks",
+    "p": "#magistuarmory:poles"
   },
   "result": {
     "id": "magistuarmory:wood_pike",

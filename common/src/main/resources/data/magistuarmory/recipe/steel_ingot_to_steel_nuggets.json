@@ -4,9 +4,7 @@
     "i"
   ],
   "key": {
-    "i": {
-      "tag": "c:ingots/steel"
-    }
+    "i": "#c:ingots/steel"
   },
   "result": {
     "id": "magistuarmory:steel_nugget",

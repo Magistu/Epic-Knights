@@ -1,5 +1,5 @@
 plugins {
-    id 'com.github.johnrengelman.shadow'
+    id 'com.gradleup.shadow'
     id "com.hypherionmc.modutils.modpublisher" version "2.1.8"
 }
 
@@ -39,10 +39,10 @@ repositories {
 
 dependencies {
     neoForge "net.neoforged:neoforge:$rootProject.neoforge_version"
-    compileOnly "dev.architectury:architectury-neoforge:$rootProject.architectury_api_version"
-    compileOnly "me.shedaniel.cloth:cloth-config-neoforge:${rootProject.cloth_config_version}"
-    compileOnly "maven.modrinth:epic-fight:${rootProject.epic_fight_version}-mc${rootProject.minecraft_version}-neoforge"
-    common(project(path: ':common', configuration: 'namedElements')) { transitive false }
+    implementation "dev.architectury:architectury-neoforge:$rootProject.architectury_api_version"
+    implementation "me.shedaniel.cloth:cloth-config-neoforge:${rootProject.cloth_config_version}"
+    // compileOnly "maven.modrinth:epic-fight:${rootProject.epic_fight_version}-mc${rootProject.minecraft_version}-neoforge"
+    common(project(path: ':common')) { transitive false }
     shadowBundle project(path: ':common', configuration: 'transformProductionNeoForge')
 }
 
@@ -79,22 +79,34 @@ processResources {
     }
 }
 
-shadowJar {
-    configurations = [project.configurations.shadowBundle]
-    archiveClassifier = 'dev-shadow'
+// Minecraft 26.1 ships unobfuscated; the shaded jar is the final artifact.
+jar {
+    archiveClassifier.set 'dev'
 }
 
-remapJar {
-    inputFile.set shadowJar.archiveFile
-    dependsOn shadowJar
-
+shadowJar {
+    configurations = [project.configurations.shadowBundle]
     archiveClassifier.set(null)
+    exclude 'architectury.common.json'
+}
+
+assemble.dependsOn shadowJar
+
+configurations {
+    apiElements {
+        outgoing.artifacts.clear()
+        outgoing.artifact(shadowJar)
+    }
+    runtimeElements {
+        outgoing.artifacts.clear()
+        outgoing.artifact(shadowJar)
+    }
 }
 
 def display_minecraft_version = rootProject.findProperty("display_minecraft_version")
 def mod_version = rootProject.findProperty("mod_version")
 
-tasks.named("remapJar") { t ->
+tasks.named("shadowJar") { t ->
     t.archiveFileName.set("epic-knights-${display_minecraft_version}-neoforge-${mod_version}.jar")
 }
 
@@ -126,7 +138,7 @@ publisher {
 
     setCurseEnvironment("both")
 
-    setArtifact(tasks.remapJar)
+    setArtifact(tasks.shadowJar)
 
     modrinthDepends {
         required("cloth-config")

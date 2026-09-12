@@ -7,17 +7,17 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.inventory.CraftingContainer;
-import net.minecraft.world.item.ArmorItem;
+
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 public class ArmorDecorationRecipe extends CustomRecipe {
-    public static RecipeSerializer<ArmorDecorationRecipe> SERIALIZER = new SimpleCraftingRecipeSerializer<>(ArmorDecorationRecipe::new);
+    public static RecipeSerializer<ArmorDecorationRecipe> SERIALIZER = new RecipeSerializer<>(com.mojang.serialization.MapCodec.unit(() -> new ArmorDecorationRecipe(CraftingBookCategory.MISC)), net.minecraft.network.codec.StreamCodec.unit(new ArmorDecorationRecipe(CraftingBookCategory.MISC)));
     
     public ArmorDecorationRecipe(CraftingBookCategory category) {
-        super(category);
+        super();
         //super(location, CraftingBookCategory.MISC);
     }
 
@@ -32,7 +32,7 @@ public class ArmorDecorationRecipe extends CustomRecipe {
             if (stack.isEmpty())
                 continue;
 
-            if (stack.getItem() instanceof ArmorItem && stack.getItem() instanceof ArmorDecoration) {
+            if (com.magistuarmory.item.armor.ArmorComponents.isArmor(stack) && stack.getItem() instanceof ArmorDecoration) {
                 if (!wearabledecorationstack.isEmpty())
                     return false;
 
@@ -48,7 +48,7 @@ public class ArmorDecorationRecipe extends CustomRecipe {
                 continue;
             }
 
-            if (stack.getItem() instanceof ArmorItem) {
+            if (com.magistuarmory.item.armor.ArmorComponents.isArmor(stack)) {
                 if (!armorstack.isEmpty())
                     return false;
 
@@ -77,7 +77,7 @@ public class ArmorDecorationRecipe extends CustomRecipe {
     }
 
     @Override
-    public @NotNull ItemStack assemble(CraftingInput container, @NotNull HolderLookup.Provider access) {
+    public @NotNull ItemStack assemble(CraftingInput container) {
         ItemStack wearabledecorationstack = ItemStack.EMPTY;
         ItemStack armorstack = ItemStack.EMPTY;
         ItemStack decorationstack = ItemStack.EMPTY;
@@ -86,11 +86,11 @@ public class ArmorDecorationRecipe extends CustomRecipe {
             ItemStack stack = container.getItem(i);
             if (stack.isEmpty())
                 continue;
-            if (stack.getItem() instanceof ArmorDecoration && stack.getItem() instanceof ArmorItem)
+            if (stack.getItem() instanceof ArmorDecoration && com.magistuarmory.item.armor.ArmorComponents.isArmor(stack))
                 wearabledecorationstack = stack;
             else if (stack.getItem() instanceof ArmorDecoration)
                 decorationstack = stack;
-            else if (stack.getItem() instanceof ArmorItem)
+            else if (com.magistuarmory.item.armor.ArmorComponents.isArmor(stack))
                 armorstack = stack.copy();
         }
 
@@ -110,13 +110,9 @@ public class ArmorDecorationRecipe extends CustomRecipe {
         return armorstack;
     }
 
-    @Override
-    public boolean canCraftInDimensions(int n, int m) {
-        return n * m >= 2;
-    }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<ArmorDecorationRecipe> getSerializer() {
         return getSerializerInstance();
     }
 

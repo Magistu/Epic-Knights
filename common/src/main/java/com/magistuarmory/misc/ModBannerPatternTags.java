@@ -2,7 +2,7 @@ package com.magistuarmory.misc;
 
 import com.magistuarmory.EpicKnights;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.entity.BannerPattern;
 
@@ -29,6 +29,6 @@ public class ModBannerPatternTags
 
     private static TagKey<BannerPattern> create(String name) 
     {
-        return TagKey.create(Registries.BANNER_PATTERN, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "pattern_item/" + name));
+        return TagKey.create(Registries.BANNER_PATTERN, Identifier.fromNamespaceAndPath(EpicKnights.ID, "pattern_item/" + name));
     }
 }

@@ -5,15 +5,9 @@
     "p "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/bronze"
-    },
-    "t": {
-      "item": "magistuarmory:bronze_shortsword"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    }
+    "m": "#c:ingots/bronze",
+    "t": "magistuarmory:bronze_shortsword",
+    "p": "#magistuarmory:poles"
   },
   "result": {
     "id": "magistuarmory:bronze_guisarme",

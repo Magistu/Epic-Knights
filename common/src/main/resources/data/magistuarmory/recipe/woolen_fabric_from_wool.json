@@ -4,9 +4,7 @@
     "www"
   ],
   "key": {
-    "w": {
-      "item": "minecraft:white_wool"
-    }
+    "w": "minecraft:white_wool"
   },
   "result": {
     "id": "magistuarmory:woolen_fabric",

@@ -1,11 +1,3 @@
 {
-  "parent": "magistuarmory:item/target",
-  "overrides": [
-    {
-      "predicate": {
-        "blocking": 1
-      },
-      "model": "magistuarmory:item/steel_target_blocking"
-    }
-  ]
+  "parent": "magistuarmory:item/target"
 }

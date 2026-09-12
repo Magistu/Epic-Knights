@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "magistuarmory:shepherd/apostolic_cross_pattern",
+    "magistuarmory:shepherd/bowl_pattern",
+    "magistuarmory:shepherd/bull_pattern",
+    "magistuarmory:shepherd/chess_pattern",
+    "magistuarmory:shepherd/crusader_cross_pattern",
+    "magistuarmory:shepherd/dragon_pattern",
+    "magistuarmory:shepherd/eagle_pattern",
+    "magistuarmory:shepherd/horse_pattern",
+    "magistuarmory:shepherd/lily_pattern",
+    "magistuarmory:shepherd/lion1_pattern",
+    "magistuarmory:shepherd/lion2_pattern",
+    "magistuarmory:shepherd/orthodox_cross_pattern",
+    "magistuarmory:shepherd/snake_pattern",
+    "magistuarmory:shepherd/sun_pattern",
+    "magistuarmory:shepherd/swords_pattern",
+    "magistuarmory:shepherd/tower_pattern",
+    "magistuarmory:shepherd/tree_pattern",
+    "magistuarmory:shepherd/two_headed_eagle_pattern"
+  ]
+}

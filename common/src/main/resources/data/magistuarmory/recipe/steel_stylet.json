@@ -6,12 +6,8 @@
     "h  "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/steel"
-    },
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "m": "#c:ingots/steel",
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:steel_stylet",

@@ -5,17 +5,17 @@ import com.magistuarmory.effects.LacerationEffect;
 import com.magistuarmory.component.ModDataComponents;
 import com.magistuarmory.util.CombatHelper;
 import com.magistuarmory.util.ModDamageSources;
-import dev.architectury.registry.item.ItemPropertiesRegistry;
+import com.magistuarmory.client.render.ItemPropertiesRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
@@ -33,9 +33,9 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 
-public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
+public class MedievalWeaponItem extends Item implements IHasModelProperty
 {
-	public static final ResourceLocation BASE_ENTITY_INTERACTION_RANGE_ID = ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "base_entity_interaction_range_id");
+	public static final Identifier BASE_ENTITY_INTERACTION_RANGE_ID = Identifier.fromNamespaceAndPath(EpicKnights.ID, "base_entity_interaction_range_id");
 
 	private final ItemAttributeModifiers defaultModifiers;
 	private final ItemAttributeModifiers decreasedModifiers;
@@ -44,11 +44,10 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 	protected final float attackDamage;
 	private boolean isSilver = false;
 	private float silverAttackDamage = 0.0f;
-	private boolean blockingPriority = false;
 
 	public MedievalWeaponItem(Properties properties, ModItemTier material, WeaponType type)
 	{
-		super(material, properties.stacksTo(1).durability(type.getDurability(material)).attributes(createDefaultAttributeModifiersBuilder(material, type).build()));
+		super(material.asToolMaterial().applySwordProperties(type.canBlock() ? MedievalShieldItem.blockingProperties(properties) : properties, 0, 0).stacksTo(1).durability(type.getDurability(material)).attributes(createDefaultAttributeModifiersBuilder(material, type).build()));
 		this.type = type;
 		this.attackDamage = CombatHelper.getBaseAttackDamage(material, type);
 
@@ -90,7 +89,7 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 	}
 
 	@Override
-	public void inventoryTick(ItemStack stack, Level level, Entity entity, int i, boolean selected)
+	public void inventoryTick(ItemStack stack, net.minecraft.server.level.ServerLevel level, Entity entity, net.minecraft.world.entity.EquipmentSlot slot)
 	{
 		if (entity instanceof LivingEntity livingentity)
 		{
@@ -101,10 +100,8 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 				stack.set(DataComponents.ATTRIBUTE_MODIFIERS, this.getAttributeModifiers(stack));
 			}
 			
-			if (this.canBlock()) 
-				this.blockingPriority = !(livingentity.getMainHandItem().getItem() instanceof ShieldItem) && !(livingentity.getOffhandItem().getItem() instanceof ShieldItem);
 		}
-		super.inventoryTick(stack, level, entity, i, selected);
+		super.inventoryTick(stack, level, entity, slot);
 	}
 
 	public boolean onHurtEntity(DamageSource source, LivingEntity victim, float damage)
@@ -131,31 +128,31 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, List<Component> tooltip, TooltipFlag flag)
+	public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> tooltip, TooltipFlag flag)
 	{
 		if (this.isSilver)
-			tooltip.add(Component.translatable("silvertools.hurt", this.silverAttackDamage).withStyle(ChatFormatting.GREEN));
+			tooltip.accept(Component.translatable("silvertools.hurt", this.silverAttackDamage).withStyle(ChatFormatting.GREEN));
 		if (type.isFlamebladed())
-			tooltip.add(Component.translatable("flamebladed.hurt").withStyle(ChatFormatting.BLUE));
+			tooltip.accept(Component.translatable("flamebladed.hurt").withStyle(ChatFormatting.BLUE));
 		if (type.isHalberd())
-			tooltip.add(Component.translatable("halberd.hurt").withStyle(ChatFormatting.BLUE));
+			tooltip.accept(Component.translatable("halberd.hurt").withStyle(ChatFormatting.BLUE));
 		if (type.getArmorPiercing() != 0)
-			tooltip.add(Component.translatable("armorpiercing", this.type.getArmorPiercing()).withStyle(ChatFormatting.BLUE));
+			tooltip.accept(Component.translatable("armorpiercing", this.type.getArmorPiercing()).withStyle(ChatFormatting.BLUE));
 		if (this.isLong())
-			tooltip.add(Component.translatable("bonusattackreach", this.type.getBonusAttackReach()).withStyle(ChatFormatting.BLUE));
+			tooltip.accept(Component.translatable("bonusattackreach", this.type.getBonusAttackReach()).withStyle(ChatFormatting.BLUE));
 		if (type.getTwoHanded() == 1)
-			tooltip.add(Component.translatable("twohandedi").withStyle(ChatFormatting.BLUE));
+			tooltip.accept(Component.translatable("twohandedi").withStyle(ChatFormatting.BLUE));
 		else if (type.getTwoHanded() > 1)
-			tooltip.add(Component.translatable("twohandedii").withStyle(ChatFormatting.BLUE));
+			tooltip.accept(Component.translatable("twohandedii").withStyle(ChatFormatting.BLUE));
 		if (this.canBlock())
-			tooltip.add(Component.translatable("maxdamageblock", this.getMaxBlockDamage()).withStyle(ChatFormatting.BLUE));
-		tooltip.add(Component.translatable("kgweight", this.getWeight()).withStyle(ChatFormatting.BLUE));
+			tooltip.accept(Component.translatable("maxdamageblock", this.getMaxBlockDamage()).withStyle(ChatFormatting.BLUE));
+		tooltip.accept(Component.translatable("kgweight", this.getWeight()).withStyle(ChatFormatting.BLUE));
 		if (this.hasTwoHandedPenalty(stack))
 		{
-			tooltip.add(Component.translatable("twohandedpenalty_1").withStyle(ChatFormatting.RED));
-			tooltip.add(Component.translatable("twohandedpenalty_2").withStyle(ChatFormatting.RED));
+			tooltip.accept(Component.translatable("twohandedpenalty_1").withStyle(ChatFormatting.RED));
+			tooltip.accept(Component.translatable("twohandedpenalty_2").withStyle(ChatFormatting.RED));
 		}
-		super.appendHoverText(stack, tooltipContext, tooltip, flag);
+		super.appendHoverText(stack, tooltipContext, display, tooltip, flag);
 	}
 
 	public boolean hasTwoHandedPenalty(ItemStack stack)
@@ -221,17 +218,17 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
+	public InteractionResult use(Level level, Player player, InteractionHand hand)
 	{
-		if (canBlock(player) && blockingPriority)
+		if (canBlock(player) && !(player.getMainHandItem().getItem() instanceof ShieldItem) && !(player.getOffhandItem().getItem() instanceof ShieldItem))
 		{
 			ItemStack stack = player.getItemInHand(hand);
 			player.startUsingItem(hand);
 
-			return InteractionResultHolder.consume(stack);
+			return InteractionResult.CONSUME;
 		}
 
-		return super.use(level, player, hand);
+		return InteractionResult.PASS;
 	}
 
 	@Override
@@ -241,9 +238,9 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 	}
 
 	@Override
-	public UseAnim getUseAnimation(ItemStack stack)
+	public ItemUseAnimation getUseAnimation(ItemStack stack)
 	{
-		return (canBlock() && blockingPriority) ? UseAnim.BLOCK : super.getUseAnimation(stack);
+		return canBlock() ? ItemUseAnimation.BLOCK : super.getUseAnimation(stack);
 	}
 
 	public void onBlocked(ItemStack stack, float damage, LivingEntity victim, DamageSource source)
@@ -274,7 +271,7 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 
 	public boolean dealSilverDamage(DamageSource source, LivingEntity attacker, LivingEntity victim, float damage, float attackscale)
 	{
-		if (victim.getType().is(EntityTypeTags.UNDEAD))
+		if (victim.getType().builtInRegistryHolder().is(EntityTypeTags.UNDEAD))
 		{
 			victim.hurt(ModDamageSources.silverAttack(attacker), CombatHelper.getDamageAfterAbsorb(source, victim, this.silverAttackDamage) * attackscale + damage);
 			return true;
@@ -297,7 +294,7 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 	{
 		if (this.canBlock())
 		{
-			ItemPropertiesRegistry.register(this, ResourceLocation.withDefaultNamespace("blocking"), (stack, level, entity, i) ->
+			ItemPropertiesRegistry.register(this, Identifier.withDefaultNamespace("blocking"), (stack, level, entity, i) ->
 					entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
 		}
 	}

@@ -4,9 +4,7 @@
     "h h"
   ],
   "key": {
-    "h": {
-      "item": "minecraft:goat_horn"
-    }
+    "h": "minecraft:goat_horn"
   },
   "result": {
     "id": "magistuarmory:viking_horns_decoration",

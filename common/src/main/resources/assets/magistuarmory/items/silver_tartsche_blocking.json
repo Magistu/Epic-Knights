@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "magistuarmory:item/silver_tartsche_blocking",
+    "model": {
+      "type": "magistuarmory:heraldry",
+      "id": "silver_tartsche",
+      "location": "magistuarmory:tartsche"
+    }
+  }
+}

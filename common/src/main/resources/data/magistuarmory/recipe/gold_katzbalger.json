@@ -6,12 +6,8 @@
     "h"
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/gold"
-    },
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "m": "#c:ingots/gold",
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:gold_katzbalger",

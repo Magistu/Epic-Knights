@@ -6,15 +6,9 @@
     " p "
   ],
   "key": {
-    "s": {
-      "tag": "c:rods/wooden"
-    },
-    "m": {
-      "tag": "c:ingots/tin"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    }
+    "s": "#c:rods/wooden",
+    "m": "#c:ingots/tin",
+    "p": "#magistuarmory:poles"
   },
   "result": {
     "id": "magistuarmory:tin_concavehalberd",

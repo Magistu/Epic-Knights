@@ -6,12 +6,8 @@
     " m "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/tin"
-    },
-    "s": {
-      "item": "magistuarmory:wood_pavese"
-    }
+    "m": "#c:ingots/tin",
+    "s": "magistuarmory:wood_pavese"
   },
   "result": {
     "id": "magistuarmory:tin_pavese",

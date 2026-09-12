@@ -6,8 +6,8 @@
   "description": "${mod_description}",
   "license": "${mod_license}",
   "icon": "icon.png",
-  "authors": ${mod_authors},
-  "contributors": ${mod_contributors},
+  "authors": ["${mod_authors}"],
+  "contributors": ["${mod_contributors}"],
   "contact": {
     "homepage": "${mod_page_url}",
     "issues": "${mod_issues_url}",
@@ -24,11 +24,11 @@
     ]
   },
   "depends": {
-    "fabric": "*",
+    "fabric-api": "*",
+    "java": ">=25",
     "fabricloader": ">=${min_fabric_loader_version}",
     "minecraft": ">=${minecraft_min_version} <${minecraft_max_version}",
     "architectury": ">=${architectury_api_version}",
-    "magistuarmory": ">=${epic_knights_version}",
     "cloth-config2": ">=${cloth_config_version}"
   },
   "custom": {

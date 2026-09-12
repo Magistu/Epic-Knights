@@ -6,12 +6,8 @@
     "ccc"
   ],
   "key": {
-    "c": {
-      "tag": "magistuarmory:chainmails/steel"
-    },
-    "i": {
-      "tag": "c:ingots/steel"
-    }
+    "c": "#magistuarmory:chainmails/steel",
+    "i": "#c:ingots/steel"
   },
   "result": {
     "id": "magistuarmory:platemail_chestplate",

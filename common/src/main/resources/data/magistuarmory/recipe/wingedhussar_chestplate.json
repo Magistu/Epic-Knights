@@ -6,18 +6,10 @@
     "fsf"
   ],
   "key": {
-    "h": {
-      "item": "minecraft:rabbit_hide"
-    },
-    "c": {
-      "item": "magistuarmory:halfarmor_chestplate"
-    },
-    "s": {
-      "tag": "c:rods/wooden"
-    },
-    "f": {
-      "item": "minecraft:feather"
-    }
+    "h": "minecraft:rabbit_hide",
+    "c": "magistuarmory:halfarmor_chestplate",
+    "s": "#c:rods/wooden",
+    "f": "minecraft:feather"
   },
   "result": {
     "id": "magistuarmory:wingedhussar_chestplate",

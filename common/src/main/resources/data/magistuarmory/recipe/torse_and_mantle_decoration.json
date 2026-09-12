@@ -6,12 +6,8 @@
     "fff"
   ],
   "key": {
-    "t": {
-      "item": "magistuarmory:torse_decoration"
-    },
-    "f": {
-      "tag": "magistuarmory:woolen_fabrics"
-    }
+    "t": "magistuarmory:torse_decoration",
+    "f": "#magistuarmory:woolen_fabrics"
   },
   "result": {
     "id": "magistuarmory:torse_and_mantle_decoration",

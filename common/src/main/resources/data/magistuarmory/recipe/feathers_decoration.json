@@ -4,9 +4,7 @@
     "ppp"
   ],
   "key": {
-    "p": {
-      "tag": "magistuarmory:plume_decorations"
-    }
+    "p": "#magistuarmory:plume_decorations"
   },
   "result": {
     "id": "magistuarmory:feathers_decoration",

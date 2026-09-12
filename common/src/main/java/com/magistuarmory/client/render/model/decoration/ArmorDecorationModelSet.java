@@ -7,7 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 
 import java.util.HashMap;
@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 @Environment(EnvType.CLIENT)
-public class ArmorDecorationModelSet<T extends LivingEntity>
+public class ArmorDecorationModelSet<T extends net.minecraft.client.renderer.entity.state.HumanoidRenderState>
 {
     final Map<ModelLayerLocation, ArmorDecorationModel<T>> map = new HashMap<>();
 
@@ -33,7 +33,7 @@ public class ArmorDecorationModelSet<T extends LivingEntity>
         return this.map.get(location);
     }
 
-    public ArmorDecorationModel<T> get(ResourceLocation location)
+    public ArmorDecorationModel<T> get(Identifier location)
     {
         return this.get(ModModels.createDecorationLocation(location));
     }

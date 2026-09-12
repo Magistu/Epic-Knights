@@ -11,7 +11,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.world.entity.LivingEntity;
 
 @Environment(EnvType.CLIENT)
-public class TopDecorationModel<T extends LivingEntity> extends ArmorDecorationModel<T>
+public class TopDecorationModel<T extends net.minecraft.client.renderer.entity.state.HumanoidRenderState> extends ArmorDecorationModel<T>
 {
 	public TopDecorationModel(ModelPart root)
 	{
@@ -23,8 +23,8 @@ public class TopDecorationModel<T extends LivingEntity> extends ArmorDecorationM
 		MeshDefinition meshdefinition = new MeshDefinition();
 	    PartDefinition partdefinition = meshdefinition.getRoot();
 	    partdefinition.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.ZERO);
-	    partdefinition.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(35, -14).addBox(0.0F, -24.05F, -13.0F, 0.0F, 24.0F, 24.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+	    partdefinition.getChild("head").addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition decoration_r2_r1 = head.addOrReplaceChild("decoration_r2_r1", CubeListBuilder.create().texOffs(39, 37).addBox(-12.5F, -24.55F, 0.0F, 25.0F, 24.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.5F, 0.0F, 0.0F, 0.0F, 0.0F));
 	    partdefinition.addOrReplaceChild("right_arm", CubeListBuilder.create(), PartPose.ZERO);
 	    partdefinition.addOrReplaceChild("left_arm", CubeListBuilder.create(), PartPose.ZERO);

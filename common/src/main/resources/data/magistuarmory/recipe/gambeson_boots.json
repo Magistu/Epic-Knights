@@ -6,15 +6,9 @@
     "l l"
   ],
   "key": {
-    "w": {
-      "tag": "magistuarmory:woolen_fabrics"
-    },
-    "s": {
-      "tag": "magistuarmory:leather_strips"
-    },
-    "l": {
-      "item": "minecraft:leather"
-    }
+    "w": "#magistuarmory:woolen_fabrics",
+    "s": "#magistuarmory:leather_strips",
+    "l": "minecraft:leather"
   },
   "result": {
     "id": "magistuarmory:gambeson_boots",

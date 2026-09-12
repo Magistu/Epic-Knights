@@ -36,13 +36,13 @@ public class ClientEvents
 			EpicKnights.checkBetterCombatOrEpicFightInstalled();
 	}
 
-	private static EventResult onMouseInput(Minecraft mc, int button, int action, int mods)
+	private static EventResult onMouseInput(Minecraft mc, net.minecraft.client.input.MouseButtonInfo info, int action)
 	{
 		if (mc.level == null || mc.screen != null || mc.isPaused())
 			return EventResult.pass();
 
 		KeyMapping keyattack = mc.options.keyAttack;
-		if (button == keyattack.getDefaultKey().getValue())
+		if (info.button() == keyattack.getDefaultKey().getValue())
 		{
 			Player player = mc.player;
 			if (player == null || player.isBlocking())

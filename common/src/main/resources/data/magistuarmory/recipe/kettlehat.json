@@ -6,15 +6,9 @@
     "ccc"
   ],
   "key": {
-    "c": {
-      "tag": "magistuarmory:chainmails/steel"
-    },
-    "i": {
-      "tag": "c:ingots/steel"
-    },
-    "p": {
-      "tag": "c:plates/steel"
-    }
+    "c": "#magistuarmory:chainmails/steel",
+    "i": "#c:ingots/steel",
+    "p": "#c:plates/steel"
   },
   "result": {
     "id": "magistuarmory:kettlehat",

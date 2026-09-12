@@ -6,12 +6,8 @@
     " m "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/iron"
-    },
-    "s": {
-      "item": "magistuarmory:wood_tartsche"
-    }
+    "m": "#c:ingots/iron",
+    "s": "magistuarmory:wood_tartsche"
   },
   "result": {
     "id": "magistuarmory:iron_tartsche",

@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "magistuarmory:knight"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "magistuarmory:knight"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "magistuarmory:knight"
+      }
+    ]
+  }
+}

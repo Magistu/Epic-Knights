@@ -5,12 +5,8 @@
     "mm "
   ],
   "key": {
-    "m": {
-      "tag": "minecraft:planks"
-    },
-    "h": {
-      "tag": "c:ingots/steel"
-    }
+    "m": "#minecraft:planks",
+    "h": "#c:ingots/steel"
   },
   "result": {
     "id": "magistuarmory:wood_buckler",

@@ -5,12 +5,8 @@
     "t "
   ],
   "key": {
-    "t": {
-      "item": "magistuarmory:diamond_shortsword"
-    },
-    "m": {
-      "tag": "c:gems/diamond"
-    }
+    "t": "magistuarmory:diamond_shortsword",
+    "m": "#c:gems/diamond"
   },
   "result": {
     "id": "magistuarmory:diamond_estoc",

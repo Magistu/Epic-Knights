@@ -94,9 +94,9 @@ public class CombatHelper
 		else 
 		{
 			float k;
-			if (victim.hasEffect(MobEffects.DAMAGE_RESISTANCE) && !source.is(DamageTypeTags.BYPASSES_RESISTANCE)) 
+			if (victim.hasEffect(MobEffects.RESISTANCE) && !source.is(DamageTypeTags.BYPASSES_RESISTANCE))
 			{
-				k = (victim.getEffect(MobEffects.DAMAGE_RESISTANCE).getAmplifier() + 1.0f) * 5.0f;
+				k = (victim.getEffect(MobEffects.RESISTANCE).getAmplifier() + 1.0f) * 5.0f;
 				float j = 25 - k;
 				float f = damage * j;
 				float f1 = damage;
@@ -136,7 +136,7 @@ public class CombatHelper
 
 	public static float getDamageAfterAbsorb(DamageSource source, LivingEntity victim, float damage)
 	{
-		if (victim.isInvulnerableTo(source) || damage <= 0.0f)
+		if (!(victim.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) || victim.isInvulnerableTo(serverLevel, source) || damage <= 0.0f)
 			return 0.0f;
 
 		damage = getDamageAfterArmorAbsorb(source, victim, damage);

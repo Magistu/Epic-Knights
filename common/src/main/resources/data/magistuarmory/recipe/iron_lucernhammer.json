@@ -6,15 +6,9 @@
     " h "
   ],
   "key": {
-    "s": {
-      "tag": "c:rods/wooden"
-    },
-    "m": {
-      "tag": "c:ingots/iron"
-    },
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "s": "#c:rods/wooden",
+    "m": "#c:ingots/iron",
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:iron_lucernhammer",

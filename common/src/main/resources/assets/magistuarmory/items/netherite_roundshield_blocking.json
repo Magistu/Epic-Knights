@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "magistuarmory:item/netherite_roundshield_blocking",
+    "model": {
+      "type": "magistuarmory:heraldry",
+      "id": "netherite_roundshield",
+      "location": "magistuarmory:roundshield"
+    }
+  }
+}

@@ -1,16 +1,10 @@
 {
   "type": "minecraft:smithing_transform",
-  "base": {
-    "item": "magistuarmory:iron_bastardsword"
-  },
-  "addition": {
-    "tag": "c:ingots/gold"
-  },
+  "base": "magistuarmory:iron_bastardsword",
+  "addition": "#c:ingots/gold",
   "result": {
     "id": "magistuarmory:noble_sword",
     "count": 1
   },
-  "template": {
-    "item": "magistuarmory:gilding_template"
-  }
+  "template": "magistuarmory:gilding_template"
 }

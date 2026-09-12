@@ -5,9 +5,7 @@
     "f"
   ],
   "key": {
-    "f": {
-      "item": "minecraft:feather"
-    }
+    "f": "minecraft:feather"
   },
   "result": {
     "id": "magistuarmory:plume_middle_decoration",

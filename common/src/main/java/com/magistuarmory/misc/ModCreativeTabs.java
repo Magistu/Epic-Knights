@@ -12,7 +12,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
@@ -38,12 +38,12 @@ public class ModCreativeTabs
 	static final RegistrySupplier<CreativeModeTab> RUSTED = createTab("rusted", ModItems.RUSTED_BASTARD_SWORD);
 	static final RegistrySupplier<CreativeModeTab> ARMOR_DECORATIONS = createTab("armor_decorations", ModItems.CROWN_DECORATION);
 
-	public static final ResourceKey<CreativeModeTab> ARMOR_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "armor"));
-	public static final ResourceKey<CreativeModeTab> WEAPONS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "weapons"));
-	public static final ResourceKey<CreativeModeTab> PARTICULAR_WEAPONS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "particular_weapons"));
-	public static final ResourceKey<CreativeModeTab> SHIELDS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "shields"));
-	public static final ResourceKey<CreativeModeTab> RUSTED_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "rusted"));
-	public static final ResourceKey<CreativeModeTab> ARMOR_DECORATIONS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "armor_decorations"));
+	public static final ResourceKey<CreativeModeTab> ARMOR_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.fromNamespaceAndPath(EpicKnights.ID, "armor"));
+	public static final ResourceKey<CreativeModeTab> WEAPONS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.fromNamespaceAndPath(EpicKnights.ID, "weapons"));
+	public static final ResourceKey<CreativeModeTab> PARTICULAR_WEAPONS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.fromNamespaceAndPath(EpicKnights.ID, "particular_weapons"));
+	public static final ResourceKey<CreativeModeTab> SHIELDS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.fromNamespaceAndPath(EpicKnights.ID, "shields"));
+	public static final ResourceKey<CreativeModeTab> RUSTED_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.fromNamespaceAndPath(EpicKnights.ID, "rusted"));
+	public static final ResourceKey<CreativeModeTab> ARMOR_DECORATIONS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.fromNamespaceAndPath(EpicKnights.ID, "armor_decorations"));
 	public static final ResourceKey<CreativeModeTab> INGRIDIENTS_RESOURCE_KEY = CreativeModeTabs.INGREDIENTS;
 
 	public static RegistrySupplier<CreativeModeTab> createTab(String name, @Nullable RegistrySupplier<? extends Item> supplier)
@@ -227,11 +227,13 @@ public class ModCreativeTabs
 	@SafeVarargs
 	public static <I extends ItemStack, T extends Supplier<I>> void appendStack(DeferredSupplier<CreativeModeTab> tab, T... stacks)
 	{
-		Arrays.stream(stacks).filter(Objects::nonNull).forEach((stack) -> {
-			if (!stack.get().isEmpty()) {
-				CreativeTabRegistry.appendStack(tab, stack.get());
-			}
-		});
+        // Item components are bound after registration in 26.1. Build decorated stacks when the tab is populated.
+        CreativeTabRegistry.modify(tab, (flags, output, canUseGameMasterBlocks) -> {
+            Arrays.stream(stacks).filter(Objects::nonNull).forEach(supplier -> {
+                ItemStack stack = supplier.get();
+                if (!stack.isEmpty()) output.accept(stack);
+            });
+        });
 	}
 
 	@SafeVarargs

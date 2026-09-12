@@ -6,15 +6,9 @@
     "l l"
   ],
   "key": {
-    "s": {
-      "tag": "magistuarmory:leather_strips"
-    },
-    "l": {
-      "item": "minecraft:leather"
-    },
-    "i": {
-      "tag": "c:ingots/steel"
-    }
+    "s": "#magistuarmory:leather_strips",
+    "l": "minecraft:leather",
+    "i": "#c:ingots/steel"
   },
   "result": {
     "id": "magistuarmory:platemail_boots",

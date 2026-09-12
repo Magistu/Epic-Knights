@@ -7,21 +7,21 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.resources.Identifier;
+
+import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class WearableArmorDecorationItem extends MedievalArmorItem implements ArmorDecoration
 {
-	public WearableArmorDecorationItem(ArmorType material, Type type, Properties properties)
+	public WearableArmorDecorationItem(ArmorType material, net.minecraft.world.item.equipment.ArmorType type, Properties properties)
 	{
 		super(material, type, properties);
 	}
 
 	@Override
-	public ResourceLocation getResourceLocation()
+	public Identifier getIdentifier()
 	{
 		return this.getArmorType().getLocation();
 	}
@@ -31,7 +31,7 @@ public class WearableArmorDecorationItem extends MedievalArmorItem implements Ar
 	{
 		CompoundTag compoundnbt = new CompoundTag();
 
-		compoundnbt.putString("name", this.getResourceLocation().toString());
+		compoundnbt.putString("name", this.getIdentifier().toString());
 		compoundnbt.putBoolean("dyeable", true);
 		compoundnbt.putInt("color", 1);
 
@@ -39,7 +39,7 @@ public class WearableArmorDecorationItem extends MedievalArmorItem implements Ar
 	}
 
 	@Override
-	public @NotNull Type getType()
+	public @NotNull net.minecraft.world.item.equipment.ArmorType getType()
 	{
 		return this.type;
 	}
@@ -49,14 +49,14 @@ public class WearableArmorDecorationItem extends MedievalArmorItem implements Ar
 	{
 		return stack.getItem() != this &&
 				ArmorDecorationItem.getDecorationTags(stack).size() < 8 &&
-				stack.getItem() instanceof ArmorItem armor &&
-				this.getType() == armor.getType();
+				com.magistuarmory.item.armor.ArmorComponents.isArmor(stack) &&
+				this.getType().getSlot() == com.magistuarmory.item.armor.ArmorComponents.slot(stack.getItem());
 	}
 
 	@Override
 	@Environment(EnvType.CLIENT)
 	public ModelLayerLocation createModelLocation()
 	{
-		return ModModelsProvider.createDecorationLocation(this.getResourceLocation());
+		return ModModelsProvider.createDecorationLocation(this.getIdentifier());
 	}
 }

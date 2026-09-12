@@ -11,8 +11,8 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.fabricmc.api.EnvType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.resources.Identifier;
+
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -51,8 +51,9 @@ public abstract class ModItemsProvider
 		return new ShieldsSupply(workshop, shieldName);
 	}
 
-	public @Nullable RegistrySupplier<KnightItem> addKnightItem(String id, ArmorType type, ArmorItem.Type slot, Item.Properties properties)
+	public @Nullable RegistrySupplier<KnightItem> addKnightItem(String id, ArmorType type, net.minecraft.world.item.equipment.ArmorType slot, Item.Properties properties)
 	{
+        properties.setId(net.minecraft.resources.ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modId, id)));
 		if (type.isDisabled())
 			return null;
 		RegistrySupplier<KnightItem> armor = ItemRegistryHelper.registerKnightItem(this.items, id, type, slot, properties);
@@ -61,20 +62,22 @@ public abstract class ModItemsProvider
 		return armor;
 	}
 
-	public @Nullable RegistrySupplier<MedievalArmorItem> addJoustingItem(String id, ArmorType type, ArmorItem.Type slot, Item.Properties properties)
+	public @Nullable RegistrySupplier<MedievalArmorItem> addJoustingItem(String id, ArmorType type, net.minecraft.world.item.equipment.ArmorType slot, Item.Properties properties)
 	{
+        properties.setId(net.minecraft.resources.ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modId, id)));
 		if (type.isDisabled())
 			return null;
 		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerJoustingItem(this.items, id, type, slot, properties);
 		this.armorItems.add(armor);
-		if (slot == ArmorItem.Type.HELMET) {
+		if (slot == net.minecraft.world.item.equipment.ArmorType.HELMET) {
 			this.dyeableItems.add(armor);
 		}
 		return armor;
 	}
 
-	public @Nullable RegistrySupplier<MedievalArmorItem> addMedievalArmorItem(String id, ArmorType type, ArmorItem.Type slot, Item.Properties properties)
+	public @Nullable RegistrySupplier<MedievalArmorItem> addMedievalArmorItem(String id, ArmorType type, net.minecraft.world.item.equipment.ArmorType slot, Item.Properties properties)
 	{
+        properties.setId(net.minecraft.resources.ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modId, id)));
 		if (type.isDisabled()) {
 			return null;
 		}
@@ -83,8 +86,9 @@ public abstract class ModItemsProvider
 		return armor;
 	}
 
-	public @Nullable RegistrySupplier<DyeableMedievalArmorItem> addDyeableMedievalArmorItem(String id, ArmorType type, ArmorItem.Type slot, Item.Properties properties, int defaultcolor)
+	public @Nullable RegistrySupplier<DyeableMedievalArmorItem> addDyeableMedievalArmorItem(String id, ArmorType type, net.minecraft.world.item.equipment.ArmorType slot, Item.Properties properties, int defaultcolor)
 	{
+        properties.setId(net.minecraft.resources.ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modId, id)));
 		if (type.isDisabled())
 			return null;
 		RegistrySupplier<DyeableMedievalArmorItem> armor = ItemRegistryHelper.registerDyeableMedievalArmorItem(this.items, id, type, slot, properties, defaultcolor);
@@ -95,6 +99,7 @@ public abstract class ModItemsProvider
 
 	public @Nullable RegistrySupplier<MedievalWeaponItem> addMedievalWeaponItem(String id, Item.Properties properties, ModItemTier material, WeaponType type)
 	{
+        properties.setId(net.minecraft.resources.ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modId, id)));
 		if (type.isDisabled())
 			return null;
 		RegistrySupplier<MedievalWeaponItem> weapon = ItemRegistryHelper.registerMedievalWeaponItem(this.items, id, properties, material, type);
@@ -104,6 +109,7 @@ public abstract class ModItemsProvider
 
 	public @Nullable RegistrySupplier<MedievalWeaponItem> addLanceItem(String id, Item.Properties properties, ModItemTier material, WeaponType type)
 	{
+        properties.setId(net.minecraft.resources.ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modId, id)));
 		if (type.isDisabled())
 			return null;
 		RegistrySupplier<MedievalWeaponItem> weapon = ItemRegistryHelper.registerLanceItem(this.items, id, properties, material, type);
@@ -133,16 +139,18 @@ public abstract class ModItemsProvider
 		return registrysupplier;
 	}
 
-	public RegistrySupplier<WearableArmorDecorationItem> addWearableArmorDecorationItem(String id, ArmorType material, ArmorItem.Type type, Item.Properties properties)
+	public RegistrySupplier<WearableArmorDecorationItem> addWearableArmorDecorationItem(String id, ArmorType material, net.minecraft.world.item.equipment.ArmorType type, Item.Properties properties)
 	{
+        properties.setId(net.minecraft.resources.ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modId, id)));
 		RegistrySupplier<WearableArmorDecorationItem> registrysupplier = ItemRegistryHelper.registerWearableArmorDecorationItem(this.items, id, material, type, properties);
 		this.armorDecorationItems.add(registrysupplier);
 		this.armorItems.add(registrysupplier);
 		return registrysupplier;
 	}
 
-	public RegistrySupplier<DyeableWearableArmorDecorationItem> addDyeableWearableArmorDecorationItem(String id, ArmorType material, ArmorItem.Type type, Item.Properties properties, int defaultcolor)
+	public RegistrySupplier<DyeableWearableArmorDecorationItem> addDyeableWearableArmorDecorationItem(String id, ArmorType material, net.minecraft.world.item.equipment.ArmorType type, Item.Properties properties, int defaultcolor)
 	{
+        properties.setId(net.minecraft.resources.ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modId, id)));
 		RegistrySupplier<DyeableWearableArmorDecorationItem> registrysupplier = ItemRegistryHelper.registerDyeableWearableArmorDecorationItem(this.items, id, material, type, properties, defaultcolor);
 		this.armorDecorationItems.add(registrysupplier);
 		this.dyeableItems.add(registrysupplier);
@@ -152,18 +160,20 @@ public abstract class ModItemsProvider
 
 	public @Nullable RegistrySupplier<MedievalShieldItem> addMedievalShieldItem(String id, String name, Item.Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type)
 	{
+        properties.setId(net.minecraft.resources.ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modId, id)));
 		if (type.isDisabled())
 			return null;
-		RegistrySupplier<MedievalShieldItem> shield = ItemRegistryHelper.registerMedievalShieldItem(this.items, id, ResourceLocation.fromNamespaceAndPath(this.modId, name), properties, material, paintable, is3d, type);
+		RegistrySupplier<MedievalShieldItem> shield = ItemRegistryHelper.registerMedievalShieldItem(this.items, id, Identifier.fromNamespaceAndPath(this.modId, name), properties, material, paintable, is3d, type);
 		this.shieldItems.add(shield);
 		return shield;
 	}
 
 	public @Nullable RegistrySupplier<MedievalShieldItem> addPaviseItem(String id, String name, Item.Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Supplier<PaviseBlock> block)
 	{
+        properties.setId(net.minecraft.resources.ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modId, id)));
 		if (type.isDisabled())
 			return null;
-		RegistrySupplier<MedievalShieldItem> shield = ItemRegistryHelper.registerPaviseItem(this.items, id, ResourceLocation.fromNamespaceAndPath(this.modId, name), properties, material, paintable, is3d, type, block);
+		RegistrySupplier<MedievalShieldItem> shield = ItemRegistryHelper.registerPaviseItem(this.items, id, Identifier.fromNamespaceAndPath(this.modId, name), properties, material, paintable, is3d, type, block);
 		this.shieldItems.add(shield);
 		return shield;
 	}
@@ -172,7 +182,7 @@ public abstract class ModItemsProvider
 	{
 		if (type.isDisabled())
 			return null;
-		RegistrySupplier<Item> bow = this.items.register(id, () -> new MedievalBowItem(new Item.Properties().stacksTo(1).durability(type.getDurability()), type.getProjectileSpeed(), type.getPullTime()));
+		RegistrySupplier<Item> bow = this.items.register(id, () -> new MedievalBowItem(new Item.Properties().setId(net.minecraft.resources.ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modId, id))).stacksTo(1).durability(type.getDurability()), type.getProjectileSpeed(), type.getPullTime()));
 		this.rangedWeaponItems.add(bow);
 		return bow;
 	}
@@ -181,21 +191,21 @@ public abstract class ModItemsProvider
 	{
 		if (type.isDisabled())
 			return null;
-		RegistrySupplier<Item> crossbow = this.items.register(id, () -> new MedievalCrossbowItem(new Item.Properties().stacksTo(1).durability(type.getDurability()), type.getProjectileSpeed(), type.getPullTime()));
+		RegistrySupplier<Item> crossbow = this.items.register(id, () -> new MedievalCrossbowItem(new Item.Properties().setId(net.minecraft.resources.ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modId, id))).stacksTo(1).durability(type.getDurability()), type.getProjectileSpeed(), type.getPullTime()));
 		this.rangedWeaponItems.add(crossbow);
 		return crossbow;
 	}
 
 	public @Nullable RegistrySupplier<Item> addMedievalBowItem(String id, int durability, float projectileSpeed, int pullTime)
 	{
-		RegistrySupplier<Item> bow = this.items.register(id, () -> new MedievalBowItem(new Item.Properties().stacksTo(1).durability(durability), projectileSpeed, pullTime));
+		RegistrySupplier<Item> bow = this.items.register(id, () -> new MedievalBowItem(new Item.Properties().setId(net.minecraft.resources.ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modId, id))).stacksTo(1).durability(durability), projectileSpeed, pullTime));
 		this.rangedWeaponItems.add(bow);
 		return bow;
 	}
 
 	public @Nullable RegistrySupplier<Item> addMedievalCrossbowItem(String id, int durability, float projectileSpeed, int pullTime)
 	{
-		RegistrySupplier<Item> crossbow = this.items.register(id, () -> new MedievalCrossbowItem(new Item.Properties().stacksTo(1).durability(durability), projectileSpeed, pullTime));
+		RegistrySupplier<Item> crossbow = this.items.register(id, () -> new MedievalCrossbowItem(new Item.Properties().setId(net.minecraft.resources.ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modId, id))).stacksTo(1).durability(durability), projectileSpeed, pullTime));
 		this.rangedWeaponItems.add(crossbow);
 		return crossbow;
 	}

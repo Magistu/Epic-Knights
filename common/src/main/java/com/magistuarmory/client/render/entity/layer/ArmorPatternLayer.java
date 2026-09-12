@@ -1,35 +1,24 @@
 package com.magistuarmory.client.render.entity.layer;
 
 import com.magistuarmory.client.render.PatternLayer;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.resources.ResourceLocation;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.resources.Identifier;
 
-public interface ArmorPatternLayer extends PatternLayer
-{
-    ResourceLocation getBaseTexture(boolean withPattern);
-    
-    ResourceLocation getBasePatternTexture();
-
-    ResourceLocation getPatternTexture(ResourceLocation patternlocation);
-    
+public interface ArmorPatternLayer extends PatternLayer {
+    Identifier getBaseTexture(boolean withPattern);
+    Identifier getBasePatternTexture();
+    Identifier getPatternTexture(Identifier pattern);
     @Override
-    default VertexConsumer baseVertexConsumer(MultiBufferSource buffer, boolean withPattern, boolean hasfoil)
-    {
-        return ItemRenderer.getArmorFoilBuffer(buffer, RenderType.entityCutout(getBaseTexture(withPattern)), hasfoil);
-    }
-    
-    @Override
-    default VertexConsumer basePatternVertexConsumer(MultiBufferSource buffer, boolean hasfoil)
-    {
-        return ItemRenderer.getArmorFoilBuffer(buffer, RenderType.entityCutout(getBasePatternTexture()), hasfoil);
-    }
-
-    @Override
-    default VertexConsumer patternVertexConsumer(MultiBufferSource buffer, ResourceLocation patternlocation, boolean hasfoil)
-    {
-        return ItemRenderer.getArmorFoilBuffer(buffer, RenderType.entityNoOutline(getPatternTexture(patternlocation)), hasfoil);
+    default void submitPatternPart(PoseStack pose, SubmitNodeCollector collector, ModelPart part, int light, int overlay,
+            int color, boolean foil, int layer, Identifier pattern) {
+        Identifier texture = switch (layer) {
+            case 0, 1 -> getBaseTexture(layer == 1);
+            case 2 -> getBasePatternTexture();
+            default -> getPatternTexture(pattern);
+        };
+        collector.submitModelPart(part, pose, RenderTypes.entityTranslucent(texture), light, overlay, null, false, foil, color, null, 0);
     }
 }

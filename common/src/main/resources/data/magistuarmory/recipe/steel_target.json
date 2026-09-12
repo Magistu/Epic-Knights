@@ -5,12 +5,8 @@
     "mmh"
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/steel"
-    },
-    "h": {
-      "tag": "c:ingots/steel"
-    }
+    "m": "#c:ingots/steel",
+    "h": "#c:ingots/steel"
   },
   "result": {
     "id": "magistuarmory:steel_target",

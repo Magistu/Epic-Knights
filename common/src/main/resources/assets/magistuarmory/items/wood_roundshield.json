@@ -1,0 +1,30 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "magistuarmory:property",
+    "name": "minecraft:blocking",
+    "fallback": {
+      "type": "minecraft:special",
+      "base": "magistuarmory:item/wood_roundshield",
+      "model": {
+        "type": "magistuarmory:heraldry",
+        "id": "wood_roundshield",
+        "location": "magistuarmory:roundshield"
+      }
+    },
+    "entries": [
+      {
+        "threshold": 1,
+        "model": {
+          "type": "minecraft:special",
+          "base": "magistuarmory:item/wood_roundshield_blocking",
+          "model": {
+            "type": "magistuarmory:heraldry",
+            "id": "wood_roundshield",
+            "location": "magistuarmory:roundshield"
+          }
+        }
+      }
+    ]
+  }
+}

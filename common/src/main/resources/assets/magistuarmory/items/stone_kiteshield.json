@@ -1,0 +1,30 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "magistuarmory:property",
+    "name": "minecraft:blocking",
+    "fallback": {
+      "type": "minecraft:special",
+      "base": "magistuarmory:item/stone_kiteshield",
+      "model": {
+        "type": "magistuarmory:heraldry",
+        "id": "stone_kiteshield",
+        "location": "magistuarmory:kiteshield"
+      }
+    },
+    "entries": [
+      {
+        "threshold": 1,
+        "model": {
+          "type": "minecraft:special",
+          "base": "magistuarmory:item/stone_kiteshield_blocking",
+          "model": {
+            "type": "magistuarmory:heraldry",
+            "id": "stone_kiteshield",
+            "location": "magistuarmory:kiteshield"
+          }
+        }
+      }
+    ]
+  }
+}

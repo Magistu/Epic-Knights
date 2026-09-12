@@ -6,25 +6,25 @@ import com.magistuarmory.component.ModDataComponents;
 import com.magistuarmory.network.PacketLanceCollision;
 import com.magistuarmory.util.CombatHelper;
 import com.magistuarmory.util.ModDamageSources;
-import dev.architectury.registry.item.ItemPropertiesRegistry;
+import com.magistuarmory.client.render.ItemPropertiesRegistry;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.horse.Horse;
+import net.minecraft.world.entity.animal.equine.Horse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
@@ -41,7 +41,7 @@ import java.util.List;
 public class LanceItem extends MedievalWeaponItem
 {
 	private final ModItemTier material;
-	private List<ItemStack> dropItems = new ArrayList<>();
+	private final List<java.util.function.Supplier<ItemStack>> dropItems = new ArrayList<>();
 	protected int clickedticks = 0;
 	static int CLICKED_TICKS_COOLDOWN = 5;
 
@@ -63,24 +63,25 @@ public class LanceItem extends MedievalWeaponItem
 
 	public void setupDropItems()
 	{
-		this.dropItems.add(new ItemStack(Items.STICK, 2));
+        this.dropItems.clear();
+		this.dropItems.add(() -> new ItemStack(Items.STICK, 2));
 		String materialname = this.material.getMaterialName();
 		switch (materialname)
 		{
-			case "iron" -> this.dropItems.add(new ItemStack(Items.IRON_INGOT));
-			case "gold" -> this.dropItems.add(new ItemStack(Items.GOLD_INGOT));
-			case "diamond" -> this.dropItems.add(new ItemStack(Items.DIAMOND));
+			case "iron" -> this.dropItems.add(() -> new ItemStack(Items.IRON_INGOT));
+			case "gold" -> this.dropItems.add(() -> new ItemStack(Items.GOLD_INGOT));
+			case "diamond" -> this.dropItems.add(() -> new ItemStack(Items.DIAMOND));
 			case "netherite" ->
 			{
-				this.dropItems.add(new ItemStack(Items.NETHERITE_INGOT));
-				this.dropItems.add(new ItemStack(Items.DIAMOND));
+				this.dropItems.add(() -> new ItemStack(Items.NETHERITE_INGOT));
+				this.dropItems.add(() -> new ItemStack(Items.DIAMOND));
 			}
-			case "steel" -> this.dropItems.add(new ItemStack(ModItems.STEEL_INGOT.get()));
+			case "steel" -> this.dropItems.add(() -> new ItemStack(ModItems.STEEL_INGOT.get()));
 		}
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
+	public InteractionResult use(Level level, Player player, InteractionHand hand)
 	{
 		this.setRaised(player, !this.isRaised(player));
 		return super.use(level, player, hand);
@@ -92,7 +93,7 @@ public class LanceItem extends MedievalWeaponItem
 		if (EpicKnights.GENERAL_CONFIG.disableLanceCollision)
 			return super.onAttackClickEntity(stack, player, entity);
 
-		if (player.isPassenger() && !this.isRaised(player) && !player.getCooldowns().isOnCooldown(this))
+		if (player.isPassenger() && !this.isRaised(player) && !player.getCooldowns().isOnCooldown(player.getMainHandItem()))
 			this.resetClickedTicks();
 		player.swing(InteractionHand.MAIN_HAND);
 
@@ -104,7 +105,7 @@ public class LanceItem extends MedievalWeaponItem
 		if (player == null || level == null)
 			return;
 
-		if (!this.isRaised(player) && !player.getCooldowns().isOnCooldown(this) && player.isPassenger())
+		if (!this.isRaised(player) && !player.getCooldowns().isOnCooldown(player.getMainHandItem()) && player.isPassenger())
 		{
 			float speed = this.getVelocityProjection(player);
 
@@ -160,10 +161,10 @@ public class LanceItem extends MedievalWeaponItem
 					stack.setDamageValue(stack.getDamageValue() + 1);
 			}
 
-			for (ItemStack stack0 : player.getInventory().items)
+			for (ItemStack stack0 : player.getInventory().getNonEquipmentItems())
 			{
 				this.setRaised(player, true);
-				player.getCooldowns().addCooldown(stack0.getItem(), (int) player.getCurrentItemAttackStrengthDelay());
+				player.getCooldowns().addCooldown(stack0, (int) player.getCurrentItemAttackStrengthDelay());
 			}
 
 			if (stack.getDamageValue() >= stack.getMaxDamage())
@@ -180,14 +181,14 @@ public class LanceItem extends MedievalWeaponItem
 		if (victim.isPassenger())
 		{
 			victim.getRootVehicle().setDeltaMovement(victim.getRootVehicle().getDeltaMovement().add(vel));
-			victim.getRootVehicle().hasImpulse = true;
+			victim.getRootVehicle().needsSync = true;
 			if (dismount)
 				victim.stopRiding();
 		}
 		else
 		{
 			victim.setDeltaMovement(victim.getDeltaMovement().add(vel));
-			victim.hasImpulse = true;
+			victim.needsSync = true;
 		}
 
 		if (!super.onHurtEntity(source, victim, bonusdamage + damage) && bonusdamage != 0.0f)
@@ -200,23 +201,23 @@ public class LanceItem extends MedievalWeaponItem
 	}
 
 	@Override
-	public UseAnim getUseAnimation(ItemStack stack)
+	public ItemUseAnimation getUseAnimation(ItemStack stack)
 	{
-		return UseAnim.BOW;
+		return ItemUseAnimation.BOW;
 	}
 
 	@Override
-	public void inventoryTick(ItemStack stack, Level level, Entity entity, int i, boolean selected)
+	public void inventoryTick(ItemStack stack, net.minecraft.server.level.ServerLevel level, Entity entity, net.minecraft.world.entity.EquipmentSlot slot)
 	{
 		if (EpicKnights.GENERAL_CONFIG.disableLanceCollision)
 		{
-			super.inventoryTick(stack, level, entity, i, selected);
+			super.inventoryTick(stack, level, entity, slot);
 			return;
 		}
 
 		if (entity instanceof Player player)
 		{
-			if (level.isClientSide && player.getMainHandItem().getItem() instanceof LanceItem)
+			if (level.isClientSide() && player.getMainHandItem().getItem() instanceof LanceItem)
 			{
 				HitResult hit = HitResultHelper.getMouseOver(Minecraft.getInstance(), CombatHelper.getAttackReach(player, this));
 				if (hit instanceof EntityHitResult entityhit)
@@ -230,10 +231,10 @@ public class LanceItem extends MedievalWeaponItem
 					this.clickedticks--;
 			}
 
-			if (!this.isRaised(player) && player.getCooldowns().isOnCooldown(this))
+			if (!this.isRaised(player) && player.getCooldowns().isOnCooldown(player.getMainHandItem()))
 				this.setRaised(player, true);
 		}
-		super.inventoryTick(stack, level, entity, i, selected);
+		super.inventoryTick(stack, level, entity, slot);
 	}
 
 	@Override
@@ -249,13 +250,13 @@ public class LanceItem extends MedievalWeaponItem
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, List<Component> tooltip, TooltipFlag flag)
+	public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> tooltip, TooltipFlag flag)
 	{
-		tooltip.add(Component.translatable("lance.rideronly").withStyle(ChatFormatting.BLUE));
-		tooltip.add(Component.translatable("lance.leftclick").withStyle(ChatFormatting.BLUE));
-		tooltip.add(Component.translatable("lance.bonusdamage").withStyle(ChatFormatting.BLUE));
+		tooltip.accept(Component.translatable("lance.rideronly").withStyle(ChatFormatting.BLUE));
+		tooltip.accept(Component.translatable("lance.leftclick").withStyle(ChatFormatting.BLUE));
+		tooltip.accept(Component.translatable("lance.bonusdamage").withStyle(ChatFormatting.BLUE));
 
-		super.appendHoverText(stack, tooltipContext, tooltip, flag);
+		super.appendHoverText(stack, tooltipContext, display, tooltip, flag);
 	}
 
 
@@ -302,11 +303,9 @@ public class LanceItem extends MedievalWeaponItem
 		mass += (box.getXsize()) * (box.getYsize()) * (box.getZsize());
 
 		if (entity instanceof LivingEntity livingentity) {
-			for (ItemStack armorpiece : livingentity.getArmorSlots())
-			{
-				if (!armorpiece.isEmpty() && armorpiece.getItem() instanceof ArmorItem)
-					mass += (((ArmorItem) armorpiece.getItem()).getDefense() + ((ArmorItem) armorpiece.getItem()).getToughness()) / 20.0;
-			}
+            mass += (livingentity.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR)
+                    + livingentity.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR_TOUGHNESS)) / 20.0;
+
 		}
 
 		return mass;
@@ -316,9 +315,9 @@ public class LanceItem extends MedievalWeaponItem
 	{
 		if (player.getMainHandItem().getItem() == this)
 		{
-			for (ItemStack stack : this.dropItems)
-				player.drop(stack, true);
-			player.playSound(SoundEvents.ITEM_BREAK, 1.0f, 1.0f);
+			for (var drop : this.dropItems)
+				player.drop(drop.get(), true);
+			player.playSound(SoundEvents.ITEM_BREAK.value(), 1.0f, 1.0f);
 		}
 	}
 
@@ -365,6 +364,6 @@ public class LanceItem extends MedievalWeaponItem
 	@Environment(EnvType.CLIENT)
 	public void registerModelProperty()
 	{
-		ItemPropertiesRegistry.register(this, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "raised"), (stack, level, entity, i) -> this.isRaised(entity) ? 1 : 0);
+		ItemPropertiesRegistry.register(this, Identifier.fromNamespaceAndPath(EpicKnights.ID, "raised"), (stack, level, entity, i) -> this.isRaised(entity) ? 1 : 0);
 	}
 }

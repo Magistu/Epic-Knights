@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "magistuarmory:item/target",
+    "model": {
+      "type": "magistuarmory:heraldry",
+      "id": "target",
+      "location": "magistuarmory:target"
+    }
+  }
+}

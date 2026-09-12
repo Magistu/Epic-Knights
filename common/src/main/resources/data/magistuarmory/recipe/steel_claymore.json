@@ -4,12 +4,8 @@
     "mt"
   ],
   "key": {
-    "t": {
-      "item": "magistuarmory:steel_shortsword"
-    },
-    "m": {
-      "tag": "c:ingots/steel"
-    }
+    "t": "magistuarmory:steel_shortsword",
+    "m": "#c:ingots/steel"
   },
   "result": {
     "id": "magistuarmory:steel_claymore",

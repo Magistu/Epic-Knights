@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "magistuarmory:rustedchainmail"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "magistuarmory:rustedchainmail"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "magistuarmory:rustedchainmail"
+      }
+    ]
+  }
+}

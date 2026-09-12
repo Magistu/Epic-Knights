@@ -9,7 +9,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -35,11 +35,11 @@ public class ThrowingWeaponItem extends TridentItem
     }
 
     @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity shooter, int i) {
+    public boolean releaseUsing(ItemStack stack, Level level, LivingEntity shooter, int i) {
         int duration = this.getUseDuration(stack, shooter) - i;
         if (duration >= this.shootThresholdTime && !isTooDamagedToUse(stack)) {
-            if (!level.isClientSide) {
-                stack.hurtAndBreak(1, shooter, LivingEntity.getSlotForHand(shooter.getUsedItemHand()));
+            if (!level.isClientSide()) {
+                stack.hurtAndBreak(1, shooter, shooter.getUsedItemHand() == net.minecraft.world.InteractionHand.MAIN_HAND ? net.minecraft.world.entity.EquipmentSlot.MAINHAND : net.minecraft.world.entity.EquipmentSlot.OFFHAND);
                 ThrownProjectile projectile = new ThrownProjectile(level, shooter, stack);
                 projectile.shootFromRotation(shooter, shooter.getXRot(), shooter.getYRot(), 0.0F, this.projectileSpeed, 1.0F);
                 if (shooter.hasInfiniteMaterials()) {
@@ -57,7 +57,10 @@ public class ThrowingWeaponItem extends TridentItem
             if (shooter instanceof Player player) {
                 player.awardStat(Stats.ITEM_USED.get(this));
             }
+            return true;
         }
+
+        return false;
     }
 
     private static boolean isTooDamagedToUse(ItemStack stack) {

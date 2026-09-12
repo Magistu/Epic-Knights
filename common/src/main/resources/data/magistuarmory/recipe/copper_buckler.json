@@ -5,12 +5,8 @@
     "mm "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/copper"
-    },
-    "h": {
-      "tag": "c:ingots/steel"
-    }
+    "m": "#c:ingots/copper",
+    "h": "#c:ingots/steel"
   },
   "result": {
     "id": "magistuarmory:copper_buckler",

@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "magistuarmory:wingedhussarchestplate"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "magistuarmory:wingedhussarchestplate"
+      }
+    ]
+  }
+}

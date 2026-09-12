@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "magistuarmory:item/diamond_rondache_blocking",
+    "model": {
+      "type": "magistuarmory:heraldry",
+      "id": "diamond_rondache",
+      "location": "magistuarmory:rondache"
+    }
+  }
+}

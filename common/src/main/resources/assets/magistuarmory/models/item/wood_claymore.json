@@ -2,13 +2,5 @@
   "parent": "magistuarmory:item/iron_claymore",
   "textures": {
     "layer0": "magistuarmory:item/wood_claymore"
-  },
-  "overrides": [
-    {
-      "predicate": {
-        "blocking": 1
-      },
-      "model": "magistuarmory:item/wood_claymore_blocking"
-    }
-  ]
+  }
 }

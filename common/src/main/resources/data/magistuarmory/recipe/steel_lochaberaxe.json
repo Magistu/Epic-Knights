@@ -6,12 +6,8 @@
     "p  "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/steel"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    }
+    "m": "#c:ingots/steel",
+    "p": "#magistuarmory:poles"
   },
   "result": {
     "id": "magistuarmory:steel_lochaberaxe",

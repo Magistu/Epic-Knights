@@ -5,12 +5,8 @@
     "i i"
   ],
   "key": {
-    "f": {
-      "item": "minecraft:feather"
-    },
-    "i": {
-      "tag": "c:ingots/steel"
-    }
+    "f": "minecraft:feather",
+    "i": "#c:ingots/steel"
   },
   "result": {
     "id": "magistuarmory:two_plumes_decoration",

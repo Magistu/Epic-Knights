@@ -6,12 +6,8 @@
     " m "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/steel"
-    },
-    "s": {
-      "item": "magistuarmory:wood_pavese"
-    }
+    "m": "#c:ingots/steel",
+    "s": "magistuarmory:wood_pavese"
   },
   "result": {
     "id": "magistuarmory:steel_pavese",

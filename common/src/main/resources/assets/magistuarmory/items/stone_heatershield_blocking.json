@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "magistuarmory:item/stone_heatershield_blocking",
+    "model": {
+      "type": "magistuarmory:heraldry",
+      "id": "stone_heatershield",
+      "location": "magistuarmory:heatershield"
+    }
+  }
+}

@@ -5,15 +5,15 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ModItemTags extends ItemTagsProvider {
+public class ModItemTags extends IntrinsicHolderTagsProvider<Item> {
 
     TagKey<Item> INGOTS = tag("c", "ingots");
     TagKey<Item> NUGGETS = tag("c", "nuggets");
@@ -28,7 +28,7 @@ public class ModItemTags extends ItemTagsProvider {
     TagKey<Item> ARMORS_BOOTS = tag("c", "armors/boots");
 
     public ModItemTags(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> completableFuture, CompletableFuture<TagLookup<Block>> completableFuture2) {
-        super(packOutput, completableFuture, completableFuture2);
+        super(packOutput, Registries.ITEM, completableFuture, item -> item.builtInRegistryHolder().key());
     }
 
     @Override
@@ -64,11 +64,11 @@ public class ModItemTags extends ItemTagsProvider {
                 case LEGS -> tag(ARMORS_LEGGINGS).add(armor);
                 case FEET -> tag(ARMORS_BOOTS).add(armor);
             }
-            tag(ARMORS_HELMETS).add(supplier.get());
+
         }
     }
 
     private static TagKey<Item> tag(String namespace, String name) {
-        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(namespace, name));
+        return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(namespace, name));
     }
 }

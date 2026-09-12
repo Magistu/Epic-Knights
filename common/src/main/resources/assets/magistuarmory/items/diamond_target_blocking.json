@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "magistuarmory:item/diamond_target_blocking",
+    "model": {
+      "type": "magistuarmory:heraldry",
+      "id": "diamond_target",
+      "location": "magistuarmory:target"
+    }
+  }
+}

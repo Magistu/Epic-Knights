@@ -2,13 +2,5 @@
   "parent": "magistuarmory:item/iron_concavehalberd",
   "textures": {
     "layer0": "magistuarmory:item/steel_concavehalberd"
-  },
-  "overrides": [
-    {
-      "predicate": {
-        "blocking": 1
-      },
-      "model": "magistuarmory:item/steel_concavehalberd_blocking"
-    }
-  ]
+  }
 }

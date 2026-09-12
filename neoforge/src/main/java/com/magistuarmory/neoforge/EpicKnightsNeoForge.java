@@ -1,7 +1,6 @@
 package com.magistuarmory.neoforge;
 
 import com.magistuarmory.EpicKnights;
-import com.magistuarmory.compat.ClientEpicFightCompat;
 import dev.architectury.platform.Platform;
 import dev.architectury.utils.Env;
 import net.neoforged.bus.api.IEventBus;
@@ -18,7 +17,7 @@ public class EpicKnightsNeoForge
         ModEffectsNeoForge.init(modEventBus);
         EpicKnights.init();
         if (Platform.getEnvironment() == Env.CLIENT && Platform.isModLoaded("epicfight")) {
-            ClientEpicFightCompat.register(modEventBus);
+//            ClientEpicFightCompat.register(modEventBus);
         }
     }
 }

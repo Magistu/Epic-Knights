@@ -1,9 +1,9 @@
 package com.magistuarmory.item;
 
-import dev.architectury.registry.item.ItemPropertiesRegistry;
+import com.magistuarmory.client.render.ItemPropertiesRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -29,7 +29,7 @@ public class MedievalBowItem extends BowItem implements IHasModelProperty
     }
 
     @Override
-    public void releaseUsing(ItemStack itemStack, Level level, LivingEntity livingEntity, int i) {
+    public boolean releaseUsing(ItemStack itemStack, Level level, LivingEntity livingEntity, int i) {
         if (livingEntity instanceof Player player) {
             ItemStack itemStack2 = player.getProjectile(itemStack);
             if (!itemStack2.isEmpty()) {
@@ -43,9 +43,12 @@ public class MedievalBowItem extends BowItem implements IHasModelProperty
 
                     level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (level.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
                     player.awardStat(Stats.ITEM_USED.get(this));
+                    return true;
                 }
             }
         }
+
+        return false;
     }
 
     public float getPower(int p_185059_0_)
@@ -61,10 +64,10 @@ public class MedievalBowItem extends BowItem implements IHasModelProperty
     @Override
     public void registerModelProperty()
     {
-        ItemPropertiesRegistry.register(this, ResourceLocation.withDefaultNamespace("pulling"), (stack, level, entity, i) ->
+        ItemPropertiesRegistry.register(this, Identifier.withDefaultNamespace("pulling"), (stack, level, entity, i) ->
                 entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
 
-        ItemPropertiesRegistry.register(this, ResourceLocation.withDefaultNamespace("pull"), (stack, level, entity, i) ->
+        ItemPropertiesRegistry.register(this, Identifier.withDefaultNamespace("pull"), (stack, level, entity, i) ->
         {
             if (entity == null) 
                 return 0.0F;

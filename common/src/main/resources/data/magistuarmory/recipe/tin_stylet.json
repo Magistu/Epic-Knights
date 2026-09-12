@@ -6,12 +6,8 @@
     "h  "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/tin"
-    },
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "m": "#c:ingots/tin",
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:tin_stylet",

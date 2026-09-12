@@ -8,7 +8,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class PacketLanceCollision implements CustomPacketPayload
 {
-	public static final CustomPacketPayload.Type<PacketLanceCollision> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, "packet_lance_collision"));
+	public static final CustomPacketPayload.Type<PacketLanceCollision> TYPE = new CustomPacketPayload.Type<>(Identifier.fromNamespaceAndPath(EpicKnights.ID, "packet_lance_collision"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, PacketLanceCollision> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.INT, p -> p.attackerid,
 			ByteBufCodecs.INT, p -> p.victimid,

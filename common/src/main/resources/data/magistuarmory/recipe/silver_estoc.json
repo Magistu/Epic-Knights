@@ -5,12 +5,8 @@
     "t "
   ],
   "key": {
-    "t": {
-      "item": "magistuarmory:silver_shortsword"
-    },
-    "m": {
-      "tag": "c:ingots/silver"
-    }
+    "t": "magistuarmory:silver_shortsword",
+    "m": "#c:ingots/silver"
   },
   "result": {
     "id": "magistuarmory:silver_estoc",

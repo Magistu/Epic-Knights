@@ -16,11 +16,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class HeraldryRecipe extends CustomRecipe
 {
-    public static RecipeSerializer<HeraldryRecipe> SERIALIZER = new SimpleCraftingRecipeSerializer<>(HeraldryRecipe::new);
+    public static RecipeSerializer<HeraldryRecipe> SERIALIZER = new RecipeSerializer<>(com.mojang.serialization.MapCodec.unit(() -> new HeraldryRecipe(CraftingBookCategory.MISC)), net.minecraft.network.codec.StreamCodec.unit(new HeraldryRecipe(CraftingBookCategory.MISC)));
 
     public HeraldryRecipe(CraftingBookCategory category)
     {
-        super(category);
+        super();
         //super(location, CraftingBookCategory.MISC);
     }
 
@@ -63,7 +63,7 @@ public class HeraldryRecipe extends CustomRecipe
     }
 
     @Override
-    public @NotNull ItemStack assemble(CraftingInput container, @NotNull HolderLookup.Provider access)
+    public @NotNull ItemStack assemble(CraftingInput container)
     {
         ItemStack stack = ItemStack.EMPTY;
         ItemStack stack1 = ItemStack.EMPTY;
@@ -102,14 +102,9 @@ public class HeraldryRecipe extends CustomRecipe
         return stack1;
     }
 
-    @Override
-    public boolean canCraftInDimensions(int p_44298_, int p_44299_)
-    {
-        return p_44298_ * p_44299_ >= 2;
-    }
 
     @Override
-    public @NotNull RecipeSerializer<?> getSerializer()
+    public @NotNull RecipeSerializer<HeraldryRecipe> getSerializer()
     {
         return getSerializerInstance();
     }
@@ -127,12 +122,12 @@ public class HeraldryRecipe extends CustomRecipe
 
     static boolean wornWithCaparison(Item item)
     {
-        return item instanceof AnimalArmorItem animalarmor && animalarmor.getBodyType().equals(AnimalArmorItem.BodyType.EQUESTRIAN);
+        return com.magistuarmory.item.armor.ArmorComponents.slot(item) == EquipmentSlot.BODY;
     }
 
     static boolean wornWithSurcoat(Item item)
     {
-        return item instanceof ArmorItem && (EpicKnights.GENERAL_CONFIG.enableSurcoatRecipeForAllArmor || item instanceof ISurcoat) && ((ArmorItem) item).getType().getSlot().equals(EquipmentSlot.CHEST);
+        return com.magistuarmory.item.armor.ArmorComponents.isArmor(item) && (EpicKnights.GENERAL_CONFIG.enableSurcoatRecipeForAllArmor || item instanceof ISurcoat) && com.magistuarmory.item.armor.ArmorComponents.slot(item).equals(EquipmentSlot.CHEST);
     }
 
     static boolean isApplicableForBanner(Item item)

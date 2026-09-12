@@ -6,15 +6,9 @@
     " h "
   ],
   "key": {
-    "s": {
-      "tag": "c:rods/wooden"
-    },
-    "m": {
-      "tag": "c:ingots/gold"
-    },
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "s": "#c:rods/wooden",
+    "m": "#c:ingots/gold",
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:gold_heavywarhammer",

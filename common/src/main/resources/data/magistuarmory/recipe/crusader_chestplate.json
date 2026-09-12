@@ -6,12 +6,8 @@
     "www"
   ],
   "key": {
-    "c": {
-      "item": "magistuarmory:platemail_chestplate"
-    },
-    "w": {
-      "tag": "magistuarmory:woolen_fabrics"
-    }
+    "c": "magistuarmory:platemail_chestplate",
+    "w": "#magistuarmory:woolen_fabrics"
   },
   "result": {
     "id": "magistuarmory:crusader_chestplate",

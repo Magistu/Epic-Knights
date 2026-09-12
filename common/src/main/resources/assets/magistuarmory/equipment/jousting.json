@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "magistuarmory:jousting"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "magistuarmory:jousting"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "magistuarmory:jousting"
+      }
+    ]
+  }
+}

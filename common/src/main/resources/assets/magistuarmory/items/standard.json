@@ -1,0 +1,10 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "magistuarmory:item/standard",
+    "model": {
+      "type": "minecraft:banner",
+      "color": "white"
+    }
+  }
+}

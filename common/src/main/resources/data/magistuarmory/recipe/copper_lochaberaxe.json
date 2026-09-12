@@ -6,12 +6,8 @@
     "p  "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/copper"
-    },
-    "p": {
-      "tag": "magistuarmory:poles"
-    }
+    "m": "#c:ingots/copper",
+    "p": "#magistuarmory:poles"
   },
   "result": {
     "id": "magistuarmory:copper_lochaberaxe",

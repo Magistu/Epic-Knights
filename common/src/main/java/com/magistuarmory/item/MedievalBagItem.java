@@ -6,7 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -20,34 +20,31 @@ import java.util.List;
 
 public class MedievalBagItem extends Item
 {
-	public MedievalBagItem()
+	public MedievalBagItem(Properties properties)
 	{
-		super(new Properties().stacksTo(1).component(DataComponents.CONTAINER, ItemContainerContents.EMPTY));
+		super(properties.stacksTo(1).component(DataComponents.CONTAINER, ItemContainerContents.EMPTY));
 	}
 	
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
+	public InteractionResult use(Level level, Player player, InteractionHand hand)
 	{
-		InteractionResultHolder<ItemStack> result = super.use(level, player, hand);
-		if (level.isClientSide() || result.getResult().consumesAction())
-			return result;
-		
-		ItemStack bagstack = player.getItemInHand(hand);
-		player.getInventory().setItem(player.getInventory().findSlotMatchingItem(bagstack), ItemStack.EMPTY);
+        if (level.isClientSide()) return InteractionResult.SUCCESS;
+        ItemStack bagstack = player.getItemInHand(hand);
+        player.setItemInHand(hand, ItemStack.EMPTY);
 
-		getContents(bagstack).nonEmptyStream().forEach(s -> {
+		getContents(bagstack).nonEmptyItemCopyStream().forEach(s -> {
 			if (!player.addItem(s))
 				level.addFreshEntity(new ItemEntity(level, player.getX(), player.getY(), player.getZ(), s));
 		});
 		
-		return new InteractionResultHolder<>(InteractionResult.SUCCESS, bagstack);
+		return InteractionResult.SUCCESS;
 	}
 	
 	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, List<Component> tooltip, TooltipFlag flag)
+	public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> tooltip, TooltipFlag flag)
 	{
-		super.appendHoverText(stack, tooltipContext, tooltip, flag);
-		tooltip.add(Component.translatable("medieval_bag.rightclick").withStyle(Style.EMPTY.withColor(ChatFormatting.BLUE).withItalic(true)));
+		super.appendHoverText(stack, tooltipContext, display, tooltip, flag);
+		tooltip.accept(Component.translatable("medieval_bag.rightclick").withStyle(Style.EMPTY.withColor(ChatFormatting.BLUE).withItalic(true)));
 	}
 	
 	public static void setContents(ItemStack bagstack, List<ItemStack> stacks)
@@ -57,6 +54,6 @@ public class MedievalBagItem extends Item
 	
 	public static ItemContainerContents getContents(ItemStack bagstack)
 	{
-		return bagstack.get(DataComponents.CONTAINER);
+		return bagstack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
 	}
 }

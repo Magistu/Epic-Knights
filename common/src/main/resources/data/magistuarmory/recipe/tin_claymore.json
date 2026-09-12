@@ -4,12 +4,8 @@
     "mt"
   ],
   "key": {
-    "t": {
-      "item": "magistuarmory:tin_shortsword"
-    },
-    "m": {
-      "tag": "c:ingots/tin"
-    }
+    "t": "magistuarmory:tin_shortsword",
+    "m": "#c:ingots/tin"
   },
   "result": {
     "id": "magistuarmory:tin_claymore",

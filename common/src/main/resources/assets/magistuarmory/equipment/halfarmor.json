@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "magistuarmory:halfarmor"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "magistuarmory:halfarmor"
+      }
+    ]
+  }
+}

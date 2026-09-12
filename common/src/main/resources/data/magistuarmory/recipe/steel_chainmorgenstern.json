@@ -6,18 +6,10 @@
     "h  "
   ],
   "key": {
-    "c": {
-      "tag": "magistuarmory:chains/steel"
-    },
-    "s": {
-      "tag": "c:rods/wooden"
-    },
-    "m": {
-      "tag": "c:ingots/steel"
-    },
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "c": "#magistuarmory:chains/steel",
+    "s": "#c:rods/wooden",
+    "m": "#c:ingots/steel",
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:steel_chainmorgenstern",

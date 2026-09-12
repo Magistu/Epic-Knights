@@ -16,16 +16,16 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
@@ -41,43 +41,43 @@ import static com.magistuarmory.item.ArmorDecorationItem.getDecorationTags;
 
 
 @Environment(EnvType.CLIENT)
-public class ArmorDecorationLayer<T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> implements ArmorPatternLayer
+public class ArmorDecorationLayer<T extends net.minecraft.client.renderer.entity.state.HumanoidRenderState, M extends HumanoidModel<T>> extends RenderLayer<T, M> implements ArmorPatternLayer
 {
 
    private static final String ARMOR_DIR_PREFIX = "textures/models/armor/";
    private final ArmorDecorationModel<T> coatModel;
    private final String coatDirPrefix;
-   private final ResourceLocation coatTexture;
-   private final ResourceLocation basePatternTexture;
+   private final Identifier coatTexture;
+   private final Identifier basePatternTexture;
    private final ArmorDecorationModelSet<T> decorationModels;
 
-   public ArmorDecorationLayer(ArmorDecorationModelSet<T> decorationModels, RenderLayerParent<T, M> parent, EntityRendererProvider.Context context, ResourceLocation location)
+   public ArmorDecorationLayer(ArmorDecorationModelSet<T> decorationModels, RenderLayerParent<T, M> parent, EntityRendererProvider.Context context, Identifier location)
    {
       super(parent);
       this.decorationModels = decorationModels;
       this.coatModel = new SurcoatModel<>(context.bakeLayer(ModModels.createDecorationLocation(location)));
       this.coatDirPrefix = this.getDirPrefix(location);
       this.coatTexture = this.getTexture(location);
-      this.basePatternTexture = ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, coatDirPrefix + "base.png");
+      this.basePatternTexture = Identifier.fromNamespaceAndPath(EpicKnights.ID, coatDirPrefix + "base.png");
    }
 
-   public ResourceLocation getTexture(ResourceLocation location)
+   public Identifier getTexture(Identifier location)
    {
       return getTexture(location, false);
    }
 
-   public ResourceLocation getTexture(ResourceLocation location, boolean overlay)
+   public Identifier getTexture(Identifier location, boolean overlay)
    {
-      return ResourceLocation.fromNamespaceAndPath(location.getNamespace(), ARMOR_DIR_PREFIX + location.getPath() + (overlay ? "_overlay.png" : ".png"));
+      return Identifier.fromNamespaceAndPath(location.getNamespace(), ARMOR_DIR_PREFIX + location.getPath() + (overlay ? "_overlay.png" : ".png"));
    }
 
-   public String getDirPrefix(ResourceLocation location)
+   public String getDirPrefix(Identifier location)
    {
       return ARMOR_DIR_PREFIX + location.getPath() + "/";
    }
 
    @Override
-   public void render(PoseStack pose, MultiBufferSource buffer, int p, T entity, float f, float f2, float f3, float f4, float f5, float f6)
+   public void submit(PoseStack pose, SubmitNodeCollector buffer, int p, T entity, float yRot, float xRot)
    {
       this.renderPiece(pose, buffer, entity, EquipmentSlot.CHEST, p);
       this.renderPiece(pose, buffer, entity, EquipmentSlot.LEGS, p);
@@ -85,20 +85,20 @@ public class ArmorDecorationLayer<T extends LivingEntity, M extends HumanoidMode
       this.renderPiece(pose, buffer, entity, EquipmentSlot.HEAD, p);
    }
 
-   private void renderPiece(PoseStack pose, MultiBufferSource buffer, T entity, EquipmentSlot slot, int p)
+   private void renderPiece(PoseStack pose, SubmitNodeCollector buffer, T entity, EquipmentSlot slot, int p)
    {
-      ItemStack stack = entity.getItemBySlot(slot);
-      if (stack.getItem() instanceof ArmorItem armoritem && armoritem.getEquipmentSlot() == slot)
+      ItemStack stack = switch (slot) { case HEAD -> entity.headEquipment; case CHEST -> entity.chestEquipment; case LEGS -> entity.legsEquipment; case FEET -> entity.feetEquipment; default -> ItemStack.EMPTY; };
+      if (com.magistuarmory.item.armor.ArmorComponents.isArmor(stack))
       {
          if (stack.get(ModDataComponents.ARMOR_DECORATION.get()) != null)
          {
             for (ArmorDecorationItem.DecorationInfo info : createDecorations(getDecorationTags(stack)))
             {
-               ResourceLocation location = info.location();
+               Identifier location = info.location();
                ArmorDecorationModel<T> model = this.getArmorDecorationModel(location);
                if (model != null)
                {
-                  this.getParentModel().copyPropertiesTo(model);
+                  model.setupAnim(entity);
                   if (info.dyeable())
                   {
                      renderDecoration(pose, buffer, p, OverlayTexture.NO_OVERLAY, info.color(), stack.hasFoil(), model.parts(), getTexture(location));
@@ -112,10 +112,10 @@ public class ArmorDecorationLayer<T extends LivingEntity, M extends HumanoidMode
             }
          }
          BannerPatternLayers patterns = stack.get(DataComponents.BANNER_PATTERNS);
-         if (armoritem.getEquipmentSlot() == EquipmentSlot.CHEST && patterns != null)
+         if (slot == EquipmentSlot.CHEST && patterns != null)
          {
             DyeColor basecolor = stack.get(DataComponents.BASE_COLOR);
-            this.getParentModel().copyPropertiesTo(this.coatModel);
+            this.coatModel.setupAnim(entity);
             renderDecoration(pose, buffer, p, OverlayTexture.NO_OVERLAY, stack.hasFoil(), this.coatModel.parts(), this.coatTexture);
             List<Pair<Holder<BannerPattern>, DyeColor>> list = patterns == null ? new ArrayList<>() : patterns.layers().stream().map(l -> Pair.of(l.pattern(), l.color())).collect(Collectors.toList());
             renderPatterns(pose, buffer, p, OverlayTexture.NO_OVERLAY, list, stack.hasFoil(), this.coatModel.parts(), basecolor);
@@ -127,45 +127,43 @@ public class ArmorDecorationLayer<T extends LivingEntity, M extends HumanoidMode
       return this.coatModel;
    }
 
-   public ArmorDecorationModel<T> getArmorDecorationModel(ResourceLocation location)
+   public ArmorDecorationModel<T> getArmorDecorationModel(Identifier location)
    {
       return this.decorationModels.get(location);
    }
 
-   public void renderDecoration(PoseStack pose, MultiBufferSource buffer, int p, int overlay, boolean hasfoil, ModelPart[] modelparts, ResourceLocation texture)
+   public void renderDecoration(PoseStack pose, SubmitNodeCollector buffer, int p, int overlay, boolean hasfoil, ModelPart[] modelparts, Identifier texture)
    {
       renderDecoration(pose, buffer, p, overlay, -1, hasfoil, modelparts, texture);
    }
 
-   public void renderDecoration(PoseStack pose, MultiBufferSource buffer, int p, int overlay, int color, boolean hasfoil, ModelPart[] modelparts, ResourceLocation texture)
+   public void renderDecoration(PoseStack pose, SubmitNodeCollector buffer, int p, int overlay, int color, boolean hasfoil, ModelPart[] modelparts, Identifier texture)
    {
-      VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.entityCutoutNoCull(texture), hasfoil);
-
       for (ModelPart part : modelparts)
-         part.render(pose, vertexconsumer, p, overlay, color);
+         buffer.submitModelPart(part, pose, net.minecraft.client.renderer.rendertype.RenderTypes.entityCutout(texture), p, overlay, null, false, hasfoil, color, null, 0);
    }
 
    @Override
-   public ResourceLocation getBaseTexture(boolean withPattern)
+   public Identifier getBaseTexture(boolean withPattern)
    {
       return this.coatTexture;
    }
 
-   public ResourceLocation getBaseTexture()
+   public Identifier getBaseTexture()
    {
       return this.coatTexture;
    }
 
    @Override
-   public ResourceLocation getBasePatternTexture()
+   public Identifier getBasePatternTexture()
    {
       return this.basePatternTexture;
    }
 
    @Override
-   public ResourceLocation getPatternTexture(ResourceLocation patternlocation)
+   public Identifier getPatternTexture(Identifier patternlocation)
    {
-      return ResourceLocation.fromNamespaceAndPath(this.coatTexture.getNamespace(), this.coatDirPrefix + patternlocation.getPath() + ".png");
+      return Identifier.fromNamespaceAndPath(this.coatTexture.getNamespace(), this.coatDirPrefix + patternlocation.getPath() + ".png");
    }
 
    public void registerDecorations(List<RegistrySupplier<? extends ArmorDecoration>> armorDecorationItems, EntityRendererProvider.Context context) {

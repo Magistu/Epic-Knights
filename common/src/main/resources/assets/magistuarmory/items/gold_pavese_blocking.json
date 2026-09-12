@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "magistuarmory:item/gold_pavese_blocking",
+    "model": {
+      "type": "magistuarmory:heraldry",
+      "id": "gold_pavese",
+      "location": "magistuarmory:pavese"
+    }
+  }
+}

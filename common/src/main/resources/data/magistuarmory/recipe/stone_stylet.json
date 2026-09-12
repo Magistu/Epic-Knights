@@ -6,12 +6,8 @@
     "h  "
   ],
   "key": {
-    "m": {
-      "tag": "c:cobblestones"
-    },
-    "h": {
-      "tag": "magistuarmory:hilts"
-    }
+    "m": "#c:cobblestones",
+    "h": "#magistuarmory:hilts"
   },
   "result": {
     "id": "magistuarmory:stone_stylet",

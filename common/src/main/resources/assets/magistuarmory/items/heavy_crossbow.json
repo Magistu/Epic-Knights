@@ -1,0 +1,342 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "magistuarmory:property",
+    "name": "minecraft:charged",
+    "fallback": {
+      "type": "minecraft:range_dispatch",
+      "property": "magistuarmory:property",
+      "name": "minecraft:charged",
+      "fallback": {
+        "type": "minecraft:range_dispatch",
+        "property": "magistuarmory:property",
+        "name": "minecraft:pulling",
+        "fallback": {
+          "type": "minecraft:range_dispatch",
+          "property": "magistuarmory:property",
+          "name": "minecraft:pulling",
+          "fallback": {
+            "type": "minecraft:range_dispatch",
+            "property": "magistuarmory:property",
+            "name": "minecraft:pulling",
+            "fallback": {
+              "type": "minecraft:model",
+              "model": "magistuarmory:item/heavy_crossbow"
+            },
+            "entries": [
+              {
+                "threshold": 1,
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "magistuarmory:item/heavy_crossbow_pulling_0"
+                }
+              }
+            ]
+          },
+          "entries": [
+            {
+              "threshold": 1,
+              "model": {
+                "type": "minecraft:range_dispatch",
+                "property": "magistuarmory:property",
+                "name": "minecraft:pull",
+                "fallback": {
+                  "type": "minecraft:range_dispatch",
+                  "property": "magistuarmory:property",
+                  "name": "minecraft:pulling",
+                  "fallback": {
+                    "type": "minecraft:model",
+                    "model": "magistuarmory:item/heavy_crossbow"
+                  },
+                  "entries": [
+                    {
+                      "threshold": 1,
+                      "model": {
+                        "type": "minecraft:model",
+                        "model": "magistuarmory:item/heavy_crossbow_pulling_0"
+                      }
+                    }
+                  ]
+                },
+                "entries": [
+                  {
+                    "threshold": 0.58,
+                    "model": {
+                      "type": "minecraft:model",
+                      "model": "magistuarmory:item/heavy_crossbow_pulling_1"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "entries": [
+          {
+            "threshold": 1,
+            "model": {
+              "type": "minecraft:range_dispatch",
+              "property": "magistuarmory:property",
+              "name": "minecraft:pull",
+              "fallback": {
+                "type": "minecraft:range_dispatch",
+                "property": "magistuarmory:property",
+                "name": "minecraft:pulling",
+                "fallback": {
+                  "type": "minecraft:range_dispatch",
+                  "property": "magistuarmory:property",
+                  "name": "minecraft:pulling",
+                  "fallback": {
+                    "type": "minecraft:model",
+                    "model": "magistuarmory:item/heavy_crossbow"
+                  },
+                  "entries": [
+                    {
+                      "threshold": 1,
+                      "model": {
+                        "type": "minecraft:model",
+                        "model": "magistuarmory:item/heavy_crossbow_pulling_0"
+                      }
+                    }
+                  ]
+                },
+                "entries": [
+                  {
+                    "threshold": 1,
+                    "model": {
+                      "type": "minecraft:range_dispatch",
+                      "property": "magistuarmory:property",
+                      "name": "minecraft:pull",
+                      "fallback": {
+                        "type": "minecraft:range_dispatch",
+                        "property": "magistuarmory:property",
+                        "name": "minecraft:pulling",
+                        "fallback": {
+                          "type": "minecraft:model",
+                          "model": "magistuarmory:item/heavy_crossbow"
+                        },
+                        "entries": [
+                          {
+                            "threshold": 1,
+                            "model": {
+                              "type": "minecraft:model",
+                              "model": "magistuarmory:item/heavy_crossbow_pulling_0"
+                            }
+                          }
+                        ]
+                      },
+                      "entries": [
+                        {
+                          "threshold": 0.58,
+                          "model": {
+                            "type": "minecraft:model",
+                            "model": "magistuarmory:item/heavy_crossbow_pulling_1"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              "entries": [
+                {
+                  "threshold": 1,
+                  "model": {
+                    "type": "minecraft:model",
+                    "model": "magistuarmory:item/heavy_crossbow_pulling_2"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "entries": [
+        {
+          "threshold": 1,
+          "model": {
+            "type": "minecraft:model",
+            "model": "magistuarmory:item/heavy_crossbow_arrow"
+          }
+        }
+      ]
+    },
+    "entries": [
+      {
+        "threshold": 1,
+        "model": {
+          "type": "minecraft:range_dispatch",
+          "property": "magistuarmory:property",
+          "name": "minecraft:firework",
+          "fallback": {
+            "type": "minecraft:range_dispatch",
+            "property": "magistuarmory:property",
+            "name": "minecraft:charged",
+            "fallback": {
+              "type": "minecraft:range_dispatch",
+              "property": "magistuarmory:property",
+              "name": "minecraft:pulling",
+              "fallback": {
+                "type": "minecraft:range_dispatch",
+                "property": "magistuarmory:property",
+                "name": "minecraft:pulling",
+                "fallback": {
+                  "type": "minecraft:range_dispatch",
+                  "property": "magistuarmory:property",
+                  "name": "minecraft:pulling",
+                  "fallback": {
+                    "type": "minecraft:model",
+                    "model": "magistuarmory:item/heavy_crossbow"
+                  },
+                  "entries": [
+                    {
+                      "threshold": 1,
+                      "model": {
+                        "type": "minecraft:model",
+                        "model": "magistuarmory:item/heavy_crossbow_pulling_0"
+                      }
+                    }
+                  ]
+                },
+                "entries": [
+                  {
+                    "threshold": 1,
+                    "model": {
+                      "type": "minecraft:range_dispatch",
+                      "property": "magistuarmory:property",
+                      "name": "minecraft:pull",
+                      "fallback": {
+                        "type": "minecraft:range_dispatch",
+                        "property": "magistuarmory:property",
+                        "name": "minecraft:pulling",
+                        "fallback": {
+                          "type": "minecraft:model",
+                          "model": "magistuarmory:item/heavy_crossbow"
+                        },
+                        "entries": [
+                          {
+                            "threshold": 1,
+                            "model": {
+                              "type": "minecraft:model",
+                              "model": "magistuarmory:item/heavy_crossbow_pulling_0"
+                            }
+                          }
+                        ]
+                      },
+                      "entries": [
+                        {
+                          "threshold": 0.58,
+                          "model": {
+                            "type": "minecraft:model",
+                            "model": "magistuarmory:item/heavy_crossbow_pulling_1"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              "entries": [
+                {
+                  "threshold": 1,
+                  "model": {
+                    "type": "minecraft:range_dispatch",
+                    "property": "magistuarmory:property",
+                    "name": "minecraft:pull",
+                    "fallback": {
+                      "type": "minecraft:range_dispatch",
+                      "property": "magistuarmory:property",
+                      "name": "minecraft:pulling",
+                      "fallback": {
+                        "type": "minecraft:range_dispatch",
+                        "property": "magistuarmory:property",
+                        "name": "minecraft:pulling",
+                        "fallback": {
+                          "type": "minecraft:model",
+                          "model": "magistuarmory:item/heavy_crossbow"
+                        },
+                        "entries": [
+                          {
+                            "threshold": 1,
+                            "model": {
+                              "type": "minecraft:model",
+                              "model": "magistuarmory:item/heavy_crossbow_pulling_0"
+                            }
+                          }
+                        ]
+                      },
+                      "entries": [
+                        {
+                          "threshold": 1,
+                          "model": {
+                            "type": "minecraft:range_dispatch",
+                            "property": "magistuarmory:property",
+                            "name": "minecraft:pull",
+                            "fallback": {
+                              "type": "minecraft:range_dispatch",
+                              "property": "magistuarmory:property",
+                              "name": "minecraft:pulling",
+                              "fallback": {
+                                "type": "minecraft:model",
+                                "model": "magistuarmory:item/heavy_crossbow"
+                              },
+                              "entries": [
+                                {
+                                  "threshold": 1,
+                                  "model": {
+                                    "type": "minecraft:model",
+                                    "model": "magistuarmory:item/heavy_crossbow_pulling_0"
+                                  }
+                                }
+                              ]
+                            },
+                            "entries": [
+                              {
+                                "threshold": 0.58,
+                                "model": {
+                                  "type": "minecraft:model",
+                                  "model": "magistuarmory:item/heavy_crossbow_pulling_1"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    "entries": [
+                      {
+                        "threshold": 1,
+                        "model": {
+                          "type": "minecraft:model",
+                          "model": "magistuarmory:item/heavy_crossbow_pulling_2"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "entries": [
+              {
+                "threshold": 1,
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "magistuarmory:item/heavy_crossbow_arrow"
+                }
+              }
+            ]
+          },
+          "entries": [
+            {
+              "threshold": 1,
+              "model": {
+                "type": "minecraft:model",
+                "model": "magistuarmory:item/heavy_crossbow_firework"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

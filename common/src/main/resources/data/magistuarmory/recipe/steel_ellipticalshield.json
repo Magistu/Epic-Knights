@@ -6,12 +6,8 @@
     " m "
   ],
   "key": {
-    "m": {
-      "tag": "c:ingots/steel"
-    },
-    "s": {
-      "item": "magistuarmory:wood_ellipticalshield"
-    }
+    "m": "#c:ingots/steel",
+    "s": "magistuarmory:wood_ellipticalshield"
   },
   "result": {
     "id": "magistuarmory:steel_ellipticalshield",

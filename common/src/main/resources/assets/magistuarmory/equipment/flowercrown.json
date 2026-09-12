@@ -1,0 +1,26 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "magistuarmory:flowercrown",
+        "dyeable": {
+          "color_when_undyed": 16777215
+        }
+      },
+      {
+        "texture": "magistuarmory:flowercrown_overlay"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "magistuarmory:flowercrown",
+        "dyeable": {
+          "color_when_undyed": 16777215
+        }
+      },
+      {
+        "texture": "magistuarmory:flowercrown_overlay"
+      }
+    ]
+  }
+}

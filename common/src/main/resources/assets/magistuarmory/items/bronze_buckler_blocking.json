@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "magistuarmory:item/bronze_buckler_blocking",
+    "model": {
+      "type": "magistuarmory:heraldry",
+      "id": "bronze_buckler",
+      "location": "magistuarmory:buckler"
+    }
+  }
+}

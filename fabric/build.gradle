@@ -1,7 +1,7 @@
 import groovy.json.JsonOutput
 
 plugins {
-    id 'com.github.johnrengelman.shadow'
+    id 'com.gradleup.shadow'
     id "com.hypherionmc.modutils.modpublisher" version "2.1.8"
 }
 
@@ -31,11 +31,11 @@ configurations {
 }
 
 dependencies {
-    compileOnly "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
-    compileOnly "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"
-    compileOnly "dev.architectury:architectury-fabric:$rootProject.architectury_api_version"
-    compileOnly "me.shedaniel.cloth:cloth-config-fabric:${rootProject.cloth_config_version}"
-    common(project(path: ':common', configuration: 'namedElements')) { transitive false }
+    implementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+    implementation "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"
+    implementation "dev.architectury:architectury-fabric:$rootProject.architectury_api_version"
+    implementation "me.shedaniel.cloth:cloth-config-fabric:${rootProject.cloth_config_version}"
+    common(project(path: ':common')) { transitive false }
     shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
     compileOnly("com.terraformersmc:modmenu:${rootProject.modmenu_version}") {
         exclude group: "net.fabricmc.fabric-api" }
@@ -48,8 +48,8 @@ processResources {
     def authorsList      = rawAuthors.split(",")*.trim().findAll { it }
     def contributorsList = rawContributors.split(",")*.trim().findAll { it }
 
-    def authorsArray      = JsonOutput.toJson(authorsList)
-    def contributorsArray = JsonOutput.toJson(contributorsList)
+    def authorsArray      = authorsList.collect { JsonOutput.toJson(it)[1..-2] }.join('", "')
+    def contributorsArray = contributorsList.collect { JsonOutput.toJson(it)[1..-2] }.join('", "')
 
     def expandProps = [
             "mod_id"                    : (project.findProperty("mod_id") ?: "").toString(),
@@ -79,22 +79,34 @@ processResources {
     }
 }
 
-shadowJar {
-    configurations = [project.configurations.shadowBundle]
-    archiveClassifier.set 'dev-shadow'
+// Minecraft 26.1 ships unobfuscated; the shaded jar is the final artifact.
+jar {
+    archiveClassifier.set 'dev'
 }
 
-remapJar {
-    inputFile.set shadowJar.archiveFile
-    dependsOn shadowJar
-
+shadowJar {
+    configurations = [project.configurations.shadowBundle]
     archiveClassifier.set(null)
+    exclude 'architectury.common.json'
+}
+
+assemble.dependsOn shadowJar
+
+configurations {
+    apiElements {
+        outgoing.artifacts.clear()
+        outgoing.artifact(shadowJar)
+    }
+    runtimeElements {
+        outgoing.artifacts.clear()
+        outgoing.artifact(shadowJar)
+    }
 }
 
 def display_minecraft_version = rootProject.findProperty("display_minecraft_version")
 def mod_version = rootProject.findProperty("mod_version")
 
-tasks.named("remapJar") { t ->
+tasks.named("shadowJar") { t ->
     t.archiveFileName.set("epic-knights-${display_minecraft_version}-fabric-${mod_version}.jar")
 }
 
@@ -126,7 +138,7 @@ publisher {
 
     setCurseEnvironment("both")
 
-    setArtifact(tasks.remapJar)
+    setArtifact(tasks.shadowJar)
 
     modrinthDepends {
         required("cloth-config")

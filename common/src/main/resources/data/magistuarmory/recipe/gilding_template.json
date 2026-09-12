@@ -6,12 +6,8 @@
     "   "
   ],
   "key": {
-    "i": {
-      "tag": "c:ingots/gold"
-    },
-    "p": {
-      "tag": "magistuarmory:small_plates/steel"
-    }
+    "i": "#c:ingots/gold",
+    "p": "#magistuarmory:small_plates/steel"
   },
   "result": {
     "id": "magistuarmory:gilding_template",

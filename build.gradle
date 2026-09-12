@@ -1,6 +1,6 @@
 plugins {
-    id 'dev.architectury.loom' version '1.6-SNAPSHOT' apply false
-    id 'architectury-plugin' version '3.4-SNAPSHOT'
+    id 'net.fabricmc.fabric-loom' version '1.15.5' apply false
+    id 'architectury-plugin' version '3.5.166'
     id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
 }
 
@@ -11,23 +11,18 @@ architectury {
 allprojects {
     group = rootProject.maven_group
     version = rootProject.mod_version
-    
+
     repositories {
-        maven { url "https://maven.terraformersmc.com/" }
+        maven { url = "https://maven.terraformersmc.com/" }
     }
 }
 
 subprojects {
-    apply plugin: 'dev.architectury.loom'
+    apply plugin: 'net.fabricmc.fabric-loom'
     apply plugin: 'architectury-plugin'
     apply plugin: 'maven-publish'
 
     repositories {
-        // Add repositories to retrieve artifacts from in here.
-        // You should only use this when depending on other mods because
-        // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-        // See https://docs.gradle.org/current/userguide/declaring_repositories.html
-        // for more information about repositories.
         maven {
             name = 'ParchmentMC'
             url = 'https://maven.parchmentmc.org'
@@ -36,28 +31,20 @@ subprojects {
 
     dependencies {
         minecraft "net.minecraft:minecraft:$rootProject.minecraft_version"
-        mappings loom.officialMojangMappings()
-        /*mappings loom.layered() {
-            officialMojangMappings()
-            parchment("org.parchmentmc.data:parchment-${rootProject.minecraft_version}:${rootProject.parchment_mappings}@zip")
-        }*/
     }
 
     java {
-        // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-        // if it is present.
-        // If you remove this line, sources will not be generated.
-        withSourcesJar()
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(25)
+        }
 
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        withSourcesJar()
     }
 
     tasks.withType(JavaCompile).configureEach {
-        it.options.release = 21
+        options.release = 25
     }
 
-    // Configure Maven publishing.
     publishing {
         publications {
             mavenJava(MavenPublication) {
@@ -66,23 +53,20 @@ subprojects {
             }
         }
 
-        // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
         repositories {
-            // Add repositories to publish to here.
-            // Notice: This block does NOT have the same function as the block in the top level.
-            // The repositories here will be used for publishing your artifact, not for
-            // retrieving dependencies.
+            // Add publishing repositories here if needed.
         }
     }
 }
-
 
 ext.minecraftGameVersions = {
     def parse = { String v ->
         def parts = v.tokenize('.')
 
         if (parts.size() < 2)
-            throw new IllegalArgumentException("Version '${v}' must have at least major.minor")
+            throw new IllegalArgumentException(
+                    "Version '${v}' must have at least major.minor"
+            )
 
         [
                 major: parts[0].toInteger(),
@@ -96,25 +80,40 @@ ext.minecraftGameVersions = {
         def max = parse(rootProject.minecraft_max_version.toString())
 
         if (min.major != max.major || min.minor != max.minor) {
-            logger.lifecycle("Different minor/major in range (${min.major}.${min.minor} .. ${max.major}.${max.minor}), falling back to current '${rootProject.minecraft_version}'")
+            logger.lifecycle(
+                    "Different minor/major in range " +
+                            "(${min.major}.${min.minor} .. ${max.major}.${max.minor}), " +
+                            "falling back to current '${rootProject.minecraft_version}'"
+            )
 
             return [rootProject.minecraft_version]
         }
 
         if (min.patch > max.patch) {
-            logger.lifecycle("Min patch ${min.patch} > max patch ${max.patch}, falling back to current '${rootProject.minecraft_version}'")
+            logger.lifecycle(
+                    "Min patch ${min.patch} > max patch ${max.patch}, " +
+                            "falling back to current '${rootProject.minecraft_version}'"
+            )
 
             return [rootProject.minecraft_version]
         }
 
         def result = []
 
-        for (int p = min.patch; p < max.patch; p++)
-            result << (p == 0 ? "${min.major}.${min.minor}" : "${min.major}.${min.minor}.${p}")
+        for (int p = min.patch; p < max.patch; p++) {
+            result << (
+                    p == 0
+                            ? "${min.major}.${min.minor}"
+                            : "${min.major}.${min.minor}.${p}"
+            )
+        }
 
         return result.unique()
     } catch (Exception e) {
-        logger.lifecycle("Failed to compute range: ${e.message}; falling back to current '${rootProject.minecraft_version}'")
+        logger.lifecycle(
+                "Failed to compute range: ${e.message}; " +
+                        "falling back to current '${rootProject.minecraft_version}'"
+        )
 
         return [rootProject.minecraft_version]
     }

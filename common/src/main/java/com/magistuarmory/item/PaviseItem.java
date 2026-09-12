@@ -50,7 +50,7 @@ public class PaviseItem extends MedievalShieldItem
 	
 	public PaviseItem(String id, Identifier location, Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Supplier<PaviseBlock> block)
 	{
-		super(id, location, properties.overrideDescription(block.get().getDescriptionId()), material, paintable, is3d, type);
+		super(id, location, properties, material, paintable, is3d, type);
 		this.block = block;
 	}
 

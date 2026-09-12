@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "magistuarmory:apostolic_cross_pattern",
+    "magistuarmory:bowl_pattern",
+    "magistuarmory:bull_pattern",
+    "magistuarmory:chess_pattern",
+    "magistuarmory:crusader_cross_pattern",
+    "magistuarmory:dragon_pattern",
+    "magistuarmory:eagle_pattern",
+    "magistuarmory:horse_pattern",
+    "magistuarmory:lily_pattern",
+    "magistuarmory:lion1_pattern",
+    "magistuarmory:lion2_pattern",
+    "magistuarmory:orthodox_cross_pattern",
+    "magistuarmory:snake_pattern",
+    "magistuarmory:sun_pattern",
+    "magistuarmory:swords_pattern",
+    "magistuarmory:tower_pattern",
+    "magistuarmory:tree_pattern",
+    "magistuarmory:two_headed_eagle_pattern"
+  ]
+}

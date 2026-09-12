@@ -1,5 +1,6 @@
 """Regression checks for the resource formats and model states used by the 26.1 port."""
 import json
+import re
 from pathlib import Path
 import unittest
 
@@ -88,6 +89,34 @@ class PortResourcesTest(unittest.TestCase):
         crown = read(RESOURCES / "data/magistuarmory/villager_trade/wandering_trader/crown_decoration.json")
         self.assertEqual(crown["wants"]["count"], 10)
         self.assertEqual(crown["max_uses"], 1)
+
+    def test_all_banner_pattern_items_are_accepted_by_loom(self):
+        source = (COMMON / "src/main/java/com/magistuarmory/item/ModItems.java").read_text()
+        registered = {"magistuarmory:" + name for name in
+                      re.findall(r'addIngredientItem\("([^\"]+_pattern)"', source)}
+        self.assertEqual(len(registered), 18)
+        tag = read(RESOURCES / "data/minecraft/tags/item/loom_patterns.json")
+        self.assertFalse(tag.get("replace", False))
+        self.assertEqual(set(tag["values"]), registered)
+        for item in registered:
+            pattern = item.split(":")[1].removesuffix("_pattern")
+            pattern_tag = read(RESOURCES / "data/magistuarmory/tags/banner_pattern/pattern_item" / f"{pattern}.json")
+            self.assertTrue(pattern_tag["values"])
+            for value in pattern_tag["values"]:
+                namespace, name = value.split(":")
+                self.assertTrue((RESOURCES / "data" / namespace / "banner_pattern" / f"{name}.json").is_file())
+
+    def test_dye_recipes_cover_previously_dyeable_equipment(self):
+        tag = read(RESOURCES / "data/minecraft/tags/item/dyeable.json")
+        items = {entry["id"] if isinstance(entry, dict) else entry for entry in tag["values"]}
+        recipes = [read(path) for path in (RESOURCES / "data/magistuarmory/recipe").glob("*_dyed.json")]
+        self.assertEqual({recipe["target"] for recipe in recipes}, items)
+        for recipe in recipes:
+            with self.subTest(item=recipe["target"]):
+                # Vanilla crafting_dye mixes multiple dyes and transmits the original stack's components.
+                self.assertEqual(recipe["type"], "minecraft:crafting_dye")
+                self.assertEqual(recipe["dye"], "#minecraft:dyes")
+                self.assertEqual(recipe["result"], {"id": recipe["target"]})
 
     def test_loot_tables_use_singular_directory(self):
         self.assertEqual(len(list((RESOURCES / "data/magistuarmory/loot_table").rglob("*.json"))), 8)

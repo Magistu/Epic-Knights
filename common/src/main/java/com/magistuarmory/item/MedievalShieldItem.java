@@ -72,6 +72,12 @@ public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
                 .component(net.minecraft.core.component.DataComponents.BREAK_SOUND, net.minecraft.sounds.SoundEvents.SHIELD_BREAK);
     }
 
+    @Override
+    public Component getName(net.minecraft.world.item.ItemStack stack) {
+        // Vanilla ShieldItem appends a dye suffix; mod shields keep their translated item name.
+        return stack.getOrDefault(net.minecraft.core.component.DataComponents.ITEM_NAME, net.minecraft.network.chat.CommonComponents.EMPTY);
+    }
+
 	public String getId()
 	{
 		return this.id;

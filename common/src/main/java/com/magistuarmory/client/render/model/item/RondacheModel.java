@@ -1,7 +1,5 @@
 package com.magistuarmory.client.render.model.item;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -13,7 +11,6 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 // Exported for Minecraft version 1.15 - 1.16 with MCP mappings
 // Paste this class into your mod and generate all required imports
 
-@Environment(EnvType.CLIENT)
 public class RondacheModel extends MedievalShieldModel 
 {
 	public RondacheModel(ModelPart root)

@@ -3,8 +3,6 @@ package com.magistuarmory.client.render.model.decoration;
 import com.magistuarmory.client.render.model.ModModels;
 import com.magistuarmory.item.ArmorDecoration;
 import dev.architectury.registry.registries.RegistrySupplier;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.Identifier;
@@ -15,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-@Environment(EnvType.CLIENT)
 public class ArmorDecorationModelSet<T extends net.minecraft.client.renderer.entity.state.HumanoidRenderState>
 {
     final Map<ModelLayerLocation, ArmorDecorationModel<T>> map = new HashMap<>();

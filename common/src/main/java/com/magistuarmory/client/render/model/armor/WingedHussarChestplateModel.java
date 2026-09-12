@@ -4,12 +4,9 @@ package com.magistuarmory.client.render.model.armor;
 // Paste this class into your mod and generate all required imports
 
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-@Environment(EnvType.CLIENT)
 public class WingedHussarChestplateModel {
 
 	public static LayerDefinition createLayer()

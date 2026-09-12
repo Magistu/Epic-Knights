@@ -8,8 +8,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.math.Axis;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -30,7 +28,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-@Environment(EnvType.CLIENT)
 public class PaviseBlockRenderer implements BlockEntityRenderer<PaviseBlockEntity, PaviseBlockRenderer.State>, ShieldPatternLayer
 {
 	private final PaviseBlockModel model;

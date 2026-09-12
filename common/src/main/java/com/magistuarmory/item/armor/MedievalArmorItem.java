@@ -2,8 +2,6 @@ package com.magistuarmory.item.armor;
 
 import com.magistuarmory.client.render.ModRender;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -38,7 +36,6 @@ public class MedievalArmorItem extends Item implements ISurcoat
 	}
 
 	@Deprecated(forRemoval = true)
-	@Environment(EnvType.CLIENT)
 	public void loadModel(EntityRendererProvider.Context context)
 	{
 		Optional<ModelLayerLocation> location = this.armortype.getModelLocation();
@@ -47,12 +44,10 @@ public class MedievalArmorItem extends Item implements ISurcoat
 						() -> getType() == net.minecraft.world.item.equipment.ArmorType.LEGGINGS ? ModRender.INNER_ARMOR : ModRender.OUTER_ARMOR);
 	}
 
-	@Environment(EnvType.CLIENT)
 	public void setModel(HumanoidModel<net.minecraft.client.renderer.entity.state.HumanoidRenderState> model) {
 		this.model = model;
 	}
 
-	@Environment(EnvType.CLIENT)
 	public HumanoidModel<? extends net.minecraft.client.renderer.entity.state.HumanoidRenderState> getArmorModel(EquipmentSlot slot, HumanoidModel<? extends net.minecraft.client.renderer.entity.state.HumanoidRenderState> _default)
 	{
 		if (slot == this.type.getSlot() && this.model != null) {

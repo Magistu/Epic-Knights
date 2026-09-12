@@ -4,8 +4,6 @@ import com.magistuarmory.EpicKnights;
 import com.magistuarmory.api.client.render.model.ModModelsProvider;
 import com.magistuarmory.item.ArmorDecoration;
 import com.magistuarmory.item.ArmorDecorationItem;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.nbt.CompoundTag;
@@ -67,7 +65,6 @@ public class DyeableWearableArmorDecorationItem extends DyeableMedievalArmorItem
 	}
 
 	@Override
-	@Environment(EnvType.CLIENT)
 	public ModelLayerLocation createModelLocation()
 	{
 		return ModModelsProvider.createDecorationLocation(this.getIdentifier());

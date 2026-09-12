@@ -43,4 +43,4 @@ side = "BOTH"
 
 
 [[mixins]]
-config = "magistuarmory.mixins.json"
+config = "magistuarmory.common.mixins.json"

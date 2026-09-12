@@ -1,13 +1,10 @@
 package com.magistuarmory.client.render.model.decoration;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.world.entity.animal.equine.AbstractHorse;
 
-@Environment(EnvType.CLIENT)
 public class CaparisonModel<T extends AbstractHorse> extends HorseArmorDecorationModel<T>
 {
     public CaparisonModel(ModelPart root)

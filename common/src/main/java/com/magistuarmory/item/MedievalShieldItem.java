@@ -7,7 +7,6 @@ import com.magistuarmory.util.ModDamageSources;
 import dev.architectury.platform.Platform;
 import com.magistuarmory.client.render.ItemPropertiesRegistry;
 import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.network.chat.Component;
@@ -170,7 +169,6 @@ public class MedievalShieldItem extends ShieldItem implements IHasModelProperty
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
 	public void registerModelProperty() 
 	{
 		ItemPropertiesRegistry.register(this, Identifier.withDefaultNamespace("blocking"), (stack, level, entity, i) ->

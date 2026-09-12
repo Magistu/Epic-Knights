@@ -3,8 +3,6 @@ package com.magistuarmory.api.client.render.model;
 import com.magistuarmory.api.item.ModItemsProvider;
 import com.magistuarmory.client.render.ModRender;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.resources.Identifier;
@@ -14,7 +12,6 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 
-@Environment(EnvType.CLIENT)
 public abstract class ModModelsProvider
 {
 	public final String modId;

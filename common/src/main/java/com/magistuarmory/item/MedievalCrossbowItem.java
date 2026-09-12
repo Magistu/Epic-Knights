@@ -1,8 +1,6 @@
 package com.magistuarmory.item;
 
 import com.magistuarmory.client.render.ItemPropertiesRegistry;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -120,7 +118,6 @@ public class MedievalCrossbowItem extends CrossbowItem implements IHasModelPrope
 	}
 
     @Override
-	@Environment(EnvType.CLIENT)
 	public void registerModelProperty()
 	{
 		ItemPropertiesRegistry.register(this, Identifier.withDefaultNamespace("pull"), (stack, level, entity, i) -> {

@@ -2,8 +2,6 @@ package com.magistuarmory.item.armor;
 
 import com.magistuarmory.client.render.model.ModModels;
 import dev.architectury.registry.registries.DeferredRegister;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.util.Util;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.core.Holder;
@@ -116,7 +114,6 @@ public final class ArmorType
 		return !this.enabled;
 	}
 	
-	@Environment(EnvType.CLIENT)
 	public Optional<ModelLayerLocation> getModelLocation()
 	{
 		if (Objects.equals(this.modellocation.getPath(), "default"))

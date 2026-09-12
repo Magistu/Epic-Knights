@@ -556,7 +556,7 @@
   "item.magistuarmory.swords_pattern.desc": "Schwerter",
   "item.magistuarmory.tower_pattern.desc": "Turm",
   "item.magistuarmory.tree_pattern.desc": "Baum",
-  "item.magistuarmory.two-headed_eagle_pattern.desc": "Zweiköpfiger Adler",
+  "item.magistuarmory.two_headed_eagle_pattern.desc": "Zweiköpfiger Adler",
 
 
 
@@ -565,24 +565,24 @@
 
 
 
-  "item.magistuarmory.apostolic_cross_pattern": "Bannervorlage",
-  "item.magistuarmory.bowl_pattern": "Bannervorlage",
-  "item.magistuarmory.bull_pattern": "Bannervorlage",
-  "item.magistuarmory.chess_pattern": "Bannervorlage",
-  "item.magistuarmory.crusader_cross_pattern": "Bannervorlage",
-  "item.magistuarmory.dragon_pattern": "Bannervorlage",
-  "item.magistuarmory.eagle_pattern": "Bannervorlage",
-  "item.magistuarmory.horse_pattern": "Bannervorlage",
-  "item.magistuarmory.lily_pattern": "Bannervorlage",
-  "item.magistuarmory.lion1_pattern": "Bannervorlage",
-  "item.magistuarmory.lion2_pattern": "Bannervorlage",
-  "item.magistuarmory.orthodox_cross_pattern": "Bannervorlage",
-  "item.magistuarmory.snake_pattern": "Bannervorlage",
-  "item.magistuarmory.sun_pattern": "Bannervorlage",
-  "item.magistuarmory.swords_pattern": "Bannervorlage",
-  "item.magistuarmory.tower_pattern": "Bannervorlage",
-  "item.magistuarmory.tree_pattern": "Bannervorlage",
-  "item.magistuarmory.two-headed_eagle_pattern": "Bannervorlage",
+  "item.magistuarmory.apostolic_cross_pattern": "Bannervorlage: Apostolisches Kreuz",
+  "item.magistuarmory.bowl_pattern": "Bannervorlage: Schüssel",
+  "item.magistuarmory.bull_pattern": "Bannervorlage: Stier",
+  "item.magistuarmory.chess_pattern": "Bannervorlage: Schach",
+  "item.magistuarmory.crusader_cross_pattern": "Bannervorlage: Kreuzritter Kreuz",
+  "item.magistuarmory.dragon_pattern": "Bannervorlage: Drache",
+  "item.magistuarmory.eagle_pattern": "Bannervorlage: Adler",
+  "item.magistuarmory.horse_pattern": "Bannervorlage: Pferd",
+  "item.magistuarmory.lily_pattern": "Bannervorlage: Lilie",
+  "item.magistuarmory.lion1_pattern": "Bannervorlage: Löwe auf Hinterbeine",
+  "item.magistuarmory.lion2_pattern": "Bannervorlage: Löwe auf allen Vieren",
+  "item.magistuarmory.orthodox_cross_pattern": "Bannervorlage: Russisches Kreuz",
+  "item.magistuarmory.snake_pattern": "Bannervorlage: Schlange",
+  "item.magistuarmory.sun_pattern": "Bannervorlage: Sonne",
+  "item.magistuarmory.swords_pattern": "Bannervorlage: Schwerter",
+  "item.magistuarmory.tower_pattern": "Bannervorlage: Turm",
+  "item.magistuarmory.tree_pattern": "Bannervorlage: Baum",
+  "item.magistuarmory.two_headed_eagle_pattern": "Bannervorlage: Zweiköpfiger Adler",
 
 
 

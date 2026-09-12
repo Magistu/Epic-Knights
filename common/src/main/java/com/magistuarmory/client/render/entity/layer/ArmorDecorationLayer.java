@@ -12,8 +12,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.datafixers.util.Pair;
 import dev.architectury.registry.registries.RegistrySupplier;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.SubmitNodeCollector;
@@ -40,7 +38,6 @@ import static com.magistuarmory.item.ArmorDecorationItem.createDecorations;
 import static com.magistuarmory.item.ArmorDecorationItem.getDecorationTags;
 
 
-@Environment(EnvType.CLIENT)
 public class ArmorDecorationLayer<T extends net.minecraft.client.renderer.entity.state.HumanoidRenderState, M extends HumanoidModel<T>> extends RenderLayer<T, M> implements ArmorPatternLayer
 {
 

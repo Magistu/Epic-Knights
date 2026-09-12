@@ -5,8 +5,6 @@ import com.magistuarmory.client.render.model.item.MedievalShieldModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.datafixers.util.Pair;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.Model;
 
@@ -28,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Environment(EnvType.CLIENT)
 public class HeraldryItemStackRenderer implements net.minecraft.client.renderer.special.SpecialModelRenderer<net.minecraft.core.component.DataComponentMap>, ShieldPatternLayer {
     private Model model;
     private final Identifier location;

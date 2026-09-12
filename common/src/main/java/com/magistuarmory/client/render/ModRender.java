@@ -11,8 +11,6 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import dev.architectury.registry.registries.RegistrySupplier;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -27,7 +25,6 @@ import java.util.Map;
 import java.util.Optional;
 
 
-@Environment(EnvType.CLIENT)
 public class ModRender
 {
 	public static HumanoidModel<net.minecraft.client.renderer.entity.state.HumanoidRenderState> INNER_ARMOR = null;

@@ -1,17 +1,13 @@
 package com.magistuarmory.item;
 
 import com.magistuarmory.EpicKnights;
-import com.magistuarmory.client.HitResultHelper;
 import com.magistuarmory.component.ModDataComponents;
 import com.magistuarmory.network.PacketLanceCollision;
 import com.magistuarmory.util.CombatHelper;
 import com.magistuarmory.util.ModDamageSources;
 import com.magistuarmory.client.render.ItemPropertiesRegistry;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
@@ -30,8 +26,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
@@ -55,6 +49,10 @@ public class LanceItem extends MedievalWeaponItem
 	{
 		this.clickedticks = CLICKED_TICKS_COOLDOWN;
 	}
+
+    public void tickClickCooldown() {
+        if (this.clickedticks > 0) this.clickedticks--;
+    }
 
 	public float getClickedScale()
 	{
@@ -215,21 +213,8 @@ public class LanceItem extends MedievalWeaponItem
 			return;
 		}
 
-		if (entity instanceof Player player)
+		if (entity instanceof Player player && slot == net.minecraft.world.entity.EquipmentSlot.MAINHAND)
 		{
-			if (level.isClientSide() && player.getMainHandItem().getItem() instanceof LanceItem)
-			{
-				HitResult hit = HitResultHelper.getMouseOver(Minecraft.getInstance(), CombatHelper.getAttackReach(player, this));
-				if (hit instanceof EntityHitResult entityhit)
-				{
-					Entity victim = entityhit.getEntity();
-					if (player.isPassenger() && victim instanceof LivingEntity && victim.isAlive() && victim.getId() != player.getVehicle().getId())
-						this.collide(player, (LivingEntity) victim, level);
-				}
-
-				if (this.clickedticks > 0)
-					this.clickedticks--;
-			}
 
 			if (!this.isRaised(player) && player.getCooldowns().isOnCooldown(player.getMainHandItem()))
 				this.setRaised(player, true);
@@ -361,7 +346,6 @@ public class LanceItem extends MedievalWeaponItem
 	}
 
 	@Override
-	@Environment(EnvType.CLIENT)
 	public void registerModelProperty()
 	{
 		ItemPropertiesRegistry.register(this, Identifier.fromNamespaceAndPath(EpicKnights.ID, "raised"), (stack, level, entity, i) -> this.isRaised(entity) ? 1 : 0);

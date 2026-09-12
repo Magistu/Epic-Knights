@@ -556,7 +556,7 @@
   "item.magistuarmory.swords_pattern.desc": "Miecze",
   "item.magistuarmory.tower_pattern.desc": "Wierza",
   "item.magistuarmory.tree_pattern.desc": "Drzewo",
-  "item.magistuarmory.two-headed_eagle_pattern.desc": "Dwugłowy Orzeł",
+  "item.magistuarmory.two_headed_eagle_pattern.desc": "Dwugłowy Orzeł",
 
 
 
@@ -565,24 +565,24 @@
 
 
 
-  "item.magistuarmory.apostolic_cross_pattern": "Wzór Sztandaru",
-  "item.magistuarmory.bowl_pattern": "Wzór Sztandaru",
-  "item.magistuarmory.bull_pattern": "Wzór Sztandaru",
-  "item.magistuarmory.chess_pattern": "Wzór Sztandaru",
-  "item.magistuarmory.crusader_cross_pattern": "Wzór Sztandaru",
-  "item.magistuarmory.dragon_pattern": "Wzór Sztandaru",
-  "item.magistuarmory.eagle_pattern": "Wzór Sztandaru",
-  "item.magistuarmory.horse_pattern": "Wzór Sztandaru",
-  "item.magistuarmory.lily_pattern": "Wzór Sztandaru",
-  "item.magistuarmory.lion1_pattern": "Wzór Sztandaru",
-  "item.magistuarmory.lion2_pattern": "Wzór Sztandaru",
-  "item.magistuarmory.orthodox_cross_pattern": "Wzór Sztandaru",
-  "item.magistuarmory.snake_pattern": "Wzór Sztandaru",
-  "item.magistuarmory.sun_pattern": "Wzór Sztandaru",
-  "item.magistuarmory.swords_pattern": "Wzór Sztandaru",
-  "item.magistuarmory.tower_pattern": "Wzór Sztandaru",
-  "item.magistuarmory.tree_pattern": "Wzór Sztandaru",
-  "item.magistuarmory.two-headed_eagle_pattern": "name=Banner",
+  "item.magistuarmory.apostolic_cross_pattern": "Wzór Sztandaru: Chrześcijański Krzyż",
+  "item.magistuarmory.bowl_pattern": "Wzór Sztandaru: Miska",
+  "item.magistuarmory.bull_pattern": "Wzór Sztandaru: Byk",
+  "item.magistuarmory.chess_pattern": "Wzór Sztandaru: Szachy",
+  "item.magistuarmory.crusader_cross_pattern": "Wzór Sztandaru: Krzyż Krzyżowców",
+  "item.magistuarmory.dragon_pattern": "Wzór Sztandaru: Smok",
+  "item.magistuarmory.eagle_pattern": "Wzór Sztandaru: Orzeł",
+  "item.magistuarmory.horse_pattern": "Wzór Sztandaru: Koń",
+  "item.magistuarmory.lily_pattern": "Wzór Sztandaru: Lila",
+  "item.magistuarmory.lion1_pattern": "Wzór Sztandaru: Lew na Tylnich Łapach",
+  "item.magistuarmory.lion2_pattern": "Wzór Sztandaru: Lew na Czterech Łapach",
+  "item.magistuarmory.orthodox_cross_pattern": "Wzór Sztandaru: Prawosławny Krzyż",
+  "item.magistuarmory.snake_pattern": "Wzór Sztandaru: Wąż",
+  "item.magistuarmory.sun_pattern": "Wzór Sztandaru: Słońće",
+  "item.magistuarmory.swords_pattern": "Wzór Sztandaru: Miecze",
+  "item.magistuarmory.tower_pattern": "Wzór Sztandaru: Wierza",
+  "item.magistuarmory.tree_pattern": "Wzór Sztandaru: Drzewo",
+  "item.magistuarmory.two_headed_eagle_pattern": "Wzór Sztandaru: Dwugłowy Orzeł",
 
 
 

@@ -3,8 +3,6 @@ package com.magistuarmory.client.render.model.decoration;// Made with Blockbench
 // Paste this class into your mod and generate all required imports
 
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -13,7 +11,6 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.world.entity.LivingEntity;
 
-@Environment(EnvType.CLIENT)
 public class HornsModel<T extends net.minecraft.client.renderer.entity.state.HumanoidRenderState> extends ArmorDecorationModel<T>
 {
 	public HornsModel(ModelPart root)

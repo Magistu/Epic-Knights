@@ -4,8 +4,6 @@ import com.google.common.collect.Lists;
 import com.magistuarmory.EpicKnights;
 import com.magistuarmory.client.render.model.ModModels;
 import com.magistuarmory.component.ModDataComponents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.nbt.CompoundTag;
@@ -106,7 +104,6 @@ public class ArmorDecorationItem extends Item implements ArmorDecoration
 	}
 
 	@Override
-	@Environment(EnvType.CLIENT)
 	public ModelLayerLocation createModelLocation()
 	{
 		return ModModels.createDecorationLocation(this.location);

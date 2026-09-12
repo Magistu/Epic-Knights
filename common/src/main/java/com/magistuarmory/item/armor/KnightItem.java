@@ -7,8 +7,6 @@ import com.magistuarmory.item.DyeableItemLike;
 import com.magistuarmory.item.IHasModelProperty;
 import com.magistuarmory.item.ModItems;
 import com.magistuarmory.client.render.ItemPropertiesRegistry;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
@@ -48,7 +46,6 @@ public class KnightItem extends MedievalArmorItem implements ISurcoat, DyeableIt
 	}
 
 	@Override
-	@Environment(EnvType.CLIENT)
 	public void registerModelProperty()
 	{
 		ItemPropertiesRegistry.register(this, Identifier.fromNamespaceAndPath(EpicKnights.ID, "has_plume"), (stack, level, entity, i) -> this.hasPlume(stack) ? 1 : 0);

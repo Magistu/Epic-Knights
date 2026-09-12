@@ -6,13 +6,10 @@ import com.magistuarmory.client.render.model.armor.*;
 import com.magistuarmory.client.render.model.block.PaviseBlockModel;
 import com.magistuarmory.client.render.model.decoration.*;
 import com.magistuarmory.client.render.model.item.*;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 
 
-@Environment(EnvType.CLIENT)
 public class ModModels extends ModModelsProvider
 {
 	public static final ModModels INSTANCE = new ModModels(EpicKnights.ID);

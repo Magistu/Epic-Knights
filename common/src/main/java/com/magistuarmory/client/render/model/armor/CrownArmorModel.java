@@ -4,14 +4,11 @@ package com.magistuarmory.client.render.model.armor;// Made with Blockbench 4.0.
 
 
 import com.magistuarmory.client.render.model.decoration.ArmorDecorationModel;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.world.entity.LivingEntity;
 
-@Environment(EnvType.CLIENT)
 public class CrownArmorModel<T extends net.minecraft.client.renderer.entity.state.HumanoidRenderState> extends ArmorDecorationModel<T>
 {
 	public CrownArmorModel(ModelPart root)

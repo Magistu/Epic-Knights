@@ -1,8 +1,6 @@
 package com.magistuarmory.item;
 
 import com.magistuarmory.client.render.ItemPropertiesRegistry;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -60,7 +58,6 @@ public class MedievalBowItem extends BowItem implements IHasModelProperty
         return f;
     }
 
-    @Environment(EnvType.CLIENT)
     @Override
     public void registerModelProperty()
     {

@@ -3,8 +3,6 @@ package com.magistuarmory.item.armor;
 import com.magistuarmory.api.client.render.model.ModModelsProvider;
 import com.magistuarmory.item.ArmorDecoration;
 import com.magistuarmory.item.ArmorDecorationItem;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.Identifier;
@@ -54,7 +52,6 @@ public class WearableArmorDecorationItem extends MedievalArmorItem implements Ar
 	}
 
 	@Override
-	@Environment(EnvType.CLIENT)
 	public ModelLayerLocation createModelLocation()
 	{
 		return ModModelsProvider.createDecorationLocation(this.getIdentifier());

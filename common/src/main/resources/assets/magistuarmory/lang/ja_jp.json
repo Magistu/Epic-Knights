@@ -556,7 +556,7 @@
   "item.magistuarmory.swords_pattern.desc": "剣",
   "item.magistuarmory.tower_pattern.desc": "塔",
   "item.magistuarmory.tree_pattern.desc": "木",
-  "item.magistuarmory.two-headed_eagle_pattern.desc": "双頭のワシ",
+  "item.magistuarmory.two_headed_eagle_pattern.desc": "双頭のワシ",
 
 
 
@@ -565,24 +565,24 @@
 
 
 
-  "item.magistuarmory.apostolic_cross_pattern": "旗の模様",
-  "item.magistuarmory.bowl_pattern": "旗の模様",
-  "item.magistuarmory.bull_pattern": "旗の模様",
-  "item.magistuarmory.chess_pattern": "旗の模様",
-  "item.magistuarmory.crusader_cross_pattern": "旗の模様",
-  "item.magistuarmory.dragon_pattern": "旗の模様",
-  "item.magistuarmory.eagle_pattern": "旗の模様",
-  "item.magistuarmory.horse_pattern": "旗の模様",
-  "item.magistuarmory.lily_pattern": "旗の模様",
-  "item.magistuarmory.lion1_pattern": "旗の模様",
-  "item.magistuarmory.lion2_pattern": "旗の模様",
-  "item.magistuarmory.orthodox_cross_pattern": "旗の模様",
-  "item.magistuarmory.snake_pattern": "旗の模様",
-  "item.magistuarmory.sun_pattern": "旗の模様",
-  "item.magistuarmory.swords_pattern": "旗の模様",
-  "item.magistuarmory.tower_pattern": "旗の模様",
-  "item.magistuarmory.tree_pattern": "旗の模様",
-  "item.magistuarmory.two-headed_eagle_pattern": "旗の模様",
+  "item.magistuarmory.apostolic_cross_pattern": "使徒の十字架の旗の模様",
+  "item.magistuarmory.bowl_pattern": "ボウルの旗の模様",
+  "item.magistuarmory.bull_pattern": "闘牛の旗の模様",
+  "item.magistuarmory.chess_pattern": "チェスの旗の模様",
+  "item.magistuarmory.crusader_cross_pattern": "十字軍の十字架の旗の模様",
+  "item.magistuarmory.dragon_pattern": "ドラゴンの旗の模様",
+  "item.magistuarmory.eagle_pattern": "ワシの旗の模様",
+  "item.magistuarmory.horse_pattern": "ウマの旗の模様",
+  "item.magistuarmory.lily_pattern": "ユリの旗の模様",
+  "item.magistuarmory.lion1_pattern": "後ろ足をついたライオンの旗の模様",
+  "item.magistuarmory.lion2_pattern": "四つ足をついたライオンの旗の模様",
+  "item.magistuarmory.orthodox_cross_pattern": "正統派の十字架の旗の模様",
+  "item.magistuarmory.snake_pattern": "ヘビの旗の模様",
+  "item.magistuarmory.sun_pattern": "太陽の旗の模様",
+  "item.magistuarmory.swords_pattern": "剣の旗の模様",
+  "item.magistuarmory.tower_pattern": "塔の旗の模様",
+  "item.magistuarmory.tree_pattern": "木の旗の模様",
+  "item.magistuarmory.two_headed_eagle_pattern": "双頭のワシの旗の模様",
 
 
 

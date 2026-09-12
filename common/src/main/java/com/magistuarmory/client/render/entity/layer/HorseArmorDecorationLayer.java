@@ -6,8 +6,6 @@ import com.magistuarmory.client.render.model.decoration.HorseArmorDecorationMode
 import com.magistuarmory.component.ModDataComponents;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.animal.equine.HorseModel;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -27,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Environment(EnvType.CLIENT)
 public class HorseArmorDecorationLayer extends RenderLayer<net.minecraft.client.renderer.entity.state.HorseRenderState, HorseModel> implements ArmorPatternLayer
 {
    private static final String BASE_DIR = "textures/entity/horse/armor/";

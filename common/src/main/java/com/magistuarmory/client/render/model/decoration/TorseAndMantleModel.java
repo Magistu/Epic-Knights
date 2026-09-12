@@ -3,14 +3,11 @@
 
 package com.magistuarmory.client.render.model.decoration;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.world.entity.LivingEntity;
 
-@Environment(EnvType.CLIENT)
 public class TorseAndMantleModel<T extends net.minecraft.client.renderer.entity.state.HumanoidRenderState> extends ArmorDecorationModel<T>
 {
 	public TorseAndMantleModel(ModelPart root)

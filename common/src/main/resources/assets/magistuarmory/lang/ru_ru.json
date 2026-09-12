@@ -556,7 +556,7 @@
   "item.magistuarmory.swords_pattern.desc": "Мечи",
   "item.magistuarmory.tower_pattern.desc": "Башня",
   "item.magistuarmory.tree_pattern.desc": "Дерево",
-  "item.magistuarmory.two-headed_eagle_pattern.desc": "Двуглавый орёл",
+  "item.magistuarmory.two_headed_eagle_pattern.desc": "Двуглавый орёл",
 
 
 
@@ -565,24 +565,24 @@
 
 
 
-  "item.magistuarmory.apostolic_cross_pattern": "Выкройка флага",
-  "item.magistuarmory.bowl_pattern": "Выкройка флага",
-  "item.magistuarmory.bull_pattern": "Выкройка флага",
-  "item.magistuarmory.chess_pattern": "Выкройка флага",
-  "item.magistuarmory.crusader_cross_pattern": "Выкройка флага",
-  "item.magistuarmory.dragon_pattern": "Выкройка флага",
-  "item.magistuarmory.eagle_pattern": "Выкройка флага",
-  "item.magistuarmory.horse_pattern": "Выкройка флага",
-  "item.magistuarmory.lily_pattern": "Выкройка флага",
-  "item.magistuarmory.lion1_pattern": "Выкройка флага",
-  "item.magistuarmory.lion2_pattern": "Выкройка флага",
-  "item.magistuarmory.orthodox_cross_pattern": "Выкройка флага",
-  "item.magistuarmory.snake_pattern": "Выкройка флага",
-  "item.magistuarmory.sun_pattern": "Выкройка флага",
-  "item.magistuarmory.swords_pattern": "Выкройка флага",
-  "item.magistuarmory.tower_pattern": "Выкройка флага",
-  "item.magistuarmory.tree_pattern": "Выкройка флага",
-  "item.magistuarmory.two-headed_eagle_pattern": "Выкройка флага",
+  "item.magistuarmory.apostolic_cross_pattern": "Выкройка флага: Апостольский крест",
+  "item.magistuarmory.bowl_pattern": "Выкройка флага: Кубок",
+  "item.magistuarmory.bull_pattern": "Выкройка флага: Бык",
+  "item.magistuarmory.chess_pattern": "Выкройка флага: Шахматы",
+  "item.magistuarmory.crusader_cross_pattern": "Выкройка флага: Крест крестоносца",
+  "item.magistuarmory.dragon_pattern": "Выкройка флага: Дракон",
+  "item.magistuarmory.eagle_pattern": "Выкройка флага: Орёл",
+  "item.magistuarmory.horse_pattern": "Выкройка флага: Конь",
+  "item.magistuarmory.lily_pattern": "Выкройка флага: Геральдическая лилия",
+  "item.magistuarmory.lion1_pattern": "Выкройка флага: Лев на задних лапах",
+  "item.magistuarmory.lion2_pattern": "Выкройка флага: Лев на четырёх лапах",
+  "item.magistuarmory.orthodox_cross_pattern": "Выкройка флага: Православный крест",
+  "item.magistuarmory.snake_pattern": "Выкройка флага: Змея",
+  "item.magistuarmory.sun_pattern": "Выкройка флага: Солнце",
+  "item.magistuarmory.swords_pattern": "Выкройка флага: Мечи",
+  "item.magistuarmory.tower_pattern": "Выкройка флага: Башня",
+  "item.magistuarmory.tree_pattern": "Выкройка флага: Дерево",
+  "item.magistuarmory.two_headed_eagle_pattern": "Выкройка флага: Двуглавый орёл",
 
 
 

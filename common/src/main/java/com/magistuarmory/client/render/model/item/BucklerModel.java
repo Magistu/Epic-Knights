@@ -3,13 +3,10 @@ package com.magistuarmory.client.render.model.item;
 // Exported for Minecraft version 1.17 - 1.18 with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-@Environment(EnvType.CLIENT)
 public class BucklerModel extends MedievalShieldModel 
 {
 	public BucklerModel(ModelPart root)

@@ -1,13 +1,10 @@
 package com.magistuarmory.client.render.model.block;
 
 import com.magistuarmory.client.render.model.item.MedievalShieldModel;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-@Environment(EnvType.CLIENT)
 public class PaviseBlockModel extends MedievalShieldModel
 {
 

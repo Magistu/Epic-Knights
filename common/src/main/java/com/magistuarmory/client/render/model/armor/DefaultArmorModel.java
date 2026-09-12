@@ -1,11 +1,8 @@
 package com.magistuarmory.client.render.model.armor;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-@Environment(EnvType.CLIENT)
 public class DefaultArmorModel
 {
 	public static LayerDefinition createLayer() 

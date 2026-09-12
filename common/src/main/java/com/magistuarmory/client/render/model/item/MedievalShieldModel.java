@@ -2,13 +2,10 @@ package com.magistuarmory.client.render.model.item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.rendertype.RenderType;
 
-@Environment(EnvType.CLIENT)
 public class MedievalShieldModel extends Model<net.minecraft.util.Unit>
 {
 	private final ModelPart root;

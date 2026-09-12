@@ -6,8 +6,6 @@ import com.magistuarmory.component.ModDataComponents;
 import com.magistuarmory.util.CombatHelper;
 import com.magistuarmory.util.ModDamageSources;
 import com.magistuarmory.client.render.ItemPropertiesRegistry;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -289,7 +287,6 @@ public class MedievalWeaponItem extends Item implements IHasModelProperty
 	}
 
 	@Override
-	@Environment(EnvType.CLIENT)
 	public void registerModelProperty()
 	{
 		if (this.canBlock())

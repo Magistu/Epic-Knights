@@ -556,7 +556,7 @@
   "item.magistuarmory.swords_pattern.desc": "Épées",
   "item.magistuarmory.tower_pattern.desc": "Tour",
   "item.magistuarmory.tree_pattern.desc": "Arbre",
-  "item.magistuarmory.two-headed_eagle_pattern.desc": "Aigle à deux têtes",
+  "item.magistuarmory.two_headed_eagle_pattern.desc": "Aigle à deux têtes",
 
 
 
@@ -565,24 +565,24 @@
 
 
 
-  "item.magistuarmory.apostolic_cross_pattern": "Modèle de Bannière",
-  "item.magistuarmory.bowl_pattern": "Modèle de Bannière",
-  "item.magistuarmory.bull_pattern": "Modèle de Bannière",
-  "item.magistuarmory.chess_pattern": "Modèle de Bannière",
-  "item.magistuarmory.crusader_cross_pattern": "Modèle de Bannière",
-  "item.magistuarmory.dragon_pattern": "Modèle de Bannière",
-  "item.magistuarmory.eagle_pattern": "Modèle de Bannière",
-  "item.magistuarmory.horse_pattern": "Modèle de Bannière",
-  "item.magistuarmory.lily_pattern": "Modèle de Bannière",
-  "item.magistuarmory.lion1_pattern": "Modèle de Bannière",
-  "item.magistuarmory.lion2_pattern": "Modèle de Bannière",
-  "item.magistuarmory.orthodox_cross_pattern": "Modèle de Bannière",
-  "item.magistuarmory.snake_pattern": "Modèle de Bannière",
-  "item.magistuarmory.sun_pattern": "Modèle de Bannière",
-  "item.magistuarmory.swords_pattern": "Modèle de Bannière",
-  "item.magistuarmory.tower_pattern": "Modèle de Bannière",
-  "item.magistuarmory.tree_pattern": "Modèle de Bannière",
-  "item.magistuarmory.two-headed_eagle_pattern": "Modèle de Bannière",
+  "item.magistuarmory.apostolic_cross_pattern": "Modèle de Bannière: Croix Apostolique",
+  "item.magistuarmory.bowl_pattern": "Modèle de Bannière: Bol",
+  "item.magistuarmory.bull_pattern": "Modèle de Bannière: Taureau",
+  "item.magistuarmory.chess_pattern": "Modèle de Bannière: Échecs",
+  "item.magistuarmory.crusader_cross_pattern": "Modèle de Bannière: Croix de Croisé",
+  "item.magistuarmory.dragon_pattern": "Modèle de Bannière: Dragon",
+  "item.magistuarmory.eagle_pattern": "Modèle de Bannière: Aigle",
+  "item.magistuarmory.horse_pattern": "Modèle de Bannière: Cheval",
+  "item.magistuarmory.lily_pattern": "Modèle de Bannière: Lys",
+  "item.magistuarmory.lion1_pattern": "Modèle de Bannière: Lion sur pattes postérieures",
+  "item.magistuarmory.lion2_pattern": "Modèle de Bannière: Lion à quatre pattes",
+  "item.magistuarmory.orthodox_cross_pattern": "Modèle de Bannière: Croix orthodoxe",
+  "item.magistuarmory.snake_pattern": "Modèle de Bannière: Serpent",
+  "item.magistuarmory.sun_pattern": "Modèle de Bannière: Soleil",
+  "item.magistuarmory.swords_pattern": "Modèle de Bannière: Épées",
+  "item.magistuarmory.tower_pattern": "Modèle de Bannière: Tour",
+  "item.magistuarmory.tree_pattern": "Modèle de Bannière: Arbre",
+  "item.magistuarmory.two_headed_eagle_pattern": "Modèle de Bannière: Aigle à deux têtes",
 
 
 

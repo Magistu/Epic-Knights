@@ -556,7 +556,7 @@
   "item.magistuarmory.swords_pattern.desc": "Swords",
   "item.magistuarmory.tower_pattern.desc": "Tower",
   "item.magistuarmory.tree_pattern.desc": "Tree",
-  "item.magistuarmory.two-headed_eagle_pattern.desc": "Two-Headed Eagle",
+  "item.magistuarmory.two_headed_eagle_pattern.desc": "Two-Headed Eagle",
 
 
 
@@ -565,24 +565,24 @@
 
 
 
-  "item.magistuarmory.apostolic_cross_pattern": "Banner Pattern",
-  "item.magistuarmory.bowl_pattern": "Banner Pattern",
-  "item.magistuarmory.bull_pattern": "Banner Pattern",
-  "item.magistuarmory.chess_pattern": "Banner Pattern",
-  "item.magistuarmory.crusader_cross_pattern": "Banner Pattern",
-  "item.magistuarmory.dragon_pattern": "Banner Pattern",
-  "item.magistuarmory.eagle_pattern": "Banner Pattern",
-  "item.magistuarmory.horse_pattern": "Banner Pattern",
-  "item.magistuarmory.lily_pattern": "Banner Pattern",
-  "item.magistuarmory.lion1_pattern": "Banner Pattern",
-  "item.magistuarmory.lion2_pattern": "Banner Pattern",
-  "item.magistuarmory.orthodox_cross_pattern": "Banner Pattern",
-  "item.magistuarmory.snake_pattern": "Banner Pattern",
-  "item.magistuarmory.sun_pattern": "Banner Pattern",
-  "item.magistuarmory.swords_pattern": "Banner Pattern",
-  "item.magistuarmory.tower_pattern": "Banner Pattern",
-  "item.magistuarmory.tree_pattern": "Banner Pattern",
-  "item.magistuarmory.two-headed_eagle_pattern": "Banner Pattern",
+  "item.magistuarmory.apostolic_cross_pattern": "Apostolic Cross Banner Pattern",
+  "item.magistuarmory.bowl_pattern": "Bowl Banner Pattern",
+  "item.magistuarmory.bull_pattern": "Bull Banner Pattern",
+  "item.magistuarmory.chess_pattern": "Chess Banner Pattern",
+  "item.magistuarmory.crusader_cross_pattern": "Crusader Cross Banner Pattern",
+  "item.magistuarmory.dragon_pattern": "Dragon Banner Pattern",
+  "item.magistuarmory.eagle_pattern": "Eagle Banner Pattern",
+  "item.magistuarmory.horse_pattern": "Horse Banner Pattern",
+  "item.magistuarmory.lily_pattern": "Lily Banner Pattern",
+  "item.magistuarmory.lion1_pattern": "Lion on Hind Legs Banner Pattern",
+  "item.magistuarmory.lion2_pattern": "Lion on Four Legs Banner Pattern",
+  "item.magistuarmory.orthodox_cross_pattern": "Orthodox Cross Banner Pattern",
+  "item.magistuarmory.snake_pattern": "Snake Banner Pattern",
+  "item.magistuarmory.sun_pattern": "Sun Banner Pattern",
+  "item.magistuarmory.swords_pattern": "Swords Banner Pattern",
+  "item.magistuarmory.tower_pattern": "Tower Banner Pattern",
+  "item.magistuarmory.tree_pattern": "Tree Banner Pattern",
+  "item.magistuarmory.two_headed_eagle_pattern": "Two-Headed Eagle Banner Pattern",
 
 
 

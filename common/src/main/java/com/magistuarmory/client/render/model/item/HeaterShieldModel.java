@@ -1,7 +1,5 @@
 package com.magistuarmory.client.render.model.item;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -9,7 +7,6 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
-@Environment(EnvType.CLIENT)
 public class HeaterShieldModel extends MedievalShieldModel 
 {
 	public HeaterShieldModel(ModelPart root)

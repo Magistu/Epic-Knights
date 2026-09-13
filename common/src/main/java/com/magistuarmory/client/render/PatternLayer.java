@@ -23,7 +23,7 @@ public interface PatternLayer {
             for (int i = 0; i < Math.min(17, patterns.size()); i++) {
                 var pattern = patterns.get(i);
                 submitPatternPart(pose, collector, part, light, overlay, pattern.getSecond().getTextureDiffuseColor(), false,
-                        3, pattern.getFirst().unwrapKey().orElseThrow().identifier());
+                        3 + i, pattern.getFirst().unwrapKey().orElseThrow().identifier());
             }
         }
     }

@@ -23,7 +23,7 @@ public interface ShieldPatternLayer extends PatternLayer {
             case 2 -> getBasePatternMaterial();
             default -> getPatternMaterial(pattern);
         };
-        collector.submitModelPart(part, pose, sprite.renderType(RenderTypes::entityTranslucent), light, overlay,
+        collector.order(layer).submitModelPart(part, pose, sprite.renderType(RenderTypes::entityTranslucent), light, overlay,
                 sprites().get(sprite), true, foil, color, null, 0);
     }
 }

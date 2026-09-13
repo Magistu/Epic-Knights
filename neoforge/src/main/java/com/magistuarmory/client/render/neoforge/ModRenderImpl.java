@@ -76,10 +76,11 @@ public class ModRenderImpl
             for (var supplier : content.armorItems) {
                 event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions() {
                     @Override
-                    public net.minecraft.client.model.Model getHumanoidArmorModel(net.minecraft.world.item.ItemStack stack,
+                    public net.minecraft.client.model.Model getGenericArmorModel(net.minecraft.world.item.ItemStack stack,
                             net.minecraft.client.resources.model.EquipmentClientInfo.LayerType layer, net.minecraft.client.model.Model original) {
                         if (stack.getItem() instanceof com.magistuarmory.item.armor.MedievalArmorItem armor && original instanceof HumanoidModel<?> humanoid)
-                            return armor.getArmorModel(armor.getEquipmentSlot(), humanoid);
+                            return new com.magistuarmory.client.render.model.armor.FollowingArmorModel(humanoid,
+                                    armor.getArmorModel(armor.getEquipmentSlot(), humanoid), armor.getEquipmentSlot());
                         return original;
                     }
                 }, supplier.get());

@@ -34,6 +34,6 @@ public class MedievalArmorLayer implements ArmorRenderer {
         var layer = state.isBaby && state.entityType != EntityType.ARMOR_STAND
                 ? EquipmentClientInfo.LayerType.HUMANOID_BABY
                 : slot == EquipmentSlot.LEGS ? EquipmentClientInfo.LayerType.HUMANOID_LEGGINGS : EquipmentClientInfo.LayerType.HUMANOID;
-        equipmentRenderer.renderLayers(layer, equippable.assetId().orElseThrow(), model, state, stack, pose, collector, light, state.outlineColor);
+        equipmentRenderer.renderLayers(layer, equippable.assetId().orElseThrow(), new com.magistuarmory.client.render.model.armor.FollowingArmorModel(contextModel, model, slot), state, stack, pose, collector, light, state.outlineColor);
     }
 }

@@ -76,10 +76,14 @@ public class ArmorDecorationLayer<T extends net.minecraft.client.renderer.entity
    @Override
    public void submit(PoseStack pose, SubmitNodeCollector buffer, int p, T entity, float yRot, float xRot)
    {
+      this.getParentModel().setupAnim(entity);
+      pose.pushPose();
+      this.getParentModel().root().translateAndRotate(pose);
       this.renderPiece(pose, buffer, entity, EquipmentSlot.CHEST, p);
       this.renderPiece(pose, buffer, entity, EquipmentSlot.LEGS, p);
       this.renderPiece(pose, buffer, entity, EquipmentSlot.FEET, p);
       this.renderPiece(pose, buffer, entity, EquipmentSlot.HEAD, p);
+      pose.popPose();
    }
 
    private void renderPiece(PoseStack pose, SubmitNodeCollector buffer, T entity, EquipmentSlot slot, int p)
@@ -96,6 +100,7 @@ public class ArmorDecorationLayer<T extends net.minecraft.client.renderer.entity
                if (model != null)
                {
                   model.setupAnim(entity);
+                  com.magistuarmory.client.render.model.armor.FollowingArmorModel.copyPose(this.getParentModel(), model);
                   if (info.dyeable())
                   {
                      renderDecoration(pose, buffer, p, OverlayTexture.NO_OVERLAY, info.color(), stack.hasFoil(), model.parts(), getTexture(location));
@@ -113,7 +118,7 @@ public class ArmorDecorationLayer<T extends net.minecraft.client.renderer.entity
          {
             DyeColor basecolor = stack.get(DataComponents.BASE_COLOR);
             this.coatModel.setupAnim(entity);
-            renderDecoration(pose, buffer, p, OverlayTexture.NO_OVERLAY, stack.hasFoil(), this.coatModel.parts(), this.coatTexture);
+            com.magistuarmory.client.render.model.armor.FollowingArmorModel.copyPose(this.getParentModel(), this.coatModel);
             List<Pair<Holder<BannerPattern>, DyeColor>> list = patterns == null ? new ArrayList<>() : patterns.layers().stream().map(l -> Pair.of(l.pattern(), l.color())).collect(Collectors.toList());
             renderPatterns(pose, buffer, p, OverlayTexture.NO_OVERLAY, list, stack.hasFoil(), this.coatModel.parts(), basecolor);
          }

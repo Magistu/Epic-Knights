@@ -10,7 +10,6 @@ Validation from the repository root:
 
 ```sh
 java -classpath gradle/wrapper/gradle-wrapper.jar org.gradle.wrapper.GradleWrapperMain :common:build :fabric:build :neoforge:build --console=plain
-python3 -m unittest discover -s common/src/test/python -v
 ```
 
 Both development clients were launched on 26.1.2 and completed resource loading without model-baking failures or resource-pack fallback, then exited normally. This is a startup smoke test, not a gameplay test. Combat, armor decorations in motion, resource reloading in a world, and placing/breaking decorated pavises still need an in-game playtest. Some pre-existing unused/add-on texture references still produce warnings. Shared Environment annotations were removed because their Architectury-transformed OnlyIn equivalents no longer strip members on NeoForge. Client initialization remains explicitly guarded by the environment, and the first-person mixin is registered only on clients.
@@ -18,3 +17,5 @@ Both development clients were launched on 26.1.2 and completed resource loading 
 Final shaded artifacts are fabric/build/libs/epic-knights-26.1.2-fabric-10.12.jar and neoforge/build/libs/epic-knights-26.1.2-neoforge-10.12.jar. Development runs include loader dependencies on their runtime classpaths; those dependencies must also be installed alongside the release jars.
 
 Lance collision targeting runs from ClientTickEvent.CLIENT_POST for the local player; inventoryTick is server-only in 26.1 and only handles the equipped lance cooldown state. The first-person mixin omits vanilla's extra BLOCK transform for MedievalWeaponItem because the blocking model already supplies its pose; the actual use animation and third-person pose remain unchanged. Both client startup checks passed, NeoForge reported no OnlyIn warning, and Fabric dedicated-server initialization reached settings creation. Mounted combat and the visual blocking pose still require an in-game check.
+
+Armor replacements now wrap the renderer's source model: source animation, part poses, and baked root scale are copied at deferred draw time before slot visibility is applied. This preserves zombie/piglin arm animations and wither skeleton scaling. Attached decorations follow the parent pose as well. Heraldry submissions use explicit order groups for the cloth, banner base color, and successive patterns, and the redundant surcoat base submission is removed.

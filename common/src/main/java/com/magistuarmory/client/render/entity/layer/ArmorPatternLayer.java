@@ -19,6 +19,6 @@ public interface ArmorPatternLayer extends PatternLayer {
             case 2 -> getBasePatternTexture();
             default -> getPatternTexture(pattern);
         };
-        collector.submitModelPart(part, pose, RenderTypes.entityTranslucent(texture), light, overlay, null, false, foil, color, null, 0);
+        collector.order(layer).submitModelPart(part, pose, RenderTypes.entityTranslucent(texture), light, overlay, null, false, foil, color, null, 0);
     }
 }

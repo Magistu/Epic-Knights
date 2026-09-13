@@ -27,10 +27,10 @@ public final class FollowingArmorModel extends Model<HumanoidRenderState> {
         source.setupAnim(state);
         copyPose(source, armor);
         if (slot == EquipmentSlot.HEAD && state.entityType == EntityType.WITHER_SKELETON) {
-            // Add a little clearance around the enlarged skull, after copying its baked scale.
             armor.head.xScale *= 1.05F;
             armor.head.yScale *= 1.05F;
             armor.head.zScale *= 1.05F;
+            armor.head.y -= 0.5F;
         }
         armor.head.visible = armor.hat.visible = slot == EquipmentSlot.HEAD;
         armor.body.visible = slot == EquipmentSlot.CHEST || slot == EquipmentSlot.LEGS;

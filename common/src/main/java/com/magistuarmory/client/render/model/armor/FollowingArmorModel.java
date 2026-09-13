@@ -5,6 +5,7 @@ import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EntityType;
 
 /** Copies the entity-specific animation and baked scale when the deferred draw executes. */
 public final class FollowingArmorModel extends Model<HumanoidRenderState> {
@@ -25,6 +26,12 @@ public final class FollowingArmorModel extends Model<HumanoidRenderState> {
         armor.resetPose();
         source.setupAnim(state);
         copyPose(source, armor);
+        if (slot == EquipmentSlot.HEAD && state.entityType == EntityType.WITHER_SKELETON) {
+            // Add a little clearance around the enlarged skull, after copying its baked scale.
+            armor.head.xScale *= 1.05F;
+            armor.head.yScale *= 1.05F;
+            armor.head.zScale *= 1.05F;
+        }
         armor.head.visible = armor.hat.visible = slot == EquipmentSlot.HEAD;
         armor.body.visible = slot == EquipmentSlot.CHEST || slot == EquipmentSlot.LEGS;
         armor.rightArm.visible = armor.leftArm.visible = slot == EquipmentSlot.CHEST;

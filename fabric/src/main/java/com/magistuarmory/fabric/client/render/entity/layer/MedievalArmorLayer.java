@@ -1,6 +1,7 @@
 package com.magistuarmory.fabric.client.render.entity.layer;
 
 import com.magistuarmory.client.render.ModRender;
+import com.magistuarmory.client.render.model.armor.FollowingArmorModel;
 import com.magistuarmory.item.armor.MedievalArmorItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
@@ -34,6 +35,6 @@ public class MedievalArmorLayer implements ArmorRenderer {
         var layer = state.isBaby && state.entityType != EntityType.ARMOR_STAND
                 ? EquipmentClientInfo.LayerType.HUMANOID_BABY
                 : slot == EquipmentSlot.LEGS ? EquipmentClientInfo.LayerType.HUMANOID_LEGGINGS : EquipmentClientInfo.LayerType.HUMANOID;
-        equipmentRenderer.renderLayers(layer, equippable.assetId().orElseThrow(), new com.magistuarmory.client.render.model.armor.FollowingArmorModel(contextModel, model, slot), state, stack, pose, collector, light, state.outlineColor);
+        equipmentRenderer.renderLayers(layer, equippable.assetId().orElseThrow(), new FollowingArmorModel(contextModel, model, slot), state, stack, pose, collector, light, state.outlineColor);
     }
 }

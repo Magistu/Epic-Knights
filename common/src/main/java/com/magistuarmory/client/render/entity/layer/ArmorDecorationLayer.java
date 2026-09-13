@@ -2,6 +2,7 @@ package com.magistuarmory.client.render.entity.layer;
 
 import com.magistuarmory.EpicKnights;
 import com.magistuarmory.client.render.model.ModModels;
+import com.magistuarmory.client.render.model.armor.FollowingArmorModel;
 import com.magistuarmory.client.render.model.decoration.ArmorDecorationModel;
 import com.magistuarmory.client.render.model.decoration.ArmorDecorationModelSet;
 import com.magistuarmory.client.render.model.decoration.SurcoatModel;
@@ -100,7 +101,7 @@ public class ArmorDecorationLayer<T extends net.minecraft.client.renderer.entity
                if (model != null)
                {
                   model.setupAnim(entity);
-                  com.magistuarmory.client.render.model.armor.FollowingArmorModel.copyPose(this.getParentModel(), model);
+                  FollowingArmorModel.copyPose(this.getParentModel(), model);
                   if (info.dyeable())
                   {
                      renderDecoration(pose, buffer, p, OverlayTexture.NO_OVERLAY, info.color(), stack.hasFoil(), model.parts(), getTexture(location));
@@ -118,7 +119,7 @@ public class ArmorDecorationLayer<T extends net.minecraft.client.renderer.entity
          {
             DyeColor basecolor = stack.get(DataComponents.BASE_COLOR);
             this.coatModel.setupAnim(entity);
-            com.magistuarmory.client.render.model.armor.FollowingArmorModel.copyPose(this.getParentModel(), this.coatModel);
+            FollowingArmorModel.copyPose(this.getParentModel(), this.coatModel);
             List<Pair<Holder<BannerPattern>, DyeColor>> list = patterns == null ? new ArrayList<>() : patterns.layers().stream().map(l -> Pair.of(l.pattern(), l.color())).collect(Collectors.toList());
             renderPatterns(pose, buffer, p, OverlayTexture.NO_OVERLAY, list, stack.hasFoil(), this.coatModel.parts(), basecolor);
          }

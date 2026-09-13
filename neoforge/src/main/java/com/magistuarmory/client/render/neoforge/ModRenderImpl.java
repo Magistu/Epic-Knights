@@ -5,6 +5,7 @@ import com.magistuarmory.api.item.ModItemsProvider;
 import com.magistuarmory.client.render.ModRender;
 import com.magistuarmory.client.render.entity.layer.ArmorDecorationLayer;
 import com.magistuarmory.client.render.entity.layer.HorseArmorDecorationLayer;
+import com.magistuarmory.client.render.model.armor.FollowingArmorModel;
 import com.magistuarmory.client.render.model.decoration.ArmorDecorationModelSet;
 import com.magistuarmory.client.render.tileentity.HeraldryItemStackRenderer;
 import com.magistuarmory.item.ModItems;
@@ -79,7 +80,7 @@ public class ModRenderImpl
                     public net.minecraft.client.model.Model getGenericArmorModel(net.minecraft.world.item.ItemStack stack,
                             net.minecraft.client.resources.model.EquipmentClientInfo.LayerType layer, net.minecraft.client.model.Model original) {
                         if (stack.getItem() instanceof com.magistuarmory.item.armor.MedievalArmorItem armor && original instanceof HumanoidModel<?> humanoid)
-                            return new com.magistuarmory.client.render.model.armor.FollowingArmorModel(humanoid,
+                            return new FollowingArmorModel(humanoid,
                                     armor.getArmorModel(armor.getEquipmentSlot(), humanoid), armor.getEquipmentSlot());
                         return original;
                     }

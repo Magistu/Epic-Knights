@@ -182,7 +182,7 @@ public abstract class ModItemsProvider
 	{
 		if (type.isDisabled())
 			return null;
-		RegistrySupplier<Item> bow = this.items.register(id, () -> new MedievalBowItem(new Item.Properties().setId(net.minecraft.resources.ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modId, id))).stacksTo(1).durability(type.getDurability()), type.getProjectileSpeed(), type.getPullTime()));
+		RegistrySupplier<Item> bow = this.items.register(id, () -> new MedievalBowItem(new Item.Properties().setId(net.minecraft.resources.ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modId, id))).stacksTo(1).enchantable(1).durability(type.getDurability()), type.getProjectileSpeed(), type.getPullTime()));
 		this.rangedWeaponItems.add(bow);
 		return bow;
 	}
@@ -191,7 +191,7 @@ public abstract class ModItemsProvider
 	{
 		if (type.isDisabled())
 			return null;
-		RegistrySupplier<Item> crossbow = this.items.register(id, () -> new MedievalCrossbowItem(new Item.Properties().setId(net.minecraft.resources.ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modId, id))).stacksTo(1).durability(type.getDurability()), type.getProjectileSpeed(), type.getPullTime()));
+		RegistrySupplier<Item> crossbow = this.items.register(id, () -> new MedievalCrossbowItem(new Item.Properties().setId(net.minecraft.resources.ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modId, id))).stacksTo(1).enchantable(1).durability(type.getDurability()), type.getProjectileSpeed(), type.getPullTime()));
 		this.rangedWeaponItems.add(crossbow);
 		return crossbow;
 	}

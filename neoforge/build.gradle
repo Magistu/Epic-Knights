@@ -124,7 +124,7 @@ publisher {
 
     setModrinthID((rootProject.findProperty("mod_modrinth_id") ?: "").toString())
 
-    setVersionType((rootProject.findProperty("release_channel") ?: "release").toString())
+    setVersionType((rootProject.findProperty("release_channel") ?: "beta").toString())
 
     setChangelog(changelogText)
 

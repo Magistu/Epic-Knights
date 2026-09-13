@@ -16,7 +16,7 @@ public class CaparisonModel<T extends AbstractHorse> extends HorseArmorDecoratio
 	{
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
-		PartDefinition partdefinition1 = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-5.0F, -8.0F, -17.0F, 10.0F, 18.0F, 22.0F, new CubeDeformation(0.2F)), PartPose.offset(0.0F, 11.0F, 5.0F));
+		PartDefinition partdefinition1 = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-5.0F, -9.0F, -17.0F, 10.0F, 18.0F, 22.0F, new CubeDeformation(1.3F)), PartPose.offset(0.0F, 11.0F, 5.0F));
 	    partdefinition1.addOrReplaceChild("tail", CubeListBuilder.create(), PartPose.ZERO);
         partdefinition1.addOrReplaceChild("saddle", CubeListBuilder.create(), PartPose.ZERO);
         PartDefinition partdefinition2 = partdefinition.addOrReplaceChild("head_parts", CubeListBuilder.create(), PartPose.ZERO);

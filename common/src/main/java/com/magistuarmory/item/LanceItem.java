@@ -160,10 +160,16 @@ public class LanceItem extends MedievalWeaponItem
 					stack.setDamageValue(stack.getDamageValue() + 1);
 			}
 
-			for (ItemStack stack0 : player.getInventory().items)
-			{
+			for (ItemStack stack0 : player.getInventory().items) {
 				this.setRaised(player, true);
-				player.getCooldowns().addCooldown(stack0.getItem(), (int) player.getCurrentItemAttackStrengthDelay());
+
+				int delay = (int) player.getCurrentItemAttackStrengthDelay();
+
+				if (player.getCooldowns().getCooldownPercent(stack0.getItem(), 0.0F) < 1.0F) {
+					continue;
+				}
+
+				player.getCooldowns().addCooldown(stack0.getItem(), delay);
 			}
 
 			if (stack.getDamageValue() >= stack.getMaxDamage())

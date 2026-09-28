@@ -126,7 +126,6 @@ public class MedievalWeaponItem extends SwordItem implements IHasModelProperty
 		if (type.isFlamebladed())
 			LacerationEffect.apply(source, victim, damage * attackscale);
 
-		postHurtEnemy(attacker.getWeaponItem(), attacker, victim);
 		return flag;
 	}
 

@@ -16,7 +16,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class HeraldryRecipe extends CustomRecipe
 {
-    public static RecipeSerializer<HeraldryRecipe> SERIALIZER = new RecipeSerializer<>(com.mojang.serialization.MapCodec.unit(() -> new HeraldryRecipe(CraftingBookCategory.MISC)), net.minecraft.network.codec.StreamCodec.unit(new HeraldryRecipe(CraftingBookCategory.MISC)));
+    private static final HeraldryRecipe INSTANCE = new HeraldryRecipe(CraftingBookCategory.MISC);
+    public static final RecipeSerializer<HeraldryRecipe> SERIALIZER = new RecipeSerializer<>(
+            com.mojang.serialization.MapCodec.unit(INSTANCE),
+            net.minecraft.network.codec.StreamCodec.unit(INSTANCE));
 
     public HeraldryRecipe(CraftingBookCategory category)
     {

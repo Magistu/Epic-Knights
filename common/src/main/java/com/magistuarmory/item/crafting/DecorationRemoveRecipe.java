@@ -27,7 +27,10 @@ import java.util.List;
 
 public class DecorationRemoveRecipe extends CustomRecipe
 {
-    public static RecipeSerializer<DecorationRemoveRecipe> SERIALIZER = new RecipeSerializer<>(com.mojang.serialization.MapCodec.unit(() -> new DecorationRemoveRecipe(CraftingBookCategory.MISC)), net.minecraft.network.codec.StreamCodec.unit(new DecorationRemoveRecipe(CraftingBookCategory.MISC)));
+    private static final DecorationRemoveRecipe INSTANCE = new DecorationRemoveRecipe(CraftingBookCategory.MISC);
+    public static final RecipeSerializer<DecorationRemoveRecipe> SERIALIZER = new RecipeSerializer<>(
+            com.mojang.serialization.MapCodec.unit(INSTANCE),
+            net.minecraft.network.codec.StreamCodec.unit(INSTANCE));
 
     public DecorationRemoveRecipe(CraftingBookCategory category)
     {

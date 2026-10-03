@@ -14,7 +14,10 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 public class ArmorDecorationRecipe extends CustomRecipe {
-    public static RecipeSerializer<ArmorDecorationRecipe> SERIALIZER = new RecipeSerializer<>(com.mojang.serialization.MapCodec.unit(() -> new ArmorDecorationRecipe(CraftingBookCategory.MISC)), net.minecraft.network.codec.StreamCodec.unit(new ArmorDecorationRecipe(CraftingBookCategory.MISC)));
+    private static final ArmorDecorationRecipe INSTANCE = new ArmorDecorationRecipe(CraftingBookCategory.MISC);
+    public static final RecipeSerializer<ArmorDecorationRecipe> SERIALIZER = new RecipeSerializer<>(
+            com.mojang.serialization.MapCodec.unit(INSTANCE),
+            net.minecraft.network.codec.StreamCodec.unit(INSTANCE));
     
     public ArmorDecorationRecipe(CraftingBookCategory category) {
         super();

@@ -13,13 +13,19 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
+import java.util.function.IntSupplier;
 
 public class MedievalBowItem extends BowItem implements IHasModelProperty
 {
-    private final int pullTime;
+    private final IntSupplier pullTime;
     private final float projectileSpeed;
 
     public MedievalBowItem(Properties properties, float projectileSpeed, int pullTime)
+    {
+        this(properties, projectileSpeed, () -> pullTime);
+    }
+
+    public MedievalBowItem(Properties properties, float projectileSpeed, IntSupplier pullTime)
     {
         super(properties.stacksTo(1));
         this.projectileSpeed = projectileSpeed;
@@ -51,7 +57,7 @@ public class MedievalBowItem extends BowItem implements IHasModelProperty
 
     public float getPower(int p_185059_0_)
     {
-        float f = (float)p_185059_0_ / this.pullTime;
+        float f = (float)p_185059_0_ / this.pullTime.getAsInt();
         f = (f * f + f * 2.0F) / 3.0F;
         if (f > 1.0F)
             f = 1.0F;
@@ -69,7 +75,7 @@ public class MedievalBowItem extends BowItem implements IHasModelProperty
             if (entity == null) 
                 return 0.0F;
             else 
-                return entity.getUseItem() != stack ? 0.0F : (float)(stack.getUseDuration(entity) - entity.getUseItemRemainingTicks()) / this.pullTime;
+                return entity.getUseItem() != stack ? 0.0F : (float)(stack.getUseDuration(entity) - entity.getUseItemRemainingTicks()) / this.pullTime.getAsInt();
         });
     }
 }

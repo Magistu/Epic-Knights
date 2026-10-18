@@ -25,6 +25,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.IntSupplier;
 
 public class MedievalCrossbowItem extends CrossbowItem implements IHasModelProperty
 {
@@ -33,13 +34,18 @@ public class MedievalCrossbowItem extends CrossbowItem implements IHasModelPrope
 		DEFAULT_SOUNDS = new ChargingSounds(Optional.of(SoundEvents.CROSSBOW_LOADING_START), Optional.of(SoundEvents.CROSSBOW_LOADING_MIDDLE), Optional.of(SoundEvents.CROSSBOW_LOADING_END));
 	}
 	
-	private final int pullTime;
+	private final IntSupplier pullTime;
     private final float projectileSpeed;
 
 	protected boolean startSoundPlayed = false;
 	protected boolean midLoadSoundPlayed = false;
 	
     public MedievalCrossbowItem(Properties properties, float projectileSpeed, int pullTime)
+    {
+        this(properties, projectileSpeed, () -> pullTime);
+    }
+
+    public MedievalCrossbowItem(Properties properties, float projectileSpeed, IntSupplier pullTime)
     {
         super(properties.stacksTo(1));
 		this.projectileSpeed = projectileSpeed;
@@ -79,6 +85,36 @@ public class MedievalCrossbowItem extends CrossbowItem implements IHasModelPrope
         return false;
     }
 
+	@Override
+	public void onUseTick(Level level, LivingEntity livingEntity, ItemStack itemStack, int remainingUseDuration) {
+		if (level.isClientSide()) {
+			return;
+		}
+
+		ChargingSounds chargingSounds = this.getChargingSounds(itemStack);
+		float pullProgress = (float)(itemStack.getUseDuration(livingEntity) - remainingUseDuration)
+				/ (float)this.getPullTime(itemStack, livingEntity);
+
+		if (pullProgress < 0.2F) {
+			this.startSoundPlayed = false;
+			this.midLoadSoundPlayed = false;
+		}
+
+		if (pullProgress >= 0.2F && !this.startSoundPlayed) {
+			this.startSoundPlayed = true;
+			chargingSounds.start().ifPresent((holder) -> level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), holder.value(), livingEntity.getSoundSource(), 0.5F, 1.0F));
+		}
+
+		if (pullProgress >= 0.5F && !this.midLoadSoundPlayed) {
+			this.midLoadSoundPlayed = true;
+			chargingSounds.mid().ifPresent((holder) -> level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), holder.value(), livingEntity.getSoundSource(), 0.5F, 1.0F));
+		}
+
+		if (pullProgress >= 1.0F && !isCharged(itemStack) && tryLoadProjectiles(livingEntity, itemStack)) {
+			chargingSounds.end().ifPresent((holder) -> level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), holder.value(), livingEntity.getSoundSource(), 1.0F, 1.0F / (level.getRandom().nextFloat() * 0.5F + 1.0F) + 0.2F));
+		}
+	}
+
 	private static boolean tryLoadProjectiles(LivingEntity livingEntity, ItemStack itemStack) {
 		List<ItemStack> list = draw(itemStack, livingEntity.getProjectile(itemStack), livingEntity);
 		if (!list.isEmpty()) {
@@ -99,7 +135,7 @@ public class MedievalCrossbowItem extends CrossbowItem implements IHasModelPrope
 	}
 	
 	public int getPullTime(ItemStack itemStack, LivingEntity shooter) {
-		float f = EnchantmentHelper.modifyCrossbowChargingTime(itemStack, shooter, pullTime / 20.0f);
+		float f = EnchantmentHelper.modifyCrossbowChargingTime(itemStack, shooter, pullTime.getAsInt() / 20.0f);
 		return Mth.floor(f * 20.0F);
 	}
 

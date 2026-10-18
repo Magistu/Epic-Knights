@@ -1,309 +1,107 @@
 {
   "type": "minecraft:blasting",
   "ingredient": [
-    {
-      "item": "magistuarmory:steel_stylet"
-    },
-    {
-      "item": "magistuarmory:steel_shortsword"
-    },
-    {
-      "item": "magistuarmory:steel_katzbalger"
-    },
-    {
-      "item": "magistuarmory:steel_pike"
-    },
-    {
-      "item": "magistuarmory:steel_ranseur"
-    },
-    {
-      "item": "magistuarmory:steel_ahlspiess"
-    },
-    {
-      "item": "magistuarmory:steel_chivalrylance"
-    },
-    {
-      "item": "magistuarmory:steel_bastardsword"
-    },
-    {
-      "item": "magistuarmory:steel_estoc"
-    },
-    {
-      "item": "magistuarmory:steel_claymore"
-    },
-    {
-      "item": "magistuarmory:steel_zweihander"
-    },
-    {
-      "item": "magistuarmory:steel_flamebladedsword"
-    },
-    {
-      "item": "magistuarmory:steel_lochaberaxe"
-    },
-    {
-      "item": "magistuarmory:steel_concavehalberd"
-    },
-    {
-      "item": "magistuarmory:steel_heavymace"
-    },
-    {
-      "item": "magistuarmory:steel_heavywarhammer"
-    },
-    {
-      "item": "magistuarmory:steel_lucernhammer"
-    },
-    {
-      "item": "magistuarmory:steel_morgenstern"
-    },
-    {
-      "item": "magistuarmory:barbute"
-    },
-    {
-      "item": "magistuarmory:halfarmor_chestplate"
-    },
-    {
-      "item": "magistuarmory:armet"
-    },
-    {
-      "item": "magistuarmory:knight_chestplate"
-    },
-    {
-      "item": "magistuarmory:knight_leggings"
-    },
-    {
-      "item": "magistuarmory:knight_boots"
-    },
-    {
-      "item": "magistuarmory:sallet"
-    },
-    {
-      "item": "magistuarmory:gothic_chestplate"
-    },
-    {
-      "item": "magistuarmory:gothic_leggings"
-    },
-    {
-      "item": "magistuarmory:gothic_boots"
-    },
-    {
-      "item": "magistuarmory:stechhelm"
-    },
-    {
-      "item": "magistuarmory:jousting_chestplate"
-    },
-    {
-      "item": "magistuarmory:jousting_leggings"
-    },
-    {
-      "item": "magistuarmory:jousting_boots"
-    },
-    {
-      "item": "magistuarmory:maximilian_helmet"
-    },
-    {
-      "item": "magistuarmory:maximilian_chestplate"
-    },
-    {
-      "item": "magistuarmory:maximilian_leggings"
-    },
-    {
-      "item": "magistuarmory:maximilian_boots"
-    },
-    {
-      "item": "magistuarmory:chainmail_helmet"
-    },
-    {
-      "item": "magistuarmory:chainmail_chestplate"
-    },
-    {
-      "item": "magistuarmory:chainmail_leggings"
-    },
-    {
-      "item": "magistuarmory:kettlehat"
-    },
-    {
-      "item": "magistuarmory:platemail_chestplate"
-    },
-    {
-      "item": "magistuarmory:platemail_leggings"
-    },
-    {
-      "item": "magistuarmory:platemail_boots"
-    },
-    {
-      "item": "magistuarmory:steel_chainmorgenstern"
-    },
-    {
-      "item": "magistuarmory:steel_guisarme"
-    },
-    {
-      "item": "magistuarmory:blacksmith_hammer"
-    },
-    {
-      "item": "magistuarmory:armet"
-    },
-    {
-      "item": "magistuarmory:knight_chestplate"
-    },
-    {
-      "item": "magistuarmory:knight_leggings"
-    },
-    {
-      "item": "magistuarmory:knight_boots"
-    },
-    {
-      "item": "magistuarmory:stechhelm"
-    },
-    {
-      "item": "magistuarmory:jousting_chestplate"
-    },
-    {
-      "item": "magistuarmory:jousting_leggings"
-    },
-    {
-      "item": "magistuarmory:jousting_boots"
-    },
-    {
-      "item": "magistuarmory:sallet"
-    },
-    {
-      "item": "magistuarmory:gothic_chestplate"
-    },
-    {
-      "item": "magistuarmory:gothic_leggings"
-    },
-    {
-      "item": "magistuarmory:gothic_boots"
-    },
-    {
-      "item": "magistuarmory:maximilian_helmet"
-    },
-    {
-      "item": "magistuarmory:maximilian_chestplate"
-    },
-    {
-      "item": "magistuarmory:maximilian_leggings"
-    },
-    {
-      "item": "magistuarmory:maximilian_boots"
-    },
-    {
-      "item": "magistuarmory:chainmail_helmet"
-    },
-    {
-      "item": "magistuarmory:chainmail_chestplate"
-    },
-    {
-      "item": "magistuarmory:chainmail_leggings"
-    },
-    {
-      "item": "magistuarmory:kettlehat"
-    },
-    {
-      "item": "magistuarmory:platemail_chestplate"
-    },
-    {
-      "item": "magistuarmory:platemail_leggings"
-    },
-    {
-      "item": "magistuarmory:barbute"
-    },
-    {
-      "item": "magistuarmory:halfarmor_chestplate"
-    },
-    {
-      "item": "magistuarmory:greathelm"
-    },
-    {
-      "item": "magistuarmory:crusader_chestplate"
-    },
-    {
-      "item": "magistuarmory:crusader_leggings"
-    },
-    {
-      "item": "magistuarmory:ceremonialarmet"
-    },
-    {
-      "item": "magistuarmory:ceremonial_chestplate"
-    },
-    {
-      "item": "magistuarmory:ceremonial_boots"
-    },
-    {
-      "item": "magistuarmory:brigandine_chestplate"
-    },
-    {
-      "item": "magistuarmory:norman_helmet"
-    },
-    {
-      "item": "magistuarmory:shishak"
-    },
-    {
-      "item": "magistuarmory:rustedbarbute"
-    },
-    {
-      "item": "magistuarmory:rustedhalfarmor_chestplate"
-    },
-    {
-      "item": "magistuarmory:rustedgreathelm"
-    },
-    {
-      "item": "magistuarmory:rustedcrusader_chestplate"
-    },
-    {
-      "item": "magistuarmory:rustednorman_helmet"
-    },
-    {
-      "item": "magistuarmory:rustedchainmail_helmet"
-    },
-    {
-      "item": "magistuarmory:rustedchainmail_chestplate"
-    },
-    {
-      "item": "magistuarmory:rustedchainmail_leggings"
-    },
-    {
-      "item": "magistuarmory:rustedkettlehat"
-    },
-    {
-      "item": "magistuarmory:bascinet"
-    },
-    {
-      "item": "magistuarmory:xivcenturyknight_chestplate"
-    },
-    {
-      "item": "magistuarmory:xivcenturyknight_leggings"
-    },
-    {
-      "item": "magistuarmory:wingedhussar_chestplate"
-    },
-    {
-      "item": "magistuarmory:cuirassier_helmet"
-    },
-    {
-      "item": "magistuarmory:cuirassier_chestplate"
-    },
-    {
-      "item": "magistuarmory:cuirassier_leggings"
-    },
-    {
-      "item": "magistuarmory:grand_bascinet"
-    },
-    {
-      "item": "magistuarmory:kastenbrust_chestplate"
-    },
-    {
-      "item": "magistuarmory:kastenbrust_leggings"
-    },
-    {
-      "item": "magistuarmory:kastenbrust_boots"
-    },
-    {
-      "item": "magistuarmory:face_helmet"
-    },
-    {
-      "item": "magistuarmory:lamellar_chestplate"
-    }
+    "magistuarmory:steel_stylet",
+    "magistuarmory:steel_shortsword",
+    "magistuarmory:steel_katzbalger",
+    "magistuarmory:steel_pike",
+    "magistuarmory:steel_ranseur",
+    "magistuarmory:steel_ahlspiess",
+    "magistuarmory:steel_chivalrylance",
+    "magistuarmory:steel_bastardsword",
+    "magistuarmory:steel_estoc",
+    "magistuarmory:steel_claymore",
+    "magistuarmory:steel_zweihander",
+    "magistuarmory:steel_flamebladedsword",
+    "magistuarmory:steel_lochaberaxe",
+    "magistuarmory:steel_concavehalberd",
+    "magistuarmory:steel_heavymace",
+    "magistuarmory:steel_heavywarhammer",
+    "magistuarmory:steel_lucernhammer",
+    "magistuarmory:steel_morgenstern",
+    "magistuarmory:barbute",
+    "magistuarmory:halfarmor_chestplate",
+    "magistuarmory:armet",
+    "magistuarmory:knight_chestplate",
+    "magistuarmory:knight_leggings",
+    "magistuarmory:knight_boots",
+    "magistuarmory:sallet",
+    "magistuarmory:gothic_chestplate",
+    "magistuarmory:gothic_leggings",
+    "magistuarmory:gothic_boots",
+    "magistuarmory:stechhelm",
+    "magistuarmory:jousting_chestplate",
+    "magistuarmory:jousting_leggings",
+    "magistuarmory:jousting_boots",
+    "magistuarmory:maximilian_helmet",
+    "magistuarmory:maximilian_chestplate",
+    "magistuarmory:maximilian_leggings",
+    "magistuarmory:maximilian_boots",
+    "magistuarmory:chainmail_helmet",
+    "magistuarmory:chainmail_chestplate",
+    "magistuarmory:chainmail_leggings",
+    "magistuarmory:kettlehat",
+    "magistuarmory:platemail_chestplate",
+    "magistuarmory:platemail_leggings",
+    "magistuarmory:platemail_boots",
+    "magistuarmory:steel_chainmorgenstern",
+    "magistuarmory:steel_guisarme",
+    "magistuarmory:blacksmith_hammer",
+    "magistuarmory:armet",
+    "magistuarmory:knight_chestplate",
+    "magistuarmory:knight_leggings",
+    "magistuarmory:knight_boots",
+    "magistuarmory:stechhelm",
+    "magistuarmory:jousting_chestplate",
+    "magistuarmory:jousting_leggings",
+    "magistuarmory:jousting_boots",
+    "magistuarmory:sallet",
+    "magistuarmory:gothic_chestplate",
+    "magistuarmory:gothic_leggings",
+    "magistuarmory:gothic_boots",
+    "magistuarmory:maximilian_helmet",
+    "magistuarmory:maximilian_chestplate",
+    "magistuarmory:maximilian_leggings",
+    "magistuarmory:maximilian_boots",
+    "magistuarmory:chainmail_helmet",
+    "magistuarmory:chainmail_chestplate",
+    "magistuarmory:chainmail_leggings",
+    "magistuarmory:kettlehat",
+    "magistuarmory:platemail_chestplate",
+    "magistuarmory:platemail_leggings",
+    "magistuarmory:barbute",
+    "magistuarmory:halfarmor_chestplate",
+    "magistuarmory:greathelm",
+    "magistuarmory:crusader_chestplate",
+    "magistuarmory:crusader_leggings",
+    "magistuarmory:ceremonialarmet",
+    "magistuarmory:ceremonial_chestplate",
+    "magistuarmory:ceremonial_boots",
+    "magistuarmory:brigandine_chestplate",
+    "magistuarmory:norman_helmet",
+    "magistuarmory:shishak",
+    "magistuarmory:rustedbarbute",
+    "magistuarmory:rustedhalfarmor_chestplate",
+    "magistuarmory:rustedgreathelm",
+    "magistuarmory:rustedcrusader_chestplate",
+    "magistuarmory:rustednorman_helmet",
+    "magistuarmory:rustedchainmail_helmet",
+    "magistuarmory:rustedchainmail_chestplate",
+    "magistuarmory:rustedchainmail_leggings",
+    "magistuarmory:rustedkettlehat",
+    "magistuarmory:bascinet",
+    "magistuarmory:xivcenturyknight_chestplate",
+    "magistuarmory:xivcenturyknight_leggings",
+    "magistuarmory:wingedhussar_chestplate",
+    "magistuarmory:cuirassier_helmet",
+    "magistuarmory:cuirassier_chestplate",
+    "magistuarmory:cuirassier_leggings",
+    "magistuarmory:grand_bascinet",
+    "magistuarmory:kastenbrust_chestplate",
+    "magistuarmory:kastenbrust_leggings",
+    "magistuarmory:kastenbrust_boots",
+    "magistuarmory:face_helmet",
+    "magistuarmory:lamellar_chestplate"
   ],
   "result": {
     "id": "magistuarmory:steel_nugget"

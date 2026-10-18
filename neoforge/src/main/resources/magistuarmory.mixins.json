@@ -1,4 +1,4 @@
-﻿{
+{
   "required": true,
   "package": "com.magistuarmory.neoforge.mixin",
   "compatibilityLevel": "JAVA_17",

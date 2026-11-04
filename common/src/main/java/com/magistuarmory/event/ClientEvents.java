@@ -50,7 +50,7 @@ public class ClientEvents
 
 	private static EventResult onMouseInput(Minecraft mc, net.minecraft.client.input.MouseButtonInfo info, int action)
 	{
-		if (mc.level == null || mc.screen != null || mc.isPaused())
+		if (mc.level == null || mc.gui.screen() != null || mc.isPaused())
 			return EventResult.pass();
 
 		KeyMapping keyattack = mc.options.keyAttack;

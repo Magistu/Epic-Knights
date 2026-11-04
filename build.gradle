@@ -119,3 +119,17 @@ ext.minecraftGameVersions = {
         return [rootProject.minecraft_version]
     }
 }()
+// EK-PORT: MC 26.3 ships LWJGL 3.4.3 (Java 27 bytecode, class major 71), which the
+// Architectury production transformer (ASM in tiny-remapper 1.1.0) cannot read.
+// Pin LWJGL to 3.4.1 (major 69) for the build's internal classpaths only; the
+// shipped jar declares no LWJGL dependency and runs on the game's own LWJGL.
+subprojects {
+    configurations.all {
+        resolutionStrategy.eachDependency { details ->
+            if (details.requested.group == 'org.lwjgl') {
+                details.useVersion('3.4.1')
+                details.because('EK port: transformer ASM cannot read LWJGL 3.4.3 (class major 71)')
+            }
+        }
+    }
+}

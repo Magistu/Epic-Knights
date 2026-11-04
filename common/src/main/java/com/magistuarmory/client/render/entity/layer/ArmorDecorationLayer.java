@@ -143,7 +143,7 @@ public class ArmorDecorationLayer<T extends net.minecraft.client.renderer.entity
    public void renderDecoration(PoseStack pose, SubmitNodeCollector buffer, int p, int overlay, int color, boolean hasfoil, ModelPart[] modelparts, Identifier texture)
    {
       for (ModelPart part : modelparts)
-         buffer.submitModelPart(part, pose, net.minecraft.client.renderer.rendertype.RenderTypes.entityCutout(texture), p, overlay, null, false, hasfoil, color, null, 0);
+         buffer.submitModelPart(part, pose, net.minecraft.client.renderer.rendertype.RenderTypes.entityCutout(texture), p, overlay, null, color, 0);
    }
 
    @Override

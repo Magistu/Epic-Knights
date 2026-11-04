@@ -3,10 +3,10 @@ package com.magistuarmory.block;
 import com.magistuarmory.item.MedievalShieldItem;
 import com.magistuarmory.item.ModItems;
 import com.mojang.math.Axis;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -49,7 +49,6 @@ public class PaviseBlock extends AbstractBannerBlock
 	static final Vector3d BOXMIN = new Vector3d(0.0, 0.0, 0.0);
 	static final Vector3d BOXMAX = new Vector3d(1.0, 1.0, 1.0);
 	
-	public final MapCodec<PaviseBlock> codec;
 	private final Supplier<BlockEntityType<PaviseBlockEntity>> entityType;
 	protected String shieldId;
 	
@@ -59,7 +58,6 @@ public class PaviseBlock extends AbstractBannerBlock
 		this.shieldId = shieldId;
 		this.entityType = entityType;
 		this.registerDefaultState(this.stateDefinition.any().setValue(ROTATION, 0));
-		this.codec = RecordCodecBuilder.mapCodec((instance) -> instance.group(DyeColor.CODEC.fieldOf("color").forGetter(AbstractBannerBlock::getColor), propertiesCodec()).apply(instance, (a, b) -> new PaviseBlock(a, b, shieldId, entityType)));
 	}
 	
 	public BlockEntityType<PaviseBlockEntity> getEntityType() {
@@ -69,12 +67,6 @@ public class PaviseBlock extends AbstractBannerBlock
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(ROTATION);
-	}
-
-	@Override
-	protected MapCodec<? extends AbstractBannerBlock> codec()
-	{
-		return this.codec;
 	}
 
 	@Override
@@ -137,7 +129,7 @@ public class PaviseBlock extends AbstractBannerBlock
 	}
 
 	@Override
-	public void playerDestroy(Level level, Player player, BlockPos blockpos, BlockState blockstate, @Nullable BlockEntity blockentity, ItemStack stack)
+	public void playerDestroy(ServerLevel level, ServerPlayer player, BlockPos blockpos, BlockState blockstate, @Nullable BlockEntity blockentity, ItemStack stack)
 	{
 		player.awardStat(Stats.BLOCK_MINED.get(this));
 		player.causeFoodExhaustion(0.005F);

@@ -15,7 +15,7 @@ public class ModEffects {
 
 	public static void init() {
 		if (Platform.isFabric()) {
-			LACERATION = EFFECTS.register("laceration", LacerationEffect::new);
+			LACERATION = (Holder<MobEffect>) (Holder<?>) EFFECTS.register("laceration", LacerationEffect::new).asHolder();
 			EFFECTS.register();
 		}
 	}

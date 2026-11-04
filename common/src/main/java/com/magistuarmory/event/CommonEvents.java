@@ -12,6 +12,7 @@ import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.EntityEvent;
 import dev.architectury.event.events.common.LifecycleEvent;
 import dev.architectury.event.events.common.LootEvent;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -35,9 +36,9 @@ public class CommonEvents
         EntityEvent.LIVING_HURT.register(CommonEvents::onLivingHurt);
     }
 
-    private static void onModifyLootTable(ResourceKey<LootTable> key, LootEvent.LootTableModificationContext context, boolean builtin)
+    private static void onModifyLootTable(HolderGetter.Provider registries, ResourceKey<LootTable> key, LootEvent.LootTableModificationContext context, boolean builtin)
     {
-        ModLoot.modifyLootTable(key, context, builtin);
+        ModLoot.modifyLootTable(registries, key, context, builtin);
     }
 
     private static void onSetup()

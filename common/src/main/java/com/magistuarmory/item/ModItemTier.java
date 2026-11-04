@@ -32,10 +32,10 @@ public class ModItemTier
 	public static ModItemTier NETHERITE = new ModItemTier("netherite", ToolMaterial.NETHERITE, 5);
 
 	public static ModItemTier COPPER = new ModItemTier("copper", BlockTags.INCORRECT_FOR_STONE_TOOL, 150, 0.7F, 0.0F, 10, "c:ingots/copper", 1);
-	public static ModItemTier SILVER = new ModItemTier("silver", BlockTags.INCORRECT_FOR_STONE_TOOL, 230, 5.5F, 1.0F, 18, "c:ingots/silver", 2);
+	public static ModItemTier SILVER = new ModItemTier("silver", BlockTags.INCORRECT_FOR_STONE_TOOL, 230, 5.5F, 1.0F, 18, "c:ingots/gold", 2);
 	public static ModItemTier STEEL = new ModItemTier("steel", BlockTags.INCORRECT_FOR_IRON_TOOL, 400, 6.0F, 2.5F, 14, "c:ingots/steel", 2);
-	public static ModItemTier TIN = new ModItemTier("tin", BlockTags.INCORRECT_FOR_STONE_TOOL, 130, 6.0F, 0.0F, 20, "c:ingots/tin", 2);
-	public static ModItemTier BRONZE = new ModItemTier("bronze", BlockTags.INCORRECT_FOR_IRON_TOOL, 200, 6.0F, 2.0F, 15, "c:ingots/bronze", 2);
+	public static ModItemTier TIN = new ModItemTier("tin", BlockTags.INCORRECT_FOR_STONE_TOOL, 130, 6.0F, 0.0F, 20, "c:ingots/copper", 2);
+	public static ModItemTier BRONZE = new ModItemTier("bronze", BlockTags.INCORRECT_FOR_IRON_TOOL, 200, 6.0F, 2.0F, 15, "c:ingots/iron", 2);
 	private final TagKey<Block> incorrectBlocks;
 
 	public ModItemTier(String name, ToolMaterial tier, float density)

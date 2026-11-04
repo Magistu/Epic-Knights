@@ -6,6 +6,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 
 /** Copies the entity-specific animation and baked scale when the deferred draw executes. */
 public final class FollowingArmorModel extends Model<HumanoidRenderState> {
@@ -26,7 +27,7 @@ public final class FollowingArmorModel extends Model<HumanoidRenderState> {
         armor.resetPose();
         source.setupAnim(state);
         copyPose(source, armor);
-        if (slot == EquipmentSlot.HEAD && state.entityType == EntityType.WITHER_SKELETON) {
+        if (slot == EquipmentSlot.HEAD && state.entityType == EntityTypes.WITHER_SKELETON) {
             armor.head.xScale *= 1.05F;
             armor.head.yScale *= 1.05F;
             armor.head.zScale *= 1.05F;

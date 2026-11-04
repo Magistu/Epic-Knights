@@ -23,7 +23,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.equine.Horse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.SwingAnimation;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.util.Prediction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -93,7 +95,7 @@ public class LanceItem extends MedievalWeaponItem
 
 		if (player.isPassenger() && !this.isRaised(player) && !player.getCooldowns().isOnCooldown(player.getMainHandItem()))
 			this.resetClickedTicks();
-		player.swing(InteractionHand.MAIN_HAND);
+		player.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, false);
 
 		return false;
 	}
@@ -301,7 +303,7 @@ public class LanceItem extends MedievalWeaponItem
 		if (player.getMainHandItem().getItem() == this)
 		{
 			for (var drop : this.dropItems)
-				player.drop(drop.get(), true);
+				player.drop(drop.get(), true, Prediction.SERVER_ONLY);
 			player.playSound(SoundEvents.ITEM_BREAK.value(), 1.0f, 1.0f);
 		}
 	}

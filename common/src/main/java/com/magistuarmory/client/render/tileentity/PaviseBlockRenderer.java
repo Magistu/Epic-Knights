@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.BannerBlock;
 import net.minecraft.world.level.block.entity.BannerPattern;
 import net.minecraft.world.level.block.entity.BannerPatternLayers;
 import net.minecraft.world.level.block.state.BlockState;
+import org.joml.Matrix4f;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +70,7 @@ public class PaviseBlockRenderer implements BlockEntityRenderer<PaviseBlockEntit
     public void submit(State state, PoseStack pose, SubmitNodeCollector collector, net.minecraft.client.renderer.state.level.CameraRenderState camera) {
         pose.pushPose();
         pose.translate(0.5F, 0.5F, 0.5F);
-        pose.mulPose(Axis.YP.rotationDegrees(state.rotation));
+        pose.mulPose(new Matrix4f().rotation(Axis.YP.rotationDegrees(state.rotation)));
         pose.scale(1, -1, -1);
         submitPatternPart(pose, collector, model.handle(), state.lightCoords, OverlayTexture.NO_OVERLAY, -1, state.foil, state.base == null ? 0 : 1, null);
         renderPatterns(pose, collector, state.lightCoords, OverlayTexture.NO_OVERLAY,

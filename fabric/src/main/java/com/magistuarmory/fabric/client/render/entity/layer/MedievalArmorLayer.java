@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.entity.layers.EquipmentLayerRenderer;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.resources.model.EquipmentClientInfo;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 
@@ -32,7 +32,7 @@ public class MedievalArmorLayer implements ArmorRenderer {
         if (equippable == null || equippable.assetId().isEmpty()) return;
         var fallback = slot == EquipmentSlot.LEGS ? ModRender.INNER_ARMOR : ModRender.OUTER_ARMOR;
         var model = (HumanoidModel<HumanoidRenderState>) armor.getArmorModel(slot, fallback);
-        var layer = state.isBaby && state.entityType != EntityType.ARMOR_STAND
+        var layer = state.isBaby && state.entityType != EntityTypes.ARMOR_STAND
                 ? EquipmentClientInfo.LayerType.HUMANOID_BABY
                 : slot == EquipmentSlot.LEGS ? EquipmentClientInfo.LayerType.HUMANOID_LEGGINGS : EquipmentClientInfo.LayerType.HUMANOID;
         equipmentRenderer.renderLayers(layer, equippable.assetId().orElseThrow(), new FollowingArmorModel(contextModel, model, slot), state, stack, pose, collector, light, state.outlineColor);

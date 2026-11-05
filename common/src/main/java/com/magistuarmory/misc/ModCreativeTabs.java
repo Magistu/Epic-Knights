@@ -44,7 +44,7 @@ public class ModCreativeTabs
 	public static final ResourceKey<CreativeModeTab> SHIELDS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.fromNamespaceAndPath(EpicKnights.ID, "shields"));
 	public static final ResourceKey<CreativeModeTab> RUSTED_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.fromNamespaceAndPath(EpicKnights.ID, "rusted"));
 	public static final ResourceKey<CreativeModeTab> ARMOR_DECORATIONS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.fromNamespaceAndPath(EpicKnights.ID, "armor_decorations"));
-	public static final ResourceKey<CreativeModeTab> INGRIDIENTS_RESOURCE_KEY = CreativeModeTabs.INGREDIENTS;
+	public static final ResourceKey<CreativeModeTab> INGRIDIENTS_RESOURCE_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.withDefaultNamespace("ingredients"));
 
 	public static RegistrySupplier<CreativeModeTab> createTab(String name, @Nullable RegistrySupplier<? extends Item> supplier)
 	{

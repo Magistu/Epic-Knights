@@ -3,7 +3,7 @@ license = "${mod_license}"
 loaderVersion = "${neoforge_loader_version_range}"
 displayURL = "${mod_page_url}"
 issueTrackerURL = "${mod_issues_url}"
-logoFile = "icon.png"
+iconFile = "icon.png"
 
 [[mods]]
 modId = "${mod_id}"
